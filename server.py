@@ -28,10 +28,43 @@ import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+def _app_root() -> Path:
+    """Folder that holds the bundled `static/` and `data/`.
+
+    When frozen into a single-file executable (PyInstaller), the assets are
+    unpacked to a temp dir exposed as ``sys._MEIPASS``. Otherwise the assets
+    sit next to this source file.
+    """
+    if getattr(sys, "frozen", False):
+        return Path(getattr(sys, "_MEIPASS", Path(sys.executable).parent))
+    return Path(__file__).resolve().parent
+
+
+def _writable_dir() -> Path:
+    """Folder for user data (store.json), next to the app or its executable."""
+    if getattr(sys, "frozen", False):
+        base = Path(sys.executable).resolve().parent
+    else:
+        base = Path(__file__).resolve().parent
+    try:
+        base.mkdir(parents=True, exist_ok=True)
+        probe = base / ".write-test"
+        probe.write_text("ok", "utf-8")
+        probe.unlink()
+        return base / "data"
+    except OSError:
+        # Fall back to the user's home directory (e.g. read-only app bundle).
+        fallback = Path.home() / ".iptv-player"
+        fallback.mkdir(parents=True, exist_ok=True)
+        return fallback
+
+
+ROOT = _app_root()
 STATIC_DIR = ROOT / "static"
-DATA_DIR = ROOT / "data"
+DATA_DIR = _writable_dir()
 STORE_FILE = DATA_DIR / "store.json"
+# Read-only bundled defaults (channel list shipped inside the app).
+BUNDLED_DATA_DIR = ROOT / "data"
 
 DEFAULT_TIMEOUT = 20
 UA = (
@@ -224,7 +257,7 @@ class Handler(BaseHTTPRequestHandler):
     def _api_channels(self) -> None:
         """Return the bundled default channel list plus user M3U playlists."""
         channels = []
-        defaults = DATA_DIR / "channels.json"
+        defaults = BUNDLED_DATA_DIR / "channels.json"
         if defaults.exists():
             try:
                 channels.extend(json.loads(defaults.read_text("utf-8")))
@@ -387,16 +420,47 @@ def normalize_channel(ch: dict) -> dict:
     }
 
 
+def _open_browser(url: str) -> None:
+    import webbrowser
+
+    def _go():
+        time.sleep(0.8)
+        try:
+            webbrowser.open(url)
+        except Exception:  # noqa: BLE001
+            pass
+
+    threading.Thread(target=_go, daemon=True).start()
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description="IPTV Web Player server")
     ap.add_argument("-p", "--port", type=int,
                     default=int(os.environ.get("PORT", 8000)))
-    ap.add_argument("-H", "--host", default=os.environ.get("HOST", "0.0.0.0"))
+    ap.add_argument("-H", "--host", default=os.environ.get("HOST", "127.0.0.1"))
+    ap.add_argument("--open", action="store_true",
+                    help="open the player in the default browser on startup")
     args = ap.parse_args()
 
     DATA_DIR.mkdir(parents=True, exist_ok=True)
-    httpd = ThreadingHTTPServer((args.host, args.port), Handler)
-    print(f"IPTV player running at http://{args.host}:{args.port}")
+    # Pick a free port if the requested one is busy.
+    httpd = None
+    last_err = None
+    for port in range(args.port, args.port + 20):
+        try:
+            httpd = ThreadingHTTPServer((args.host, port), Handler)
+            args.port = port
+            break
+        except OSError as exc:
+            last_err = exc
+    if httpd is None:
+        raise SystemExit(f"Could not bind a port: {last_err}")
+
+    url = f"http://127.0.0.1:{args.port}/"
+    print(f"IPTV player running at {url}")
+    print("Press Ctrl+C to stop.")
+    if args.open or os.environ.get("IPTV_OPEN"):
+        _open_browser(url)
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:

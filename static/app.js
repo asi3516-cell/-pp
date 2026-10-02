@@ -28,27 +28,66 @@
   var osdTimer = null;
 
   /* ----------------------------- storage ----------------------------- */
+  // Playlists live on the server so they survive a reload and can be opened
+  // from any device using the same address. localStorage is an offline cache.
   var LS_KEY = "iptv.state.v1";
+
+  function snapshot() {
+    return {
+      favorites: state.favorites,
+      recent: state.recent,
+      playlists: state.playlists,
+      epgUrl: state.epgUrl
+    };
+  }
+
+  function applySnapshot(raw) {
+    if (!raw || typeof raw !== "object") return false;
+    state.favorites = raw.favorites || [];
+    state.recent = raw.recent || [];
+    state.playlists = raw.playlists || [];
+    state.epgUrl = raw.epgUrl || "";
+    return true;
+  }
 
   function loadLocal() {
     try {
-      var raw = JSON.parse(localStorage.getItem(LS_KEY) || "{}");
-      state.favorites = raw.favorites || [];
-      state.recent = raw.recent || [];
-      state.playlists = raw.playlists || [];
-      state.epgUrl = raw.epgUrl || "";
-    } catch (e) { /* ignore */ }
+      return applySnapshot(JSON.parse(localStorage.getItem(LS_KEY) || "{}"));
+    } catch (e) { return false; }
   }
 
-  function persistLocal() {
-    try {
-      localStorage.setItem(LS_KEY, JSON.stringify({
-        favorites: state.favorites,
-        recent: state.recent,
-        playlists: state.playlists,
-        epgUrl: state.epgUrl
-      }));
-    } catch (e) { /* ignore */ }
+  function saveLocal() {
+    try { localStorage.setItem(LS_KEY, JSON.stringify(snapshot())); } catch (e) {}
+  }
+
+  function loadServerStore() {
+    return api("/api/store").then(function (data) {
+      var settings = data.settings || {};
+      return applySnapshot({
+        favorites: data.favorites,
+        recent: data.recent,
+        playlists: data.playlists,
+        epgUrl: settings.epgUrl
+      });
+    }).catch(function () { return false; });
+  }
+
+  var saveTimer = null;
+  function persist() {
+    saveLocal();
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () {
+      fetch("/api/store", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          favorites: state.favorites,
+          recent: state.recent,
+          playlists: state.playlists,
+          settings: { epgUrl: state.epgUrl }
+        })
+      }).catch(function () { /* offline: localStorage still has it */ });
+    }, 400);
   }
 
   /* ------------------------------ api -------------------------------- */
@@ -255,7 +294,7 @@
     var i = state.favorites.indexOf(url);
     if (i >= 0) state.favorites.splice(i, 1);
     else state.favorites.push(url);
-    persistLocal();
+    persist();
     render();
     updateFavBtn();
   }
@@ -265,7 +304,7 @@
     if (i >= 0) state.recent.splice(i, 1);
     state.recent.unshift(url);
     state.recent = state.recent.slice(0, 50);
-    persistLocal();
+    persist();
   }
 
   /* ------------------------------ player ----------------------------- */
@@ -527,7 +566,7 @@
       del.title = "Sil";
       del.onclick = function () {
         state.playlists.splice(idx, 1);
-        persistLocal();
+        persist();
         renderPlaylists();
         loadChannels();
       };
@@ -594,7 +633,7 @@
       var url = $("#plUrl").value.trim();
       if (!url) return;
       state.playlists.push({ url: url, name: $("#plName").value.trim() || "Playlist" });
-      persistLocal();
+      persist();
       $("#plUrl").value = ""; $("#plName").value = "";
       renderPlaylists();
       loadChannels();
@@ -610,7 +649,7 @@
           name: file.name,
           channels: chans
         });
-        persistLocal();
+        persist();
         state.channels = dedupe(state.channels.concat(chans));
         buildGroups(); render(); renderPlaylists();
         showOsd(chans.length + " kanal yüklendi");
@@ -620,10 +659,51 @@
 
     $("#saveEpg").onclick = function () {
       state.epgUrl = $("#epgUrl").value.trim();
-      persistLocal();
+      persist();
       if (state.current) loadEpgFor(state.current);
       showOsd(state.epgUrl ? "EPG kaydedildi" : "EPG kaldırıldı");
     };
+
+    $("#exportPl").onclick = function () {
+      var data = JSON.stringify(snapshot(), null, 2);
+      var blob = new Blob([data], { type: "application/json" });
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "iptv-ayarlar.json";
+      a.click();
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+      showOsd("Ayarlar indirildi");
+    };
+
+    $("#importPl").addEventListener("change", function (e) {
+      var file = e.target.files[0];
+      if (!file) return;
+      var fr = new FileReader();
+      fr.onload = function () {
+        try {
+          var raw = JSON.parse(String(fr.result));
+          // Accept both our export format and a bare M3U text file.
+          if (typeof raw === "string" || !applySnapshot(raw)) {
+            throw new Error("bad");
+          }
+          persist();
+          renderPlaylists();
+          loadChannels();
+          showOsd("Ayarlar yüklendi");
+        } catch (err) {
+          parseM3UFile(file).then(function (chans) {
+            if (!chans.length) { showOsd("Dosya okunamadı"); return; }
+            state.playlists.push({ local: true, name: file.name, channels: chans });
+            persist();
+            renderPlaylists();
+            loadChannels();
+            showOsd(chans.length + " kanal yüklendi");
+          });
+        }
+      };
+      fr.readAsText(file);
+      e.target.value = "";
+    });
 
     $("#saveChannel").onclick = function () {
       var name = $("#addName").value.trim();
@@ -661,9 +741,12 @@
 
     loadLocal();
     bind();
-    if (state.epgUrl) $("#epgUrl").value = state.epgUrl;
 
-    loadChannels().then(function () {
+    // Prefer the shared server copy (lets you open your list from any device).
+    loadServerStore().then(function () {
+      if (state.epgUrl) $("#epgUrl").value = state.epgUrl;
+      return loadChannels();
+    }).then(function () {
       if (state.channels.length) {
         setOverlay(true,
           "<h2>" + state.channels.length + " kanal hazır</h2>" +

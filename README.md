@@ -10,9 +10,45 @@ HLS oynatma için `hls.js` yerel olarak paketlenmiştir.
 ## Hızlı başlangıç
 
 ```bash
-python server.py --port 8000
-# tarayıcıda aç: http://localhost:8000
+python server.py --port 8000 --open
+# tarayıcı otomatik açılır: http://127.0.0.1:8000
 ```
+
+Python yoksa, hazır tek dosyalık sürümü kullan (aşağıya bak).
+
+## Taşınabilir sürüm (tek dosya / .exe / .app)
+
+Uygulamayı Python kurulu olmayan bir bilgisayarda da çalıştırmak için tek
+dosyaya paketleyebilirsin:
+
+```bash
+pip install -r build/requirements-build.txt
+python build/make.py
+```
+
+Çıktı `dist/` klasöründe:
+
+| Platform | Dosya | Kullanım |
+|----------|-------|----------|
+| Windows  | `IPTV-Player.exe` | Çift tıkla |
+| macOS    | `IPTV Player.app` ve `IPTV-Player` | Çift tıkla |
+| Linux    | `IPTV-Player` | `./IPTV-Player` |
+
+Program açılınca yerel bir sunucu başlar ve tarayıcı otomatik açılır.
+**Paket kendi içinde web arayüzünü ve kanal listesini taşır**, ekstra dosya
+gerekmez. `build/` klasörünü taşıman gerekmez, sadece `dist/` içindeki tek
+dosyayı kopyalaman yeterli.
+
+> Not: Her işletim sistemi için ayrı paket gerekir. Mac `.app`'i ancak bir Mac
+> üzerinde derleyebilirsin (Windows'ta `.exe`, Linux'ta Linux dosyası).
+
+### Python varsa (paketlemeden)
+
+| Platform | Yöntem |
+|----------|--------|
+| Windows  | `run.bat` dosyasına çift tıkla |
+| macOS    | `IPTV Player.command` dosyasına çift tıkla |
+| Linux    | `./run.sh` |
 
 Sunucu:
 
@@ -32,17 +68,28 @@ Sunucu:
 - **+ Kanal:** tek bir yayın adresini elle ekle.
 - **Kısayollar:** `/` ara, `f` tam ekran, `p` PiP, `m` sessiz.
 
-Ayarlar, favoriler ve playlistler tarayıcının `localStorage`'ında tutulur.
+Playlistler, favoriler ve EPG adresi **sunucuda** (`data/store.json`) saklanır;
+`localStorage` yalnızca çevrimdışı yedek olarak kullanılır.
 
 ## Kanal listesi
 
 `data/channels.json` içinde [iptv-org](https://github.com/iptv-org/iptv) projesinden
-alınan Türkiye kanalları ve her ortamda çalışan birkaç demo yayın bulunur.
+alınan **Türkiye kanalları, film kanalları (777) ve dizi kanalları (440)** ile
+her ortamda çalışan birkaç demo yayın bulunur — toplam ~1400 kanal.
 Listeyi yenilemek için:
 
 ```bash
 python build_channels.py
 ```
+
+## Kendi listenizi ekleme / taşıma
+
+1. **Playlistler** düğmesine bas.
+2. **M3U playlist adresi** alanına listenin URL'sini yaz ve **Playlist ekle**
+   (ya da *Dosyadan yükle* ile `.m3u` dosyanı seç).
+3. Liste **sunucuda** saklanır; aynı adresi açan her cihazdan görünür.
+4. Taşımak için **Yedek indir (JSON)** ile dosyayı al, diğer bilgisayarda
+   **Yedek / M3U yükle** ile geri yükle.
 
 ## Notlar
 

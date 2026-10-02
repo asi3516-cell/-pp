@@ -18,9 +18,11 @@ from server import normalize_channel, parse_m3u
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "data" / "channels.json"
 
-# Country playlists pulled from the community-maintained iptv-org project.
+# Playlists pulled from the community-maintained iptv-org project.
 SOURCES = [
     ("https://iptv-org.github.io/iptv/countries/tr.m3u", "Türkiye"),
+    ("https://iptv-org.github.io/iptv/categories/movies.m3u", "Film Kanalları"),
+    ("https://iptv-org.github.io/iptv/categories/series.m3u", "Dizi Kanalları"),
 ]
 
 # Stable, always-on public demo streams (used to verify the player itself).

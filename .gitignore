@@ -3,3 +3,7 @@ __pycache__/
 data/store.json
 data/store.tmp
 .DS_Store
+dist/
+build/work/
+build/__pycache__/
+static/IPTV-Player-linux

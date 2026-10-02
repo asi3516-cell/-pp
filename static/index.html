@@ -118,6 +118,15 @@
       <button id="saveEpg" type="button" class="btn ghost">EPG kaydet</button>
     </div>
 
+    <p class="muted" style="margin:6px 0 0">Yedekleme / taşıma — listenizi dosyaya indirip başka cihazda geri yükleyin.</p>
+    <div class="dlg-actions">
+      <button id="exportPl" type="button" class="btn ghost">⬇ Yedek indir (JSON)</button>
+      <label class="btn ghost file">
+        ⬆ Yedek / M3U yükle
+        <input id="importPl" type="file" accept=".json,.m3u,.m3u8,.txt" hidden />
+      </label>
+    </div>
+
     <ul id="plList" class="pl-list"></ul>
 
     <div class="dlg-actions end">

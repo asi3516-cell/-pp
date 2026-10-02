@@ -356,10 +356,6 @@
       if (ch.urls && ch.urls.length > 1) {
         var alts = document.createElement("div");
         alts.className = "ch-alts";
-        var label = document.createElement("span");
-        label.className = "alt-label";
-        label.textContent = ch.urls.length + " yayın:";
-        alts.appendChild(label);
         ch.urls.forEach(function (a, idx) {
           var b = document.createElement("button");
           b.className = "alt" + (idx === 0 ? " primary" : "");

@@ -225,7 +225,6 @@ h1, h2, h3 { margin: 0; }
   display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end;
   gap: 4px; margin-left: auto; flex: 0 1 auto; min-width: 0;
 }
-.alt-label { font-size: 10.5px; color: var(--muted); }
 .alt {
   font-size: 10.5px;
   padding: 2px 7px;

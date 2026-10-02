@@ -16,6 +16,9 @@
     current: null,
     group: "all",
     tab: "all",
+    kind: "all",
+    source: "all",
+    sources: [],
     query: "",
     queue: [],
     streamIdx: 0
@@ -162,6 +165,17 @@
     return out;
   }
 
+  // Classify a stream as live TV, a movie or a series episode. Xtream/XUI
+  // portals separate them by URL path (/movie/, /series/), everything else is
+  // treated as live television.
+  function contentKind(ch) {
+    var u = (ch.url || "").toLowerCase();
+    if (ch.kind === "vod" || ch.kind === "series") return ch.kind;
+    if (/\/movie\//.test(u) || /\.(mkv|mp4|avi)$/.test(u) && /\/movie/.test(u)) return "vod";
+    if (/\/series\//.test(u)) return "series";
+    return "live";
+  }
+
   function normalize(ch) {
     var raw = ch.urls;
     var urls = [];
@@ -181,6 +195,7 @@
       group: ch["group-title"] || ch.group || "Genel",
       tvgId: ch["tvg-id"] || ch.tvgId || "",
       source: ch.source || "Özel",
+      kind: ch.kind || "",
       headers: ch.headers || null
     };
   }
@@ -196,20 +211,43 @@
   /* ----------------------------- channels ---------------------------- */
   function loadChannels() {
     var defaults = api("/api/channels").then(function (data) {
-      return data.channels || [];
+      return (data.channels || []).map(function (c) {
+        c.listName = "Yerleşik liste";
+        return c;
+      });
     }).catch(function () { return []; });
 
     var fromLists = Promise.all(state.playlists.map(function (pl) {
-      if (pl.local) return Promise.resolve(pl.channels || []);
+      var label = pl.name || "Playlist";
+      if (pl.local) {
+        return Promise.resolve((pl.channels || []).map(function (c) {
+          c.listName = label; return c;
+        }));
+      }
+      if (pl.xc) {
+        return api("/api/xtream?portal=" + encodeURIComponent(pl.portal) +
+                   "&user=" + encodeURIComponent(pl.user) +
+                   "&pass=" + encodeURIComponent(pl.pass))
+          .then(function (d) {
+            return (d.channels || []).map(function (c) { c.listName = label; return c; });
+          })
+          .catch(function () { return []; });
+      }
       if (pl.mac) {
         return api("/api/stalker?portal=" + encodeURIComponent(pl.portal) +
                    "&mac=" + encodeURIComponent(pl.macAddr))
-          .then(function (d) { return d.channels || []; })
+          .then(function (d) {
+            return (d.channels || []).map(function (c) { c.listName = label; return c; });
+          })
           .catch(function () { return []; });
       }
       return fetch("/api/fetch?url=" + encodeURIComponent(pl.url))
         .then(function (r) { return r.text(); })
-        .then(function (t) { return parseM3U(t, pl.name || "Playlist"); })
+        .then(function (t) {
+          return parseM3U(t, label).map(function (c) {
+            c.listName = label; return c;
+          });
+        })
         .catch(function () { return []; });
     }));
 
@@ -218,9 +256,80 @@
       res[1].forEach(function (arr) { all = all.concat(arr); });
       all = dedupe(all);
       state.channels = all;
+      buildSources();
       buildGroups();
       render();
       return all;
+    });
+  }
+
+  // Distinct lists (bundled + each playlist / portal) the user can switch
+  // between, so channels from different sources are not one big pile.
+  function buildSources() {
+    var counts = {};
+    state.channels.forEach(function (ch) {
+      var n = ch.listName || "Yerleşik liste";
+      counts[n] = (counts[n] || 0) + 1;
+    });
+    state.sources = Object.keys(counts).map(function (n) {
+      return { name: n, count: counts[n] };
+    }).sort(function (a, b) {
+      // Bundled list always first, the rest alphabetically.
+      var ab = a.name === "Yerleşik liste", bb = b.name === "Yerleşik liste";
+      if (ab !== bb) return ab ? -1 : 1;
+      return a.name.localeCompare(b.name, "tr");
+    });
+    if (state.source !== "all" &&
+        !state.sources.some(function (s) { return s.name === state.source; })) {
+      state.source = "all";
+    }
+    renderSources();
+  }
+
+  function renderSources() {
+    var box = $("#sources");
+    box.innerHTML = "";
+    var total = state.channels.length;
+    var allChip = document.createElement("button");
+    allChip.className = "schip" + (state.source === "all" ? " active" : "");
+    allChip.innerHTML = "Tüm listeler<span class='n'>" + total + "</span>";
+    allChip.onclick = function () { selectSource("all"); };
+    box.appendChild(allChip);
+
+    state.sources.forEach(function (s) {
+      var b = document.createElement("button");
+      b.className = "schip" + (state.source === s.name ? " active" : "");
+      b.title = s.name;
+      b.innerHTML = escapeHtml(s.name) + "<span class='n'>" + s.count + "</span>";
+      b.onclick = function () { selectSource(s.name); };
+      box.appendChild(b);
+    });
+  }
+
+  function selectSource(name) {
+    state.source = name;
+    state.group = "all";
+    state.tab = "all";
+    $$("#tabs .tab").forEach(function (t) {
+      t.classList.toggle("active", t.dataset.filter === "all");
+    });
+    renderSources();
+    buildGroups();
+    render();
+  }
+
+  // Step through lists with the ‹ › buttons.
+  function cycleSource(dir) {
+    var names = ["all"].concat(state.sources.map(function (s) { return s.name; }));
+    var i = names.indexOf(state.source);
+    if (i < 0) i = 0;
+    i = (i + dir + names.length) % names.length;
+    selectSource(names[i]);
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   }
 
@@ -238,16 +347,23 @@
 
   function buildGroups() {
     var counts = {};
-    state.channels.forEach(function (ch) {
-      var g = ch.group || "Genel";
-      counts[g] = (counts[g] || 0) + 1;
+    var order = [];
+    var scope = state.channels.filter(function (ch) {
+      if (!inSource(ch)) return false;
+      if (state.kind !== "all" && contentKind(ch) !== state.kind) return false;
+      return true;
     });
-    var groups = Object.keys(counts).sort();
+    scope.forEach(function (ch) {
+      var g = ch.group || "Genel";
+      if (!counts[g]) { counts[g] = 0; order.push(g); }
+      counts[g] += 1;
+    });
+    var groups = order;
     var box = $("#groups");
     box.innerHTML = "";
     var allChip = document.createElement("button");
     allChip.className = "gchip" + (state.group === "all" ? " active" : "");
-    allChip.textContent = "Tüm gruplar (" + state.channels.length + ")";
+    allChip.textContent = "Tüm gruplar (" + scope.length + ")";
     allChip.onclick = function () { state.group = "all"; buildGroups(); render(); };
     box.appendChild(allChip);
 
@@ -260,11 +376,18 @@
     });
   }
 
+  function inSource(ch) {
+    if (state.source === "all") return true;
+    return (ch.listName || "Yerleşik liste") === state.source;
+  }
+
   function isFav(url) { return state.favorites.indexOf(url) >= 0; }
 
   function applyFilter() {
     var q = state.query.toLowerCase();
     var list = state.channels.filter(function (ch) {
+      if (!inSource(ch)) return false;
+      if (state.kind !== "all" && contentKind(ch) !== state.kind) return false;
       if (state.tab === "fav" && !isFav(ch.url)) return false;
       if (state.tab === "recent" && state.recent.indexOf(ch.url) < 0) return false;
       if (state.group !== "all" && (ch.group || "Genel") !== state.group) return false;
@@ -356,10 +479,6 @@
       if (ch.urls && ch.urls.length > 1) {
         var alts = document.createElement("div");
         alts.className = "ch-alts";
-        var label = document.createElement("span");
-        label.className = "alt-label";
-        label.textContent = ch.urls.length + " yayın:";
-        alts.appendChild(label);
         ch.urls.forEach(function (a, idx) {
           var b = document.createElement("button");
           b.className = "alt" + (idx === 0 ? " primary" : "");
@@ -786,6 +905,20 @@
       };
     });
 
+    $("#srcPrev").onclick = function () { cycleSource(-1); };
+    $("#srcNext").onclick = function () { cycleSource(1); };
+
+    $$("#kinds .tab").forEach(function (t) {
+      t.onclick = function () {
+        $$("#kinds .tab").forEach(function (x) { x.classList.remove("active"); });
+        t.classList.add("active");
+        state.kind = t.dataset.kind;
+        state.group = "all";
+        buildGroups();
+        render();
+      };
+    });
+
     $("#favBtn").onclick = function () {
       if (state.current) toggleFav(state.current.url);
     };
@@ -823,6 +956,33 @@
       $("#plUrl").value = ""; $("#plName").value = "";
       renderPlaylists();
       loadChannels();
+    };
+
+    $("#addXc").onclick = function () {
+      var portal = $("#xcPortal").value.trim();
+      var user = $("#xcUser").value.trim();
+      var pass = $("#xcPass").value.trim();
+      var name = $("#xcName").value.trim() || "XC " + (user || portal);
+      if (!portal || !user || !pass) {
+        $("#xcStatus").textContent = "Portal, kullanıcı adı ve şifre gerekli";
+        return;
+      }
+      $("#xcStatus").textContent = "Bağlanılıyor...";
+      api("/api/xtream?portal=" + encodeURIComponent(portal) +
+          "&user=" + encodeURIComponent(user) +
+          "&pass=" + encodeURIComponent(pass)).then(function (data) {
+        var count = (data && data.count) || 0;
+        if (!count) { $("#xcStatus").textContent = "Kanal bulunamadı (bilgiler hatalı olabilir)"; return; }
+        state.playlists.push({ xc: true, portal: portal, user: user, pass: pass, name: name });
+        persist();
+        $("#xcStatus").textContent = count + " kanal eklendi";
+        $("#xcPortal").value = ""; $("#xcUser").value = "";
+        $("#xcPass").value = ""; $("#xcName").value = "";
+        renderPlaylists();
+        loadChannels();
+      }).catch(function (err) {
+        $("#xcStatus").textContent = "Hata: " + (err.message || "bağlanamadı");
+      });
     };
 
     $("#addMac").onclick = function () {

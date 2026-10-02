@@ -254,6 +254,8 @@ class Handler(BaseHTTPRequestHandler):
             return self._api_channels()
         if path == "/api/stalker":
             return self._api_stalker(query)
+        if path == "/api/xtream":
+            return self._api_xtream(query)
         if path == "/api/proxy":
             return self._api_proxy(query, head_only)
         if path == "/api/fetch":
@@ -471,6 +473,26 @@ class Handler(BaseHTTPRequestHandler):
             "channels": channels,
         })
 
+    def _api_xtream(self, query: dict) -> None:
+        portal = (query.get("portal") or [""])[0]
+        user = (query.get("user") or [""])[0]
+        password = (query.get("pass") or [""])[0]
+        if not portal or not user or not password:
+            return self._json(400, {"error": "portal, kullanıcı adı ve şifre gerekli"})
+        try:
+            channels, pl_url = xtream_channels(portal, user, password)
+        except ValueError as exc:
+            return self._json(400, {"error": str(exc)})
+        except urllib.error.HTTPError as exc:
+            return self._json(502, {"error": f"portal HTTP {exc.code}"})
+        except (urllib.error.URLError, OSError) as exc:
+            return self._json(502, {"error": f"portal erişilemedi: {exc}"})
+        return self._json(200, {
+            "count": len(channels),
+            "playlist": pl_url,
+            "channels": channels,
+        })
+
     def _api_fetch(self, query: dict, head_only: bool) -> None:
         url = (query.get("url") or [""])[0]
         if not url:
@@ -667,6 +689,8 @@ def normalize_channel(ch: dict) -> dict:
     }
     if ch.get("headers"):
         out["headers"] = ch["headers"]
+    if ch.get("kind"):
+        out["kind"] = ch["kind"]
     if ch.get("urls"):
         out["urls"] = ch["urls"]
     if ch.get("rank") is not None:
@@ -695,6 +719,98 @@ def _stalker_call(portal: str, params: str, mac: str, token: str = "",
     _, _, raw = fetch(url, _stalker_headers(mac, token), timeout=timeout)
     data = json.loads(raw.decode("utf-8", "replace"))
     return data.get("js", data) if isinstance(data, dict) else data
+
+
+def xtream_channels(portal: str, user: str, password: str) -> tuple[list, str]:
+    """Load an Xtream Codes / XUI account. Returns (channels, playlist-url).
+
+    Streams are built from the player API so the same credentials work for
+    live TV, movies and series. `kind` tells the front-end which is which."""
+    base = portal.strip().rstrip("/")
+    if not re.match(r"^https?://", base):
+        base = "http://" + base
+    qs = urllib.parse.urlencode(
+        {"username": user, "password": password, "action": "get_live_streams"})
+    status, _hdrs, raw = fetch(f"{base}/player_api.php?{qs}")
+    if status != 200:
+        raise ValueError(f"portal HTTP {status}")
+    try:
+        live = json.loads(raw.decode("utf-8", "replace") or "[]")
+    except json.JSONDecodeError:
+        raise ValueError("portal JSON döndürmedi (Xtream API değil)")
+    if isinstance(live, dict):
+        raise ValueError(live.get("user_info", {}).get("auth")
+                         and "kimlik doğrulanamadı" or "portal yanıtı geçersiz")
+
+    def stream_url(folder, stream_id, ext):
+        return f"{base}/{folder}/{user}/{password}/{stream_id}.{ext}"
+
+    def categories(action):
+        q = urllib.parse.urlencode(
+            {"username": user, "password": password, "action": action})
+        try:
+            _s, _h, raw = fetch(f"{base}/player_api.php?{q}")
+            items = json.loads(raw.decode("utf-8", "replace") or "[]")
+        except (urllib.error.URLError, OSError, json.JSONDecodeError):
+            return {}
+        if not isinstance(items, list):
+            return {}
+        return {str(c.get("category_id")): c.get("category_name")
+                for c in items if isinstance(c, dict)}
+
+    live_cats = categories("get_live_categories")
+
+    channels = []
+    for item in live:
+        if not isinstance(item, dict):
+            continue
+        sid = item.get("stream_id")
+        if sid is None:
+            continue
+        ext = item.get("container_extension") or "ts"
+        cat = live_cats.get(str(item.get("category_id")))
+        channels.append({
+            "name": item.get("name") or f"Kanal {sid}",
+            "url": stream_url("live", sid, ext),
+            "logo": item.get("stream_icon") or "",
+            "group": item.get("category_name") or cat or "Genel",
+            "tvgId": str(item.get("epg_channel_id") or ""),
+            "source": "Xtream",
+            "kind": "live",
+        })
+
+    # Movies and series need one extra call each; failures are non-fatal.
+    for action, kind, folder, ext in (("get_vod_streams", "vod", "movie", "mkv"),
+                                      ("get_series", "series", "series", "mkv")):
+        qs = urllib.parse.urlencode(
+            {"username": user, "password": password, "action": action})
+        try:
+            status, _hdrs, raw = fetch(f"{base}/player_api.php?{qs}")
+            items = json.loads(raw.decode("utf-8", "replace") or "[]")
+        except (urllib.error.URLError, OSError, json.JSONDecodeError):
+            continue
+        if not isinstance(items, list):
+            continue
+        cats = categories("get_vod_categories" if kind == "vod"
+                          else "get_series_categories")
+        for item in items:
+            if not isinstance(item, dict):
+                continue
+            sid = item.get("stream_id") or item.get("series_id")
+            if sid is None:
+                continue
+            e = item.get("container_extension") or ext
+            cat = cats.get(str(item.get("category_id")))
+            channels.append({
+                "name": item.get("name") or f"{kind} {sid}",
+                "url": stream_url(folder, sid, e),
+                "logo": item.get("stream_icon") or item.get("cover") or "",
+                "group": item.get("category_name") or cat or "Genel",
+                "tvgId": "",
+                "source": "Xtream",
+                "kind": kind,
+            })
+    return channels, f"{base}/get.php?username={user}&password={password}&type=m3u_plus"
 
 
 def stalker_channels(portal: str, mac: str) -> tuple[list, str]:

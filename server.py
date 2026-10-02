@@ -267,10 +267,14 @@ class Handler(BaseHTTPRequestHandler):
     def _download_all(self, head_only: bool) -> None:
         """Serve the whole project (source + built binary + channel list) as a
         single archive, so it can be grabbed and built on the user's machine."""
+        files = [
+            "server.py", "build_channels.py", "build_canlitv.py", "build_exe.py",
+            "README.md", "build/make.py", "build/iptv_player.spec",
+            "build/requirements-build.txt", ".github/workflows/build.yml",
+        ]
         buf = io.BytesIO()
         with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zf:
-            for name in ("server.py", "build_channels.py", "build_canlitv.py",
-                         "build_exe.py", "README.md"):
+            for name in files:
                 f = ROOT / name
                 if f.exists():
                     zf.write(f, f"IPTV-Player/{name}")
@@ -278,9 +282,6 @@ class Handler(BaseHTTPRequestHandler):
                 for f in sorted((ROOT / folder).rglob("*")):
                     if f.is_file():
                         zf.write(f, f"IPTV-Player/{f.relative_to(ROOT)}")
-            spec = ROOT / "build" / "iptv_player.spec"
-            if spec.exists():
-                zf.write(spec, "IPTV-Player/build/iptv_player.spec")
             binary = ROOT / "dist" / "IPTV-Player"
             if binary.exists():
                 zf.write(binary, "IPTV-Player/dist/IPTV-Player")

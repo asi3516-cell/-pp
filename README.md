@@ -131,6 +131,23 @@ PyInstaller çapraz derleme yapmaz: Windows `.exe` yalnızca Windows'ta, macOS
 yapısı yalnızca macOS'ta üretilir. Üçü için birden GitHub Actions iş akışı
 (`.github/workflows/build.yml`) kullanılabilir.
 
+## Windows .exe oluşturma
+
+### En kolay yol (tek tık)
+Bilgisayarında **Python 3.10+** kuruluysa, **`build_exe.bat`** dosyasına çift
+tıkla. Betik gerekli paketi (PyInstaller) kurar, uygulamayı derler ve
+`dist\IPTV-Player.exe` dosyasını üretir; sonunda çalıştırmak isteyip
+istemediğini sorar.
+
+### Elle
+```bat
+pip install -r build\requirements-build.txt
+python build\make.py
+```
+
+Çıkan `dist\IPTV-Player.exe` tek dosyadır: kanal listesi ve arayüz içine
+gömülüdür, kurulum gerektirmez, başka bilgisayara kopyalanabilir.
+
 ## Android APK oluşturma
 
 Telefona kurulabilen bir uygulama (APK) üretmek için:

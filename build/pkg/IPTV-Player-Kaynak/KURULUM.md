@@ -1,69 +1,42 @@
 # IPTV Player — Kaynak Sürüm (EXE'siz)
 
-Bu paket, programın **kaynak kodudur**. Derlenmiş `.exe` yoktur; kodu
-doğrudan düzenleyebilir, kendi bilgisayarında çalıştırabilir veya yeniden
-derleyebilirsin.
+Bu paket programın **kaynak kodudur**. Derlenmiş `.exe` yoktur; kodu
+düzenleyebilir, çalıştırabilir veya kendin derleyebilirsin.
 
-## 1) Çalıştırmak için (Python gerekir)
-
-Windows'ta Python 3.10+ kurulu olmalı (https://python.org → "Add to PATH").
+## 1) Çalıştırma (Python 3.10+ gerekir)
 
 ```bat
-:: çift tıkla (tarayıcı otomatik açılır):
-run.bat
+run.bat          :: çift tıkla, tarayıcı otomatik açılır
 ```
 
-veya elle:
+veya: `python server.py --open`  →  http://127.0.0.1:8000
 
-```bat
-python server.py --open
-```
+Harici bağımlılık yoktur (yalnızca Python standart kütüphanesi).
 
-Ardından tarayıcıdan şu adresi aç: **http://127.0.0.1:8000**
+## 2) Tek tıkla .exe üretme
 
-> Farklı port istersen: `set PORT=9000 && python server.py --port %PORT%`
+**`build_exe.bat`** dosyasına çift tıkla. PyInstaller'ı kurar, derler ve
+`dist\IPTV-Player.exe` üretir. (Python kurulu olmalı.)
 
-Harici bağımlılık **yoktur** (yalnızca Python standart kütüphanesi).
-
-## 2) Neyi nerede düzenlersin
+## 3) Neyi nerede düzenlersin
 
 | Ne | Dosya |
 |----|-------|
 | Arayüz (HTML) | `static/index.html` |
 | Tasarım / CSS | `static/style.css` |
 | Oynatıcı mantığı (JS) | `static/app.js` |
-| Sunucu / API / proxy | `server.py` |
+| Sunucu / API / proxy / inceleme | `server.py` |
 | Kanal listesi (veri) | `data/channels.json` |
-| Kanal listesini üreten betik | `build_channels.py`, `build_canlitv.py` |
+| Kanal üretme | `build_channels.py`, `build_canlitv.py` |
 
-Kanal listesini yeniden üretmek için:
+Kanal listesini yeniden üret: `python build_channels.py`
 
-```bat
-python build_channels.py
-```
+## 4) Android APK
 
-Bu komut `data/channels.json` dosyasını güncel listelerle yeniden yazar.
-
-## 3) Kendi `.exe`'ni derlemek (isteğe bağlı)
-
-```bat
-pip install -r build\requirements-build.txt
-python build\make.py
-```
-
-Sonuç: `dist\IPTV-Player.exe`. PyInstaller çapraz derleme yapmaz; Windows
-`.exe` yalnızca Windows'ta üretilir.
-
-## 4) Android APK (isteğe bağlı)
-
-`android/` klasöründe kaynaklar, `build_apk.py` ile derleme betiği vardır.
-Gerekenler: JDK 17 + Android SDK (platforms;android-34, build-tools;34.0.0).
-
-```bat
-python build_apk.py
-```
+`android/` kaynakları + `build_apk.py`. Gerekenler: JDK 17 ve Android SDK
+(platforms;android-34, build-tools;34.0.0): `python build_apk.py`
 
 ## Not
-
 Yayınlar ücretsiz/genel kaynaklardan geldiği için bazıları bölgesel olarak
-engelli veya çevrimdışı olabilir; liste yalnızca işaret eder, garanti vermez.
+engelli veya çevrimdışı olabilir. "İncele" butonu hangi adresin çalıştığını
+gösterir.

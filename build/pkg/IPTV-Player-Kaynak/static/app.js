@@ -293,7 +293,7 @@
 
     state.filtered.slice(0, 1500).forEach(function (ch) {
       var node = document.createElement("div");
-      node.className = "ch";
+      node.className = "ch" + (ch.urls && ch.urls.length > 1 ? " ch-multi" : "");
       node.tabIndex = 0;
       node.dataset.url = ch.url;
       if (state.current && state.current.url === ch.url) node.classList.add("active");
@@ -340,6 +340,15 @@
       head.appendChild(logo);
       head.appendChild(text);
       head.appendChild(favBtn);
+
+      var inspectBtn = document.createElement("button");
+      inspectBtn.className = "ch-inspect";
+      inspectBtn.type = "button";
+      inspectBtn.textContent = "İncele";
+      inspectBtn.title = "Yayın adreslerini kontrol et";
+      inspectBtn.onclick = function (ev) { ev.stopPropagation(); inspect(ch); };
+      head.appendChild(inspectBtn);
+
       head.onclick = function () { play(ch); };
       node.appendChild(head);
 
@@ -500,8 +509,9 @@
 
     hls.on(Hls.Events.ERROR, function (evt, data) {
       if (!data || !data.fatal) return;
-      // CORS or network trouble: retry once through the server-side proxy.
-      if (!triedProxy && data.type === Hls.ErrorTypes.NETWORK_ERROR) {
+      // Any fatal load problem (CORS, network, bad manifest): retry once
+      // through the server-side proxy, which fetches the stream itself.
+      if (!triedProxy) {
         triedProxy = true;
         showOsd("Sunucu üzerinden yeniden deneniyor...");
         hls.loadSource(proxied(url, { h: originOf(url) }));
@@ -525,6 +535,56 @@
 
   function originOf(url) {
     try { return new URL(url).origin + "/"; } catch (e) { return ""; }
+  }
+
+  // Inspect a channel's stream alternatives: ask the server to fetch each one
+  // and report which respond, so a user can see why a channel won't open.
+  function inspect(ch) {
+    var streams = (ch.urls && ch.urls.length) ? ch.urls.slice()
+                                              : [{ url: ch.url, label: "" }];
+    var dlg = $("#inspectDlg");
+    $("#inspectTitle").textContent = ch.name + " — yayın incelemesi";
+    $("#inspectHint").textContent = streams.length + " yayın adresi kontrol ediliyor…";
+    var body = $("#inspectBody");
+    body.innerHTML = "";
+    streams.forEach(function (s, i) {
+      var row = document.createElement("div");
+      row.className = "inspect-row pending";
+      row.id = "insp-" + i;
+      row.innerHTML = '<span class="st">kontrol ediliyor…</span>' +
+        '<span class="u"></span>';
+      row.querySelector(".u").textContent = (s.label || ("yayın " + (i + 1))) +
+        " — " + s.url;
+      body.appendChild(row);
+    });
+    if (!dlg.open) dlg.showModal();
+
+    api("/api/probe?url=" + encodeURIComponent(streams.map(function (s) {
+      return s.url;
+    }).join("|"))).then(function (data) {
+      var results = (data && data.results) || [];
+      var working = 0;
+      results.forEach(function (r, i) {
+        var row = $("#insp-" + i);
+        if (!row) return;
+        row.classList.remove("pending");
+        row.classList.add(r.ok ? "ok" : "bad");
+        if (r.ok) working++;
+        var detail = r.ok ? "✔ çalışıyor" : "✘ açılmıyor";
+        if (r.kind === "playlist" && r.variants) {
+          detail += " (HLS liste, " + r.variants + " varyant)";
+        } else if (r.kind) {
+          detail += " (" + r.kind + ")";
+        }
+        if (r.error) detail += " — " + r.error;
+        else if (r.status && r.status !== 200) detail += " — HTTP " + r.status;
+        row.querySelector(".st").textContent = detail;
+      });
+      $("#inspectHint").textContent = working + " / " + results.length +
+        " yayın çalışıyor. Çalışanı oynatmak için listedeki numaraya tıkla.";
+    }).catch(function (err) {
+      $("#inspectHint").textContent = "İnceleme başarısız: " + err.message;
+    });
   }
 
   // Jump to the next/previous channel in the visible list. Used from the
@@ -753,6 +813,7 @@
     // dialogs
     $("#openPlaylists").onclick = function () { renderPlaylists(); $("#playlistsDlg").showModal(); };
     $("#openAdd").onclick = function () { $("#addDlg").showModal(); };
+    $("#inspectClose").onclick = function () { $("#inspectDlg").close(); };
 
     $("#addPlaylist").onclick = function () {
       var url = $("#plUrl").value.trim();

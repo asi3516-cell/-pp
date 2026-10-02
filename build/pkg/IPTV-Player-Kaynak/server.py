@@ -258,12 +258,22 @@ class Handler(BaseHTTPRequestHandler):
             return self._api_proxy(query, head_only)
         if path == "/api/fetch":
             return self._api_fetch(query, head_only)
+        if path == "/api/probe":
+            return self._api_probe(query, head_only)
         if path == "/download/player":
             return self._download_player(head_only)
         if path == "/download/apk":
             return self._download_apk(head_only)
         if path == "/download/all":
             return self._download_all(head_only)
+        if path == "/download/windows-rar":
+            return self._send_file(
+                ROOT / "build" / "pkg" / "IPTV-Player-Windows.rar",
+                "IPTV-Player-Windows.rar", "application/vnd.rar", head_only)
+        if path == "/download/source-rar":
+            return self._send_file(
+                ROOT / "build" / "pkg" / "IPTV-Player-Kaynak.rar",
+                "IPTV-Player-Kaynak.rar", "application/vnd.rar", head_only)
         if path == "/channels.m3u":
             return self._download_channels(head_only)
         return self._static(path, head_only)
@@ -310,8 +320,9 @@ class Handler(BaseHTTPRequestHandler):
         single archive, so it can be grabbed and built on the user's machine."""
         files = [
             "server.py", "build_channels.py", "build_canlitv.py", "build_exe.py",
-            "build_apk.py", "README.md", "build/make.py", "build/iptv_player.spec",
-            "build/requirements-build.txt", ".github/workflows/build.yml",
+            "build_apk.py", "build_exe.bat", "README.md", "build/make.py",
+            "build/iptv_player.spec", "build/requirements-build.txt",
+            ".github/workflows/build.yml",
         ]
         buf = io.BytesIO()
         with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zf:
@@ -342,6 +353,26 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
         if not head_only:
             self.wfile.write(body)
+
+    def _send_file(self, path, filename: str, ctype: str, head_only: bool) -> None:
+        if not path.exists():
+            return self._send(404, b"not built", "text/plain", head_only=head_only)
+        size = path.stat().st_size
+        self.send_response(200)
+        self._cors()
+        self.send_header("Content-Type", ctype)
+        self.send_header("Content-Disposition",
+                         f'attachment; filename="{filename}"')
+        self.send_header("Content-Length", str(size))
+        self.end_headers()
+        if head_only:
+            return
+        with path.open("rb") as fh:
+            while True:
+                chunk = fh.read(64 * 1024)
+                if not chunk:
+                    break
+                self.wfile.write(chunk)
 
     def _download_apk(self, head_only: bool) -> None:
         """Serve the built Android APK, if it has been assembled."""
@@ -451,6 +482,47 @@ class Handler(BaseHTTPRequestHandler):
         ctype = hdrs.get("content-type", "text/plain; charset=utf-8")
         self._send(status, raw, ctype, head_only=head_only)
 
+    def _api_probe(self, query: dict, head_only: bool) -> None:
+        """Check whether one or more stream URLs actually respond. Used by the
+        'İncele' (inspect) view to show which alternatives work from here."""
+        urls = []
+        for raw in query.get("url", []):
+            urls.extend(u for u in raw.split("|") if u)
+        if not urls:
+            return self._json(400, {"error": "missing url"})
+        results = []
+        for u in urls[:12]:
+            entry = {"url": u, "ok": False, "status": 0, "error": "",
+                     "kind": "", "note": ""}
+            try:
+                status, hdrs, raw = fetch(u, timeout=12)
+                ctype = (hdrs.get("content-type") or "").lower()
+                entry["status"] = status
+                if raw[:7].upper() == b"#EXTM3U":
+                    entry["kind"] = "playlist"
+                    text = raw.decode("utf-8", "replace")
+                    variants = [ln.strip() for ln in text.splitlines()
+                                if ln.strip() and not ln.startswith("#")]
+                    entry["variants"] = len(variants)
+                    entry["ok"] = len(variants) > 0
+                elif "mpegurl" in ctype or "vnd.apple" in ctype:
+                    entry["kind"] = "playlist"
+                    entry["ok"] = True
+                elif "mpegts" in ctype or "mp2t" in ctype or "video" in ctype:
+                    entry["kind"] = "media"
+                    entry["ok"] = status == 200
+                else:
+                    entry["kind"] = "data"
+                    entry["ok"] = status == 200 and len(raw) > 0
+                    entry["note"] = ctype or "bilinmeyen tür"
+            except urllib.error.HTTPError as exc:
+                entry["status"] = exc.code
+                entry["error"] = "HTTP %d (%s)" % (exc.code, exc.reason)
+            except (urllib.error.URLError, OSError) as exc:
+                entry["error"] = str(exc)[:120]
+            results.append(entry)
+        self._json(200, {"results": results})
+
     def _api_proxy(self, query: dict, head_only: bool) -> None:
         url = (query.get("url") or [""])[0]
         if not url:
@@ -475,7 +547,7 @@ class Handler(BaseHTTPRequestHandler):
             return self._json(502, {"error": str(exc)})
 
         ctype = hdrs.get("content-type", "")
-        if is_playlist(url, ctype):
+        if is_playlist(url, ctype) and raw[:7].upper() == b"#EXTM3U":
             text = raw.decode("utf-8", "replace")
             extra_qs = ""
             if fwd_headers.get("User-Agent"):

@@ -10,7 +10,7 @@
   --danger: #ff5c72;
   --radius: 12px;
   --shadow: 0 10px 30px rgba(0, 0, 0, .45);
-  --sidebar-w: 520px;
+  --sidebar-w: clamp(300px, 24vw, 360px);
 }
 
 :root[data-theme="light"] {

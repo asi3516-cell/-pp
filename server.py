@@ -338,6 +338,10 @@ class Handler(BaseHTTPRequestHandler):
             return self._send_file(
                 ROOT / "build" / "pkg" / "IPTV-Player-Windows.rar",
                 "IPTV-Player-Windows.rar", "application/vnd.rar", head_only)
+        if path == "/download/source-zip":
+            return self._send_file(
+                ROOT / "build" / "pkg" / "IPTV-Player-Kaynak.zip",
+                "IPTV-Player-Kaynak.zip", "application/zip", head_only)
         if path == "/download/source-rar":
             return self._send_file(
                 ROOT / "build" / "pkg" / "IPTV-Player-Kaynak.rar",

@@ -1,0 +1,408 @@
+#!/usr/bin/env python3
+"""IPTV Web Player server.
+
+Serves the static web player and exposes a small JSON API plus a CORS
+stream proxy so that HLS playlists (.m3u8) and segments can be played from
+the browser even when the upstream provider does not send CORS headers.
+
+Uses only the Python standard library so it runs anywhere Python 3.9+ is
+available.
+"""
+
+from __future__ import annotations
+
+import argparse
+import gzip
+import io
+import json
+import mimetypes
+import os
+import re
+import ssl
+import sys
+import threading
+import time
+import urllib.error
+import urllib.parse
+import urllib.request
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent
+STATIC_DIR = ROOT / "static"
+DATA_DIR = ROOT / "data"
+STORE_FILE = DATA_DIR / "store.json"
+
+DEFAULT_TIMEOUT = 20
+UA = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+)
+
+_SSL_CTX = ssl.create_default_context()
+_SSL_CTX.check_hostname = False
+_SSL_CTX.verify_mode = ssl.CERT_NONE
+
+_store_lock = threading.Lock()
+
+
+# --------------------------------------------------------------------------
+# Persistent store (playlists, favorites, settings)
+# --------------------------------------------------------------------------
+def _default_store() -> dict:
+    return {"playlists": [], "favorites": [], "settings": {}}
+
+
+def load_store() -> dict:
+    with _store_lock:
+        if not STORE_FILE.exists():
+            return _default_store()
+        try:
+            data = json.loads(STORE_FILE.read_text("utf-8"))
+        except (OSError, ValueError):
+            return _default_store()
+        base = _default_store()
+        base.update({k: data.get(k, base[k]) for k in base})
+        return base
+
+
+def save_store(store: dict) -> None:
+    with _store_lock:
+        DATA_DIR.mkdir(parents=True, exist_ok=True)
+        tmp = STORE_FILE.with_suffix(".tmp")
+        tmp.write_text(json.dumps(store, ensure_ascii=False, indent=2), "utf-8")
+        tmp.replace(STORE_FILE)
+
+
+# --------------------------------------------------------------------------
+# Upstream fetching helpers
+# --------------------------------------------------------------------------
+def fetch(url: str, headers: dict | None = None, timeout: int = DEFAULT_TIMEOUT):
+    """Fetch an upstream URL and return (status, headers, body-bytes)."""
+    req_headers = {
+        "User-Agent": UA,
+        "Accept": "*/*",
+        "Accept-Encoding": "gzip, identity",
+    }
+    if headers:
+        req_headers.update({k: v for k, v in headers.items() if v})
+    req = urllib.request.Request(url, headers=req_headers)
+    with urllib.request.urlopen(req, timeout=timeout, context=_SSL_CTX) as resp:
+        raw = resp.read()
+        hdrs = {k.lower(): v for k, v in resp.headers.items()}
+        if hdrs.get("content-encoding") == "gzip" and raw[:2] == b"\x1f\x8b":
+            raw = gzip.GzipFile(fileobj=io.BytesIO(raw)).read()
+        return resp.status, hdrs, raw
+
+
+M3U8_RE = re.compile(r"\.m3u8(\?|$)", re.IGNORECASE)
+URI_ATTR_RE = re.compile(r'URI="([^"]+)"')
+
+
+def is_playlist(url: str, content_type: str) -> bool:
+    if M3U8_RE.search(url):
+        return True
+    ct = (content_type or "").lower()
+    return "mpegurl" in ct or "vnd.apple" in ct
+
+
+def proxy_url(absolute: str) -> str:
+    return "/api/proxy?url=" + urllib.parse.quote(absolute, safe="")
+
+
+def rewrite_playlist(text: str, base_url: str) -> str:
+    """Rewrite every URI in an HLS playlist so it points back at our proxy."""
+    out_lines = []
+    for line in text.splitlines():
+        stripped = line.strip()
+        if stripped.startswith("#"):
+            # Rewrite URI="..." attributes (encryption keys, media renditions).
+            def _sub(m: re.Match) -> str:
+                target = urllib.parse.urljoin(base_url, m.group(1))
+                return 'URI="%s"' % proxy_url(target)
+
+            out_lines.append(URI_ATTR_RE.sub(_sub, line))
+        elif stripped:
+            target = urllib.parse.urljoin(base_url, stripped)
+            out_lines.append(proxy_url(target))
+        else:
+            out_lines.append(line)
+    return "\n".join(out_lines)
+
+
+# --------------------------------------------------------------------------
+# HTTP handler
+# --------------------------------------------------------------------------
+class Handler(BaseHTTPRequestHandler):
+    server_version = "IPTVPlayer/1.0"
+    protocol_version = "HTTP/1.1"
+
+    def log_message(self, fmt, *args):  # keep the console readable
+        if os.environ.get("IPTV_VERBOSE"):
+            sys.stderr.write("%s - %s\n" % (self.address_string(), fmt % args))
+
+    # -- helpers -----------------------------------------------------------
+    def _cors(self) -> None:
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Allow-Headers", "*")
+        self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+
+    def _send(self, status: int, body: bytes, ctype: str, extra: dict | None = None,
+              head_only: bool = False) -> None:
+        self.send_response(status)
+        self.send_header("Content-Type", ctype)
+        self.send_header("Content-Length", str(len(body)))
+        self._cors()
+        for k, v in (extra or {}).items():
+            self.send_header(k, v)
+        self.end_headers()
+        if not head_only:
+            try:
+                self.wfile.write(body)
+            except (BrokenPipeError, ConnectionResetError):
+                pass
+
+    def _json(self, status: int, obj) -> None:
+        body = json.dumps(obj, ensure_ascii=False).encode("utf-8")
+        self._send(status, body, "application/json; charset=utf-8")
+
+    def _read_json(self) -> dict:
+        length = int(self.headers.get("Content-Length") or 0)
+        if length <= 0:
+            return {}
+        try:
+            return json.loads(self.rfile.read(length).decode("utf-8"))
+        except ValueError:
+            return {}
+
+    # -- routing -----------------------------------------------------------
+    def do_OPTIONS(self):  # noqa: N802
+        self.send_response(204)
+        self._cors()
+        self.send_header("Content-Length", "0")
+        self.end_headers()
+
+    def do_HEAD(self):  # noqa: N802
+        self._route(head_only=True)
+
+    def do_GET(self):  # noqa: N802
+        self._route(head_only=False)
+
+    def do_POST(self):  # noqa: N802
+        parsed = urllib.parse.urlparse(self.path)
+        path = parsed.path.rstrip("/") or "/"
+        if path == "/api/store":
+            store = self._read_json()
+            if not isinstance(store, dict):
+                return self._json(400, {"error": "invalid body"})
+            current = load_store()
+            for key in ("playlists", "favorites", "settings"):
+                if key in store:
+                    current[key] = store[key]
+            save_store(current)
+            return self._json(200, current)
+        return self._json(404, {"error": "not found"})
+
+    def _route(self, head_only: bool) -> None:
+        parsed = urllib.parse.urlparse(self.path)
+        path = parsed.path
+        query = urllib.parse.parse_qs(parsed.query)
+
+        if path == "/api/health":
+            return self._json(200, {"ok": True, "time": int(time.time())})
+        if path == "/api/store":
+            return self._json(200, load_store())
+        if path == "/api/channels":
+            return self._api_channels()
+        if path == "/api/proxy":
+            return self._api_proxy(query, head_only)
+        if path == "/api/fetch":
+            return self._api_fetch(query, head_only)
+        return self._static(path, head_only)
+
+    # -- API ---------------------------------------------------------------
+    def _api_channels(self) -> None:
+        """Return the bundled default channel list plus user M3U playlists."""
+        channels = []
+        defaults = DATA_DIR / "channels.json"
+        if defaults.exists():
+            try:
+                channels.extend(json.loads(defaults.read_text("utf-8")))
+            except (OSError, ValueError):
+                pass
+
+        store = load_store()
+        for pl in store.get("playlists", []):
+            url = pl.get("url")
+            if not url:
+                continue
+            try:
+                _, hdrs, raw = fetch(url)
+                text = raw.decode("utf-8", "replace")
+                channels.extend(parse_m3u(text, pl.get("name") or url))
+            except (urllib.error.URLError, OSError, ValueError):
+                continue
+
+        # De-duplicate by name+url.
+        seen = set()
+        unique = []
+        for ch in channels:
+            key = (ch.get("name"), ch.get("url"))
+            if key in seen:
+                continue
+            seen.add(key)
+            unique.append(ch)
+        self._json(200, {"count": len(unique), "channels": unique})
+
+    def _api_fetch(self, query: dict, head_only: bool) -> None:
+        url = (query.get("url") or [""])[0]
+        if not url:
+            return self._json(400, {"error": "missing url"})
+        try:
+            status, hdrs, raw = fetch(url)
+        except (urllib.error.URLError, OSError) as exc:
+            return self._json(502, {"error": str(exc)})
+        ctype = hdrs.get("content-type", "text/plain; charset=utf-8")
+        self._send(status, raw, ctype, head_only=head_only)
+
+    def _api_proxy(self, query: dict, head_only: bool) -> None:
+        url = (query.get("url") or [""])[0]
+        if not url:
+            return self._json(400, {"error": "missing url"})
+
+        fwd_headers = {}
+        for src, dst in (("h", "Referer"), ("u", "User-Agent"), ("o", "Origin")):
+            val = (query.get(src) or [None])[0]
+            if val:
+                fwd_headers[dst] = val
+
+        rng = self.headers.get("Range")
+        if rng:
+            fwd_headers["Range"] = rng
+
+        try:
+            status, hdrs, raw = fetch(url, fwd_headers)
+        except urllib.error.HTTPError as exc:
+            return self._send(exc.code, b"upstream error", "text/plain")
+        except (urllib.error.URLError, OSError) as exc:
+            return self._json(502, {"error": str(exc)})
+
+        ctype = hdrs.get("content-type", "")
+        if is_playlist(url, ctype):
+            text = raw.decode("utf-8", "replace")
+            rewritten = rewrite_playlist(text, url)
+            body = rewritten.encode("utf-8")
+            return self._send(
+                200, body, "application/vnd.apple.mpegurl",
+                {"Cache-Control": "no-cache"}, head_only=head_only,
+            )
+
+        extra = {}
+        for h in ("content-range", "accept-ranges"):
+            if h in hdrs:
+                extra[h.title()] = hdrs[h]
+        if not ctype:
+            ctype = mimetypes.guess_type(urllib.parse.urlparse(url).path)[0] or "application/octet-stream"
+        self._send(status, raw, ctype, extra, head_only=head_only)
+
+    # -- static files ------------------------------------------------------
+    def _static(self, path: str, head_only: bool) -> None:
+        rel = urllib.parse.unquote(path.lstrip("/")) or "index.html"
+        candidate = (STATIC_DIR / rel).resolve()
+        try:
+            candidate.relative_to(STATIC_DIR.resolve())
+        except ValueError:
+            return self._send(403, b"forbidden", "text/plain")
+        if candidate.is_dir():
+            candidate = candidate / "index.html"
+        if not candidate.exists():
+            # Single-page-app fallback.
+            candidate = STATIC_DIR / "index.html"
+            if not candidate.exists():
+                return self._send(404, b"not found", "text/plain")
+        ctype = mimetypes.guess_type(str(candidate))[0] or "application/octet-stream"
+        if ctype.startswith("text/") or ctype in (
+            "application/javascript", "application/json", "image/svg+xml",
+        ):
+            ctype += "; charset=utf-8"
+        body = candidate.read_bytes()
+        self._send(200, body, ctype, {"Cache-Control": "no-cache"}, head_only=head_only)
+
+
+# --------------------------------------------------------------------------
+# Minimal M3U parser (server side, used when importing playlists)
+# --------------------------------------------------------------------------
+ATTR_RE = re.compile(r'([\w-]+)="([^"]*)"')
+
+
+def display_name(line: str) -> str:
+    """Return the title after the EXTINF attributes.
+
+    Attribute values may themselves contain commas (e.g. an http-user-agent),
+    so only commas outside of quoted values delimit the display name.
+    """
+    in_quote = False
+    last = -1
+    for i, ch in enumerate(line):
+        if ch == '"':
+            in_quote = not in_quote
+        elif ch == "," and not in_quote:
+            last = i
+    return line[last + 1:].strip() if last >= 0 else ""
+
+
+def parse_m3u(text: str, source: str = "playlist") -> list:
+    channels = []
+    info = {}
+    for line in text.splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        if line.startswith("#EXTINF"):
+            info = {"source": source}
+            for key, val in ATTR_RE.findall(line):
+                info[key] = val
+            info["name"] = display_name(line) or info.get("tvg-name") or "Unnamed"
+        elif line.startswith("#"):
+            continue
+        elif line.startswith(("http://", "https://", "rtmp://", "rtsp://")):
+            if not info:
+                info = {"name": line, "source": source}
+            ch = normalize_channel(info)
+            ch["url"] = line
+            channels.append(ch)
+            info = {}
+    return channels
+
+
+def normalize_channel(ch: dict) -> dict:
+    """Map raw EXTINF attributes to the shape the front-end expects."""
+    return {
+        "name": ch.get("name") or "Unnamed",
+        "url": ch.get("url", ""),
+        "logo": ch.get("tvg-logo") or ch.get("logo") or "",
+        "group": ch.get("group-title") or ch.get("group") or "Genel",
+        "tvgId": ch.get("tvg-id") or ch.get("tvgId") or "",
+        "source": ch.get("source", "Playlist"),
+    }
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser(description="IPTV Web Player server")
+    ap.add_argument("-p", "--port", type=int,
+                    default=int(os.environ.get("PORT", 8000)))
+    ap.add_argument("-H", "--host", default=os.environ.get("HOST", "0.0.0.0"))
+    args = ap.parse_args()
+
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    httpd = ThreadingHTTPServer((args.host, args.port), Handler)
+    print(f"IPTV player running at http://{args.host}:{args.port}")
+    try:
+        httpd.serve_forever()
+    except KeyboardInterrupt:
+        print("\nShutting down...")
+        httpd.shutdown()
+
+
+if __name__ == "__main__":
+    main()

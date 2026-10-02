@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0b0f19" />
+<title>IPTV Player</title>
+<link rel="icon" href="icons/favicon.svg" type="image/svg+xml" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div id="app">
+  <aside id="sidebar" class="sidebar">
+    <div class="brand">
+      <img src="icons/logo.svg" alt="" class="brand-logo" />
+      <div>
+        <h1>IPTV Player</h1>
+        <span class="brand-sub">canlı TV &amp; m3u8 oynatıcı</span>
+      </div>
+    </div>
+
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" class="ic"><path d="M10 2a8 8 0 105.3 14l4.4 4.4 1.4-1.4-4.4-4.4A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z"/></svg>
+      <input id="search" type="search" placeholder="Kanal ara..." autocomplete="off" />
+      <button id="clearSearch" class="clear" title="Temizle" hidden>&times;</button>
+    </div>
+
+    <div class="tabs" id="tabs">
+      <button class="tab active" data-filter="all">Tümü</button>
+      <button class="tab" data-filter="fav">★ Favoriler</button>
+      <button class="tab" data-filter="recent">Son</button>
+    </div>
+
+    <div class="groups" id="groups"></div>
+
+    <div class="channel-list" id="channels" role="list"></div>
+
+    <div class="sidebar-foot">
+      <button id="openPlaylists" class="btn ghost sm">Playlistler</button>
+      <button id="openAdd" class="btn ghost sm">+ Kanal</button>
+      <span id="chCount" class="muted"></span>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <button id="menuBtn" class="btn icon only-mobile" title="Menü">☰</button>
+      <div class="now-playing">
+        <span id="npName">Kanal seçin</span>
+        <span id="npMeta" class="muted"></span>
+      </div>
+      <div class="topbar-actions">
+        <button id="favBtn" class="btn icon" title="Favorilere ekle">☆</button>
+        <button id="reloadBtn" class="btn icon" title="Yeniden yükle">⟳</button>
+        <button id="pipBtn" class="btn icon" title="Resim içinde resim">⧉</button>
+        <button id="fullBtn" class="btn icon" title="Tam ekran">⛶</button>
+        <button id="themeBtn" class="btn icon" title="Tema">◐</button>
+      </div>
+    </header>
+
+    <div class="stage" id="stage">
+      <video id="video" playsinline controls crossorigin="anonymous"></video>
+      <div id="overlay" class="overlay">
+        <div class="spinner" id="spinner" hidden></div>
+        <div class="overlay-msg" id="overlayMsg">
+          <h2>IPTV Player</h2>
+          <p>Soldaki listeden bir kanal seçin ya da <b>Playlistler</b> ile kendi M3U listenizi ekleyin.</p>
+        </div>
+      </div>
+      <div class="osd" id="osd"></div>
+    </div>
+
+    <div class="below">
+      <div class="card epg-card">
+        <div class="card-head"><h3>Yayın akışı (EPG)</h3><span id="epgSource" class="muted"></span></div>
+        <div id="epg" class="epg-body muted">EPG yüklenmedi. Playlistler bölümünden bir XMLTV adresi ekleyin.</div>
+      </div>
+      <div class="card info-card">
+        <div class="card-head"><h3>Kanal bilgisi</h3></div>
+        <dl id="chInfo" class="info-body">
+          <dt>Ad</dt><dd id="iName">—</dd>
+          <dt>Grup</dt><dd id="iGroup">—</dd>
+          <dt>Kaynak</dt><dd id="iSource">—</dd>
+          <dt>Akış</dt><dd id="iUrl" class="ellipsis">—</dd>
+        </dl>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Playlist manager -->
+<dialog id="playlistsDlg" class="dlg">
+  <form method="dialog" class="dlg-form">
+    <h2>Playlistler</h2>
+    <p class="muted">M3U/M3U8 playlist veya XMLTV (EPG) adresi ekleyin. CORS engeline takılan kaynaklar sunucu üzerinden çekilir.</p>
+
+    <label class="field">
+      <span>M3U playlist adresi</span>
+      <input id="plUrl" type="url" placeholder="https://ornek.com/liste.m3u" />
+    </label>
+    <label class="field">
+      <span>Ad (opsiyonel)</span>
+      <input id="plName" type="text" placeholder="Türkiye kanalları" />
+    </label>
+    <div class="dlg-actions">
+      <button id="addPlaylist" type="button" class="btn">Playlist ekle</button>
+      <label class="btn ghost file">
+        Dosyadan yükle
+        <input id="plFile" type="file" accept=".m3u,.m3u8,.txt" hidden />
+      </label>
+    </div>
+
+    <label class="field">
+      <span>XMLTV (EPG) adresi</span>
+      <input id="epgUrl" type="url" placeholder="https://ornek.com/epg.xml" />
+    </label>
+    <div class="dlg-actions">
+      <button id="saveEpg" type="button" class="btn ghost">EPG kaydet</button>
+    </div>
+
+    <ul id="plList" class="pl-list"></ul>
+
+    <div class="dlg-actions end">
+      <button class="btn ghost" value="close">Kapat</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Add channel -->
+<dialog id="addDlg" class="dlg">
+  <form method="dialog" class="dlg-form">
+    <h2>Kanal ekle</h2>
+    <label class="field"><span>Kanal adı</span><input id="addName" type="text" placeholder="Kanal adı" /></label>
+    <label class="field"><span>Yayın adresi (m3u8 / mp4 / mpd)</span><input id="addUrl" type="url" placeholder="https://.../stream.m3u8" /></label>
+    <label class="field"><span>Grup</span><input id="addGroup" type="text" placeholder="Özel" /></label>
+    <label class="field"><span>Logo adresi (opsiyonel)</span><input id="addLogo" type="url" placeholder="https://.../logo.png" /></label>
+    <div class="dlg-actions end">
+      <button id="saveChannel" type="button" class="btn">Kaydet</button>
+      <button class="btn ghost" value="close">İptal</button>
+    </div>
+  </form>
+</dialog>
+
+<template id="chRow">
+  <div class="ch" role="listitem" tabindex="0">
+    <div class="ch-logo"><img alt="" loading="lazy" /><span class="ph"></span></div>
+    <div class="ch-text">
+      <span class="ch-name"></span>
+      <span class="ch-sub muted"></span>
+    </div>
+    <button class="ch-fav" title="Favori">☆</button>
+  </div>
+</template>
+
+<script src="vendor/hls.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

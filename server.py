@@ -25,6 +25,7 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+import zipfile
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
@@ -259,7 +260,40 @@ class Handler(BaseHTTPRequestHandler):
             return self._api_fetch(query, head_only)
         if path == "/download/player":
             return self._download_player(head_only)
+        if path == "/download/all":
+            return self._download_all(head_only)
         return self._static(path, head_only)
+
+    def _download_all(self, head_only: bool) -> None:
+        """Serve the whole project (source + built binary + channel list) as a
+        single archive, so it can be grabbed and built on the user's machine."""
+        buf = io.BytesIO()
+        with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zf:
+            for name in ("server.py", "build_channels.py", "build_canlitv.py",
+                         "build_exe.py", "README.md"):
+                f = ROOT / name
+                if f.exists():
+                    zf.write(f, f"IPTV-Player/{name}")
+            for folder in ("static", "data"):
+                for f in sorted((ROOT / folder).rglob("*")):
+                    if f.is_file():
+                        zf.write(f, f"IPTV-Player/{f.relative_to(ROOT)}")
+            spec = ROOT / "build" / "iptv_player.spec"
+            if spec.exists():
+                zf.write(spec, "IPTV-Player/build/iptv_player.spec")
+            binary = ROOT / "dist" / "IPTV-Player"
+            if binary.exists():
+                zf.write(binary, "IPTV-Player/dist/IPTV-Player")
+        body = buf.getvalue()
+        self.send_response(200)
+        self._cors()
+        self.send_header("Content-Type", "application/zip")
+        self.send_header("Content-Disposition",
+                         'attachment; filename="IPTV-Player.zip"')
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        if not head_only:
+            self.wfile.write(body)
 
     def _download_player(self, head_only: bool) -> None:
         """Serve the built portable binary (source checkout only)."""
@@ -439,6 +473,22 @@ def display_name(line: str) -> str:
     return line[last + 1:].strip() if last >= 0 else ""
 
 
+# Tokens that carry no identity, so "360 TV", "360 (720p)" and "A Spor SD" all
+# collapse to the same key as their counterpart from another source.
+_NAME_NOISE = {
+    "tv", "hd", "sd", "fhd", "uhd", "4k", "canli", "canlı", "live",
+    "turkiye", "türkiye", "channel", "kanali", "kanalı",
+}
+
+
+def name_key(name: str) -> str:
+    """Normalize a channel name for cross-source matching / de-duplication."""
+    key = re.sub(r"\([^)]*\)", " ", name.casefold().strip())
+    key = re.sub(r"\[[^\]]*\]", " ", key)
+    key = re.sub(r"[^a-z0-9çğıöşü]+", " ", key)
+    return " ".join(t for t in key.split() if t not in _NAME_NOISE)
+
+
 def parse_m3u(text: str, source: str = "playlist") -> list:
     channels = []
     info = {}
@@ -475,6 +525,10 @@ def normalize_channel(ch: dict) -> dict:
     }
     if ch.get("headers"):
         out["headers"] = ch["headers"]
+    if ch.get("urls"):
+        out["urls"] = ch["urls"]
+    if ch.get("rank") is not None:
+        out["rank"] = ch["rank"]
     return out
 
 

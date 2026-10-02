@@ -10,10 +10,11 @@ from the UI at runtime.
 from __future__ import annotations
 
 import json
+import re
 import urllib.request
 from pathlib import Path
 
-from server import normalize_channel, parse_m3u
+from server import name_key, normalize_channel, parse_m3u
 
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "data" / "channels.json"
@@ -116,18 +117,30 @@ def fetch(url: str) -> str:
 
 
 def main() -> None:
-    channels = [normalize_channel(dict(d, source="Demo")) for d in DEMO]
+    # Popularity ranks scraped from canlitv; used to put the most-watched
+    # channels at the top even when only an iptv-org stream is available.
+    ranks_file = ROOT / "data" / "canlitv_ranks.json"
+    ranks_by_name = {}
+    if ranks_file.exists():
+        try:
+            ranks_by_name = json.loads(ranks_file.read_text("utf-8"))
+        except (OSError, ValueError):
+            pass
 
-    # Merge the higher-quality canlitv streams first so their URLs win when
-    # de-duplicating against the iptv-org entries of the same channel.
+    # Collect (channel, rank) so we can order by popularity at the end.
+    # Demos sort last so real Turkish channels fill the top of the list.
+    channels = [(normalize_channel(dict(d, source="Demo")), 300000) for d in DEMO]
+
     canlitv = ROOT / "data" / "canlitv.json"
     if canlitv.exists():
         try:
+            added = 0
             for ch in json.loads(canlitv.read_text("utf-8")):
                 if ch.get("name", "").casefold().strip() in NON_TURKISH:
                     continue
-                channels.append(normalize_channel(ch))
-            print(f"+ {len(channels) - len(DEMO)} channels from Canlitv")
+                channels.append((normalize_channel(ch), ch.get("rank", 100000)))
+                added += 1
+            print(f"+ {added} channels from Canlitv")
         except (OSError, ValueError) as exc:
             print(f"! could not read {canlitv}: {exc}")
 
@@ -140,24 +153,55 @@ def main() -> None:
         parsed = parse_m3u(text, source)
         for ch in parsed:
             ch["group"] = localize_group(ch.get("group", ""))
-            # Single-language entries: prefer the Turkish language label.
             ch["source"] = "Türkçe" if "Türkçe" in (ch.get("source") or "") else source
+            # iptv-org streams are backups; if canlitv ranks this channel, use
+            # that rank so popular channels still surface at the top.
+            rank = ranks_by_name.get(name_key(ch["name"]), 200000)
+            channels.append((ch, rank))
         print(f"+ {len(parsed)} channels from {source}")
-        channels.extend(parsed)
 
-    # De-duplicate by name+url.
-    seen = set()
-    unique = []
-    for ch in channels:
-        key = (ch.get("name"), ch.get("url"))
-        if key in seen:
+    # Group the same channel (by normalized name) and keep every distinct URL as
+    # a backup. The most-watched source comes first, so it is "url" and the rest
+    # fill "urls" — the player falls back automatically if one stream fails.
+    grouped: dict[str, dict] = {}
+    order: list[str] = []
+    for ch, rank in channels:
+        url = ch.get("url")
+        if not url:
             continue
-        seen.add(key)
-        unique.append(ch)
+        key = name_key(ch.get("name", ""))
+        g = grouped.get(key)
+        if g is None:
+            g = {"name": ch["name"], "url": url, "urls": [url],
+                 "logo": ch.get("logo", ""), "group": ch.get("group", "Genel"),
+                 "tvgId": ch.get("tvgId", ""), "source": ch.get("source", ""),
+                 "headers": ch.get("headers"), "rank": rank}
+            grouped[key] = g
+            order.append(key)
+            continue
+        if url not in g["urls"]:
+            g["urls"].append(url)
+        if rank < g["rank"]:
+            # Newer, more-watched source becomes the primary entry.
+            g["rank"] = rank
+            g["name"] = ch["name"]
+            g["source"] = ch.get("source", g["source"])
+            g["urls"].remove(url)
+            g["urls"].insert(0, url)
+            g["url"] = url
+
+    items = [grouped[k] for k in order]
+    items.sort(key=lambda c: (c["rank"], c["name"].casefold()))
+    for c in items:
+        if not c.get("headers"):
+            c.pop("headers", None)
+        if len(c["urls"]) < 2:
+            c.pop("urls")
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(json.dumps(unique, ensure_ascii=False, indent=2), "utf-8")
-    print(f"wrote {len(unique)} channels -> {OUT}")
+    OUT.write_text(json.dumps(items, ensure_ascii=False, indent=2), "utf-8")
+    multi = sum(1 for c in items if c.get("urls"))
+    print(f"wrote {len(items)} channels ({multi} with backups) -> {OUT}")
 
 
 if __name__ == "__main__":

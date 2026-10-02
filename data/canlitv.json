@@ -1,1602 +1,2462 @@
 [
   {
-    "name": "24 Tv",
-    "url": "https://turkmedya-live.ercdn.net/tv24/tv24.m3u8",
+    "name": "TRT 1",
+    "url": "https://tv-trt1.medya.trt.com.tr/master.m3u8",
+    "urls": [
+      "https://tv-trt1.medya.trt.com.tr/master.m3u8"
+    ],
     "logo": "",
     "group": "Türkiye",
     "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "360 TV",
-    "url": "https://turkmedya-live.ercdn.net/tv360/tv360.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "A Haber",
-    "url": "https://yayin2.canlitv.fun/live/ahaber.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "A Spor",
-    "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/aspor/aspor_480p.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Afroturk TV",
-    "url": "https://edge2.taksimbilisim.com/naturaltv/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Ahi Tv",
-    "url": "https://yayin1.canlitv.fun/canlitv/ahitv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Aksu Tv",
-    "url": "https://live.artidijitalmedya.com/artidijital_aksutv/aksutv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Akıllı Tv",
-    "url": "https://yayin.santraltr.com/hls/arabeskyeni.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Alanya Postası TV",
-    "url": "https://api-tv3.yayin.com.tr/postatv/postatv/chunklist_w1397845910.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Alanya Tv",
-    "url": "https://cdn-alanyatv.yayin.com.tr/alanyatv/alanyatv/playlist.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Altaş Tv",
-    "url": "https://edge1.taksimbilisim.com/altastv/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Altın Asır Tv",
-    "url": "https://alpha.tv.online.tm/hls/ch001_720/index.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Alvin Channel",
-    "url": "https://stream-135962.castr.net/5ff366a512987e2c0a3dabfe/live_14378e1002eb11ef9cb025207067897a/tracks-v1/index.fmp4.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Amasya Art Tv",
-    "url": "https://yayin1.canlitv.fun/canlitv/arttv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Anadolu Dost TV",
-    "url": "https://yayin1.canlitv.fun/canlitv/dosttv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Anadolu Net TV",
-    "url": "https://live.artidijitalmedya.com/artidijital_anadolunet/anadolunet/chunks.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "ARB 24 TV",
-    "url": "https://yayin2.canlitv.fun/live/arb24.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "ARB Güneş TV",
-    "url": "https://yayin2.canlitv.fun/live/arbgunes.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "ARB TV",
-    "url": "https://yayin2.canlitv.fun/live/arb.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "As Tv",
-    "url": "https://live.artidijitalmedya.com/artidijital_astv/astv/chunks.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Askabat TV",
-    "url": "https://alpha.tv.online.tm/hls/ch006_720/index.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Atv Azad TV",
-    "url": "https://lives.atv.az:5443/ATV_TV_STREAM/streams/atvcanli.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Az Star TV",
-    "url": "https://live.livestreamtv.ca/azstar/amlst:azstar/tracks-v1a1/mono.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Az TV",
-    "url": "https://yayin2.canlitv.fun/live/aztv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Bakü TV",
-    "url": "https://rtmp.baku.tv/hls/bakutv.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Beyaz TV",
-    "url": "https://beyaztv-live.daioncdn.net/beyaztv/beyaztv.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Bi Kanal",
-    "url": "https://bikanal-live.ercdn.net/bikanal/bikanal.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Bir TV",
-    "url": "https://edge2.taksimbilisim.com/birtv/bant1/chunks.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Biznes TV",
-    "url": "https://biznestv.az/hls/live.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Bodrum Kent TV",
-    "url": "https://edge2.taksimbilisim.com/bodrumkenttv/bant1/chunks.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "BRT 1",
-    "url": "https://edge.kuzeykibrissmart.tv/brt1hd/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "BRT 2",
-    "url": "https://edge.kuzeykibrissmart.tv/brt2hd/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "BRTV",
-    "url": "https://live.artidijitalmedya.com/artidijital_brtv/brtv/chunks.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Cartoon Network",
-    "url": "https://yayin2.canlitv.fun/live/cartoon-network.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "CBC Tv",
-    "url": "https://yayin2.canlitv.fun/live/cbc.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Cem Tv",
-    "url": "https://panel.5gtvhosting.com:2020/hls/cemtv/cemtv.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "CGTN Documentary",
-    "url": "https://live-stream.cgtn.com/event-live/CGTN_1_1NAzByztAaY/index.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Cine 1",
-    "url": "https://canliyayin.cine1.com.tr/memfs/cbaef080-a742-4644-9e9e-2b9f6a5103c3.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Deniz Postası TV",
-    "url": "https://live.artidijitalmedya.com/artidijital_denizpostasi/denizpostasi/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Deutsche Welle English",
-    "url": "https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/stream01/streamPlaylist.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Dim TV",
-    "url": "https://canli.dimtv.tv/hls/dim/index.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Diyanet TV",
-    "url": "https://eustr73.mediatriple.net/videoonlylive/mtikoimxnztxlive/broadcast_5e3bf95a47e07.smil/playlist.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Diyar Tv",
-    "url": "https://live.artidijitalmedya.com/artidijital_diyartv/diyartv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "DMAX",
-    "url": "https://yayin2.canlitv.fun/live/dmax.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Dost Tv",
-    "url": "https://dost.stream.emsal.im/tv/live.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "DW TV Europe",
-    "url": "https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/stream03/streamPlaylist.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Dünya TV",
-    "url": "https://yayin2.canlitv.fun/live/dunyatv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Düzce Tv",
-    "url": "https://yayin1.canlitv.fun/canlitv/duzcetv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Edirne Tv",
-    "url": "https://yayin.edirnetv.com:8088/hls/etvcanliyayin.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Ege Live TV",
-    "url": "https://yayin1.canlitv.fun/canlitv/egelivetv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Ekol TV",
-    "url": " https://ekoltv-live.ercdn.net/ekoltv/ekoltv.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Ekotürk TV",
-    "url": "https://cdn.ekoturk.net/hls/720p.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Er TV",
-    "url": "https://live.artidijitalmedya.com/artidijital_ertv_new/ertv/chunks.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Erciyes Tv",
-    "url": "https://live.artidijitalmedya.com/artidijital_erciyestv/erciyestv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "ERT Erbaa Radyo ve TV",
-    "url": "https://yayin1.canlitv.fun/canlitv/erttv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Es Tv",
-    "url": "https://live.artidijitalmedya.com/artidijital_estv/estv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "ETV Kayseri",
-    "url": "https://live.artidijitalmedya.com/artidijital_etv/etv/chunks.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Etv Manisa",
-    "url": "https://edge1.taksimbilisim.com/manisaetv/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "FB TV",
-    "url": "https://fbtv.fenerbahce.org/fenerbahcetv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Flash Tv",
-    "url": "https://b01c02nl.mediatriple.net/videoonlylive/mtyycglqauzjhlive/broadcast_67c053c48829f.smil/mt_0.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Fortuna Tv",
-    "url": "https://edge2.taksimbilisim.com/ftvturk/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Franken Tv",
-    "url": "https://stream01.welocal.stream/stream/fhd-tvmainfranken_255661/ngrp:stream_all/chunklist_w1073867686_b446000.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "FRT TV",
-    "url": "https://edge1.taksimbilisim.com/frttv/bant1/chunks.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "GRT TV",
-    "url": "https://live.artidijitalmedya.com/artidijital_grt/grt/chunks.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "GZT TV",
-    "url": "https://gzttv-live.lg.mncdn.com/gzttv-live/gzttv/playlist.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Gözde TV",
-    "url": "https://yayin1.canlitv.fun/canlitv/gozdetv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Günaz Tv",
-    "url": " https://tv.gunaz.tv/hls/live.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Haber 61",
-    "url": "https://cdn1-haber61tv.yayin.com.tr/haber61tv/tracks-v2a1/mono.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Huda Tv",
-    "url": "https://cdn.bestream.io:19360/elfaro1/elfaro1.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Hunat TV",
-    "url": "https://live.artidijitalmedya.com/artidijital_hunattv/hunattv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "India Today",
-    "url": "https://indiatodaylive.akamaized.net/hls/live/2014320/indiatoday/indiatodaylive/live_234p/chunks.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "İlke TV",
-    "url": "https://stream.ilketv.com.tr/hls/ilkecanli.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "İmedi Tv",
-    "url": "https://tv.cdn.xsg.ge/imedihd/tracks-v1a1/mono.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "İzmir Türk TV",
-    "url": "https://yayin1.canlitv.fun/canlitv/izmirturktv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "İçel Tv",
-    "url": "https://edge1.taksimbilisim.com/iceltv/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Kanal 12",
-    "url": "https://live.artidijitalmedya.com/artidijital_kanal12/kanal12/chunks.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Kanal 15",
-    "url": "https://live.artidijitalmedya.com/artidijital_kanal15/kanal15/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Kanal 19",
-    "url": "https://live.euromediacenter.com/kanal19/tracks-v1a1/mono.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Kanal 23",
-    "url": "https://live.artidijitalmedya.com/artidijital_kanal23/kanal23/chunks.m3u8?",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Kanal 26",
-    "url": "https://live.artidijitalmedya.com/artidijital_kanal26/kanal26/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Kanal 3",
-    "url": "https://live.artidijitalmedya.com/artidijital_kanal3/kanal3/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Kanal 32",
-    "url": "https://edge2.taksimbilisim.com/kanal32/bant1/chunks.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Kanal 33",
-    "url": "https://edge2.taksimbilisim.com/kanal33/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Kanal 34",
-    "url": "https://live.euromediacenter.com/kanal34/tracks-v1a1/mono.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Kanal 38",
-    "url": "https://yayin1.canlitv.fun/canlitv/kanal38.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Kanal 58",
-    "url": "https://live.artidijitalmedya.com/artidijital_kanal58/kanal58/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Kanal 7",
-    "url": "https://kanal7-live.daioncdn.net/kanal7/kanal7.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Kanal 7 Avrupa",
-    "url": "https://livetv.radyotvonline.net/kanal7live/kanal7avr/chunklist.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Kanal Avrupa",
-    "url": "https://cdn-kanalavrupa.yayin.com.tr/kanalavrupa/tracks-v2a1/mono.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Kanal B",
-    "url": "https://tv.kanalb.tr/hls/kanalb/index.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Kanal Fırat",
-    "url": "https://live.artidijitalmedya.com/artidijital_kanalfirat/kanalfirat/chunks.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Kanal Plus",
-    "url": "https://live.artidijitalmedya.com/artidijital_kanalplus/kanalplus/mpeg/chunks.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Kanal S Az",
-    "url": "https://yayin2.canlitv.fun/live/kanals.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Kanal Sim",
-    "url": "https://yayin1.canlitv.fun/canlitv/kanalsim.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Kanal T",
-    "url": "https://edge.kuzeykibrissmart.tv/kanalt/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Kanal Urfa",
-    "url": "https://edge2.taksimbilisim.com/kanalurfa/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Kanal V",
-    "url": "https://live.artidijitalmedya.com/artidijital_kanalv/kanalv/chunks.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Kardelen Tv",
-    "url": "https://edge2.taksimbilisim.com/kardelentv/bant1/chunks.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Kay Tv",
-    "url": "https://live.artidijitalmedya.com/artidijital_kaytv/kaytv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Kent Türk TV",
-    "url": "https://live.artidijitalmedya.com/artidijital_kentturktv/kentturktv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "KN Music TV",
-    "url": "https://cdn4.yayin.com.tr/kntv/tracks-v1a1/mono.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Kocaeli Tv",
-    "url": "https://edge2.taksimbilisim.com/kocaelitv/bant1/chunks.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Kon TV",
-    "url": "https://canli.kontv.com.tr/live/kontv.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Kontra Tv",
-    "url": "https://kontralive.siliconweb.com/live/kontratv/kontralive/kontratv/chunks.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Konya Olay Tv",
-    "url": "https://live.artidijitalmedya.com/artidijital_konyaolaytv/konyaolaytv/playlist.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Konya Ün Tv",
-    "url": "https://yayin1.canlitv.fun/canlitv/untv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "KTV Kazakistan",
-    "url": "https://wz-kt.ktk.kz/ktklive/smil:ktk-live.smil/chunklist_w10227581_b928000_slrus.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Köy Tv",
-    "url": "https://yayin1.canlitv.fun/canlitv/koytv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Kıbrıs Ada Tv",
-    "url": "https://yayin1.canlitv.fun/canlitv/kibrisadatv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Kıbrıs Genç Tv",
-    "url": "https://yayin1.canlitv.fun/canlitv/genctv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Kıbrıs Tv",
-    "url": "https://play.kibristv.com/stream/hls/stream.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Lalegül Tv",
-    "url": "https://lbl.netmedya.net/hls/lalegultv.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Life Tv",
-    "url": "https://live.artidijitalmedya.com/artidijital_lifetv/lifetv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Line Tv",
-    "url": "https://edge2.taksimbilisim.com/linetv/bant1/chunks.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Live TV",
-    "url": "https://tv.mobyservice.ru/livetv-web/index.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Luys TV",
-    "url": "https://b01c02nl.mediatriple.net/videoonlylive/mtpayqrfkgirxelive/broadcast_5e91c5ac96898.smil/mt_2.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Malatya Vuslat TV",
-    "url": "https://live.artidijitalmedya.com/artidijital_vuslattv/vuslattv/chunks.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Marmara Tv",
-    "url": "https://yayin1.canlitv.fun/canlitv/marmaratv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Mavi Karadeniz Tv",
-    "url": "https://live.artidijitalmedya.com/artidijital_mavikaradeniz/mavikaradeniz/chunks.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Max Music TV",
-    "url": "https://cdn4.yayin.com.tr/maxtv/tracks-v1a1/mono.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Medeniyet Tv",
-    "url": "https://yayin2.canlitv.fun/live/medeniyettv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Meltem TV",
-    "url": "https://vhxyrsly.rocketcdn.com/meltemtv/chunklist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Mercan Tv",
-    "url": "https://live.artidijitalmedya.com/artidijital_mercantv/mercantv/chunks.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Neo Haber",
-    "url": "https://edge2.taksimbilisim.com/neohaber/bant1/chunks.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Niederbayern TV",
-    "url": "https://stream03.welocal.stream/stream/fhd-nbydeggendorf_99148/ngrp:stream_all/chunklist.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "NOA4 Hamburg",
-    "url": "https://hls1.wtnet.de/noa4/apple/wifi4000.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Oberpfalz Tv",
-    "url": "https://stream04.welocal.stream/stream/fhd-otv_496277/ngrp:stream_all/chunklist_b3628000.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Offener Kanal Berlin",
-    "url": "https://alex-stream.rosebud-media.de/bounce/alexlivetv50.smil/chunklist_b2128000_slGER.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "OKKU Tv",
-    "url": "https://yayin1.canlitv.fun/canlitv/okkutv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Olay Türk",
-    "url": "https://live.artidijitalmedya.com/artidijital_olayturk/olayturk/chunks.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "On4 Tv",
-    "url": "https://live.artidijitalmedya.com/artidijital_on4tv/on4tv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "OWAZY TV",
-    "url": "https://alpha.tv.online.tm/hls/ch005_720/index.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Power Love",
-    "url": "http://livetv.powerapp.com.tr/plove/love.smil/playlist.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Power Türk",
-    "url": "http://livetv.powerapp.com.tr/powerturkTV/powerturkhd.smil/playlist.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Power Türk Slow",
-    "url": "https://listen.powerapp.com.tr/pturkslow/slow.smil/chunks.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Press Tv",
-    "url": "https://live.presstv.co.uk/hls/presstv_5_482/index.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Rehber Tv",
-    "url": "https://cdn4.yayin.com.tr/rehbertv/tracks-v1a1/mono.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "RFH",
-    "url": "https://h056.video-stream-hosting.de/medienasa-live/_definst_/mp4:RFH_high/chunklist_w667817151.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "RT (Russia Today)",
-    "url": "https://1a-1791.com/live/hr6yv36f/slot-4/mxtm-wdfe_1080p/chunklist_DVR.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Ruha Tv",
-    "url": "https://ruhatv.radyotelekom.com.tr:3515/live/ruhatvlive.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Sat7 Türk",
-    "url": "https://live.artidijitalmedya.com/artidijital_sat7turk/sat7turk/chunks.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Semerkand Tv",
-    "url": "https://b01c02nl.mediatriple.net/videoonlylive/mtisvwurbfcyslive/broadcast_58d915bd40efc.smil/playlist.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Show Max",
-    "url": "https://rmtftbjlne.turknet.ercdn.net/bpeytmnqyp/showmax/showmax.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
+    "source": "Canlitv",
+    "rank": 1
   },
   {
     "name": "Show TV",
     "url": "https://rmtftbjlne.turknet.ercdn.net/bpeytmnqyp/showtv/showtv.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://rmtftbjlne.turknet.ercdn.net/bpeytmnqyp/showtv/showtv.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
     "logo": "",
     "group": "Türkiye",
     "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Sonsöz TV",
-    "url": "https://yayin1.canlitv.fun/canlitv/gokkusagi.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Space TV",
-    "url": "https://yayin2.canlitv.fun/live/spacetv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
+    "source": "Canlitv",
+    "rank": 2
   },
   {
     "name": "Star TV",
     "url": "https://dogus.daioncdn.net/startv/startv.m3u8?app=a20ac41e-bdc3-4aa1-934d-26b484480ac9&hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://dogus.daioncdn.net/startv/startv.m3u8?app=a20ac41e-bdc3-4aa1-934d-26b484480ac9&hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
     "logo": "",
     "group": "Türkiye",
     "tvg-id": "",
-    "source": "Canlitv"
+    "source": "Canlitv",
+    "rank": 3
   },
   {
-    "name": "Sun Tv",
-    "url": "https://live.artidijitalmedya.com/artidijital_sunrtv/sunrtv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "name": "Kanal 7",
+    "url": "https://kanal7-live.daioncdn.net/kanal7/kanal7.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://kanal7-live.daioncdn.net/kanal7/kanal7.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
     "logo": "",
     "group": "Türkiye",
     "tvg-id": "",
-    "source": "Canlitv"
+    "source": "Canlitv",
+    "rank": 4
   },
   {
-    "name": "Sönmez TV",
-    "url": "https://yayin1.canlitv.fun/canlitv/sonmeztv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "name": "ATV",
+    "url": "https://trkvz.daioncdn.net/atv/atv.m3u8?ce=3&app=866e32e3-9fea-477f-a5ef-64ebe32956f3",
+    "urls": [
+      "https://trkvz.daioncdn.net/atv/atv.m3u8?ce=3&app=866e32e3-9fea-477f-a5ef-64ebe32956f3"
+    ],
     "logo": "",
     "group": "Türkiye",
     "tvg-id": "",
-    "source": "Canlitv"
+    "source": "Canlitv",
+    "rank": 5
   },
   {
-    "name": "Tarım Tv",
-    "url": "https://content.tvkur.com/l/c7e1da7mm25p552d9u9g/master.m3u8",
+    "name": "Beyaz TV",
+    "url": "https://beyaztv-live.daioncdn.net/beyaztv/beyaztv.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://beyaztv-live.daioncdn.net/beyaztv/beyaztv.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
     "logo": "",
     "group": "Türkiye",
     "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "TBMM TV",
-    "url": "https://meclistv-live.ercdn.net/meclistv/meclistv.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Telenews",
-    "url": "https://cdn4.yayin.com.tr/telenews/tracks-v1a1/mono.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Tempo Tv",
-    "url": "https://live.artidijitalmedya.com/artidijital_tempotv/tempotv/chunks.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "TH Türk Haber",
-    "url": "https://edge2.taksimbilisim.com/turkhaber/bant1/chunks.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Tivi6",
-    "url": "https://live.artidijitalmedya.com/artidijital_tivi6/tivi6/chunks.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Tivibu Spor",
-    "url": "https://yayin2.canlitv.fun/live/tivibuspor.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "TLC",
-    "url": "https://yayin2.canlitv.fun/live/tlc.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Tokat Süper Tv",
-    "url": "https://yayin1.canlitv.fun/canlitv/tokatsupertv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Ton Tv",
-    "url": "https://live.artidijitalmedya.com/artidijital_tontv/tontv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Toprak TV",
-    "url": "https://yayin1.canlitv.fun/canlitv/topraktv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "TRT 2",
-    "url": "https://tv-trt2.medya.trt.com.tr/master.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "TRT Arapça",
-    "url": "https://tv-trtarabi.medya.trt.com.tr/master.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "TRT Avaz",
-    "url": "https://tv-trtavaz.medya.trt.com.tr/master.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "TRT Belgesel",
-    "url": "https://tv-trtbelgesel.medya.trt.com.tr/master.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "TRT Diyanet Çocuk",
-    "url": "https://tv-trtdiyanetcocuk.medya.trt.com.tr/master.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "TRT Eba TV",
-    "url": "https://tv-e-okul01.medya.trt.com.tr/master.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "TRT Genç",
-    "url": "https://tv-trtgenc.medya.trt.com.tr/master.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
+    "source": "Canlitv",
+    "rank": 9
   },
   {
     "name": "TRT Haber",
     "url": "https://tv-trthaber.medya.trt.com.tr/master.m3u8",
+    "urls": [
+      "https://tv-trthaber.medya.trt.com.tr/master.m3u8"
+    ],
     "logo": "",
     "group": "Türkiye",
     "tvg-id": "",
-    "source": "Canlitv"
+    "source": "Canlitv",
+    "rank": 10
   },
   {
-    "name": "TRT Kürdi",
-    "url": "https://tv-trtkurdi.medya.trt.com.tr/master.m3u8",
+    "name": "A Haber",
+    "url": "https://yayin2.canlitv.fun/live/ahaber.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin2.canlitv.fun/live/ahaber.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
     "logo": "",
     "group": "Türkiye",
     "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "TRT Müzik",
-    "url": "https://tv-trtmuzik.medya.trt.com.tr/master.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "TRT Spor",
-    "url": "https://tv-trtspor1.medya.trt.com.tr/master.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "TRT Spor Yıldız",
-    "url": "https://tv-trtspor2.medya.trt.com.tr/master.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "TRT Türk",
-    "url": "https://tv-trtturk.medya.trt.com.tr/master.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "TRT World",
-    "url": "https://tv-trtworld.medya.trt.com.tr/master.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "TRT Çocuk",
-    "url": "https://tv-trtcocuk.medya.trt.com.tr/master.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Tv 1",
-    "url": "https://edge1.taksimbilisim.com/tv1/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
+    "source": "Canlitv",
+    "rank": 13
   },
   {
     "name": "TV 100",
     "url": "https://yayin2.canlitv.fun/live/tv100.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin2.canlitv.fun/live/tv100.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
     "logo": "",
     "group": "Türkiye",
     "tvg-id": "",
-    "source": "Canlitv"
+    "source": "Canlitv",
+    "rank": 18
   },
   {
-    "name": "TV 2020",
-    "url": "https://yayin1.canlitv.fun/canlitv/tv2020.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "name": "360 TV",
+    "url": "https://turkmedya-live.ercdn.net/tv360/tv360.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://turkmedya-live.ercdn.net/tv360/tv360.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
     "logo": "",
     "group": "Türkiye",
     "tvg-id": "",
-    "source": "Canlitv"
+    "source": "Canlitv",
+    "rank": 19
   },
   {
-    "name": "Tv 264",
-    "url": "https://b01c02nl.mediatriple.net/videoonlylive/mtdxkkitgbrckilive/broadcast_5ee244263fd6d.smil/playlist.m3u8",
+    "name": "TRT Spor",
+    "url": "https://tv-trtspor1.medya.trt.com.tr/master.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://tv-trtspor1.medya.trt.com.tr/master.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
     "logo": "",
     "group": "Türkiye",
     "tvg-id": "",
-    "source": "Canlitv"
+    "source": "Canlitv",
+    "rank": 21
   },
   {
-    "name": "TV 41",
-    "url": "https://live.artidijitalmedya.com/artidijital_tv41/tv41/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "name": "A Spor",
+    "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/aspor/aspor_480p.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/aspor/aspor_480p.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
     "logo": "",
     "group": "Türkiye",
     "tvg-id": "",
-    "source": "Canlitv"
+    "source": "Canlitv",
+    "rank": 24
   },
   {
-    "name": "TV 42",
-    "url": "https://canliyayin.tv42.com.tr/memfs/0c8c4bc7-550a-4239-8e3d-6f4d768391bb_output_0.m3u8",
+    "name": "Tivibu Spor",
+    "url": "https://yayin2.canlitv.fun/live/tivibuspor.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin2.canlitv.fun/live/tivibuspor.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
     "logo": "",
     "group": "Türkiye",
     "tvg-id": "",
-    "source": "Canlitv"
+    "source": "Canlitv",
+    "rank": 25
   },
   {
-    "name": "TV Den",
-    "url": "https://canli.tvden.com.tr/hls/live.m3u8",
+    "name": "FB TV",
+    "url": "https://fbtv.fenerbahce.org/fenerbahcetv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://fbtv.fenerbahce.org/fenerbahcetv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
     "logo": "",
     "group": "Türkiye",
     "tvg-id": "",
-    "source": "Canlitv"
+    "source": "Canlitv",
+    "rank": 26
   },
   {
-    "name": "Tv Kayseri",
-    "url": "https://yayin1.canlitv.fun/canlitv/tvkayseri.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "name": "TRT Spor Yıldız",
+    "url": "https://tv-trtspor2.medya.trt.com.tr/master.m3u8",
+    "urls": [
+      "https://tv-trtspor2.medya.trt.com.tr/master.m3u8"
+    ],
     "logo": "",
     "group": "Türkiye",
     "tvg-id": "",
-    "source": "Canlitv"
+    "source": "Canlitv",
+    "rank": 27
   },
   {
-    "name": "TV38",
-    "url": "https://yayin1.canlitv.fun/canlitv/tv38.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "name": "TLC",
+    "url": "https://yayin2.canlitv.fun/live/tlc.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin2.canlitv.fun/live/tlc.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
     "logo": "",
     "group": "Türkiye",
     "tvg-id": "",
-    "source": "Canlitv"
+    "source": "Canlitv",
+    "rank": 32
   },
   {
-    "name": "Tv4",
-    "url": "https://turkmedya-live.ercdn.net/tv4/tv4.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "name": "DMAX",
+    "url": "https://yayin2.canlitv.fun/live/dmax.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin2.canlitv.fun/live/dmax.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
     "logo": "",
     "group": "Türkiye",
     "tvg-id": "",
-    "source": "Canlitv"
+    "source": "Canlitv",
+    "rank": 33
   },
   {
-    "name": "TV52",
-    "url": "https://edge2.taksimbilisim.com/tv52/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "name": "TRT Belgesel",
+    "url": "https://tv-trtbelgesel.medya.trt.com.tr/master.m3u8",
+    "urls": [
+      "https://tv-trtbelgesel.medya.trt.com.tr/master.m3u8"
+    ],
     "logo": "",
     "group": "Türkiye",
     "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Tvnet",
-    "url": "https://tvnet-live.lg.mncdn.com/tvnet-live/tvnet/playlist.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "TYT Türk",
-    "url": "https://tytturk-live.ercdn.net/tytturk/tytturk.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Türkmen Sport Tv",
-    "url": "https://alpha.tv.online.tm/hls/ch004_720/index.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Türkmenistan Tv",
-    "url": "https://alpha.tv.online.tm/hls/ch007_720/index.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Urfanatik TV",
-    "url": "https://live.artidijitalmedya.com/artidijital_urfanatiktv/urfanatiktv/chunks.m3u8",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "World Türk TV",
-    "url": "https://yayin1.canlitv.fun/canlitv/worldturk.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
-  },
-  {
-    "name": "Xezer Tv",
-    "url": "https://yayin2.canlitv.fun/live/xezertv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvg-id": "",
-    "source": "Canlitv"
+    "source": "Canlitv",
+    "rank": 34
   },
   {
     "name": "Yaban TV",
     "url": "https://yayin1.canlitv.fun/canlitv/yabantv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin1.canlitv.fun/canlitv/yabantv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
     "logo": "",
     "group": "Türkiye",
     "tvg-id": "",
-    "source": "Canlitv"
+    "source": "Canlitv",
+    "rank": 36
   },
   {
-    "name": "Yaşlık Tv Türkmenistan",
-    "url": "https://alpha.tv.online.tm/hls/ch002_720/index.m3u8",
+    "name": "CGTN Documentary",
+    "url": "https://live-stream.cgtn.com/event-live/CGTN_1_1NAzByztAaY/index.m3u8",
+    "urls": [
+      "https://live-stream.cgtn.com/event-live/CGTN_1_1NAzByztAaY/index.m3u8"
+    ],
     "logo": "",
     "group": "Türkiye",
     "tvg-id": "",
-    "source": "Canlitv"
+    "source": "Canlitv",
+    "rank": 37
+  },
+  {
+    "name": "TRT Çocuk",
+    "url": "https://tv-trtcocuk.medya.trt.com.tr/master.m3u8",
+    "urls": [
+      "https://tv-trtcocuk.medya.trt.com.tr/master.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 38
+  },
+  {
+    "name": "Cartoon Network",
+    "url": "https://yayin2.canlitv.fun/live/cartoon-network.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin2.canlitv.fun/live/cartoon-network.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 39
+  },
+  {
+    "name": "TRT Diyanet Çocuk",
+    "url": "https://tv-trtdiyanetcocuk.medya.trt.com.tr/master.m3u8",
+    "urls": [
+      "https://tv-trtdiyanetcocuk.medya.trt.com.tr/master.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 41
+  },
+  {
+    "name": "Minika Go",
+    "url": "https://trkvz.daioncdn.net/minikago/minikago.m3u8",
+    "urls": [
+      "https://trkvz.daioncdn.net/minikago/minikago.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 44
   },
   {
     "name": "Zarok TV",
     "url": "https://zindikurmanci.zaroktv.com.tr/hls/0/stream.m3u8?cachebust=5ffc8f",
+    "urls": [
+      "https://zindikurmanci.zaroktv.com.tr/hls/0/stream.m3u8?cachebust=5ffc8f"
+    ],
     "logo": "",
     "group": "Türkiye",
     "tvg-id": "",
-    "source": "Canlitv"
+    "source": "Canlitv",
+    "rank": 45
   },
   {
-    "name": "Çankırı Tv",
-    "url": "https://yayin1.canlitv.fun/canlitv/cankiritv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "name": "ARB Güneş TV",
+    "url": "https://yayin2.canlitv.fun/live/arbgunes.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin2.canlitv.fun/live/arbgunes.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
     "logo": "",
     "group": "Türkiye",
     "tvg-id": "",
-    "source": "Canlitv"
+    "source": "Canlitv",
+    "rank": 46
   },
   {
-    "name": "Çay Tv",
-    "url": "https://edge.taksimbilisim.com/caytv/bant1/playlist.m3u8",
+    "name": "İlke TV",
+    "url": "https://stream.ilketv.com.tr/hls/ilkecanli.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://stream.ilketv.com.tr/hls/ilkecanli.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
     "logo": "",
     "group": "Türkiye",
     "tvg-id": "",
-    "source": "Canlitv"
+    "source": "Canlitv",
+    "rank": 55
+  },
+  {
+    "name": "A Para",
+    "url": "https://trkvz.daioncdn.net/apara/apara.m3u8",
+    "urls": [
+      "https://trkvz.daioncdn.net/apara/apara.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 57
+  },
+  {
+    "name": "Neo Haber",
+    "url": "https://edge2.taksimbilisim.com/neohaber/bant1/chunks.m3u8",
+    "urls": [
+      "https://edge2.taksimbilisim.com/neohaber/bant1/chunks.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 59
+  },
+  {
+    "name": "Telenews",
+    "url": "https://cdn4.yayin.com.tr/telenews/tracks-v1a1/mono.m3u8",
+    "urls": [
+      "https://cdn4.yayin.com.tr/telenews/tracks-v1a1/mono.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 60
+  },
+  {
+    "name": "Meltem TV",
+    "url": "https://vhxyrsly.rocketcdn.com/meltemtv/chunklist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://vhxyrsly.rocketcdn.com/meltemtv/chunklist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 61
+  },
+  {
+    "name": "Cem Tv",
+    "url": "https://panel.5gtvhosting.com:2020/hls/cemtv/cemtv.m3u8",
+    "urls": [
+      "https://panel.5gtvhosting.com:2020/hls/cemtv/cemtv.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 62
+  },
+  {
+    "name": "GZT TV",
+    "url": "https://gzttv-live.lg.mncdn.com/gzttv-live/gzttv/playlist.m3u8",
+    "urls": [
+      "https://gzttv-live.lg.mncdn.com/gzttv-live/gzttv/playlist.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 64
+  },
+  {
+    "name": "Tv4",
+    "url": "https://turkmedya-live.ercdn.net/tv4/tv4.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://turkmedya-live.ercdn.net/tv4/tv4.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 65
+  },
+  {
+    "name": "Show Max",
+    "url": "https://rmtftbjlne.turknet.ercdn.net/bpeytmnqyp/showmax/showmax.m3u8",
+    "urls": [
+      "https://rmtftbjlne.turknet.ercdn.net/bpeytmnqyp/showmax/showmax.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 66
+  },
+  {
+    "name": "Cine 1",
+    "url": "https://canliyayin.cine1.com.tr/memfs/cbaef080-a742-4644-9e9e-2b9f6a5103c3.m3u8",
+    "urls": [
+      "https://canliyayin.cine1.com.tr/memfs/cbaef080-a742-4644-9e9e-2b9f6a5103c3.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 67
+  },
+  {
+    "name": "TYT Türk",
+    "url": "https://tytturk-live.ercdn.net/tytturk/tytturk.m3u8",
+    "urls": [
+      "https://tytturk-live.ercdn.net/tytturk/tytturk.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 69
+  },
+  {
+    "name": "Bi Kanal",
+    "url": "https://bikanal-live.ercdn.net/bikanal/bikanal.m3u8",
+    "urls": [
+      "https://bikanal-live.ercdn.net/bikanal/bikanal.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 70
+  },
+  {
+    "name": "Ekotürk TV",
+    "url": "https://cdn.ekoturk.net/hls/720p.m3u8",
+    "urls": [
+      "https://cdn.ekoturk.net/hls/720p.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 71
+  },
+  {
+    "name": "Tvnet",
+    "url": "https://tvnet-live.lg.mncdn.com/tvnet-live/tvnet/playlist.m3u8",
+    "urls": [
+      "https://tvnet-live.lg.mncdn.com/tvnet-live/tvnet/playlist.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 72
+  },
+  {
+    "name": "24 Tv",
+    "url": "https://turkmedya-live.ercdn.net/tv24/tv24.m3u8",
+    "urls": [
+      "https://turkmedya-live.ercdn.net/tv24/tv24.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 74
+  },
+  {
+    "name": "TBMM TV",
+    "url": "https://meclistv-live.ercdn.net/meclistv/meclistv.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://meclistv-live.ercdn.net/meclistv/meclistv.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 75
+  },
+  {
+    "name": "Lalegül Tv",
+    "url": "https://lbl.netmedya.net/hls/lalegultv.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://lbl.netmedya.net/hls/lalegultv.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 78
+  },
+  {
+    "name": "Rehber Tv",
+    "url": "https://cdn4.yayin.com.tr/rehbertv/tracks-v1a1/mono.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://cdn4.yayin.com.tr/rehbertv/tracks-v1a1/mono.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 79
+  },
+  {
+    "name": "Semerkand Tv",
+    "url": "https://b01c02nl.mediatriple.net/videoonlylive/mtisvwurbfcyslive/broadcast_58d915bd40efc.smil/playlist.m3u8",
+    "urls": [
+      "https://b01c02nl.mediatriple.net/videoonlylive/mtisvwurbfcyslive/broadcast_58d915bd40efc.smil/playlist.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 80
+  },
+  {
+    "name": "Dost Tv",
+    "url": "https://dost.stream.emsal.im/tv/live.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://dost.stream.emsal.im/tv/live.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 81
+  },
+  {
+    "name": "Diyanet TV",
+    "url": "https://eustr73.mediatriple.net/videoonlylive/mtikoimxnztxlive/broadcast_5e3bf95a47e07.smil/playlist.m3u8",
+    "urls": [
+      "https://eustr73.mediatriple.net/videoonlylive/mtikoimxnztxlive/broadcast_5e3bf95a47e07.smil/playlist.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 82
+  },
+  {
+    "name": "TRT Eba TV",
+    "url": "https://tv-e-okul01.medya.trt.com.tr/master.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://tv-e-okul01.medya.trt.com.tr/master.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 85
+  },
+  {
+    "name": "TRT 2",
+    "url": "https://tv-trt2.medya.trt.com.tr/master.m3u8",
+    "urls": [
+      "https://tv-trt2.medya.trt.com.tr/master.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 86
+  },
+  {
+    "name": "TRT Genç",
+    "url": "https://tv-trtgenc.medya.trt.com.tr/master.m3u8",
+    "urls": [
+      "https://tv-trtgenc.medya.trt.com.tr/master.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 87
+  },
+  {
+    "name": "TRT Türk",
+    "url": "https://tv-trtturk.medya.trt.com.tr/master.m3u8",
+    "urls": [
+      "https://tv-trtturk.medya.trt.com.tr/master.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 88
+  },
+  {
+    "name": "TRT World",
+    "url": "https://tv-trtworld.medya.trt.com.tr/master.m3u8",
+    "urls": [
+      "https://tv-trtworld.medya.trt.com.tr/master.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 89
+  },
+  {
+    "name": "TRT Avaz",
+    "url": "https://tv-trtavaz.medya.trt.com.tr/master.m3u8",
+    "urls": [
+      "https://tv-trtavaz.medya.trt.com.tr/master.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 90
+  },
+  {
+    "name": "TRT Kürdi",
+    "url": "https://tv-trtkurdi.medya.trt.com.tr/master.m3u8",
+    "urls": [
+      "https://tv-trtkurdi.medya.trt.com.tr/master.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 91
+  },
+  {
+    "name": "TRT Müzik",
+    "url": "https://tv-trtmuzik.medya.trt.com.tr/master.m3u8",
+    "urls": [
+      "https://tv-trtmuzik.medya.trt.com.tr/master.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 92
+  },
+  {
+    "name": "TRT Arapça",
+    "url": "https://tv-trtarabi.medya.trt.com.tr/master.m3u8",
+    "urls": [
+      "https://tv-trtarabi.medya.trt.com.tr/master.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 93
+  },
+  {
+    "name": "Konya Olay Tv",
+    "url": "https://live.artidijitalmedya.com/artidijital_konyaolaytv/konyaolaytv/playlist.m3u8",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_konyaolaytv/konyaolaytv/playlist.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 94
+  },
+  {
+    "name": "TH Türk Haber",
+    "url": "https://edge2.taksimbilisim.com/turkhaber/bant1/chunks.m3u8",
+    "urls": [
+      "https://edge2.taksimbilisim.com/turkhaber/bant1/chunks.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 95
+  },
+  {
+    "name": "Luys TV",
+    "url": "https://b01c02nl.mediatriple.net/videoonlylive/mtpayqrfkgirxelive/broadcast_5e91c5ac96898.smil/mt_2.m3u8",
+    "urls": [
+      "https://b01c02nl.mediatriple.net/videoonlylive/mtpayqrfkgirxelive/broadcast_5e91c5ac96898.smil/mt_2.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 96
+  },
+  {
+    "name": "On4 Tv",
+    "url": "https://live.artidijitalmedya.com/artidijital_on4tv/on4tv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_on4tv/on4tv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 97
+  },
+  {
+    "name": "Power Türk",
+    "url": "http://livetv.powerapp.com.tr/powerturkTV/powerturkhd.smil/playlist.m3u8",
+    "urls": [
+      "http://livetv.powerapp.com.tr/powerturkTV/powerturkhd.smil/playlist.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 98
+  },
+  {
+    "name": "Power Türk Slow",
+    "url": "https://listen.powerapp.com.tr/pturkslow/slow.smil/chunks.m3u8",
+    "urls": [
+      "https://listen.powerapp.com.tr/pturkslow/slow.smil/chunks.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 99
+  },
+  {
+    "name": "Power Love",
+    "url": "http://livetv.powerapp.com.tr/plove/love.smil/playlist.m3u8",
+    "urls": [
+      "http://livetv.powerapp.com.tr/plove/love.smil/playlist.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 100
+  },
+  {
+    "name": "Kon TV",
+    "url": "https://canli.kontv.com.tr/live/kontv.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://canli.kontv.com.tr/live/kontv.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 101
+  },
+  {
+    "name": "Kanal V",
+    "url": "https://live.artidijitalmedya.com/artidijital_kanalv/kanalv/chunks.m3u8",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_kanalv/kanalv/chunks.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 102
+  },
+  {
+    "name": "Kanal 33",
+    "url": "https://edge2.taksimbilisim.com/kanal33/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://edge2.taksimbilisim.com/kanal33/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 103
+  },
+  {
+    "name": "Bodrum Kent TV",
+    "url": "https://edge2.taksimbilisim.com/bodrumkenttv/bant1/chunks.m3u8",
+    "urls": [
+      "https://edge2.taksimbilisim.com/bodrumkenttv/bant1/chunks.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 104
+  },
+  {
+    "name": "Tivi6",
+    "url": "https://live.artidijitalmedya.com/artidijital_tivi6/tivi6/chunks.m3u8",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_tivi6/tivi6/chunks.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 105
+  },
+  {
+    "name": "Kanal 38",
+    "url": "https://yayin1.canlitv.fun/canlitv/kanal38.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin1.canlitv.fun/canlitv/kanal38.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 107
+  },
+  {
+    "name": "Tv Kayseri",
+    "url": "https://yayin1.canlitv.fun/canlitv/tvkayseri.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin1.canlitv.fun/canlitv/tvkayseri.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 108
+  },
+  {
+    "name": "TV 41",
+    "url": "https://live.artidijitalmedya.com/artidijital_tv41/tv41/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_tv41/tv41/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 109
+  },
+  {
+    "name": "Kanal 58",
+    "url": "https://live.artidijitalmedya.com/artidijital_kanal58/kanal58/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_kanal58/kanal58/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 110
+  },
+  {
+    "name": "TV 42",
+    "url": "https://canliyayin.tv42.com.tr/memfs/0c8c4bc7-550a-4239-8e3d-6f4d768391bb_output_0.m3u8",
+    "urls": [
+      "https://canliyayin.tv42.com.tr/memfs/0c8c4bc7-550a-4239-8e3d-6f4d768391bb_output_0.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 111
+  },
+  {
+    "name": "Bir TV",
+    "url": "https://edge2.taksimbilisim.com/birtv/bant1/chunks.m3u8",
+    "urls": [
+      "https://edge2.taksimbilisim.com/birtv/bant1/chunks.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 112
+  },
+  {
+    "name": "Gözde TV",
+    "url": "https://yayin1.canlitv.fun/canlitv/gozdetv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin1.canlitv.fun/canlitv/gozdetv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 113
+  },
+  {
+    "name": "Düzce Tv",
+    "url": "https://yayin1.canlitv.fun/canlitv/duzcetv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin1.canlitv.fun/canlitv/duzcetv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 114
+  },
+  {
+    "name": "Kanal Plus",
+    "url": "https://live.artidijitalmedya.com/artidijital_kanalplus/kanalplus/mpeg/chunks.m3u8",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_kanalplus/kanalplus/mpeg/chunks.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 115
+  },
+  {
+    "name": "TV 2020",
+    "url": "https://yayin1.canlitv.fun/canlitv/tv2020.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin1.canlitv.fun/canlitv/tv2020.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 116
+  },
+  {
+    "name": "Kıbrıs Ada Tv",
+    "url": "https://yayin1.canlitv.fun/canlitv/kibrisadatv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin1.canlitv.fun/canlitv/kibrisadatv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 117
+  },
+  {
+    "name": "Kıbrıs Genç Tv",
+    "url": "https://yayin1.canlitv.fun/canlitv/genctv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin1.canlitv.fun/canlitv/genctv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 118
+  },
+  {
+    "name": "Torba Tv",
+    "url": "https://yayin1.canlitv.fun/canlitv/torbatv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin1.canlitv.fun/canlitv/torbatv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 119
+  },
+  {
+    "name": "Kanal Sim",
+    "url": "https://yayin1.canlitv.fun/canlitv/kanalsim.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin1.canlitv.fun/canlitv/kanalsim.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 120
+  },
+  {
+    "name": "Kanal T",
+    "url": "https://edge.kuzeykibrissmart.tv/kanalt/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://edge.kuzeykibrissmart.tv/kanalt/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 121
+  },
+  {
+    "name": "BRT 1",
+    "url": "https://edge.kuzeykibrissmart.tv/brt1hd/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://edge.kuzeykibrissmart.tv/brt1hd/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 122
+  },
+  {
+    "name": "BRT 2",
+    "url": "https://edge.kuzeykibrissmart.tv/brt2hd/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://edge.kuzeykibrissmart.tv/brt2hd/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 123
+  },
+  {
+    "name": "Kardelen Tv",
+    "url": "https://edge2.taksimbilisim.com/kardelentv/bant1/chunks.m3u8",
+    "urls": [
+      "https://edge2.taksimbilisim.com/kardelentv/bant1/chunks.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 124
+  },
+  {
+    "name": "OKKU Tv",
+    "url": "https://yayin1.canlitv.fun/canlitv/okkutv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin1.canlitv.fun/canlitv/okkutv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 125
+  },
+  {
+    "name": "Kıbrıs Tv",
+    "url": "https://play.kibristv.com/stream/hls/stream.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://play.kibristv.com/stream/hls/stream.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 126
+  },
+  {
+    "name": "Tarım Tv",
+    "url": "https://content.tvkur.com/l/c7e1da7mm25p552d9u9g/master.m3u8",
+    "urls": [
+      "https://content.tvkur.com/l/c7e1da7mm25p552d9u9g/master.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 127
+  },
+  {
+    "name": "Köy Tv",
+    "url": "https://yayin1.canlitv.fun/canlitv/koytv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin1.canlitv.fun/canlitv/koytv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 128
   },
   {
     "name": "Çiftçi Tv",
     "url": "https://live.artidijitalmedya.com/artidijital_ciftcitv/ciftcitv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_ciftcitv/ciftcitv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
     "logo": "",
     "group": "Türkiye",
     "tvg-id": "",
-    "source": "Canlitv"
+    "source": "Canlitv",
+    "rank": 129
+  },
+  {
+    "name": "Toprak TV",
+    "url": "https://yayin1.canlitv.fun/canlitv/topraktv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin1.canlitv.fun/canlitv/topraktv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 130
+  },
+  {
+    "name": "Xezer Tv",
+    "url": "https://yayin2.canlitv.fun/live/xezertv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin2.canlitv.fun/live/xezertv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 131
+  },
+  {
+    "name": "Az TV",
+    "url": "https://yayin2.canlitv.fun/live/aztv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin2.canlitv.fun/live/aztv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 132
+  },
+  {
+    "name": "ARB TV",
+    "url": "https://yayin2.canlitv.fun/live/arb.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin2.canlitv.fun/live/arb.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 134
+  },
+  {
+    "name": "Medeniyet Tv",
+    "url": "https://yayin2.canlitv.fun/live/medeniyettv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin2.canlitv.fun/live/medeniyettv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 135
+  },
+  {
+    "name": "Kanal S Az",
+    "url": "https://yayin2.canlitv.fun/live/kanals.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin2.canlitv.fun/live/kanals.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 136
+  },
+  {
+    "name": "Günaz Tv",
+    "url": " https://tv.gunaz.tv/hls/live.m3u8",
+    "urls": [
+      " https://tv.gunaz.tv/hls/live.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 137
+  },
+  {
+    "name": "CBC Tv",
+    "url": "https://yayin2.canlitv.fun/live/cbc.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin2.canlitv.fun/live/cbc.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 138
+  },
+  {
+    "name": "Space TV",
+    "url": "https://yayin2.canlitv.fun/live/spacetv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin2.canlitv.fun/live/spacetv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 142
+  },
+  {
+    "name": "ARB 24 TV",
+    "url": "https://yayin2.canlitv.fun/live/arb24.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin2.canlitv.fun/live/arb24.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 143
+  },
+  {
+    "name": "Dünya TV",
+    "url": "https://yayin2.canlitv.fun/live/dunyatv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin2.canlitv.fun/live/dunyatv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 144
+  },
+  {
+    "name": "Atv Azad TV",
+    "url": "https://lives.atv.az:5443/ATV_TV_STREAM/streams/atvcanli.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://lives.atv.az:5443/ATV_TV_STREAM/streams/atvcanli.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 145
+  },
+  {
+    "name": "Flash Tv",
+    "url": "https://b01c02nl.mediatriple.net/videoonlylive/mtyycglqauzjhlive/broadcast_67c053c48829f.smil/mt_0.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://b01c02nl.mediatriple.net/videoonlylive/mtyycglqauzjhlive/broadcast_67c053c48829f.smil/mt_0.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 146
+  },
+  {
+    "name": "Az Star TV",
+    "url": "https://live.livestreamtv.ca/azstar/amlst:azstar/tracks-v1a1/mono.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://live.livestreamtv.ca/azstar/amlst:azstar/tracks-v1a1/mono.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 148
+  },
+  {
+    "name": "Bakü TV",
+    "url": "https://rtmp.baku.tv/hls/bakutv.m3u8",
+    "urls": [
+      "https://rtmp.baku.tv/hls/bakutv.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 149
+  },
+  {
+    "name": "Alvin Channel",
+    "url": "https://stream-135962.castr.net/5ff366a512987e2c0a3dabfe/live_14378e1002eb11ef9cb025207067897a/tracks-v1/index.fmp4.m3u8",
+    "urls": [
+      "https://stream-135962.castr.net/5ff366a512987e2c0a3dabfe/live_14378e1002eb11ef9cb025207067897a/tracks-v1/index.fmp4.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 150
+  },
+  {
+    "name": "KN Music TV",
+    "url": "https://cdn4.yayin.com.tr/kntv/tracks-v1a1/mono.m3u8",
+    "urls": [
+      "https://cdn4.yayin.com.tr/kntv/tracks-v1a1/mono.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 152
+  },
+  {
+    "name": "Max Music TV",
+    "url": "https://cdn4.yayin.com.tr/maxtv/tracks-v1a1/mono.m3u8",
+    "urls": [
+      "https://cdn4.yayin.com.tr/maxtv/tracks-v1a1/mono.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 153
+  },
+  {
+    "name": "Biznes TV",
+    "url": "https://biznestv.az/hls/live.m3u8",
+    "urls": [
+      "https://biznestv.az/hls/live.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 154
+  },
+  {
+    "name": "Live TV",
+    "url": "https://tv.mobyservice.ru/livetv-web/index.m3u8",
+    "urls": [
+      "https://tv.mobyservice.ru/livetv-web/index.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 155
+  },
+  {
+    "name": "Kanal 12",
+    "url": "https://live.artidijitalmedya.com/artidijital_kanal12/kanal12/chunks.m3u8",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_kanal12/kanal12/chunks.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 156
+  },
+  {
+    "name": "Tv 1",
+    "url": "https://edge1.taksimbilisim.com/tv1/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://edge1.taksimbilisim.com/tv1/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 157
+  },
+  {
+    "name": "Kanal 3",
+    "url": "https://live.artidijitalmedya.com/artidijital_kanal3/kanal3/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_kanal3/kanal3/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 158
+  },
+  {
+    "name": "Sönmez TV",
+    "url": "https://yayin1.canlitv.fun/canlitv/sonmeztv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin1.canlitv.fun/canlitv/sonmeztv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 160
+  },
+  {
+    "name": "Ekol TV",
+    "url": " https://ekoltv-live.ercdn.net/ekoltv/ekoltv.m3u8",
+    "urls": [
+      " https://ekoltv-live.ercdn.net/ekoltv/ekoltv.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 161
+  },
+  {
+    "name": "Sonsöz TV",
+    "url": "https://yayin1.canlitv.fun/canlitv/gokkusagi.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin1.canlitv.fun/canlitv/gokkusagi.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 162
+  },
+  {
+    "name": "Kanal 19",
+    "url": "https://live.euromediacenter.com/kanal19/tracks-v1a1/mono.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://live.euromediacenter.com/kanal19/tracks-v1a1/mono.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 163
+  },
+  {
+    "name": "Kanal 23",
+    "url": "https://live.artidijitalmedya.com/artidijital_kanal23/kanal23/chunks.m3u8?",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_kanal23/kanal23/chunks.m3u8?"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 164
+  },
+  {
+    "name": "Kanal 26",
+    "url": "https://live.artidijitalmedya.com/artidijital_kanal26/kanal26/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_kanal26/kanal26/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 166
+  },
+  {
+    "name": "Kanal 32",
+    "url": "https://edge2.taksimbilisim.com/kanal32/bant1/chunks.m3u8",
+    "urls": [
+      "https://edge2.taksimbilisim.com/kanal32/bant1/chunks.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 168
+  },
+  {
+    "name": "Kanal 34",
+    "url": "https://live.euromediacenter.com/kanal34/tracks-v1a1/mono.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://live.euromediacenter.com/kanal34/tracks-v1a1/mono.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 169
+  },
+  {
+    "name": "TV52",
+    "url": "https://edge2.taksimbilisim.com/tv52/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://edge2.taksimbilisim.com/tv52/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 170
+  },
+  {
+    "name": "Haber 61",
+    "url": "https://cdn1-haber61tv.yayin.com.tr/haber61tv/tracks-v2a1/mono.m3u8",
+    "urls": [
+      "https://cdn1-haber61tv.yayin.com.tr/haber61tv/tracks-v2a1/mono.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 171
+  },
+  {
+    "name": "Mercan Tv",
+    "url": "https://live.artidijitalmedya.com/artidijital_mercantv/mercantv/chunks.m3u8",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_mercantv/mercantv/chunks.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 172
+  },
+  {
+    "name": "Ruha Tv",
+    "url": "https://ruhatv.radyotelekom.com.tr:3515/live/ruhatvlive.m3u8",
+    "urls": [
+      "https://ruhatv.radyotelekom.com.tr:3515/live/ruhatvlive.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 173
+  },
+  {
+    "name": "Es Tv",
+    "url": "https://live.artidijitalmedya.com/artidijital_estv/estv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_estv/estv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 174
+  },
+  {
+    "name": "Aksu Tv",
+    "url": "https://live.artidijitalmedya.com/artidijital_aksutv/aksutv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_aksutv/aksutv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 175
+  },
+  {
+    "name": "As Tv",
+    "url": "https://live.artidijitalmedya.com/artidijital_astv/astv/chunks.m3u8",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_astv/astv/chunks.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 177
+  },
+  {
+    "name": "Kay Tv",
+    "url": "https://live.artidijitalmedya.com/artidijital_kaytv/kaytv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_kaytv/kaytv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 178
+  },
+  {
+    "name": "World Türk TV",
+    "url": "https://yayin1.canlitv.fun/canlitv/worldturk.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin1.canlitv.fun/canlitv/worldturk.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 179
+  },
+  {
+    "name": "Alanya Tv",
+    "url": "https://cdn-alanyatv.yayin.com.tr/alanyatv/alanyatv/playlist.m3u8",
+    "urls": [
+      "https://cdn-alanyatv.yayin.com.tr/alanyatv/alanyatv/playlist.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 181
+  },
+  {
+    "name": "Alanya Postası TV",
+    "url": "https://api-tv3.yayin.com.tr/postatv/postatv/chunklist_w1397845910.m3u8",
+    "urls": [
+      "https://api-tv3.yayin.com.tr/postatv/postatv/chunklist_w1397845910.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 182
+  },
+  {
+    "name": "Kanal Urfa",
+    "url": "https://edge2.taksimbilisim.com/kanalurfa/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://edge2.taksimbilisim.com/kanalurfa/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 183
+  },
+  {
+    "name": "Edirne Tv",
+    "url": "https://yayin.edirnetv.com:8088/hls/etvcanliyayin.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin.edirnetv.com:8088/hls/etvcanliyayin.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 184
+  },
+  {
+    "name": "Malatya Vuslat TV",
+    "url": "https://live.artidijitalmedya.com/artidijital_vuslattv/vuslattv/chunks.m3u8",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_vuslattv/vuslattv/chunks.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 185
+  },
+  {
+    "name": "Ahi Tv",
+    "url": "https://yayin1.canlitv.fun/canlitv/ahitv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin1.canlitv.fun/canlitv/ahitv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 187
+  },
+  {
+    "name": "Urfanatik TV",
+    "url": "https://live.artidijitalmedya.com/artidijital_urfanatiktv/urfanatiktv/chunks.m3u8",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_urfanatiktv/urfanatiktv/chunks.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 188
+  },
+  {
+    "name": "Kanal Fırat",
+    "url": "https://live.artidijitalmedya.com/artidijital_kanalfirat/kanalfirat/chunks.m3u8",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_kanalfirat/kanalfirat/chunks.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 190
+  },
+  {
+    "name": "Diyar Tv",
+    "url": "https://live.artidijitalmedya.com/artidijital_diyartv/diyartv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_diyartv/diyartv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 192
+  },
+  {
+    "name": "Tempo Tv",
+    "url": "https://live.artidijitalmedya.com/artidijital_tempotv/tempotv/chunks.m3u8",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_tempotv/tempotv/chunks.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 193
+  },
+  {
+    "name": "Kanal 7 Avrupa",
+    "url": "https://livetv.radyotvonline.net/kanal7live/kanal7avr/chunklist.m3u8",
+    "urls": [
+      "https://livetv.radyotvonline.net/kanal7live/kanal7avr/chunklist.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 194
+  },
+  {
+    "name": "İçel Tv",
+    "url": "https://edge1.taksimbilisim.com/iceltv/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://edge1.taksimbilisim.com/iceltv/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 195
+  },
+  {
+    "name": "Kanal B",
+    "url": "https://tv.kanalb.tr/hls/kanalb/index.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://tv.kanalb.tr/hls/kanalb/index.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 196
+  },
+  {
+    "name": "Akıllı Tv",
+    "url": "https://yayin.santraltr.com/hls/arabeskyeni.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin.santraltr.com/hls/arabeskyeni.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 197
+  },
+  {
+    "name": "Çay Tv",
+    "url": "https://edge.taksimbilisim.com/caytv/bant1/playlist.m3u8",
+    "urls": [
+      "https://edge.taksimbilisim.com/caytv/bant1/playlist.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 198
+  },
+  {
+    "name": "Mavi Karadeniz Tv",
+    "url": "https://live.artidijitalmedya.com/artidijital_mavikaradeniz/mavikaradeniz/chunks.m3u8",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_mavikaradeniz/mavikaradeniz/chunks.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 199
+  },
+  {
+    "name": "Kanal Avrupa",
+    "url": "https://cdn-kanalavrupa.yayin.com.tr/kanalavrupa/tracks-v2a1/mono.m3u8",
+    "urls": [
+      "https://cdn-kanalavrupa.yayin.com.tr/kanalavrupa/tracks-v2a1/mono.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 203
+  },
+  {
+    "name": "Erciyes Tv",
+    "url": "https://live.artidijitalmedya.com/artidijital_erciyestv/erciyestv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_erciyestv/erciyestv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 204
+  },
+  {
+    "name": "Amasya Art Tv",
+    "url": "https://yayin1.canlitv.fun/canlitv/arttv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin1.canlitv.fun/canlitv/arttv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 205
+  },
+  {
+    "name": "Marmara Tv",
+    "url": "https://yayin1.canlitv.fun/canlitv/marmaratv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin1.canlitv.fun/canlitv/marmaratv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 206
+  },
+  {
+    "name": "Sun Tv",
+    "url": "https://live.artidijitalmedya.com/artidijital_sunrtv/sunrtv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_sunrtv/sunrtv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 207
+  },
+  {
+    "name": "Konya Ün Tv",
+    "url": "https://yayin1.canlitv.fun/canlitv/untv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin1.canlitv.fun/canlitv/untv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 208
+  },
+  {
+    "name": "Line Tv",
+    "url": "https://edge2.taksimbilisim.com/linetv/bant1/chunks.m3u8",
+    "urls": [
+      "https://edge2.taksimbilisim.com/linetv/bant1/chunks.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 209
+  },
+  {
+    "name": "Etv Manisa",
+    "url": "https://edge1.taksimbilisim.com/manisaetv/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://edge1.taksimbilisim.com/manisaetv/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 211
+  },
+  {
+    "name": "Er TV",
+    "url": "https://live.artidijitalmedya.com/artidijital_ertv_new/ertv/chunks.m3u8",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_ertv_new/ertv/chunks.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 212
+  },
+  {
+    "name": "Anadolu Dost TV",
+    "url": "https://yayin1.canlitv.fun/canlitv/dosttv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin1.canlitv.fun/canlitv/dosttv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 213
+  },
+  {
+    "name": "BRTV",
+    "url": "https://live.artidijitalmedya.com/artidijital_brtv/brtv/chunks.m3u8",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_brtv/brtv/chunks.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 214
+  },
+  {
+    "name": "GRT TV",
+    "url": "https://live.artidijitalmedya.com/artidijital_grt/grt/chunks.m3u8",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_grt/grt/chunks.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 216
+  },
+  {
+    "name": "İmedi Tv",
+    "url": "https://tv.cdn.xsg.ge/imedihd/tracks-v1a1/mono.m3u8",
+    "urls": [
+      "https://tv.cdn.xsg.ge/imedihd/tracks-v1a1/mono.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 220
+  },
+  {
+    "name": "Ege Live TV",
+    "url": "https://yayin1.canlitv.fun/canlitv/egelivetv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin1.canlitv.fun/canlitv/egelivetv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 221
+  },
+  {
+    "name": "Huda Tv",
+    "url": "https://cdn.bestream.io:19360/elfaro1/elfaro1.m3u8",
+    "urls": [
+      "https://cdn.bestream.io:19360/elfaro1/elfaro1.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 223
+  },
+  {
+    "name": "İzmir Türk TV",
+    "url": "https://yayin1.canlitv.fun/canlitv/izmirturktv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin1.canlitv.fun/canlitv/izmirturktv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 225
+  },
+  {
+    "name": "Tokat Süper Tv",
+    "url": "https://yayin1.canlitv.fun/canlitv/tokatsupertv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin1.canlitv.fun/canlitv/tokatsupertv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 226
+  },
+  {
+    "name": "Hunat TV",
+    "url": "https://live.artidijitalmedya.com/artidijital_hunattv/hunattv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_hunattv/hunattv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 227
+  },
+  {
+    "name": "Ton Tv",
+    "url": "https://live.artidijitalmedya.com/artidijital_tontv/tontv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_tontv/tontv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 228
+  },
+  {
+    "name": "Altaş Tv",
+    "url": "https://edge1.taksimbilisim.com/altastv/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://edge1.taksimbilisim.com/altastv/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 230
+  },
+  {
+    "name": "Deniz Postası TV",
+    "url": "https://live.artidijitalmedya.com/artidijital_denizpostasi/denizpostasi/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_denizpostasi/denizpostasi/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 231
+  },
+  {
+    "name": "Kanal 15",
+    "url": "https://live.artidijitalmedya.com/artidijital_kanal15/kanal15/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_kanal15/kanal15/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 232
+  },
+  {
+    "name": "Afroturk TV",
+    "url": "https://edge2.taksimbilisim.com/naturaltv/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://edge2.taksimbilisim.com/naturaltv/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 233
+  },
+  {
+    "name": "Anadolu Net TV",
+    "url": "https://live.artidijitalmedya.com/artidijital_anadolunet/anadolunet/chunks.m3u8",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_anadolunet/anadolunet/chunks.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 234
+  },
+  {
+    "name": "RT (Russia Today)",
+    "url": "https://1a-1791.com/live/hr6yv36f/slot-4/mxtm-wdfe_1080p/chunklist_DVR.m3u8",
+    "urls": [
+      "https://1a-1791.com/live/hr6yv36f/slot-4/mxtm-wdfe_1080p/chunklist_DVR.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 235
+  },
+  {
+    "name": "Olay Türk",
+    "url": "https://live.artidijitalmedya.com/artidijital_olayturk/olayturk/chunks.m3u8",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_olayturk/olayturk/chunks.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 236
+  },
+  {
+    "name": "Life Tv",
+    "url": "https://live.artidijitalmedya.com/artidijital_lifetv/lifetv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_lifetv/lifetv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 237
   },
   {
     "name": "Üsküdar Üniversitesi TV",
     "url": "https://b01c02nl.mediatriple.net/videoonlylive/psikoyorum_live/broadcast_6128b034550bd.smil/chunklist_b200000.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://b01c02nl.mediatriple.net/videoonlylive/psikoyorum_live/broadcast_6128b034550bd.smil/chunklist_b200000.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
     "logo": "",
     "group": "Türkiye",
     "tvg-id": "",
-    "source": "Canlitv"
+    "source": "Canlitv",
+    "rank": 238
+  },
+  {
+    "name": "Dim TV",
+    "url": "https://canli.dimtv.tv/hls/dim/index.m3u8",
+    "urls": [
+      "https://canli.dimtv.tv/hls/dim/index.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 239
+  },
+  {
+    "name": "ERT Erbaa Radyo ve TV",
+    "url": "https://yayin1.canlitv.fun/canlitv/erttv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin1.canlitv.fun/canlitv/erttv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 240
+  },
+  {
+    "name": "Yaşlık Tv Türkmenistan",
+    "url": "https://alpha.tv.online.tm/hls/ch002_720/index.m3u8",
+    "urls": [
+      "https://alpha.tv.online.tm/hls/ch002_720/index.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 243
+  },
+  {
+    "name": "TV38",
+    "url": "https://yayin1.canlitv.fun/canlitv/tv38.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin1.canlitv.fun/canlitv/tv38.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 244
+  },
+  {
+    "name": "ETV Kayseri",
+    "url": "https://live.artidijitalmedya.com/artidijital_etv/etv/chunks.m3u8",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_etv/etv/chunks.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 245
+  },
+  {
+    "name": "DW TV Europe",
+    "url": "https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/stream03/streamPlaylist.m3u8",
+    "urls": [
+      "https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/stream03/streamPlaylist.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 247
+  },
+  {
+    "name": "Press Tv",
+    "url": "https://live.presstv.co.uk/hls/presstv_5_482/index.m3u8",
+    "urls": [
+      "https://live.presstv.co.uk/hls/presstv_5_482/index.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 248
+  },
+  {
+    "name": "Fortuna Tv",
+    "url": "https://edge2.taksimbilisim.com/ftvturk/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://edge2.taksimbilisim.com/ftvturk/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 249
+  },
+  {
+    "name": "KTV Kazakistan",
+    "url": "https://wz-kt.ktk.kz/ktklive/smil:ktk-live.smil/chunklist_w10227581_b928000_slrus.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://wz-kt.ktk.kz/ktklive/smil:ktk-live.smil/chunklist_w10227581_b928000_slrus.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 250
+  },
+  {
+    "name": "Kontra Tv",
+    "url": "https://kontralive.siliconweb.com/live/kontratv/kontralive/kontratv/chunks.m3u8",
+    "urls": [
+      "https://kontralive.siliconweb.com/live/kontratv/kontralive/kontratv/chunks.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 251
+  },
+  {
+    "name": "TV Den",
+    "url": "https://canli.tvden.com.tr/hls/live.m3u8",
+    "urls": [
+      "https://canli.tvden.com.tr/hls/live.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 252
+  },
+  {
+    "name": "Çankırı Tv",
+    "url": "https://yayin1.canlitv.fun/canlitv/cankiritv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "urls": [
+      "https://yayin1.canlitv.fun/canlitv/cankiritv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 253
+  },
+  {
+    "name": "NOA4 Hamburg",
+    "url": "https://hls1.wtnet.de/noa4/apple/wifi4000.m3u8",
+    "urls": [
+      "https://hls1.wtnet.de/noa4/apple/wifi4000.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 255
+  },
+  {
+    "name": "Türkmenistan Tv",
+    "url": "https://alpha.tv.online.tm/hls/ch007_720/index.m3u8",
+    "urls": [
+      "https://alpha.tv.online.tm/hls/ch007_720/index.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 256
+  },
+  {
+    "name": "Sat7 Türk",
+    "url": "https://live.artidijitalmedya.com/artidijital_sat7turk/sat7turk/chunks.m3u8",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_sat7turk/sat7turk/chunks.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 257
+  },
+  {
+    "name": "RFH",
+    "url": "https://h056.video-stream-hosting.de/medienasa-live/_definst_/mp4:RFH_high/chunklist_w667817151.m3u8",
+    "urls": [
+      "https://h056.video-stream-hosting.de/medienasa-live/_definst_/mp4:RFH_high/chunklist_w667817151.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 258
+  },
+  {
+    "name": "Franken Tv",
+    "url": "https://stream01.welocal.stream/stream/fhd-tvmainfranken_255661/ngrp:stream_all/chunklist_w1073867686_b446000.m3u8",
+    "urls": [
+      "https://stream01.welocal.stream/stream/fhd-tvmainfranken_255661/ngrp:stream_all/chunklist_w1073867686_b446000.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 259
+  },
+  {
+    "name": "Offener Kanal Berlin",
+    "url": "https://alex-stream.rosebud-media.de/bounce/alexlivetv50.smil/chunklist_b2128000_slGER.m3u8",
+    "urls": [
+      "https://alex-stream.rosebud-media.de/bounce/alexlivetv50.smil/chunklist_b2128000_slGER.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 260
+  },
+  {
+    "name": "Oberpfalz Tv",
+    "url": "https://stream04.welocal.stream/stream/fhd-otv_496277/ngrp:stream_all/chunklist_b3628000.m3u8",
+    "urls": [
+      "https://stream04.welocal.stream/stream/fhd-otv_496277/ngrp:stream_all/chunklist_b3628000.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 261
+  },
+  {
+    "name": "FRT TV",
+    "url": "https://edge1.taksimbilisim.com/frttv/bant1/chunks.m3u8",
+    "urls": [
+      "https://edge1.taksimbilisim.com/frttv/bant1/chunks.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 262
+  },
+  {
+    "name": "Niederbayern TV",
+    "url": "https://stream03.welocal.stream/stream/fhd-nbydeggendorf_99148/ngrp:stream_all/chunklist.m3u8",
+    "urls": [
+      "https://stream03.welocal.stream/stream/fhd-nbydeggendorf_99148/ngrp:stream_all/chunklist.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 263
+  },
+  {
+    "name": "Askabat TV",
+    "url": "https://alpha.tv.online.tm/hls/ch006_720/index.m3u8",
+    "urls": [
+      "https://alpha.tv.online.tm/hls/ch006_720/index.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 264
+  },
+  {
+    "name": "Altın Asır Tv",
+    "url": "https://alpha.tv.online.tm/hls/ch001_720/index.m3u8",
+    "urls": [
+      "https://alpha.tv.online.tm/hls/ch001_720/index.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 265
+  },
+  {
+    "name": "India Today",
+    "url": "https://indiatodaylive.akamaized.net/hls/live/2014320/indiatoday/indiatodaylive/live_234p/chunks.m3u8",
+    "urls": [
+      "https://indiatodaylive.akamaized.net/hls/live/2014320/indiatoday/indiatodaylive/live_234p/chunks.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 266
+  },
+  {
+    "name": "Kent Türk TV",
+    "url": "https://live.artidijitalmedya.com/artidijital_kentturktv/kentturktv/chunks.m3u8?hash=b8a4c059a708b2aaabd02a9d87e7e409",
+    "urls": [
+      "https://live.artidijitalmedya.com/artidijital_kentturktv/kentturktv/chunks.m3u8?hash=b8a4c059a708b2aaabd02a9d87e7e409"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 268
+  },
+  {
+    "name": "OWAZY TV",
+    "url": "https://alpha.tv.online.tm/hls/ch005_720/index.m3u8?hash=b8a4c059a708b2aaabd02a9d87e7e409",
+    "urls": [
+      "https://alpha.tv.online.tm/hls/ch005_720/index.m3u8?hash=b8a4c059a708b2aaabd02a9d87e7e409"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 269
+  },
+  {
+    "name": "Deutsche Welle English",
+    "url": "https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/stream01/streamPlaylist.m3u8",
+    "urls": [
+      "https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/stream01/streamPlaylist.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 271
+  },
+  {
+    "name": "Tv 264",
+    "url": "https://b01c02nl.mediatriple.net/videoonlylive/mtdxkkitgbrckilive/broadcast_5ee244263fd6d.smil/playlist.m3u8",
+    "urls": [
+      "https://b01c02nl.mediatriple.net/videoonlylive/mtdxkkitgbrckilive/broadcast_5ee244263fd6d.smil/playlist.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 273
+  },
+  {
+    "name": "Kocaeli Tv",
+    "url": "https://edge2.taksimbilisim.com/kocaelitv/bant1/chunks.m3u8",
+    "urls": [
+      "https://edge2.taksimbilisim.com/kocaelitv/bant1/chunks.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 274
+  },
+  {
+    "name": "Türkmen Sport Tv",
+    "url": "https://alpha.tv.online.tm/hls/ch004_720/index.m3u8",
+    "urls": [
+      "https://alpha.tv.online.tm/hls/ch004_720/index.m3u8"
+    ],
+    "logo": "",
+    "group": "Türkiye",
+    "tvg-id": "",
+    "source": "Canlitv",
+    "rank": 279
   }
 ]

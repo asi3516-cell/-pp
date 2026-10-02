@@ -118,6 +118,25 @@
       <button id="saveEpg" type="button" class="btn ghost">EPG kaydet</button>
     </div>
 
+    <hr class="sep" />
+    <p class="muted"><b>MAC adresi ile IPTV (Stalker / MAG portal)</b> — aboneliğinizin portal adresi ve size verilen MAC adresini girin.</p>
+    <label class="field">
+      <span>Portal adresi</span>
+      <input id="macPortal" type="url" placeholder="http://portal.ornek.com/c/" />
+    </label>
+    <label class="field">
+      <span>MAC adresi</span>
+      <input id="macAddr" type="text" placeholder="00:1A:79:XX:XX:XX" />
+    </label>
+    <label class="field">
+      <span>Ad (opsiyonel)</span>
+      <input id="macName" type="text" placeholder="MAC aboneliğim" />
+    </label>
+    <div class="dlg-actions">
+      <button id="addMac" type="button" class="btn">MAC hesabı ekle</button>
+      <span id="macStatus" class="muted"></span>
+    </div>
+
     <p class="muted" style="margin:6px 0 0">Yedekleme / taşıma — listenizi dosyaya indirip başka cihazda geri yükleyin.</p>
     <div class="dlg-actions">
       <button id="exportPl" type="button" class="btn ghost">⬇ Yedek indir (JSON)</button>

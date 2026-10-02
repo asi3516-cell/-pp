@@ -91,6 +91,19 @@ python build_channels.py
 4. Taşımak için **Yedek indir (JSON)** ile dosyayı al, diğer bilgisayarda
    **Yedek / M3U yükle** ile geri yükle.
 
+## MAC adresi ile IPTV (Stalker / MAG portal)
+
+Aboneliğiniz MAC adresine bağlıysa:
+
+1. **Playlistler** düğmesine bas.
+2. **Portal adresi** (ör. `http://portal.ornek.com/c/`) ve size verilen
+   **MAC adresi** (`00:1A:79:XX:XX:XX`) alanlarını doldur.
+3. **MAC hesabı ekle** → kanallar portal üzerinden çekilir ve listeye eklenir.
+
+Kanalların yayın adresleri MAC oturumuna bağlı olduğu için oynatma sunucu
+üzerinden (gerekli UA/cookie başlıklarıyla) yapılır. Portal ve MAC bilgisi
+yalnızca sizin cihazınızda saklanır; başkasıyla paylaşılmaz.
+
 ## Notlar
 
 - Ücretsiz/genel kaynaklardaki yayınlar sık sık **bölgesel olarak kısıtlanır**

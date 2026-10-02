@@ -310,6 +310,8 @@ h1, h2, h3 { margin: 0; }
 .pl-list li .u { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--muted); }
 .pl-list li .del { border: 0; background: transparent; color: var(--danger); cursor: pointer; font-size: 15px; }
 
+.sep { border: 0; border-top: 1px solid var(--line, #2a2f3a); margin: 14px 0; opacity: .7; }
+
 .only-mobile { display: none; }
 
 /* ---------------- Responsive ---------------- */

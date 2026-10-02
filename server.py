@@ -139,12 +139,16 @@ def is_playlist(url: str, content_type: str) -> bool:
     return "mpegurl" in ct or "vnd.apple" in ct
 
 
-def proxy_url(absolute: str) -> str:
-    return "/api/proxy?url=" + urllib.parse.quote(absolute, safe="")
+def proxy_url(absolute: str, extra_qs: str = "") -> str:
+    return "/api/proxy?url=" + urllib.parse.quote(absolute, safe="") + extra_qs
 
 
-def rewrite_playlist(text: str, base_url: str) -> str:
-    """Rewrite every URI in an HLS playlist so it points back at our proxy."""
+def rewrite_playlist(text: str, base_url: str, extra_qs: str = "") -> str:
+    """Rewrite every URI in an HLS playlist so it points back at our proxy.
+
+    `extra_qs` carries forwarded headers (e.g. UA/Cookie for MAC portals) so
+    that child playlists and segments keep the same authorization.
+    """
     out_lines = []
     for line in text.splitlines():
         stripped = line.strip()
@@ -152,12 +156,12 @@ def rewrite_playlist(text: str, base_url: str) -> str:
             # Rewrite URI="..." attributes (encryption keys, media renditions).
             def _sub(m: re.Match) -> str:
                 target = urllib.parse.urljoin(base_url, m.group(1))
-                return 'URI="%s"' % proxy_url(target)
+                return 'URI="%s"' % proxy_url(target, extra_qs)
 
             out_lines.append(URI_ATTR_RE.sub(_sub, line))
         elif stripped:
             target = urllib.parse.urljoin(base_url, stripped)
-            out_lines.append(proxy_url(target))
+            out_lines.append(proxy_url(target, extra_qs))
         else:
             out_lines.append(line)
     return "\n".join(out_lines)
@@ -247,6 +251,8 @@ class Handler(BaseHTTPRequestHandler):
             return self._json(200, load_store())
         if path == "/api/channels":
             return self._api_channels()
+        if path == "/api/stalker":
+            return self._api_stalker(query)
         if path == "/api/proxy":
             return self._api_proxy(query, head_only)
         if path == "/api/fetch":
@@ -287,6 +293,25 @@ class Handler(BaseHTTPRequestHandler):
             unique.append(ch)
         self._json(200, {"count": len(unique), "channels": unique})
 
+    def _api_stalker(self, query: dict) -> None:
+        portal = (query.get("portal") or [""])[0]
+        mac = (query.get("mac") or [""])[0]
+        try:
+            channels, token = stalker_channels(portal, mac)
+        except json.JSONDecodeError:
+            return self._json(502, {"error": "geçersiz portal yanıtı (JSON değil)"})
+        except ValueError as exc:
+            return self._json(400, {"error": str(exc)})
+        except urllib.error.HTTPError as exc:
+            return self._json(502, {"error": f"portal HTTP {exc.code}"})
+        except (urllib.error.URLError, OSError) as exc:
+            return self._json(502, {"error": f"portal erişilemedi: {exc}"})
+        return self._json(200, {
+            "count": len(channels),
+            "token": token,
+            "channels": channels,
+        })
+
     def _api_fetch(self, query: dict, head_only: bool) -> None:
         url = (query.get("url") or [""])[0]
         if not url:
@@ -304,7 +329,8 @@ class Handler(BaseHTTPRequestHandler):
             return self._json(400, {"error": "missing url"})
 
         fwd_headers = {}
-        for src, dst in (("h", "Referer"), ("u", "User-Agent"), ("o", "Origin")):
+        for src, dst in (("h", "Referer"), ("u", "User-Agent"),
+                         ("o", "Origin"), ("c", "Cookie")):
             val = (query.get(src) or [None])[0]
             if val:
                 fwd_headers[dst] = val
@@ -323,7 +349,12 @@ class Handler(BaseHTTPRequestHandler):
         ctype = hdrs.get("content-type", "")
         if is_playlist(url, ctype):
             text = raw.decode("utf-8", "replace")
-            rewritten = rewrite_playlist(text, url)
+            extra_qs = ""
+            if fwd_headers.get("User-Agent"):
+                extra_qs += "&u=" + urllib.parse.quote(fwd_headers["User-Agent"], safe="")
+            cookie = fwd_headers.get("Cookie")
+            extra_qs += "&c=" + urllib.parse.quote(cookie or "", safe="")
+            rewritten = rewrite_playlist(text, url, extra_qs)
             body = rewritten.encode("utf-8")
             return self._send(
                 200, body, "application/vnd.apple.mpegurl",
@@ -410,7 +441,7 @@ def parse_m3u(text: str, source: str = "playlist") -> list:
 
 def normalize_channel(ch: dict) -> dict:
     """Map raw EXTINF attributes to the shape the front-end expects."""
-    return {
+    out = {
         "name": ch.get("name") or "Unnamed",
         "url": ch.get("url", ""),
         "logo": ch.get("tvg-logo") or ch.get("logo") or "",
@@ -418,6 +449,101 @@ def normalize_channel(ch: dict) -> dict:
         "tvgId": ch.get("tvg-id") or ch.get("tvgId") or "",
         "source": ch.get("source", "Playlist"),
     }
+    if ch.get("headers"):
+        out["headers"] = ch["headers"]
+    return out
+
+
+STB_UA = (
+    "Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 "
+    "(KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3"
+)
+
+
+def _stalker_headers(mac: str, token: str = "") -> dict:
+    cookie = f"mac={mac}; stb_lang=tr; timezone=Europe/Istanbul"
+    if token:
+        cookie += f"; token={token}"
+    return {"User-Agent": STB_UA, "Cookie": cookie, "Accept": "application/json"}
+
+
+def _stalker_call(portal: str, params: str, mac: str, token: str = "",
+                  timeout: int = DEFAULT_TIMEOUT):
+    """Call a Stalker (MAG) portal load.php endpoint and return its `js` object."""
+    base = portal.rstrip("/")
+    url = f"{base}/server/load.php?{params}&JsHttpRequest=1-xml"
+    _, _, raw = fetch(url, _stalker_headers(mac, token), timeout=timeout)
+    data = json.loads(raw.decode("utf-8", "replace"))
+    return data.get("js", data) if isinstance(data, dict) else data
+
+
+def stalker_channels(portal: str, mac: str) -> tuple[list, str]:
+    """Handshake with a MAC-authorized portal and return (channels, token).
+
+    Works with the common MAG/Stalker `load.php` API. The portal is provided
+    by the user and must already be authorized for the given MAC address.
+    """
+    portal = portal.strip()
+    mac = mac.strip()
+    if not portal or not mac:
+        raise ValueError("portal ve MAC adresi gerekli")
+
+    hs = _stalker_call(
+        portal,
+        "type=stb&action=handshake&token=&prehash=0&JsHttpRequest=1-xml",
+        mac,
+    )
+    token = (hs or {}).get("token", "")
+    if not token:
+        raise ValueError("Portal el sıkışmayı reddetti (MAC yetkili olmayabilir)")
+
+    try:
+        _stalker_call(
+            portal,
+            "type=stb&action=get_profile&hd=1&num_banks=2&stb_type=MAG250"
+            "&client_type=STB&image_version=218&video_out=hdmi&hw_version=1.7-BD-00"
+            "&not_valid_token=0&auth_second_step=1",
+            mac, token,
+        )
+    except (urllib.error.URLError, OSError, ValueError):
+        pass  # some portals skip this step
+
+    data = _stalker_call(
+        portal,
+        "type=itv&action=get_all_channels&JsHttpRequest=1-xml",
+        mac, token,
+    )
+    genres = {}
+    try:
+        g = _stalker_call(portal, "type=itv&action=get_genres&JsHttpRequest=1-xml",
+                          mac, token)
+        for item in (g or {}).get("data", []) or []:
+            genres[str(item.get("id"))] = item.get("title") or "Genel"
+    except (urllib.error.URLError, OSError, ValueError, AttributeError):
+        pass
+
+    channels = []
+    for item in (data or {}).get("data", []) or []:
+        cmd = (item.get("cmd") or "").strip()
+        # `cmd` is prefixed with a player command such as "ffmpeg " or "auto ".
+        if " " in cmd:
+            cmd = cmd.split(" ", 1)[1]
+        if not cmd.startswith(("http://", "https://", "rtmp://", "rtsp://")):
+            continue
+        channels.append(normalize_channel({
+            "name": item.get("name") or "Unnamed",
+            "url": cmd,
+            "tvg-logo": item.get("logo") or item.get("tv_icon") or "",
+            "group-title": genres.get(str(item.get("tv_genre_id")), "Genel"),
+            "source": "MAC / Portal",
+            # Streams are tied to the MAC session, so they must be fetched
+            # through the server with these headers.
+            "headers": {
+                "User-Agent": STB_UA,
+                "Cookie": _stalker_headers(mac, token)["Cookie"],
+            },
+        }))
+    return channels, token
 
 
 def _open_browser(url: str) -> None:

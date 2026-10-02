@@ -101,11 +101,22 @@
   function proxied(url, extra) {
     var q = "?url=" + encodeURIComponent(url);
     if (extra) {
-      if (extra.h) q += "&h=" + encodeURIComponent(extra.h);
-      if (extra.u) q += "&u=" + encodeURIComponent(extra.u);
-      if (extra.o) q += "&o=" + encodeURIComponent(extra.o);
+      ["h", "u", "o", "c"].forEach(function (k) {
+        if (extra[k]) q += "&" + k + "=" + encodeURIComponent(extra[k]);
+      });
     }
     return "/api/proxy" + q;
+  }
+
+  // Build the proxy query from a channel's stored request headers (used by
+  // MAC/Stalker portals, whose streams require the session UA and cookie).
+  function proxyFor(ch, url) {
+    var h = (ch && ch.headers) || {};
+    return proxied(url, {
+      u: h["User-Agent"],
+      c: h["Cookie"],
+      h: h["Referer"]
+    });
   }
 
   /* --------------------------- M3U parser ---------------------------- */
@@ -176,6 +187,12 @@
 
     var fromLists = Promise.all(state.playlists.map(function (pl) {
       if (pl.local) return Promise.resolve(pl.channels || []);
+      if (pl.mac) {
+        return api("/api/stalker?portal=" + encodeURIComponent(pl.portal) +
+                   "&mac=" + encodeURIComponent(pl.macAddr))
+          .then(function (d) { return d.channels || []; })
+          .catch(function () { return []; });
+      }
       return fetch("/api/fetch?url=" + encodeURIComponent(pl.url))
         .then(function (r) { return r.text(); })
         .then(function (t) { return parseM3U(t, pl.name || "Playlist"); })
@@ -345,8 +362,9 @@
     video.removeAttribute("src");
     video.load();
 
-    var url = ch.url;
-    var lower = url.split("?")[0].toLowerCase();
+    // MAC/portal streams need the session headers, so always go via the proxy.
+    var url = ch.headers ? proxyFor(ch, ch.url) : ch.url;
+    var lower = ch.url.split("?")[0].toLowerCase();
 
     if (/\.(mp4|webm|ogv|m4v|mov)$/.test(lower)) {
       video.src = url;
@@ -558,8 +576,11 @@
     state.playlists.forEach(function (pl, idx) {
       if (pl.hidden) return;
       var li = document.createElement("li");
+      var subtitle = pl.local ? "(yerel dosya)"
+        : pl.mac ? ("MAC " + escapeHtml(pl.macAddr || "") + " · " + escapeHtml(pl.portal || ""))
+        : escapeHtml(pl.url || "");
       li.innerHTML = "<span>" + escapeHtml(pl.name || "Playlist") + "</span>" +
-        "<span class='u'>" + escapeHtml(pl.local ? "(yerel dosya)" : pl.url) + "</span>";
+        "<span class='u'>" + subtitle + "</span>";
       var del = document.createElement("button");
       del.className = "del";
       del.textContent = "✕";
@@ -637,6 +658,28 @@
       $("#plUrl").value = ""; $("#plName").value = "";
       renderPlaylists();
       loadChannels();
+    };
+
+    $("#addMac").onclick = function () {
+      var portal = $("#macPortal").value.trim();
+      var mac = $("#macAddr").value.trim();
+      var name = $("#macName").value.trim() ||
+        (mac ? "MAC " + mac.slice(-5) : "MAC portal");
+      if (!portal || !mac) { $("#macStatus").textContent = "Portal ve MAC gerekli"; return; }
+      $("#macStatus").textContent = "Bağlanılıyor...";
+      api("/api/stalker?portal=" + encodeURIComponent(portal) +
+          "&mac=" + encodeURIComponent(mac)).then(function (data) {
+        var count = (data && data.count) || 0;
+        if (!count) { $("#macStatus").textContent = "Kanal bulunamadı (MAC yetkili olmayabilir)"; return; }
+        state.playlists.push({ mac: true, portal: portal, macAddr: mac, name: name });
+        persist();
+        $("#macStatus").textContent = count + " kanal eklendi";
+        $("#macPortal").value = ""; $("#macAddr").value = ""; $("#macName").value = "";
+        renderPlaylists();
+        loadChannels();
+      }).catch(function (err) {
+        $("#macStatus").textContent = "Hata: " + (err.message || "bağlanamadı");
+      });
     };
 
     $("#plFile").addEventListener("change", function (e) {

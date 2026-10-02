@@ -10,3 +10,4 @@ build/android/
 static/IPTV-Player-linux
 android/app/src/main/assets/
 android/**/*.class
+data/channels.cache.json.gz

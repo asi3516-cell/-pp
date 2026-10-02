@@ -84,7 +84,10 @@ _store_lock = threading.Lock()
 # Persistent store (playlists, favorites, settings)
 # --------------------------------------------------------------------------
 def _default_store() -> dict:
-    return {"playlists": [], "favorites": [], "settings": {}}
+    # favoritesByList keeps a separate favorite list for every source ("Canlı
+    # TV", "Radyo", each portal), so switching lists also switches favorites.
+    return {"playlists": [], "favorites": [], "favoritesByList": {},
+            "recent": [], "overrides": {}, "settings": {}}
 
 
 def load_store() -> dict:
@@ -131,6 +134,51 @@ def fetch(url: str, headers: dict | None = None, timeout: int = DEFAULT_TIMEOUT)
 
 M3U8_RE = re.compile(r"\.m3u8(\?|$)", re.IGNORECASE)
 URI_ATTR_RE = re.compile(r'URI="([^"]+)"')
+
+
+PLS_FILE_RE = re.compile(r"\.pls(\?|$)", re.IGNORECASE)
+AUDIO_TYPES = {
+    "mp3": "audio/mpeg", "aac": "audio/aac", "aacp": "audio/aacp",
+    "ogg": "audio/ogg", "oga": "audio/ogg", "opus": "audio/ogg",
+    "m4a": "audio/mp4", "mp4": "video/mp4", "wav": "audio/wav",
+    "flac": "audio/flac", "ts": "video/mp2t", "m3u8": "application/vnd.apple.mpegurl",
+}
+
+
+def guess_stream_type(url: str) -> str:
+    path = urllib.parse.urlparse(url).path
+    ext = path.rsplit(".", 1)[-1].lower() if "." in path else ""
+    return AUDIO_TYPES.get(ext, "audio/mpeg")
+
+
+def resolve_stream(url: str, headers: dict) -> tuple[str, str]:
+    """Follow a .pls / .m3u playlist to the real stream URL it points at.
+
+    Radio-browser lists many stations as a small playlist file rather than the
+    stream itself, so the player has to unwrap one level. Returns the resolved
+    URL and a content type guess."""
+    if not (PLS_FILE_RE.search(url) or M3U8_RE.search(url) or
+            url.lower().split("?")[0].endswith((".m3u", ".m3u8", ".pls"))):
+        return url, guess_stream_type(url)
+    try:
+        status, hdrs, raw = fetch(url, headers, timeout=DEFAULT_TIMEOUT)
+    except (urllib.error.URLError, OSError):
+        return url, guess_stream_type(url)
+    text = raw.decode("utf-8", "replace")
+    # HLS manifests are left to the browser's player, not unwrapped here.
+    if raw[:7].upper() == b"#EXTM3U" and M3U8_RE.search(url):
+        return url, "application/vnd.apple.mpegurl"
+    candidates = []
+    for line in text.splitlines():
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+        m = re.match(r"(?i)file\d*\s*=\s*(.+)$", line)
+        candidates.append((m.group(1) if m else line).strip())
+    if not candidates:
+        return url, guess_stream_type(url)
+    target = urllib.parse.urljoin(url, candidates[0])
+    return target, guess_stream_type(target)
 
 
 def is_playlist(url: str, content_type: str) -> bool:
@@ -186,10 +234,23 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
 
     def _send(self, status: int, body: bytes, ctype: str, extra: dict | None = None,
-              head_only: bool = False) -> None:
+              head_only: bool = False, gz_ready: bool = False) -> None:
+        # The channel list is tens of megabytes; gzip cuts it by ~85% so the
+        # browser can parse it instead of stalling on the download. `gz_ready`
+        # marks a body that was already compressed by the caller.
+        wants_gz = "gzip" in (self.headers.get("Accept-Encoding") or "")
+        gz = gz_ready and wants_gz
+        if gz_ready and not wants_gz:
+            body = gzip.decompress(body)
+        elif not gz_ready and len(body) > 8192 and wants_gz:
+            body = gzip.compress(body, 6)
+            gz = True
         self.send_response(status)
         self.send_header("Content-Type", ctype)
         self.send_header("Content-Length", str(len(body)))
+        if gz:
+            self.send_header("Content-Encoding", "gzip")
+            self.send_header("Vary", "Accept-Encoding")
         self._cors()
         for k, v in (extra or {}).items():
             self.send_header(k, v)
@@ -234,7 +295,8 @@ class Handler(BaseHTTPRequestHandler):
             if not isinstance(store, dict):
                 return self._json(400, {"error": "invalid body"})
             current = load_store()
-            for key in ("playlists", "favorites", "settings"):
+            for key in ("playlists", "favorites", "favoritesByList",
+                        "recent", "overrides", "settings"):
                 if key in store:
                     current[key] = store[key]
             save_store(current)
@@ -251,6 +313,8 @@ class Handler(BaseHTTPRequestHandler):
         if path == "/api/store":
             return self._json(200, load_store())
         if path == "/api/channels":
+            return self._serve_channels(head_only)
+        if path == "/api/playlists":
             return self._api_channels()
         if path == "/api/stalker":
             return self._api_stalker(query)
@@ -258,6 +322,8 @@ class Handler(BaseHTTPRequestHandler):
             return self._api_xtream(query)
         if path == "/api/proxy":
             return self._api_proxy(query, head_only)
+        if path == "/api/stream":
+            return self._api_stream(query)
         if path == "/api/fetch":
             return self._api_fetch(query, head_only)
         if path == "/api/probe":
@@ -302,7 +368,7 @@ class Handler(BaseHTTPRequestHandler):
                 if not url:
                     continue
                 label = item.get("label", "") if isinstance(item, dict) else ""
-                title = name if i == 0 else f"{name} (yedek: {label})"
+                title = name if i == 0 else f"{name} {i + 1}"
                 lines.append(
                     f'#EXTINF:-1 tvg-logo="{logo}" group-title="{group}",{title}')
                 lines.append(url)
@@ -454,6 +520,29 @@ class Handler(BaseHTTPRequestHandler):
             unique.append(ch)
         self._json(200, {"count": len(unique), "channels": unique})
 
+    def _serve_channels(self, head_only: bool) -> None:
+        """Serve the bundled list on its own, from a gzipped cache.
+
+        Remote playlists are fetched on demand by the Xtream/Stalker endpoints,
+        so this endpoint must stay fast: it is read on every page load and a
+        fresh fetch of a 58 MB payload takes ~16 s."""
+        cache = DATA_DIR / "channels.cache.json.gz"
+        src = BUNDLED_DATA_DIR / "channels.json"
+        try:
+            if not cache.exists() or cache.stat().st_mtime < src.stat().st_mtime:
+                body = json.dumps(
+                    {"channels": json.loads(src.read_text("utf-8"))},
+                    ensure_ascii=False).encode("utf-8")
+                tmp = cache.with_suffix(".tmp")
+                tmp.write_bytes(gzip.compress(body, 6))
+                tmp.replace(cache)
+            body = cache.read_bytes()
+        except (OSError, ValueError):
+            self._json(500, {"error": "bundled list unavailable"})
+            return
+        self._send(200, body, "application/json; charset=utf-8",
+                   head_only=head_only, gz_ready=True)
+
     def _api_stalker(self, query: dict) -> None:
         portal = (query.get("portal") or [""])[0]
         mac = (query.get("mac") or [""])[0]
@@ -590,6 +679,61 @@ class Handler(BaseHTTPRequestHandler):
         if not ctype:
             ctype = mimetypes.guess_type(urllib.parse.urlparse(url).path)[0] or "application/octet-stream"
         self._send(status, raw, ctype, extra, head_only=head_only)
+
+    # -- streaming proxy ---------------------------------------------------
+    def _api_stream(self, query: dict) -> None:
+        """Relay a continuous audio/video stream to the browser.
+
+        The page is served over https, but many radio stations (and a few TV
+        feeds) only offer http, which the browser blocks as mixed content. The
+        server fetches the upstream itself and pipes the bytes through, so the
+        stream plays from a same-origin https URL. Playlist files (.pls / .m3u)
+        are resolved to the first real stream inside them."""
+        url = (query.get("url") or [""])[0]
+        if not url:
+            return self._json(400, {"error": "missing url"})
+        if not re.match(r"^https?://", url, re.I):
+            return self._json(400, {"error": "bad url"})
+
+        headers = {"Accept": "*/*"}
+        for src, dst in (("u", "User-Agent"), ("h", "Referer"), ("o", "Origin")):
+            val = (query.get(src) or [None])[0]
+            if val:
+                headers[dst] = val
+
+        try:
+            resolved, ctype = resolve_stream(url, headers)
+        except (urllib.error.URLError, OSError, ValueError) as exc:
+            return self._json(502, {"error": str(exc)})
+
+        try:
+            req = urllib.request.Request(resolved, headers=headers)
+            upstream = urllib.request.urlopen(
+                req, timeout=DEFAULT_TIMEOUT, context=_SSL_CTX)
+        except (urllib.error.URLError, OSError) as exc:
+            return self._json(502, {"error": str(exc)})
+
+        self.send_response(200)
+        self.send_header("Content-Type", ctype or "audio/mpeg")
+        self.send_header("Cache-Control", "no-cache")
+        self.send_header("Connection", "close")
+        self._cors()
+        self.end_headers()
+        self.close_connection = True
+        try:
+            while True:
+                chunk = upstream.read(32768)
+                if not chunk:
+                    break
+                self.wfile.write(chunk)
+                self.wfile.flush()
+        except (BrokenPipeError, ConnectionResetError, OSError):
+            pass
+        finally:
+            try:
+                upstream.close()
+            except OSError:
+                pass
 
     # -- static files ------------------------------------------------------
     def _static(self, path: str, head_only: bool) -> None:

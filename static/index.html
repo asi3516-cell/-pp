@@ -31,31 +31,22 @@
       <button id="clearSearch" class="clear" title="Temizle" hidden>&times;</button>
     </div>
 
-    <div class="tabs" id="tabs">
-      <button class="tab active" data-filter="all">Tümü</button>
-      <button class="tab" data-filter="fav">★ Favoriler</button>
-      <button class="tab" data-filter="recent">Son</button>
-    </div>
-
-    <div class="tabs kinds" id="kinds">
-      <button class="tab active" data-kind="all">Hepsi</button>
-      <button class="tab" data-kind="live">📺 Canlı TV</button>
-      <button class="tab" data-kind="vod">🎬 Film</button>
-      <button class="tab" data-kind="series">📽 Dizi</button>
-    </div>
-
-    <div class="source-bar">
-      <span class="source-title">Liste</span>
-      <button id="srcPrev" class="src-nav" title="Önceki liste">‹</button>
-      <div class="sources" id="sources"></div>
-      <button id="srcNext" class="src-nav" title="Sonraki liste">›</button>
-    </div>
+    <div class="nav-tree" id="navTree"></div>
 
     <div class="groups" id="groups"></div>
+
+    <!-- Content-type tabs under the tree: tap to jump straight to that list. -->
+    <div class="kind-tabs" id="kindTabs">
+      <button class="ktab" data-kind="live" type="button">📺 Canlı TV</button>
+      <button class="ktab" data-kind="vod" type="button">🎬 Film</button>
+      <button class="ktab" data-kind="series" type="button">📽 Dizi</button>
+      <button class="ktab" data-kind="radio" type="button">📻 Radyo</button>
+    </div>
 
     <div class="channel-list" id="channels" role="list"></div>
 
     <div class="sidebar-foot">
+      <button id="openLists" class="btn ghost sm">Liste Seç</button>
       <button id="openPlaylists" class="btn ghost sm">Playlistler</button>
       <button id="openAdd" class="btn ghost sm">+ Kanal</button>
       <span id="chCount" class="muted"></span>
@@ -88,25 +79,38 @@
         </div>
       </div>
       <div class="osd" id="osd"></div>
+      <div class="vod-info hide" id="vodInfo">
+        <img id="vodPoster" alt="" />
+        <div class="vod-text">
+          <h3 id="vodTitle">—</h3>
+          <p id="vodSub" class="muted"></p>
+        </div>
+      </div>
     </div>
 
-    <div class="below">
-      <div class="card epg-card">
-        <div class="card-head"><h3>Yayın akışı (EPG)</h3><span id="epgSource" class="muted"></span></div>
-        <div id="epg" class="epg-body muted">EPG yüklenmedi. Playlistler bölümünden bir XMLTV adresi ekleyin.</div>
+    <div class="browse hide" id="browse">
+      <div class="browse-head">
+        <button id="browseBack" class="btn ghost sm" hidden>‹ Geri</button>
+        <h2 id="browseTitle">Filmler</h2>
+        <span id="browseCount" class="muted"></span>
       </div>
-      <div class="card info-card">
-        <div class="card-head"><h3>Kanal bilgisi</h3></div>
-        <dl id="chInfo" class="info-body">
-          <dt>Ad</dt><dd id="iName">—</dd>
-          <dt>Grup</dt><dd id="iGroup">—</dd>
-          <dt>Kaynak</dt><dd id="iSource">—</dd>
-          <dt>Akış</dt><dd id="iUrl" class="ellipsis">—</dd>
-        </dl>
-      </div>
+      <div class="browse-body" id="browseBody"></div>
     </div>
+
   </main>
 </div>
+
+<!-- List picker -->
+<dialog id="listsDlg" class="dlg">
+  <form method="dialog" class="dlg-form">
+    <h2>Liste seç</h2>
+    <p class="muted">Hangi listeyi izlemek istediğinizi seçin. Seçilen liste açık olarak gelir.</p>
+    <div id="listsBody" class="lists-body"></div>
+    <div class="dlg-actions end">
+      <button class="btn ghost" value="close">Kapat</button>
+    </div>
+  </form>
+</dialog>
 
 <!-- Playlist manager -->
 <dialog id="playlistsDlg" class="dlg">
@@ -119,11 +123,12 @@
       <input id="plUrl" type="url" placeholder="https://ornek.com/liste.m3u" />
     </label>
     <label class="field">
-      <span>Ad (opsiyonel)</span>
+      <span>Liste adı (zorunlu)</span>
       <input id="plName" type="text" placeholder="Türkiye kanalları" />
     </label>
     <div class="dlg-actions">
       <button id="addPlaylist" type="button" class="btn">Playlist ekle</button>
+      <span id="plStatus" class="muted"></span>
       <label class="btn ghost file">
         Dosyadan yükle
         <input id="plFile" type="file" accept=".m3u,.m3u8,.txt" hidden />
@@ -145,7 +150,7 @@
       <input id="xcPass" type="password" placeholder="sifre" autocomplete="off" />
     </label>
     <label class="field">
-      <span>Ad (opsiyonel)</span>
+      <span>Liste adı (zorunlu)</span>
       <input id="xcName" type="text" placeholder="Ana liste" />
     </label>
     <div class="dlg-actions">
@@ -172,7 +177,7 @@
       <input id="macAddr" type="text" placeholder="00:1A:79:XX:XX:XX" />
     </label>
     <label class="field">
-      <span>Ad (opsiyonel)</span>
+      <span>Liste adı (zorunlu)</span>
       <input id="macName" type="text" placeholder="MAC aboneliğim" />
     </label>
     <div class="dlg-actions">
@@ -192,6 +197,11 @@
     </div>
 
     <ul id="plList" class="pl-list"></ul>
+
+    <div class="setting-row">
+      <label for="setList">Açılışta gösterilecek liste</label>
+      <select id="setList"></select>
+    </div>
 
     <div class="dlg-actions end">
       <button class="btn ghost" value="close">Kapat</button>

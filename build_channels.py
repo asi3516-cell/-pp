@@ -73,9 +73,67 @@ NON_TURKISH = {
     "cbc tv", "az tv", "az star tv", "azad tv", "atv azad tv", "cbc sport",
 }
 
+# Arabic-language feeds that slip in through the Turkey list. Only Turkish
+# broadcasts should remain, so these are dropped by name.
+ARABIC = {
+    "trt arabi", "al-rafidain tv", "al-zahra tv turkic", "almahriah tv",
+    "elsharrq tv", "elshark tv", "imam hussein tv 5", "mekameleen tv",
+    "qaf tv", "al-rafidain", "al-zahra", "karbala tv", "ahlulbayt tv",
+    "al kawthar tv", "alalam tv", "alalam news", "al mayadeen",
+}
+
+
+def is_arabic(name: str) -> bool:
+    """True for Arabic-language feeds: Arabic script, or a known name."""
+    if any("\u0600" <= c <= "\u06ff" for c in name):
+        return True
+    return name.casefold().strip() in ARABIC
+
+
+# TKGS-style ordering: channels are grouped the way a Turkish TV operator
+# lays them out, so the list reads national → news → sport → documentary →
+# kids → cinema/music → local/tematic → religious → radio.
+TKGS_BLOCK = {
+    "Haber": 20, "Spor": 50,
+    "Belgesel": 70, "Kültür": 70, "Doğa": 70, "Yaşam": 70, "Gezi": 70,
+    "Çocuk": 90, "Animasyon": 90, "Eğitim": 90, "Aile": 90,
+    "Film": 110, "Dizi": 110, "Müzik": 110, "Eğlence": 110, "Komedi": 110,
+    "Dini": 150, "Radyo": 400,
+}
+TKGS_DEFAULT = 150  # local, thematic and everything unclassified
+
+# The national main channels that open the list (TKGS 1–20).
+TKGS_NATIONAL = [
+    "trt 1", "atv", "show tv", "kanal d", "star tv", "now tv", "tv8",
+    "kanal 7", "beyaz tv", "trt 2", "cnbc e", "tv 100", "360 tv",
+]
+
+
+def clean_name(name: str) -> str:
+    """Lowercase a channel name and drop the resolution / source markers, so
+    "ATV", "ATV HD" and "ATV (1080p)" all match the same entry."""
+    s = name.casefold()
+    s = re.sub(r"\((?:1080p|720p|576p|1440p|480p|hd|sd|fhd|uhd)\)", " ", s)
+    s = re.sub(r"\[[^\]]*\]", " ", s)
+    s = re.sub(r"\b(?:hd|sd|fhd|uhd)\b", " ", s)
+    return re.sub(r"\s+", " ", s).strip()
+
+
+def tkgs_key(ch: dict) -> tuple:
+    """Sort key implementing the TKGS block order."""
+    name = ch.get("name", "")
+    clean = clean_name(name)
+    if clean in TKGS_NATIONAL:
+        return (1, TKGS_NATIONAL.index(clean), ch.get("rank", 0), name)
+    group = (ch.get("group") or "Genel").split(";")[0].strip()
+    return (TKGS_BLOCK.get(group, TKGS_DEFAULT), 999,
+            ch.get("rank", 0), name)
+
+
 
 # Human-readable tag for the origin of each stream alternative.
-LABELS = {"list": "Liste (iptv-org)", "site": "Site (canlitv)"}
+LABELS = {"list": "Liste (iptv-org)", "site": "Site (canlitv)",
+          "radio": "Radyo (radio-browser)"}
 
 
 def localize_group(raw: str) -> str:
@@ -160,6 +218,14 @@ def main() -> None:
             continue
         parsed = parse_m3u(text, source)
         for ch in parsed:
+            # Turkish-only: skip Arabic feeds, known foreign names and the
+            # radio entries (radios are bundled separately with popularity).
+            if ch.get("kind") == "radio":
+                continue
+            if is_arabic(ch.get("name", "")):
+                continue
+            if ch.get("name", "").casefold().strip() in NON_TURKISH:
+                continue
             ch["group"] = localize_group(ch.get("group", ""))
             ch["source"] = "Türkçe" if "Türkçe" in (ch.get("source") or "") else source
             # If canlitv ranks this channel, borrow the rank so popular
@@ -167,6 +233,21 @@ def main() -> None:
             rank = ranks_by_name.get(name_key(ch["name"]), 200000)
             collected.append((ch, rank, "list"))
         print(f"+ {len(parsed)} channels from {source}")
+
+    # Turkish radio stations from the open radio-browser database, ordered by
+    # community votes. They carry kind="radio" so the UI can show them under
+    # their own "Radyo" heading.
+    radios = ROOT / "data" / "radios.json"
+    if radios.exists():
+        try:
+            items = json.loads(radios.read_text("utf-8"))
+            for ch in items:
+                if is_arabic(ch.get("name", "")):
+                    continue
+                collected.append((normalize_channel(ch), ch.get("votes", 100000), "radio"))
+            print(f"+ {len(items)} radio stations")
+        except (OSError, ValueError) as exc:
+            print(f"! could not read {radios}: {exc}")
 
     # Group the same channel (by normalized name). Every distinct stream is kept
     # as an alternative; the iptv-org ("list") stream is primary, the canlitv
@@ -177,7 +258,9 @@ def main() -> None:
         url = ch.get("url")
         if not url:
             continue
-        key = name_key(ch.get("name", ""))
+        # Radios are their own kind, so they must never merge with a TV
+        # channel of the same name; keep them in a separate namespace.
+        key = ("radio:" if kind == "radio" else "tv:") + name_key(ch.get("name", ""))
         g = grouped.get(key)
         if g is None:
             g = {"name": ch["name"], "url": url, "logo": ch.get("logo", ""),
@@ -212,17 +295,27 @@ def main() -> None:
         g["urls"] = [{"url": u, "label": g["alts"][u]}
                      for u in sorted(g["alts"], key=lambda u: (u != g["url"],))]
         g.pop("alts")
-        g.pop("kind")
+        # Keep the kind: "radio" tells the UI to list it under its own heading
+        # and to play it as audio.
+        if g.pop("kind") == "radio":
+            g["kind"] = "radio"
+            g["group"] = "Radyo"
         if not g.get("headers"):
             g.pop("headers", None)
         items.append(g)
 
-    items.sort(key=lambda c: (c["rank"], c["name"].casefold()))
+    # TV first in TKGS order, then the radio block by popularity.
+    tv = [c for c in items if c.get("kind") != "radio"]
+    radio = [c for c in items if c.get("kind") == "radio"]
+    tv.sort(key=tkgs_key)
+    radio.sort(key=lambda c: (-c.get("rank", 0), c["name"].casefold()))
+    items = tv + radio
     fill_logos(items)
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(items, ensure_ascii=False, indent=2), "utf-8")
     multi = sum(1 for c in items if len(c["urls"]) > 1)
-    print(f"wrote {len(items)} channels ({multi} with alternatives) -> {OUT}")
+    print(f"wrote {len(items)} entries ({len(tv)} TV, {len(radio)} radio, "
+          f"{multi} with alternatives) -> {OUT}")
 
 
 # Curated aliases for channels whose names differ from the tv-logos filename.
@@ -278,7 +371,8 @@ def fill_logos(items: list[dict]) -> None:
     index = fetch_logo_index()
     filled = 0
     for ch in items:
-        if ch.get("logo"):
+        # Radios carry their own favicon; don't overwrite it with a TV logo.
+        if ch.get("logo") or ch.get("kind") == "radio":
             continue
         key = logo_slug(ch["name"])
         fname = LOGO_ALIAS.get(key) or index.get(key)

@@ -28,8 +28,8 @@ public class LocalServer extends NanoHTTPD {
     private final AssetManager assets;
     private final Map<String, String> mime = new HashMap<>();
 
-    public LocalServer(AssetManager assets) {
-        super("127.0.0.1", 0);
+    public LocalServer(AssetManager assets, int port) {
+        super("127.0.0.1", port);
         this.assets = assets;
         mime.put("html", "text/html; charset=utf-8");
         mime.put("js", "application/javascript; charset=utf-8");

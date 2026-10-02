@@ -81,13 +81,21 @@ public class MainActivity extends Activity {
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
 
-        server = new LocalServer(getAssets());
+        server = new LocalServer(getAssets(), 8737);
         try {
             server.start();
-        } catch (Exception e) {
-            web.loadData("<h2>Sunucu başlatılamadı: " + e.getMessage() + "</h2>",
-                    "text/html; charset=utf-8", "UTF-8");
-            return;
+        } catch (Exception first) {
+            // Preferred port taken: fall back to an ephemeral one. Favorites
+            // live in localStorage keyed by origin, so the fixed port keeps
+            // them across restarts whenever it is available.
+            try {
+                server = new LocalServer(getAssets(), 0);
+                server.start();
+            } catch (Exception e) {
+                web.loadData("<h2>Sunucu başlatılamadı: " + e.getMessage() + "</h2>",
+                        "text/html; charset=utf-8", "UTF-8");
+                return;
+            }
         }
         web.loadUrl("http://127.0.0.1:" + server.getListeningPort() + "/");
     }
@@ -115,8 +123,6 @@ public class MainActivity extends Activity {
                 return true;
             case KeyEvent.KEYCODE_BACK:
                 if (fullscreenView != null) {
-                    web.getSettings(); // no-op, keeps lint calm
-                    ViewGroup parent = root;
                     onHideCustomViewViaWeb();
                     return true;
                 }

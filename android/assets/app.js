@@ -527,24 +527,6 @@
     try { return new URL(url).origin + "/"; } catch (e) { return ""; }
   }
 
-  // Jump to the next/previous channel in the visible list. Used from the
-  // remote's channel and left/right keys while watching, so the video
-  // forward/back buttons change channel instead of seeking.
-  function zap(delta) {
-    var list = state.filtered.length ? state.filtered : state.channels;
-    if (!list.length) return;
-    var cur = state.current;
-    var idx = 0;
-    if (cur) {
-      for (var i = 0; i < list.length; i++) {
-        if (list[i] === cur || list[i].url === cur.url) { idx = i; break; }
-      }
-    }
-    var next = (idx + delta + list.length) % list.length;
-    play(list[next]);
-  }
-  window.iptvZap = zap;
-
   function finishInit() {
     spinner.hidden = true;
     setOverlay(false);
@@ -872,12 +854,6 @@
     // keyboard shortcuts
     document.addEventListener("keydown", function (e) {
       if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
-      // Channel zapping: the remote's left/right and channel buttons switch
-      // channel instead of seeking the video.
-      if (e.key === "ArrowRight" || e.key === "MediaTrackNext" ||
-          e.key === "ChannelUp") { e.preventDefault(); zap(1); return; }
-      if (e.key === "ArrowLeft" || e.key === "MediaTrackPrevious" ||
-          e.key === "ChannelDown") { e.preventDefault(); zap(-1); return; }
       if (e.key === "/") { e.preventDefault(); $("#search").focus(); }
       if (e.key === "f") $("#fullBtn").click();
       if (e.key === "p") $("#pipBtn").click();

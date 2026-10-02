@@ -131,6 +131,30 @@ PyInstaller çapraz derleme yapmaz: Windows `.exe` yalnızca Windows'ta, macOS
 yapısı yalnızca macOS'ta üretilir. Üçü için birden GitHub Actions iş akışı
 (`.github/workflows/build.yml`) kullanılabilir.
 
+## Android APK oluşturma
+
+Telefona kurulabilen bir uygulama (APK) üretmek için:
+
+```bash
+python build_apk.py        # -> dist/IPTV-Player.apk
+```
+
+Gerekenler: **JDK 17** (`JAVA_HOME`) ve **Android SDK** (`ANDROID_SDK_ROOT`,
+`platforms;android-34` + `build-tools;34.0.0`). Gradle gerekmez; APK, SDK
+araçlarıyla (aapt2, d8, zipalign, apksigner) doğrudan derlenir.
+
+Uygulama, oynatıcıyı WebView içinde çalıştırır ve cihazın içinde küçük bir
+yerel sunucu (NanoHTTPD) çalıştırır; böylece HLS yayınları ve MAC/Stalker
+portal desteği masaüstü sürümdekiyle aynı çalışır. Kanal listesi ve tüm site
+APK'nın içine gömülüdür, internet gerekmez (yayınlar hariç).
+
+Kurulum: `dist/IPTV-Player.apk` dosyasını telefona kopyalayıp açın; Android
+"bilinmeyen kaynaklardan" kurulum izni isteyecektir.
+
+**Kanal değiştirme:** Tam ekranda/oynatıcıda kumandadaki **ileri / geri**
+(veya **kanal + / -**) tuşları artık videoyu sarmak yerine **kanal değiştirir**.
+Klavyede de ← / → ve medya ileri/geri tuşları aynı işi yapar.
+
 ## Notlar
 
 - Ücretsiz/genel kaynaklardaki yayınlar sık sık **bölgesel olarak kısıtlanır**

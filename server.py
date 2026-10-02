@@ -260,6 +260,8 @@ class Handler(BaseHTTPRequestHandler):
             return self._api_fetch(query, head_only)
         if path == "/download/player":
             return self._download_player(head_only)
+        if path == "/download/apk":
+            return self._download_apk(head_only)
         if path == "/download/all":
             return self._download_all(head_only)
         if path == "/channels.m3u":
@@ -308,7 +310,7 @@ class Handler(BaseHTTPRequestHandler):
         single archive, so it can be grabbed and built on the user's machine."""
         files = [
             "server.py", "build_channels.py", "build_canlitv.py", "build_exe.py",
-            "README.md", "build/make.py", "build/iptv_player.spec",
+            "build_apk.py", "README.md", "build/make.py", "build/iptv_player.spec",
             "build/requirements-build.txt", ".github/workflows/build.yml",
         ]
         buf = io.BytesIO()
@@ -317,13 +319,19 @@ class Handler(BaseHTTPRequestHandler):
                 f = ROOT / name
                 if f.exists():
                     zf.write(f, f"IPTV-Player/{name}")
-            for folder in ("static", "data"):
+            for folder in ("static", "data", "android/app/src/main"):
                 for f in sorted((ROOT / folder).rglob("*")):
-                    if f.is_file():
-                        zf.write(f, f"IPTV-Player/{f.relative_to(ROOT)}")
+                    if not f.is_file() or f.name.endswith((".class", ".dex")):
+                        continue
+                    zf.write(f, f"IPTV-Player/{f.relative_to(ROOT)}")
+            for extra in (ROOT / "android" / "libs").glob("*.jar"):
+                zf.write(extra, f"IPTV-Player/{extra.relative_to(ROOT)}")
             binary = ROOT / "dist" / "IPTV-Player"
             if binary.exists():
                 zf.write(binary, "IPTV-Player/dist/IPTV-Player")
+            apk = ROOT / "dist" / "IPTV-Player.apk"
+            if apk.exists():
+                zf.write(apk, "IPTV-Player/dist/IPTV-Player.apk")
         body = buf.getvalue()
         self.send_response(200)
         self._cors()
@@ -334,6 +342,28 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
         if not head_only:
             self.wfile.write(body)
+
+    def _download_apk(self, head_only: bool) -> None:
+        """Serve the built Android APK, if it has been assembled."""
+        apk = ROOT / "dist" / "IPTV-Player.apk"
+        if not apk.exists():
+            return self._send(404, b"apk not built", "text/plain", head_only=head_only)
+        size = apk.stat().st_size
+        self.send_response(200)
+        self._cors()
+        self.send_header("Content-Type", "application/vnd.android.package-archive")
+        self.send_header("Content-Disposition",
+                         'attachment; filename="IPTV-Player.apk"')
+        self.send_header("Content-Length", str(size))
+        self.end_headers()
+        if head_only:
+            return
+        with apk.open("rb") as fh:
+            while True:
+                chunk = fh.read(64 * 1024)
+                if not chunk:
+                    break
+                self.wfile.write(chunk)
 
     def _download_player(self, head_only: bool) -> None:
         """Serve the built portable binary (source checkout only)."""

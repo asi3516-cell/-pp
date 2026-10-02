@@ -6,4 +6,7 @@ data/store.tmp
 dist/
 build/work/
 build/__pycache__/
+build/android/
 static/IPTV-Player-linux
+android/app/src/main/assets/
+android/**/*.class

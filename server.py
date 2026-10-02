@@ -257,7 +257,31 @@ class Handler(BaseHTTPRequestHandler):
             return self._api_proxy(query, head_only)
         if path == "/api/fetch":
             return self._api_fetch(query, head_only)
+        if path == "/download/player":
+            return self._download_player(head_only)
         return self._static(path, head_only)
+
+    def _download_player(self, head_only: bool) -> None:
+        """Serve the built portable binary (source checkout only)."""
+        binary = ROOT / "dist" / "IPTV-Player"
+        if not binary.exists():
+            return self._send(404, b"not built", "text/plain", head_only=head_only)
+        size = binary.stat().st_size
+        self.send_response(200)
+        self._cors()
+        self.send_header("Content-Type", "application/octet-stream")
+        self.send_header("Content-Disposition",
+                         'attachment; filename="IPTV-Player"')
+        self.send_header("Content-Length", str(size))
+        self.end_headers()
+        if head_only:
+            return
+        with binary.open("rb") as fh:
+            while True:
+                chunk = fh.read(64 * 1024)
+                if not chunk:
+                    break
+                self.wfile.write(chunk)
 
     # -- API ---------------------------------------------------------------
     def _api_channels(self) -> None:

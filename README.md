@@ -73,13 +73,21 @@ Playlistler, favoriler ve EPG adresi **sunucuda** (`data/store.json`) saklanır;
 
 ## Kanal listesi
 
-`data/channels.json` içinde [iptv-org](https://github.com/iptv-org/iptv) projesinden
-alınan **Türkiye kanalları, film kanalları (777) ve dizi kanalları (440)** ile
-her ortamda çalışan birkaç demo yayın bulunur — toplam ~1400 kanal.
-Listeyi yenilemek için:
+`data/channels.json` içinde iki Türkçe kaynak birleştirilir ve yalnızca
+**Türkçe yayınlar** paketlenir (~370 kanal + 4 demo):
+
+- **Canlitv** (`build_canlitv.py`): [canlitv.you](https://www.canlitv.you/)
+  dizinindeki 278 kanaldan doğrudan `.m3u8` akışı veren, Türkçe yayın yapan
+  ~180 kanal. Bu akışlar iptv-org'dan belirgin şekilde daha güvenilirdir.
+- **iptv-org**: Türkçe dil listesi + Türkiye kanalları (~190 kanal).
+
+Almanca/İngilizce/Arapça yayınlar `NON_TURKISH` listesiyle ayıklanır; grup
+adları Türkçeleştirilir (Haber, Spor, Müzik, Film, Çocuk, Belgesel, Dini...).
+Aynı kanal iki kaynakta varsa Canlitv adresi tercih edilir. Listeyi yenilemek için:
 
 ```bash
-python build_channels.py
+python build_canlitv.py    # canlitv.you listesini çeker
+python build_channels.py   # birleştirip data/channels.json üretir
 ```
 
 ## Kendi listenizi ekleme / taşıma
@@ -103,6 +111,25 @@ Aboneliğiniz MAC adresine bağlıysa:
 Kanalların yayın adresleri MAC oturumuna bağlı olduğu için oynatma sunucu
 üzerinden (gerekli UA/cookie başlıklarıyla) yapılır. Portal ve MAC bilgisi
 yalnızca sizin cihazınızda saklanır; başkasıyla paylaşılmaz.
+
+## Tek dosyalık çalıştırılabilir (exe) üretme
+
+Programın tamamını **tek bir dosyaya** paketlemek için bu betiği çalıştır:
+
+```bash
+python build_exe.py
+```
+
+Kendi bilgisayarında çalıştırdığın işletim sistemine göre `dist/` içinde
+kurulum gerektirmeyen tek dosya üretir:
+
+- **Windows:** `dist/IPTV-Player.exe`
+- **macOS:** `dist/IPTV-Player` (ve `IPTV Player.app`)
+- **Linux:** `dist/IPTV-Player`
+
+PyInstaller çapraz derleme yapmaz: Windows `.exe` yalnızca Windows'ta, macOS
+yapısı yalnızca macOS'ta üretilir. Üçü için birden GitHub Actions iş akışı
+(`.github/workflows/build.yml`) kullanılabilir.
 
 ## Notlar
 

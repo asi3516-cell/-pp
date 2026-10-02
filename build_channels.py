@@ -19,11 +19,68 @@ ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "data" / "channels.json"
 
 # Playlists pulled from the community-maintained iptv-org project.
+# Only Turkish-language broadcasts are bundled: the `languages/tur` list holds
+# every channel whose language is Turkish, and `countries/tr` adds the
+# Turkey-licensed ones. Both are Turkish-only, so the player ships no foreign
+# channels.
 SOURCES = [
+    ("https://iptv-org.github.io/iptv/languages/tur.m3u", "Türkçe"),
     ("https://iptv-org.github.io/iptv/countries/tr.m3u", "Türkiye"),
-    ("https://iptv-org.github.io/iptv/categories/movies.m3u", "Film Kanalları"),
-    ("https://iptv-org.github.io/iptv/categories/series.m3u", "Dizi Kanalları"),
 ]
+
+# iptv-org group titles are English; show friendly Turkish names in the UI.
+GROUP_TR = {
+    "General": "Genel",
+    "Undefined": "Diğer",
+    "News": "Haber",
+    "Music": "Müzik",
+    "Sports": "Spor",
+    "Entertainment": "Eğlence",
+    "Religious": "Dini",
+    "Kids": "Çocuk",
+    "Movies": "Film",
+    "Series": "Dizi",
+    "Documentary": "Belgesel",
+    "Education": "Eğitim",
+    "Animation": "Animasyon",
+    "Outdoor": "Doğa",
+    "Business": "İş",
+    "Culture": "Kültür",
+    "Lifestyle": "Yaşam",
+    "Relax": "Rahatlama",
+    "Travel": "Gezi",
+    "Family": "Aile",
+    "Comedy": "Komedi",
+    "Science": "Bilim",
+    "Auto": "Otomotiv",
+    "Shop": "Alışveriş",
+    "Weather": "Hava",
+    "Legislative": "Meclis",
+    "Classic": "Klasik",
+}
+
+
+# Channels from the canlitv listing that do not broadcast in Turkish. The
+# list mixes in German local stations, English/Arabic news and Georgian /
+# other-language feeds; those are dropped so the package stays Turkish-only.
+NON_TURKISH = {
+    "alvin channel", "cgtn documentary", "deutsche welle english",
+    "dw tv europe", "franken tv", "huda tv", "india today", "imedi tv",
+    "niederbayern tv", "noa4 hamburg", "oberpfalz tv", "offener kanal berlin",
+    "press tv", "rfh", "rt (russia today)", "trt arapça", "trt world",
+    "cbc tv", "az tv", "az star tv", "azad tv", "atv azad tv", "cbc sport",
+}
+
+
+def localize_group(raw: str) -> str:
+    """Translate comma-separated iptv-org group titles to Turkish."""
+    if not raw:
+        return "Genel"
+    parts = [p.strip() for p in raw.split(";") if p.strip()]
+    seen = []
+    for p in parts:
+        seen.append(GROUP_TR.get(p, p))
+    return ";".join(dict.fromkeys(seen))
 
 # Stable, always-on public demo streams (used to verify the player itself).
 DEMO = [
@@ -60,6 +117,20 @@ def fetch(url: str) -> str:
 
 def main() -> None:
     channels = [normalize_channel(dict(d, source="Demo")) for d in DEMO]
+
+    # Merge the higher-quality canlitv streams first so their URLs win when
+    # de-duplicating against the iptv-org entries of the same channel.
+    canlitv = ROOT / "data" / "canlitv.json"
+    if canlitv.exists():
+        try:
+            for ch in json.loads(canlitv.read_text("utf-8")):
+                if ch.get("name", "").casefold().strip() in NON_TURKISH:
+                    continue
+                channels.append(normalize_channel(ch))
+            print(f"+ {len(channels) - len(DEMO)} channels from Canlitv")
+        except (OSError, ValueError) as exc:
+            print(f"! could not read {canlitv}: {exc}")
+
     for url, source in SOURCES:
         try:
             text = fetch(url)
@@ -67,6 +138,10 @@ def main() -> None:
             print(f"! could not fetch {url}: {exc}")
             continue
         parsed = parse_m3u(text, source)
+        for ch in parsed:
+            ch["group"] = localize_group(ch.get("group", ""))
+            # Single-language entries: prefer the Turkish language label.
+            ch["source"] = "Türkçe" if "Türkçe" in (ch.get("source") or "") else source
         print(f"+ {len(parsed)} channels from {source}")
         channels.extend(parsed)
 

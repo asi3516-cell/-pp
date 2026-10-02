@@ -264,14 +264,6 @@ class Handler(BaseHTTPRequestHandler):
             return self._download_apk(head_only)
         if path == "/download/all":
             return self._download_all(head_only)
-        if path == "/download/windows-rar":
-            return self._send_file(
-                ROOT / "build" / "pkg" / "IPTV-Player-Windows.rar",
-                "IPTV-Player-Windows.rar", "application/vnd.rar", head_only)
-        if path == "/download/source-rar":
-            return self._send_file(
-                ROOT / "build" / "pkg" / "IPTV-Player-Kaynak.rar",
-                "IPTV-Player-Kaynak.rar", "application/vnd.rar", head_only)
         if path == "/channels.m3u":
             return self._download_channels(head_only)
         return self._static(path, head_only)
@@ -350,26 +342,6 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
         if not head_only:
             self.wfile.write(body)
-
-    def _send_file(self, path, filename: str, ctype: str, head_only: bool) -> None:
-        if not path.exists():
-            return self._send(404, b"not built", "text/plain", head_only=head_only)
-        size = path.stat().st_size
-        self.send_response(200)
-        self._cors()
-        self.send_header("Content-Type", ctype)
-        self.send_header("Content-Disposition",
-                         f'attachment; filename="{filename}"')
-        self.send_header("Content-Length", str(size))
-        self.end_headers()
-        if head_only:
-            return
-        with path.open("rb") as fh:
-            while True:
-                chunk = fh.read(64 * 1024)
-                if not chunk:
-                    break
-                self.wfile.write(chunk)
 
     def _download_apk(self, head_only: bool) -> None:
         """Serve the built Android APK, if it has been assembled."""

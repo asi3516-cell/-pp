@@ -2,11 +2,17 @@
   {
     "name": "TRT 1",
     "url": "https://tv-trt1.medya.trt.com.tr/master.m3u8",
-    "logo": "",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/TRT_1_logo_%282021-%29.svg/960px-TRT_1_logo_%282021-%29.svg.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 1
+    "rank": 1,
+    "urls": [
+      {
+        "url": "https://tv-trt1.medya.trt.com.tr/master.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Show TV",
@@ -15,46 +21,70 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 2
+    "rank": 2,
+    "urls": [
+      {
+        "url": "https://rmtftbjlne.turknet.ercdn.net/bpeytmnqyp/showtv/showtv.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Star TV",
-    "url": "https://dogus.daioncdn.net/startv/startv.m3u8?app=a20ac41e-bdc3-4aa1-934d-26b484480ac9&hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "urls": [
-      "https://dogus.daioncdn.net/startv/startv.m3u8?app=a20ac41e-bdc3-4aa1-934d-26b484480ac9&hash=fe96d103350bc846e52be8c7ab97fa5b",
-      "https://dogus.daioncdn.net/startv/startv_720p.m3u8?app=a20ac41e-bdc3-4aa1-934d-26b484480ac9&ce=3&sid=8l4w3lst4co5"
-    ],
-    "logo": "",
+    "url": "https://dogus.daioncdn.net/startv/startv_720p.m3u8?app=a20ac41e-bdc3-4aa1-934d-26b484480ac9&ce=3&sid=8l4w3lst4co5",
+    "logo": "https://i.imgur.com/9O3DHRB.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 3
+    "source": "Türkçe",
+    "rank": 3,
+    "urls": [
+      {
+        "url": "https://dogus.daioncdn.net/startv/startv_720p.m3u8?app=a20ac41e-bdc3-4aa1-934d-26b484480ac9&ce=3&sid=8l4w3lst4co5",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://dogus.daioncdn.net/startv/startv.m3u8?app=a20ac41e-bdc3-4aa1-934d-26b484480ac9&hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Kanal 7",
-    "url": "https://kanal7-live.daioncdn.net/kanal7/kanal7.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "urls": [
-      "https://kanal7-live.daioncdn.net/kanal7/kanal7.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-      "https://kanal7.blutv.com/blutv_kanal7_live/live.m3u8"
-    ],
-    "logo": "",
+    "url": "https://kanal7.blutv.com/blutv_kanal7_live/live.m3u8",
+    "logo": "https://i.imgur.com/0gq9xOm.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 4
+    "source": "Türkçe",
+    "rank": 4,
+    "urls": [
+      {
+        "url": "https://kanal7.blutv.com/blutv_kanal7_live/live.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://kanal7-live.daioncdn.net/kanal7/kanal7.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "ATV",
-    "url": "https://trkvz.daioncdn.net/atv/atv.m3u8?ce=3&app=866e32e3-9fea-477f-a5ef-64ebe32956f3",
-    "urls": [
-      "https://trkvz.daioncdn.net/atv/atv.m3u8?ce=3&app=866e32e3-9fea-477f-a5ef-64ebe32956f3",
-      "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/atv/atv_1080p.m3u8"
-    ],
-    "logo": "",
+    "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/atv/atv_1080p.m3u8",
+    "logo": "https://i.imgur.com/HyVUwFC.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 5
+    "source": "Türkçe",
+    "rank": 5,
+    "urls": [
+      {
+        "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/atv/atv_1080p.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://trkvz.daioncdn.net/atv/atv.m3u8?ce=3&app=866e32e3-9fea-477f-a5ef-64ebe32956f3",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Kanal D (Turkiye) (1080p)",
@@ -63,7 +93,13 @@
     "group": "Genel",
     "tvgId": "KanalD.tr@SD",
     "source": "Türkçe",
-    "rank": 6
+    "rank": 6,
+    "urls": [
+      {
+        "url": "https://demiroren.daioncdn.net/kanald/kanald.m3u8?app=kanald_web&ce=3",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "NOW TV (720p)",
@@ -72,7 +108,13 @@
     "group": "Eğlence",
     "tvgId": "NOWTV.tr@SD",
     "source": "Türkçe",
-    "rank": 7
+    "rank": 7,
+    "urls": [
+      {
+        "url": "https://uycyyuuzyh.turknet.ercdn.net/nphindgytw/nowtv/nowtv.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "TV8 (Turkiye) (1080p)",
@@ -81,29 +123,47 @@
     "group": "Genel",
     "tvgId": "TV8.tr@SD",
     "source": "Türkçe",
-    "rank": 8
+    "rank": 8,
+    "urls": [
+      {
+        "url": "https://tv8.daioncdn.net/tv8/tv8.m3u8?app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Beyaz TV",
-    "url": "https://beyaztv-live.daioncdn.net/beyaztv/beyaztv.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "urls": [
-      "https://beyaztv-live.daioncdn.net/beyaztv/beyaztv.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-      "https://mn-nl.mncdn.com/blutv_beyaztv2/live.m3u8"
-    ],
-    "logo": "",
+    "url": "https://mn-nl.mncdn.com/blutv_beyaztv2/live.m3u8",
+    "logo": "https://i.imgur.com/uykIdML.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 9
+    "source": "Türkçe",
+    "rank": 9,
+    "urls": [
+      {
+        "url": "https://mn-nl.mncdn.com/blutv_beyaztv2/live.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://beyaztv-live.daioncdn.net/beyaztv/beyaztv.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "TRT Haber",
     "url": "https://tv-trthaber.medya.trt.com.tr/master.m3u8",
-    "logo": "",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/TRT_Haber_Eyl%C3%BCl_2020_Logo.svg/960px-TRT_Haber_Eyl%C3%BCl_2020_Logo.svg.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 10
+    "rank": 10,
+    "urls": [
+      {
+        "url": "https://tv-trthaber.medya.trt.com.tr/master.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "NTV (Turkiye)",
@@ -112,20 +172,32 @@
     "group": "Genel",
     "tvgId": "NTV.tr@SD",
     "source": "Türkçe",
-    "rank": 12
+    "rank": 12,
+    "urls": [
+      {
+        "url": "https://dogus.daioncdn.net/ntv/ntv.m3u8?app=ntv_web",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "A Haber",
-    "url": "https://yayin2.canlitv.fun/live/ahaber.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "urls": [
-      "https://yayin2.canlitv.fun/live/ahaber.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-      "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/ahaber/ahaber.m3u8"
-    ],
-    "logo": "",
+    "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/ahaber/ahaber.m3u8",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/7/7c/Ahaber_Logo.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 13
+    "source": "Türkçe",
+    "rank": 13,
+    "urls": [
+      {
+        "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/ahaber/ahaber.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://yayin2.canlitv.fun/live/ahaber.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Halk TV SD (1080p)",
@@ -134,7 +206,13 @@
     "group": "Haber",
     "tvgId": "HalkTV.tr@SD",
     "source": "Türkçe",
-    "rank": 15
+    "rank": 15,
+    "urls": [
+      {
+        "url": "https://halktv-live.daioncdn.net/halktv/halktv.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Haber Global (720p) [Not 24/7]",
@@ -143,59 +221,89 @@
     "group": "Haber",
     "tvgId": "HaberGlobal.tr@SD",
     "source": "Türkçe",
-    "rank": 17
+    "rank": 17,
+    "urls": [
+      {
+        "url": "https://tv.ensonhaber.com/haberglobal/haberglobal.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "TV 100",
-    "url": "https://yayin2.canlitv.fun/live/tv100.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "urls": [
-      "https://yayin2.canlitv.fun/live/tv100.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-      "https://7nyaler.streamhostingcdn.top/stream/46/index.m3u8"
-    ],
-    "logo": "",
+    "url": "https://7nyaler.streamhostingcdn.top/stream/46/index.m3u8",
+    "logo": "https://upload.wikimedia.org/wikipedia/tr/thumb/0/0f/TV100_logo.png/960px-TV100_logo.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 18
+    "source": "Türkçe",
+    "rank": 18,
+    "urls": [
+      {
+        "url": "https://7nyaler.streamhostingcdn.top/stream/46/index.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://yayin2.canlitv.fun/live/tv100.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "360 TV",
-    "url": "https://turkmedya-live.ercdn.net/tv360/tv360.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "urls": [
-      "https://turkmedya-live.ercdn.net/tv360/tv360.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-      "https://turkmedya-live.ercdn.net/tv360/tv360.m3u8"
-    ],
-    "logo": "",
+    "url": "https://turkmedya-live.ercdn.net/tv360/tv360.m3u8",
+    "logo": "https://i.imgur.com/agn47sQ.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 19
+    "source": "Türkçe",
+    "rank": 19,
+    "urls": [
+      {
+        "url": "https://turkmedya-live.ercdn.net/tv360/tv360.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://turkmedya-live.ercdn.net/tv360/tv360.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "TRT Spor",
-    "url": "https://tv-trtspor1.medya.trt.com.tr/master.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "urls": [
-      "https://tv-trtspor1.medya.trt.com.tr/master.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-      "https://corestream.siteyaptim.live/trt-spor/index.m3u8"
-    ],
-    "logo": "",
+    "url": "https://corestream.siteyaptim.live/trt-spor/index.m3u8",
+    "logo": "https://i.imgur.com/6tv0zxh.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 21
+    "source": "Türkçe",
+    "rank": 21,
+    "urls": [
+      {
+        "url": "https://corestream.siteyaptim.live/trt-spor/index.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://tv-trtspor1.medya.trt.com.tr/master.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "A Spor",
-    "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/aspor/aspor_480p.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "urls": [
-      "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/aspor/aspor_480p.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-      "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/aspor/aspor.m3u8"
-    ],
-    "logo": "",
+    "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/aspor/aspor.m3u8",
+    "logo": "https://i.imgur.com/ZhkZzLf.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 24
+    "source": "Türkçe",
+    "rank": 24,
+    "urls": [
+      {
+        "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/aspor/aspor.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/aspor/aspor_480p.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Tivibu Spor",
@@ -204,20 +312,32 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 25
+    "rank": 25,
+    "urls": [
+      {
+        "url": "https://yayin2.canlitv.fun/live/tivibuspor.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "FB TV",
-    "url": "https://fbtv.fenerbahce.org/fenerbahcetv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "urls": [
-      "https://fbtv.fenerbahce.org/fenerbahcetv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-      "http://1hskrdto.rocketcdn.com/fenerbahcetv.smil/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "http://1hskrdto.rocketcdn.com/fenerbahcetv.smil/playlist.m3u8",
+    "logo": "https://i.imgur.com/qBVqtYd.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 26
+    "source": "Türkçe",
+    "rank": 26,
+    "urls": [
+      {
+        "url": "http://1hskrdto.rocketcdn.com/fenerbahcetv.smil/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://fbtv.fenerbahce.org/fenerbahcetv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "TRT Spor Yıldız",
@@ -226,7 +346,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 27
+    "rank": 27,
+    "urls": [
+      {
+        "url": "https://tv-trtspor2.medya.trt.com.tr/master.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "TJK TV (1080p)",
@@ -235,7 +361,13 @@
     "group": "Spor",
     "tvgId": "TJKTV.tr@SD",
     "source": "Türkçe",
-    "rank": 30
+    "rank": 30,
+    "urls": [
+      {
+        "url": "https://tjktv-live.tjk.org/tjktv.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "TLC",
@@ -244,7 +376,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 32
+    "rank": 32,
+    "urls": [
+      {
+        "url": "https://yayin2.canlitv.fun/live/tlc.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "DMAX",
@@ -253,20 +391,32 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 33
+    "rank": 33,
+    "urls": [
+      {
+        "url": "https://yayin2.canlitv.fun/live/dmax.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "TRT Belgesel",
-    "url": "https://tv-trtbelgesel.medya.trt.com.tr/master.m3u8",
-    "urls": [
-      "https://tv-trtbelgesel.medya.trt.com.tr/master.m3u8",
-      "http://hls127.freeott.top:8080/TRT_BELGESEL_TR/video.m3u8"
-    ],
-    "logo": "",
+    "url": "http://hls127.freeott.top:8080/TRT_BELGESEL_TR/video.m3u8",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/TRT_Belgesel_logo_%282019-%29.svg/960px-TRT_Belgesel_logo_%282019-%29.svg.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 34
+    "source": "Türkçe",
+    "rank": 34,
+    "urls": [
+      {
+        "url": "http://hls127.freeott.top:8080/TRT_BELGESEL_TR/video.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://tv-trtbelgesel.medya.trt.com.tr/master.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "TGRT Belgesel (576p) [Not 24/7]",
@@ -275,7 +425,13 @@
     "group": "Genel",
     "tvgId": "TGRTBelgesel.tr@SD",
     "source": "Türkçe",
-    "rank": 35
+    "rank": 35,
+    "urls": [
+      {
+        "url": "https://b01c02nl.mediatriple.net/videoonlylive/mtsxxkzwwuqtglive/broadcast_5fe462afc6a0e.smil/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Yaban TV",
@@ -284,7 +440,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 36
+    "rank": 36,
+    "urls": [
+      {
+        "url": "https://yayin1.canlitv.fun/canlitv/yabantv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "TRT Çocuk",
@@ -293,7 +455,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 38
+    "rank": 38,
+    "urls": [
+      {
+        "url": "https://tv-trtcocuk.medya.trt.com.tr/master.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Cartoon Network",
@@ -302,7 +470,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 39
+    "rank": 39,
+    "urls": [
+      {
+        "url": "https://yayin2.canlitv.fun/live/cartoon-network.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "TRT Diyanet Çocuk",
@@ -311,33 +485,51 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 41
+    "rank": 41,
+    "urls": [
+      {
+        "url": "https://tv-trtdiyanetcocuk.medya.trt.com.tr/master.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Minika Go",
-    "url": "https://trkvz.daioncdn.net/minikago/minikago.m3u8",
-    "urls": [
-      "https://trkvz.daioncdn.net/minikago/minikago.m3u8",
-      "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/minikago/minikago.m3u8"
-    ],
-    "logo": "",
+    "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/minikago/minikago.m3u8",
+    "logo": "https://i.imgur.com/qIoipDq.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 44
+    "source": "Türkçe",
+    "rank": 44,
+    "urls": [
+      {
+        "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/minikago/minikago.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://trkvz.daioncdn.net/minikago/minikago.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Zarok TV",
-    "url": "https://zindikurmanci.zaroktv.com.tr/hls/0/stream.m3u8?cachebust=5ffc8f",
-    "urls": [
-      "https://zindikurmanci.zaroktv.com.tr/hls/0/stream.m3u8?cachebust=5ffc8f",
-      "https://zindikurmanci.zaroktv.com.tr/hls/stream.m3u8"
-    ],
-    "logo": "",
+    "url": "https://zindikurmanci.zaroktv.com.tr/hls/stream.m3u8",
+    "logo": "https://i.imgur.com/o0eevnb.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 45
+    "source": "Türkiye",
+    "rank": 45,
+    "urls": [
+      {
+        "url": "https://zindikurmanci.zaroktv.com.tr/hls/stream.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://zindikurmanci.zaroktv.com.tr/hls/0/stream.m3u8?cachebust=5ffc8f",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "ARB Güneş TV",
@@ -346,7 +538,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 46
+    "rank": 46,
+    "urls": [
+      {
+        "url": "https://yayin2.canlitv.fun/live/arbgunes.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "TGRT Haber (720p)",
@@ -355,7 +553,13 @@
     "group": "Haber",
     "tvgId": "TGRTHaber.tr@SD",
     "source": "Türkçe",
-    "rank": 48
+    "rank": 48,
+    "urls": [
+      {
+        "url": "https://canli.tgrthaber.com/tgrt.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Bloomberg HT (720p)",
@@ -364,7 +568,13 @@
     "group": "İş",
     "tvgId": "BloombergHT.tr@SD",
     "source": "Türkçe",
-    "rank": 52
+    "rank": 52,
+    "urls": [
+      {
+        "url": "https://ciner-live.daioncdn.net/bloomberght/bloomberght.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "İlke TV",
@@ -373,7 +583,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 55
+    "rank": 55,
+    "urls": [
+      {
+        "url": "https://stream.ilketv.com.tr/hls/ilkecanli.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "A Para",
@@ -382,7 +598,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 57
+    "rank": 57,
+    "urls": [
+      {
+        "url": "https://trkvz.daioncdn.net/apara/apara.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "YOL TV",
@@ -391,7 +613,13 @@
     "group": "Genel",
     "tvgId": "YOLTV.de@SD",
     "source": "Türkçe",
-    "rank": 58
+    "rank": 58,
+    "urls": [
+      {
+        "url": "https://live.yoltv.com/hls/stream.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Neo Haber",
@@ -400,7 +628,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 59
+    "rank": 59,
+    "urls": [
+      {
+        "url": "https://edge2.taksimbilisim.com/neohaber/bant1/chunks.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Telenews",
@@ -409,20 +643,32 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 60
+    "rank": 60,
+    "urls": [
+      {
+        "url": "https://cdn4.yayin.com.tr/telenews/tracks-v1a1/mono.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Meltem TV",
-    "url": "https://vhxyrsly.rocketcdn.com/meltemtv/chunklist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "urls": [
-      "https://vhxyrsly.rocketcdn.com/meltemtv/chunklist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-      "https://vhxyrsly.rocketcdn.com/meltemtv/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "https://vhxyrsly.rocketcdn.com/meltemtv/playlist.m3u8",
+    "logo": "https://i.imgur.com/C3m6w5S.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 61
+    "source": "Türkçe",
+    "rank": 61,
+    "urls": [
+      {
+        "url": "https://vhxyrsly.rocketcdn.com/meltemtv/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://vhxyrsly.rocketcdn.com/meltemtv/chunklist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Cem Tv",
@@ -431,20 +677,32 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 62
+    "rank": 62,
+    "urls": [
+      {
+        "url": "https://panel.5gtvhosting.com:2020/hls/cemtv/cemtv.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "GZT TV",
-    "url": "https://gzttv-live.lg.mncdn.com/gzttv-live/gzttv/playlist.m3u8",
-    "urls": [
-      "https://gzttv-live.lg.mncdn.com/gzttv-live/gzttv/playlist.m3u8",
-      "https://gzttv-live.lg.mncdn.com/gzttv/gzttv/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "https://gzttv-live.lg.mncdn.com/gzttv/gzttv/playlist.m3u8",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/GZT_logo.svg/960px-GZT_logo.svg.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 64
+    "source": "Türkçe",
+    "rank": 64,
+    "urls": [
+      {
+        "url": "https://gzttv-live.lg.mncdn.com/gzttv/gzttv/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://gzttv-live.lg.mncdn.com/gzttv-live/gzttv/playlist.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Tv4",
@@ -453,7 +711,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 65
+    "rank": 65,
+    "urls": [
+      {
+        "url": "https://turkmedya-live.ercdn.net/tv4/tv4.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Show Max",
@@ -462,7 +726,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 66
+    "rank": 66,
+    "urls": [
+      {
+        "url": "https://rmtftbjlne.turknet.ercdn.net/bpeytmnqyp/showmax/showmax.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Cine 1",
@@ -471,7 +741,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 67
+    "rank": 67,
+    "urls": [
+      {
+        "url": "https://canliyayin.cine1.com.tr/memfs/cbaef080-a742-4644-9e9e-2b9f6a5103c3.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "TYT Türk",
@@ -480,7 +756,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 69
+    "rank": 69,
+    "urls": [
+      {
+        "url": "https://tytturk-live.ercdn.net/tytturk/tytturk.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Bi Kanal",
@@ -489,7 +771,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 70
+    "rank": 70,
+    "urls": [
+      {
+        "url": "https://bikanal-live.ercdn.net/bikanal/bikanal.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Ekotürk TV",
@@ -498,42 +786,66 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 71
+    "rank": 71,
+    "urls": [
+      {
+        "url": "https://cdn.ekoturk.net/hls/720p.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Tvnet",
-    "url": "https://tvnet-live.lg.mncdn.com/tvnet-live/tvnet/playlist.m3u8",
-    "urls": [
-      "https://tvnet-live.lg.mncdn.com/tvnet-live/tvnet/playlist.m3u8",
-      "https://tvnet-live.lg.mncdn.com/tvnet/tvnet/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "https://tvnet-live.lg.mncdn.com/tvnet/tvnet/playlist.m3u8",
+    "logo": "https://i.imgur.com/mQo8yWQ.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 72
+    "source": "Türkçe",
+    "rank": 72,
+    "urls": [
+      {
+        "url": "https://tvnet-live.lg.mncdn.com/tvnet/tvnet/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://tvnet-live.lg.mncdn.com/tvnet-live/tvnet/playlist.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "24 Tv",
     "url": "https://turkmedya-live.ercdn.net/tv24/tv24.m3u8",
-    "logo": "",
+    "logo": "https://i.imgur.com/8FO41es.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 74
+    "rank": 74,
+    "urls": [
+      {
+        "url": "https://turkmedya-live.ercdn.net/tv24/tv24.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "TBMM TV",
-    "url": "https://meclistv-live.ercdn.net/meclistv/meclistv.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "urls": [
-      "https://meclistv-live.ercdn.net/meclistv/meclistv.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-      "https://meclistv-live.ercdn.net/meclistv/meclistv.m3u8"
-    ],
-    "logo": "",
+    "url": "https://meclistv-live.ercdn.net/meclistv/meclistv.m3u8",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/TBMM_TV_logo.svg/960px-TBMM_TV_logo.svg.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 75
+    "source": "Türkçe",
+    "rank": 75,
+    "urls": [
+      {
+        "url": "https://meclistv-live.ercdn.net/meclistv/meclistv.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://meclistv-live.ercdn.net/meclistv/meclistv.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Lalegül Tv",
@@ -542,7 +854,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 78
+    "rank": 78,
+    "urls": [
+      {
+        "url": "https://lbl.netmedya.net/hls/lalegultv.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Rehber Tv",
@@ -551,60 +869,96 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 79
+    "rank": 79,
+    "urls": [
+      {
+        "url": "https://cdn4.yayin.com.tr/rehbertv/tracks-v1a1/mono.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Semerkand Tv",
     "url": "https://b01c02nl.mediatriple.net/videoonlylive/mtisvwurbfcyslive/broadcast_58d915bd40efc.smil/playlist.m3u8",
-    "logo": "",
+    "logo": "https://i.imgur.com/UVGGrQd.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 80
+    "rank": 80,
+    "urls": [
+      {
+        "url": "https://b01c02nl.mediatriple.net/videoonlylive/mtisvwurbfcyslive/broadcast_58d915bd40efc.smil/playlist.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Dost Tv",
-    "url": "https://dost.stream.emsal.im/tv/live.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "urls": [
-      "https://dost.stream.emsal.im/tv/live.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-      "https://dost.stream.emsal.im/tv/live.m3u8"
-    ],
-    "logo": "",
+    "url": "https://dost.stream.emsal.im/tv/live.m3u8",
+    "logo": "https://dosttv.com/wp-content/uploads/2022/02/dost_logo.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 81
+    "source": "Türkçe",
+    "rank": 81,
+    "urls": [
+      {
+        "url": "https://dost.stream.emsal.im/tv/live.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://dost.stream.emsal.im/tv/live.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Diyanet TV",
     "url": "https://eustr73.mediatriple.net/videoonlylive/mtikoimxnztxlive/broadcast_5e3bf95a47e07.smil/playlist.m3u8",
-    "logo": "",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Diyanet_TV_logo.svg/960px-Diyanet_TV_logo.svg.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 82
+    "rank": 82,
+    "urls": [
+      {
+        "url": "https://eustr73.mediatriple.net/videoonlylive/mtikoimxnztxlive/broadcast_5e3bf95a47e07.smil/playlist.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "TRT Eba TV",
-    "url": "https://tv-e-okul01.medya.trt.com.tr/master.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "urls": [
-      "https://tv-e-okul01.medya.trt.com.tr/master.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-      "https://tv-e-okul01.medya.trt.com.tr/master.m3u8"
-    ],
-    "logo": "",
+    "url": "https://tv-e-okul01.medya.trt.com.tr/master.m3u8",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/TRT_EBA_TV_logo.svg/960px-TRT_EBA_TV_logo.svg.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 85
+    "source": "Türkçe",
+    "rank": 85,
+    "urls": [
+      {
+        "url": "https://tv-e-okul01.medya.trt.com.tr/master.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://tv-e-okul01.medya.trt.com.tr/master.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "TRT 2",
     "url": "https://tv-trt2.medya.trt.com.tr/master.m3u8",
-    "logo": "",
+    "logo": "https://i.imgur.com/iOCQdyD.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 86
+    "rank": 86,
+    "urls": [
+      {
+        "url": "https://tv-trt2.medya.trt.com.tr/master.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "TRT Genç",
@@ -613,7 +967,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 87
+    "rank": 87,
+    "urls": [
+      {
+        "url": "https://tv-trtgenc.medya.trt.com.tr/master.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "TRT Türk",
@@ -622,16 +982,28 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 88
+    "rank": 88,
+    "urls": [
+      {
+        "url": "https://tv-trtturk.medya.trt.com.tr/master.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "TRT Avaz",
     "url": "https://tv-trtavaz.medya.trt.com.tr/master.m3u8",
-    "logo": "",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/TRT_Avaz_logo.svg/960px-TRT_Avaz_logo.svg.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 90
+    "rank": 90,
+    "urls": [
+      {
+        "url": "https://tv-trtavaz.medya.trt.com.tr/master.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "TRT Kürdi",
@@ -640,7 +1012,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 91
+    "rank": 91,
+    "urls": [
+      {
+        "url": "https://tv-trtkurdi.medya.trt.com.tr/master.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "TRT Müzik",
@@ -649,16 +1027,28 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 92
+    "rank": 92,
+    "urls": [
+      {
+        "url": "https://tv-trtmuzik.medya.trt.com.tr/master.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Konya Olay Tv",
     "url": "https://live.artidijitalmedya.com/artidijital_konyaolaytv/konyaolaytv/playlist.m3u8",
-    "logo": "",
+    "logo": "https://www.konyaolaytv.com/upload/tema/20230307__5154687762.jpg",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 94
+    "rank": 94,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_konyaolaytv/konyaolaytv/playlist.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "TH Türk Haber",
@@ -667,33 +1057,51 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 95
+    "rank": 95,
+    "urls": [
+      {
+        "url": "https://edge2.taksimbilisim.com/turkhaber/bant1/chunks.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Luys TV",
-    "url": "https://b01c02nl.mediatriple.net/videoonlylive/mtpayqrfkgirxelive/broadcast_5e91c5ac96898.smil/mt_2.m3u8",
-    "urls": [
-      "https://b01c02nl.mediatriple.net/videoonlylive/mtpayqrfkgirxelive/broadcast_5e91c5ac96898.smil/mt_2.m3u8",
-      "https://b01c02nl.mediatriple.net/videoonlylive/mtpayqrfkgirxelive/broadcast_5e91c5ac96898.smil/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "https://b01c02nl.mediatriple.net/videoonlylive/mtpayqrfkgirxelive/broadcast_5e91c5ac96898.smil/playlist.m3u8",
+    "logo": "https://i.imgur.com/9EruWIQ.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 96
+    "source": "Türkçe",
+    "rank": 96,
+    "urls": [
+      {
+        "url": "https://b01c02nl.mediatriple.net/videoonlylive/mtpayqrfkgirxelive/broadcast_5e91c5ac96898.smil/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://b01c02nl.mediatriple.net/videoonlylive/mtpayqrfkgirxelive/broadcast_5e91c5ac96898.smil/mt_2.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "On4 Tv",
-    "url": "https://live.artidijitalmedya.com/artidijital_on4tv/on4tv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "urls": [
-      "https://live.artidijitalmedya.com/artidijital_on4tv/on4tv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-      "https://edge1.socialsmart.tv/on4/bant1/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "https://edge1.socialsmart.tv/on4/bant1/playlist.m3u8",
+    "logo": "https://i.imgur.com/qGRa1KI.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 97
+    "source": "Türkçe",
+    "rank": 97,
+    "urls": [
+      {
+        "url": "https://edge1.socialsmart.tv/on4/bant1/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_on4tv/on4tv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Power Türk",
@@ -702,7 +1110,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 98
+    "rank": 98,
+    "urls": [
+      {
+        "url": "http://livetv.powerapp.com.tr/powerturkTV/powerturkhd.smil/playlist.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Power Türk Slow",
@@ -711,20 +1125,32 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 99
+    "rank": 99,
+    "urls": [
+      {
+        "url": "https://listen.powerapp.com.tr/pturkslow/slow.smil/chunks.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Power Love",
-    "url": "http://livetv.powerapp.com.tr/plove/love.smil/playlist.m3u8",
-    "urls": [
-      "http://livetv.powerapp.com.tr/plove/love.smil/playlist.m3u8",
-      "https://livetv.powerapp.com.tr/plove/love.smil/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "https://livetv.powerapp.com.tr/plove/love.smil/playlist.m3u8",
+    "logo": "https://i.imgur.com/0RzUswR.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 100
+    "source": "Türkçe",
+    "rank": 100,
+    "urls": [
+      {
+        "url": "https://livetv.powerapp.com.tr/plove/love.smil/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "http://livetv.powerapp.com.tr/plove/love.smil/playlist.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Kon TV",
@@ -733,33 +1159,51 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 101
+    "rank": 101,
+    "urls": [
+      {
+        "url": "https://canli.kontv.com.tr/live/kontv.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Kanal V",
-    "url": "https://live.artidijitalmedya.com/artidijital_kanalv/kanalv/chunks.m3u8",
-    "urls": [
-      "https://live.artidijitalmedya.com/artidijital_kanalv/kanalv/chunks.m3u8",
-      "https://live.artidijitalmedya.com/artidijital_kanalv/kanalv/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "https://live.artidijitalmedya.com/artidijital_kanalv/kanalv/playlist.m3u8",
+    "logo": "https://i.imgur.com/7RNjTno.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 102
+    "source": "Türkçe",
+    "rank": 102,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_kanalv/kanalv/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_kanalv/kanalv/chunks.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Kanal 33",
-    "url": "https://edge2.taksimbilisim.com/kanal33/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "urls": [
-      "https://edge2.taksimbilisim.com/kanal33/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-      "https://edge1.socialsmart.tv/kanal33/bant1/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "https://edge1.socialsmart.tv/kanal33/bant1/playlist.m3u8",
+    "logo": "https://i.imgur.com/5WYaoFZ.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 103
+    "source": "Türkçe",
+    "rank": 103,
+    "urls": [
+      {
+        "url": "https://edge1.socialsmart.tv/kanal33/bant1/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://edge2.taksimbilisim.com/kanal33/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Bodrum Kent TV",
@@ -768,7 +1212,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 104
+    "rank": 104,
+    "urls": [
+      {
+        "url": "https://edge2.taksimbilisim.com/bodrumkenttv/bant1/chunks.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Tivi6",
@@ -777,7 +1227,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 105
+    "rank": 105,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_tivi6/tivi6/chunks.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Kanal 38",
@@ -786,7 +1242,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 107
+    "rank": 107,
+    "urls": [
+      {
+        "url": "https://yayin1.canlitv.fun/canlitv/kanal38.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Tv Kayseri",
@@ -795,59 +1257,89 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 108
+    "rank": 108,
+    "urls": [
+      {
+        "url": "https://yayin1.canlitv.fun/canlitv/tvkayseri.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "TV 41",
-    "url": "https://live.artidijitalmedya.com/artidijital_tv41/tv41/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "urls": [
-      "https://live.artidijitalmedya.com/artidijital_tv41/tv41/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-      "http://stream.taksimbilisim.com:1935/tv41/bant1/TV41.m3u8"
-    ],
-    "logo": "",
+    "url": "http://stream.taksimbilisim.com:1935/tv41/bant1/TV41.m3u8",
+    "logo": "https://i.imgur.com/6T472LM.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 109
+    "source": "Türkçe",
+    "rank": 109,
+    "urls": [
+      {
+        "url": "http://stream.taksimbilisim.com:1935/tv41/bant1/TV41.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_tv41/tv41/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Kanal 58",
-    "url": "https://live.artidijitalmedya.com/artidijital_kanal58/kanal58/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "urls": [
-      "https://live.artidijitalmedya.com/artidijital_kanal58/kanal58/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-      "https://live.artidijitalmedya.com/artidijital_kanal58/kanal58/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "https://live.artidijitalmedya.com/artidijital_kanal58/kanal58/playlist.m3u8",
+    "logo": "https://i.imgur.com/Rgc66sv.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 110
+    "source": "Türkçe",
+    "rank": 110,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_kanal58/kanal58/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_kanal58/kanal58/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "TV 42",
-    "url": "https://canliyayin.tv42.com.tr/memfs/0c8c4bc7-550a-4239-8e3d-6f4d768391bb_output_0.m3u8",
-    "urls": [
-      "https://canliyayin.tv42.com.tr/memfs/0c8c4bc7-550a-4239-8e3d-6f4d768391bb_output_0.m3u8",
-      "https://canli.tv42.com.tr/memfs/d936e417-c4bd-4d42-89a2-02f289892d1d.m3u8"
-    ],
-    "logo": "",
+    "url": "https://canli.tv42.com.tr/memfs/d936e417-c4bd-4d42-89a2-02f289892d1d.m3u8",
+    "logo": "https://www.tv42.com.tr/logo.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 111
+    "source": "Türkçe",
+    "rank": 111,
+    "urls": [
+      {
+        "url": "https://canli.tv42.com.tr/memfs/d936e417-c4bd-4d42-89a2-02f289892d1d.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://canliyayin.tv42.com.tr/memfs/0c8c4bc7-550a-4239-8e3d-6f4d768391bb_output_0.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Bir TV",
-    "url": "https://edge2.taksimbilisim.com/birtv/bant1/chunks.m3u8",
-    "urls": [
-      "https://edge2.taksimbilisim.com/birtv/bant1/chunks.m3u8",
-      "https://edge.taksimbilisim.com/birtv/bant1/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "https://edge.taksimbilisim.com/birtv/bant1/playlist.m3u8",
+    "logo": "https://birtv.tv/assets/upload/637f83951df60.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 112
+    "source": "Türkçe",
+    "rank": 112,
+    "urls": [
+      {
+        "url": "https://edge.taksimbilisim.com/birtv/bant1/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://edge2.taksimbilisim.com/birtv/bant1/chunks.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Gözde TV",
@@ -856,7 +1348,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 113
+    "rank": 113,
+    "urls": [
+      {
+        "url": "https://yayin1.canlitv.fun/canlitv/gozdetv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Düzce Tv",
@@ -865,7 +1363,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 114
+    "rank": 114,
+    "urls": [
+      {
+        "url": "https://yayin1.canlitv.fun/canlitv/duzcetv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Kanal Plus",
@@ -874,7 +1378,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 115
+    "rank": 115,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_kanalplus/kanalplus/mpeg/chunks.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "TV 2020",
@@ -883,7 +1393,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 116
+    "rank": 116,
+    "urls": [
+      {
+        "url": "https://yayin1.canlitv.fun/canlitv/tv2020.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Kıbrıs Ada Tv",
@@ -892,7 +1408,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 117
+    "rank": 117,
+    "urls": [
+      {
+        "url": "https://yayin1.canlitv.fun/canlitv/kibrisadatv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Kıbrıs Genç Tv",
@@ -901,7 +1423,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 118
+    "rank": 118,
+    "urls": [
+      {
+        "url": "https://yayin1.canlitv.fun/canlitv/genctv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Torba Tv",
@@ -910,7 +1438,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 119
+    "rank": 119,
+    "urls": [
+      {
+        "url": "https://yayin1.canlitv.fun/canlitv/torbatv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Kanal Sim",
@@ -919,7 +1453,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 120
+    "rank": 120,
+    "urls": [
+      {
+        "url": "https://yayin1.canlitv.fun/canlitv/kanalsim.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Kanal T",
@@ -928,7 +1468,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 121
+    "rank": 121,
+    "urls": [
+      {
+        "url": "https://edge.kuzeykibrissmart.tv/kanalt/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "BRT 1",
@@ -937,7 +1483,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 122
+    "rank": 122,
+    "urls": [
+      {
+        "url": "https://edge.kuzeykibrissmart.tv/brt1hd/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "BRT 2",
@@ -946,7 +1498,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 123
+    "rank": 123,
+    "urls": [
+      {
+        "url": "https://edge.kuzeykibrissmart.tv/brt2hd/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Kardelen Tv",
@@ -955,7 +1513,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 124
+    "rank": 124,
+    "urls": [
+      {
+        "url": "https://edge2.taksimbilisim.com/kardelentv/bant1/chunks.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "OKKU Tv",
@@ -964,7 +1528,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 125
+    "rank": 125,
+    "urls": [
+      {
+        "url": "https://yayin1.canlitv.fun/canlitv/okkutv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Kıbrıs Tv",
@@ -973,7 +1543,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 126
+    "rank": 126,
+    "urls": [
+      {
+        "url": "https://play.kibristv.com/stream/hls/stream.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Tarım Tv",
@@ -982,7 +1558,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 127
+    "rank": 127,
+    "urls": [
+      {
+        "url": "https://content.tvkur.com/l/c7e1da7mm25p552d9u9g/master.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Köy Tv",
@@ -991,7 +1573,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 128
+    "rank": 128,
+    "urls": [
+      {
+        "url": "https://yayin1.canlitv.fun/canlitv/koytv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Çiftçi Tv",
@@ -1000,7 +1588,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 129
+    "rank": 129,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_ciftcitv/ciftcitv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Toprak TV",
@@ -1009,7 +1603,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 130
+    "rank": 130,
+    "urls": [
+      {
+        "url": "https://yayin1.canlitv.fun/canlitv/topraktv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Xezer Tv",
@@ -1018,7 +1618,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 131
+    "rank": 131,
+    "urls": [
+      {
+        "url": "https://yayin2.canlitv.fun/live/xezertv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "ARB TV",
@@ -1027,7 +1633,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 134
+    "rank": 134,
+    "urls": [
+      {
+        "url": "https://yayin2.canlitv.fun/live/arb.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Medeniyet Tv",
@@ -1036,7 +1648,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 135
+    "rank": 135,
+    "urls": [
+      {
+        "url": "https://yayin2.canlitv.fun/live/medeniyettv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Kanal S Az",
@@ -1045,7 +1663,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 136
+    "rank": 136,
+    "urls": [
+      {
+        "url": "https://yayin2.canlitv.fun/live/kanals.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Günaz Tv",
@@ -1054,7 +1678,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 137
+    "rank": 137,
+    "urls": [
+      {
+        "url": " https://tv.gunaz.tv/hls/live.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Space TV",
@@ -1063,7 +1693,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 142
+    "rank": 142,
+    "urls": [
+      {
+        "url": "https://yayin2.canlitv.fun/live/spacetv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "ARB 24 TV",
@@ -1072,7 +1708,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 143
+    "rank": 143,
+    "urls": [
+      {
+        "url": "https://yayin2.canlitv.fun/live/arb24.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Dünya TV",
@@ -1081,7 +1723,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 144
+    "rank": 144,
+    "urls": [
+      {
+        "url": "https://yayin2.canlitv.fun/live/dunyatv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Flash Tv",
@@ -1090,7 +1738,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 146
+    "rank": 146,
+    "urls": [
+      {
+        "url": "https://b01c02nl.mediatriple.net/videoonlylive/mtyycglqauzjhlive/broadcast_67c053c48829f.smil/mt_0.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Bakü TV",
@@ -1099,16 +1753,28 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 149
+    "rank": 149,
+    "urls": [
+      {
+        "url": "https://rtmp.baku.tv/hls/bakutv.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "KN Music TV",
     "url": "https://cdn4.yayin.com.tr/kntv/tracks-v1a1/mono.m3u8",
-    "logo": "",
+    "logo": "https://www.knmusictv.com/wp-content/uploads/2026/01/LOGO2112.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 152
+    "rank": 152,
+    "urls": [
+      {
+        "url": "https://cdn4.yayin.com.tr/kntv/tracks-v1a1/mono.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Max Music TV",
@@ -1117,7 +1783,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 153
+    "rank": 153,
+    "urls": [
+      {
+        "url": "https://cdn4.yayin.com.tr/maxtv/tracks-v1a1/mono.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Biznes TV",
@@ -1126,7 +1798,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 154
+    "rank": 154,
+    "urls": [
+      {
+        "url": "https://biznestv.az/hls/live.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Live TV",
@@ -1135,46 +1813,70 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 155
+    "rank": 155,
+    "urls": [
+      {
+        "url": "https://tv.mobyservice.ru/livetv-web/index.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Kanal 12",
-    "url": "https://live.artidijitalmedya.com/artidijital_kanal12/kanal12/chunks.m3u8",
-    "urls": [
-      "https://live.artidijitalmedya.com/artidijital_kanal12/kanal12/chunks.m3u8",
-      "https://live.artidijitalmedya.com/artidijital_kanal12/kanal12/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "https://live.artidijitalmedya.com/artidijital_kanal12/kanal12/playlist.m3u8",
+    "logo": "https://i.imgur.com/51xCkXG.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 156
+    "source": "Türkçe",
+    "rank": 156,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_kanal12/kanal12/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_kanal12/kanal12/chunks.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Tv 1",
-    "url": "https://edge1.taksimbilisim.com/tv1/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "urls": [
-      "https://edge1.taksimbilisim.com/tv1/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-      "https://edge1.socialsmart.tv/tv1/bant1/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "https://edge1.socialsmart.tv/tv1/bant1/playlist.m3u8",
+    "logo": "https://i.imgur.com/8CtrYVb.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 157
+    "source": "Türkçe",
+    "rank": 157,
+    "urls": [
+      {
+        "url": "https://edge1.socialsmart.tv/tv1/bant1/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://edge1.taksimbilisim.com/tv1/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Kanal 3",
-    "url": "https://live.artidijitalmedya.com/artidijital_kanal3/kanal3/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "urls": [
-      "https://live.artidijitalmedya.com/artidijital_kanal3/kanal3/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-      "https://live.artidijitalmedya.com/artidijital_kanal3/kanal3/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "https://live.artidijitalmedya.com/artidijital_kanal3/kanal3/playlist.m3u8",
+    "logo": "https://i.imgur.com/eXErSv0.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 158
+    "source": "Türkçe",
+    "rank": 158,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_kanal3/kanal3/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_kanal3/kanal3/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Sönmez TV",
@@ -1183,7 +1885,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 160
+    "rank": 160,
+    "urls": [
+      {
+        "url": "https://yayin1.canlitv.fun/canlitv/sonmeztv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Ekol TV",
@@ -1192,7 +1900,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 161
+    "rank": 161,
+    "urls": [
+      {
+        "url": " https://ekoltv-live.ercdn.net/ekoltv/ekoltv.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Sonsöz TV",
@@ -1201,7 +1915,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 162
+    "rank": 162,
+    "urls": [
+      {
+        "url": "https://yayin1.canlitv.fun/canlitv/gokkusagi.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Kanal 19",
@@ -1210,59 +1930,89 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 163
+    "rank": 163,
+    "urls": [
+      {
+        "url": "https://live.euromediacenter.com/kanal19/tracks-v1a1/mono.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Kanal 23",
-    "url": "https://live.artidijitalmedya.com/artidijital_kanal23/kanal23/chunks.m3u8?",
-    "urls": [
-      "https://live.artidijitalmedya.com/artidijital_kanal23/kanal23/chunks.m3u8?",
-      "https://cdn-kanal23.yayin.com.tr/kanal23/index.m3u8"
-    ],
-    "logo": "",
+    "url": "https://cdn-kanal23.yayin.com.tr/kanal23/index.m3u8",
+    "logo": "https://i.imgur.com/3br8RCq.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 164
+    "source": "Türkçe",
+    "rank": 164,
+    "urls": [
+      {
+        "url": "https://cdn-kanal23.yayin.com.tr/kanal23/index.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_kanal23/kanal23/chunks.m3u8?",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Kanal 26",
-    "url": "https://live.artidijitalmedya.com/artidijital_kanal26/kanal26/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "urls": [
-      "https://live.artidijitalmedya.com/artidijital_kanal26/kanal26/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-      "https://live.artidijitalmedya.com/artidijital_kanal26/kanal26/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "https://live.artidijitalmedya.com/artidijital_kanal26/kanal26/playlist.m3u8",
+    "logo": "https://i.imgur.com/Mr7XPii.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 166
+    "source": "Türkçe",
+    "rank": 166,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_kanal26/kanal26/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_kanal26/kanal26/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Kanal 32",
-    "url": "https://edge2.taksimbilisim.com/kanal32/bant1/chunks.m3u8",
-    "urls": [
-      "https://edge2.taksimbilisim.com/kanal32/bant1/chunks.m3u8",
-      "https://edge1.socialsmart.tv/kanal32/bant1/playlist.m3u8"
-    ],
+    "url": "https://edge1.socialsmart.tv/kanal32/bant1/playlist.m3u8",
     "logo": "",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 168
+    "source": "Türkçe",
+    "rank": 168,
+    "urls": [
+      {
+        "url": "https://edge1.socialsmart.tv/kanal32/bant1/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://edge2.taksimbilisim.com/kanal32/bant1/chunks.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Kanal 34",
-    "url": "https://live.euromediacenter.com/kanal34/tracks-v1a1/mono.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "urls": [
-      "https://live.euromediacenter.com/kanal34/tracks-v1a1/mono.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-      "https://vdo.digitalbox.xyz:3266/live/kanal34tvlive.m3u8"
-    ],
-    "logo": "",
+    "url": "https://vdo.digitalbox.xyz:3266/live/kanal34tvlive.m3u8",
+    "logo": "https://i.imgur.com/SIaI6Sj.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 169
+    "source": "Türkçe",
+    "rank": 169,
+    "urls": [
+      {
+        "url": "https://vdo.digitalbox.xyz:3266/live/kanal34tvlive.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://live.euromediacenter.com/kanal34/tracks-v1a1/mono.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "TV52",
@@ -1271,7 +2021,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 170
+    "rank": 170,
+    "urls": [
+      {
+        "url": "https://edge2.taksimbilisim.com/tv52/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Haber 61",
@@ -1280,20 +2036,32 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 171
+    "rank": 171,
+    "urls": [
+      {
+        "url": "https://cdn1-haber61tv.yayin.com.tr/haber61tv/tracks-v2a1/mono.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Mercan Tv",
-    "url": "https://live.artidijitalmedya.com/artidijital_mercantv/mercantv/chunks.m3u8",
-    "urls": [
-      "https://live.artidijitalmedya.com/artidijital_mercantv/mercantv/chunks.m3u8",
-      "https://live.artidijitalmedya.com/artidijital_mercantv/mercantv/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "https://live.artidijitalmedya.com/artidijital_mercantv/mercantv/playlist.m3u8",
+    "logo": "https://i.imgur.com/3CWV8bS.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 172
+    "source": "Türkçe",
+    "rank": 172,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_mercantv/mercantv/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_mercantv/mercantv/chunks.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Ruha Tv",
@@ -1302,59 +2070,89 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 173
+    "rank": 173,
+    "urls": [
+      {
+        "url": "https://ruhatv.radyotelekom.com.tr:3515/live/ruhatvlive.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Es Tv",
-    "url": "https://live.artidijitalmedya.com/artidijital_estv/estv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "urls": [
-      "https://live.artidijitalmedya.com/artidijital_estv/estv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-      "https://live.artidijitalmedya.com/artidijital_estv/estv/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "https://live.artidijitalmedya.com/artidijital_estv/estv/playlist.m3u8",
+    "logo": "https://i.imgur.com/epAEBrp.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 174
+    "source": "Türkçe",
+    "rank": 174,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_estv/estv/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_estv/estv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Aksu Tv",
-    "url": "https://live.artidijitalmedya.com/artidijital_aksutv/aksutv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "urls": [
-      "https://live.artidijitalmedya.com/artidijital_aksutv/aksutv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-      "https://live.artidijitalmedya.com/artidijital_aksutv/aksutv/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "https://live.artidijitalmedya.com/artidijital_aksutv/aksutv/playlist.m3u8",
+    "logo": "https://i.imgur.com/mgDCKiy.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 175
+    "source": "Türkçe",
+    "rank": 175,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_aksutv/aksutv/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_aksutv/aksutv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "As Tv",
-    "url": "https://live.artidijitalmedya.com/artidijital_astv/astv/chunks.m3u8",
-    "urls": [
-      "https://live.artidijitalmedya.com/artidijital_astv/astv/chunks.m3u8",
-      "https://live.artidijitalmedya.com/artidijital_astv/astv/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "https://live.artidijitalmedya.com/artidijital_astv/astv/playlist.m3u8",
+    "logo": "https://asset.artidijitalmedya.com/image/188x188/channels/v1/logo_13.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 177
+    "source": "Türkçe",
+    "rank": 177,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_astv/astv/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_astv/astv/chunks.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Kay Tv",
-    "url": "https://live.artidijitalmedya.com/artidijital_kaytv/kaytv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "urls": [
-      "https://live.artidijitalmedya.com/artidijital_kaytv/kaytv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-      "https://live.artidijitalmedya.com/artidijital_kaytv/kaytv/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "https://live.artidijitalmedya.com/artidijital_kaytv/kaytv/playlist.m3u8",
+    "logo": "https://i.imgur.com/MymuDJ1.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 178
+    "source": "Türkçe",
+    "rank": 178,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_kaytv/kaytv/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_kaytv/kaytv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "World Türk TV",
@@ -1363,7 +2161,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 179
+    "rank": 179,
+    "urls": [
+      {
+        "url": "https://yayin1.canlitv.fun/canlitv/worldturk.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Alanya Tv",
@@ -1372,7 +2176,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 181
+    "rank": 181,
+    "urls": [
+      {
+        "url": "https://cdn-alanyatv.yayin.com.tr/alanyatv/alanyatv/playlist.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Alanya Postası TV",
@@ -1381,7 +2191,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 182
+    "rank": 182,
+    "urls": [
+      {
+        "url": "https://api-tv3.yayin.com.tr/postatv/postatv/chunklist_w1397845910.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Kanal Urfa",
@@ -1390,7 +2206,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 183
+    "rank": 183,
+    "urls": [
+      {
+        "url": "https://edge2.taksimbilisim.com/kanalurfa/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Edirne Tv",
@@ -1399,7 +2221,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 184
+    "rank": 184,
+    "urls": [
+      {
+        "url": "https://yayin.edirnetv.com:8088/hls/etvcanliyayin.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Malatya Vuslat TV",
@@ -1408,7 +2236,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 185
+    "rank": 185,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_vuslattv/vuslattv/chunks.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Ahi Tv",
@@ -1417,7 +2251,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 187
+    "rank": 187,
+    "urls": [
+      {
+        "url": "https://yayin1.canlitv.fun/canlitv/ahitv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Urfanatik TV",
@@ -1426,7 +2266,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 188
+    "rank": 188,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_urfanatiktv/urfanatiktv/chunks.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Kanal Fırat",
@@ -1435,46 +2281,70 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 190
+    "rank": 190,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_kanalfirat/kanalfirat/chunks.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Diyar Tv",
-    "url": "https://live.artidijitalmedya.com/artidijital_diyartv/diyartv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "urls": [
-      "https://live.artidijitalmedya.com/artidijital_diyartv/diyartv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-      "https://live.artidijitalmedya.com/artidijital_diyartv/diyartv/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "https://live.artidijitalmedya.com/artidijital_diyartv/diyartv/playlist.m3u8",
+    "logo": "https://i.imgur.com/qWkHjRA.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 192
+    "source": "Türkçe",
+    "rank": 192,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_diyartv/diyartv/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_diyartv/diyartv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Tempo Tv",
-    "url": "https://live.artidijitalmedya.com/artidijital_tempotv/tempotv/chunks.m3u8",
-    "urls": [
-      "https://live.artidijitalmedya.com/artidijital_tempotv/tempotv/chunks.m3u8",
-      "https://live.artidijitalmedya.com/artidijital_tempotv/tempotv/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "https://live.artidijitalmedya.com/artidijital_tempotv/tempotv/playlist.m3u8",
+    "logo": "https://i.imgur.com/tZpx32y.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 193
+    "source": "Türkçe",
+    "rank": 193,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_tempotv/tempotv/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_tempotv/tempotv/chunks.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Kanal 7 Avrupa",
-    "url": "https://livetv.radyotvonline.net/kanal7live/kanal7avr/chunklist.m3u8",
-    "urls": [
-      "https://livetv.radyotvonline.net/kanal7live/kanal7avr/chunklist.m3u8",
-      "https://livetv.radyotvonline.net/kanal7live/kanal7avr/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "https://livetv.radyotvonline.net/kanal7live/kanal7avr/playlist.m3u8",
+    "logo": "https://i.imgur.com/wlfyj5l.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 194
+    "source": "Türkçe",
+    "rank": 194,
+    "urls": [
+      {
+        "url": "https://livetv.radyotvonline.net/kanal7live/kanal7avr/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://livetv.radyotvonline.net/kanal7live/kanal7avr/chunklist.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "İçel Tv",
@@ -1483,7 +2353,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 195
+    "rank": 195,
+    "urls": [
+      {
+        "url": "https://edge1.taksimbilisim.com/iceltv/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Kanal B",
@@ -1492,7 +2368,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 196
+    "rank": 196,
+    "urls": [
+      {
+        "url": "https://tv.kanalb.tr/hls/kanalb/index.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Akıllı Tv",
@@ -1501,7 +2383,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 197
+    "rank": 197,
+    "urls": [
+      {
+        "url": "https://yayin.santraltr.com/hls/arabeskyeni.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Çay Tv",
@@ -1510,7 +2398,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 198
+    "rank": 198,
+    "urls": [
+      {
+        "url": "https://edge.taksimbilisim.com/caytv/bant1/playlist.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Mavi Karadeniz Tv",
@@ -1519,7 +2413,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 199
+    "rank": 199,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_mavikaradeniz/mavikaradeniz/chunks.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Kanal Avrupa",
@@ -1528,7 +2428,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 203
+    "rank": 203,
+    "urls": [
+      {
+        "url": "https://cdn-kanalavrupa.yayin.com.tr/kanalavrupa/tracks-v2a1/mono.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Erciyes Tv",
@@ -1537,7 +2443,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 204
+    "rank": 204,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_erciyestv/erciyestv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Amasya Art Tv",
@@ -1546,7 +2458,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 205
+    "rank": 205,
+    "urls": [
+      {
+        "url": "https://yayin1.canlitv.fun/canlitv/arttv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Marmara Tv",
@@ -1555,7 +2473,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 206
+    "rank": 206,
+    "urls": [
+      {
+        "url": "https://yayin1.canlitv.fun/canlitv/marmaratv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Sun Tv",
@@ -1564,7 +2488,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 207
+    "rank": 207,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_sunrtv/sunrtv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Konya Ün Tv",
@@ -1573,33 +2503,51 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 208
+    "rank": 208,
+    "urls": [
+      {
+        "url": "https://yayin1.canlitv.fun/canlitv/untv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Line Tv",
-    "url": "https://edge2.taksimbilisim.com/linetv/bant1/chunks.m3u8",
-    "urls": [
-      "https://edge2.taksimbilisim.com/linetv/bant1/chunks.m3u8",
-      "https://edge1.socialsmart.tv/linetv/bant1/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "https://edge1.socialsmart.tv/linetv/bant1/playlist.m3u8",
+    "logo": "https://i.imgur.com/6GNp7f8.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 209
+    "source": "Türkçe",
+    "rank": 209,
+    "urls": [
+      {
+        "url": "https://edge1.socialsmart.tv/linetv/bant1/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://edge2.taksimbilisim.com/linetv/bant1/chunks.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Etv Manisa",
-    "url": "https://edge1.taksimbilisim.com/manisaetv/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "urls": [
-      "https://edge1.taksimbilisim.com/manisaetv/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-      "https://edge1.socialsmart.tv/manisaetv/bant1/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "https://edge1.socialsmart.tv/manisaetv/bant1/playlist.m3u8",
+    "logo": "https://i.ibb.co/QKXtdkz/sOd3INg.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 211
+    "source": "Türkçe",
+    "rank": 211,
+    "urls": [
+      {
+        "url": "https://edge1.socialsmart.tv/manisaetv/bant1/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://edge1.taksimbilisim.com/manisaetv/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Er TV",
@@ -1608,7 +2556,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 212
+    "rank": 212,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_ertv_new/ertv/chunks.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Anadolu Dost TV",
@@ -1617,20 +2571,32 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 213
+    "rank": 213,
+    "urls": [
+      {
+        "url": "https://yayin1.canlitv.fun/canlitv/dosttv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "BRTV",
-    "url": "https://live.artidijitalmedya.com/artidijital_brtv/brtv/chunks.m3u8",
-    "urls": [
-      "https://live.artidijitalmedya.com/artidijital_brtv/brtv/chunks.m3u8",
-      "https://live.artidijitalmedya.com/artidijital_brtv/brtv/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "https://live.artidijitalmedya.com/artidijital_brtv/brtv/playlist.m3u8",
+    "logo": "https://i.imgur.com/U3qlEAp.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 214
+    "source": "Türkçe",
+    "rank": 214,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_brtv/brtv/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_brtv/brtv/chunks.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "CNBC-e",
@@ -1639,7 +2605,13 @@
     "group": "İş;Dizi",
     "tvgId": "CNBCe.tr@SD",
     "source": "Türkçe",
-    "rank": 215
+    "rank": 215,
+    "urls": [
+      {
+        "url": "https://hnpsechtsc.turknet.ercdn.net/xpnvudnlsv/cnbc-e/cnbc-e.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "GRT TV",
@@ -1648,7 +2620,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 216
+    "rank": 216,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_grt/grt/chunks.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "İmedi Tv",
@@ -1657,7 +2635,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 220
+    "rank": 220,
+    "urls": [
+      {
+        "url": "https://tv.cdn.xsg.ge/imedihd/tracks-v1a1/mono.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Ege Live TV",
@@ -1666,7 +2650,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 221
+    "rank": 221,
+    "urls": [
+      {
+        "url": "https://yayin1.canlitv.fun/canlitv/egelivetv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "İzmir Türk TV",
@@ -1675,7 +2665,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 225
+    "rank": 225,
+    "urls": [
+      {
+        "url": "https://yayin1.canlitv.fun/canlitv/izmirturktv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Tokat Süper Tv",
@@ -1684,33 +2680,51 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 226
+    "rank": 226,
+    "urls": [
+      {
+        "url": "https://yayin1.canlitv.fun/canlitv/tokatsupertv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Hunat TV",
-    "url": "https://live.artidijitalmedya.com/artidijital_hunattv/hunattv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "urls": [
-      "https://live.artidijitalmedya.com/artidijital_hunattv/hunattv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-      "https://59cba4d34b678.streamlock.net/canlitv/hunattv/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "https://59cba4d34b678.streamlock.net/canlitv/hunattv/playlist.m3u8",
+    "logo": "https://i.imgur.com/NrxHGnb.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 227
+    "source": "Türkçe",
+    "rank": 227,
+    "urls": [
+      {
+        "url": "https://59cba4d34b678.streamlock.net/canlitv/hunattv/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_hunattv/hunattv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Ton Tv",
-    "url": "https://live.artidijitalmedya.com/artidijital_tontv/tontv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "urls": [
-      "https://live.artidijitalmedya.com/artidijital_tontv/tontv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-      "https://live.artidijitalmedya.com/artidijital_tontv/tontv/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "https://live.artidijitalmedya.com/artidijital_tontv/tontv/playlist.m3u8",
+    "logo": "https://i.imgur.com/f0Soeob.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 228
+    "source": "Türkçe",
+    "rank": 228,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_tontv/tontv/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_tontv/tontv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Altaş Tv",
@@ -1719,7 +2733,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 230
+    "rank": 230,
+    "urls": [
+      {
+        "url": "https://edge1.taksimbilisim.com/altastv/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Deniz Postası TV",
@@ -1728,20 +2748,32 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 231
+    "rank": 231,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_denizpostasi/denizpostasi/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Kanal 15",
-    "url": "https://live.artidijitalmedya.com/artidijital_kanal15/kanal15/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "urls": [
-      "https://live.artidijitalmedya.com/artidijital_kanal15/kanal15/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-      "https://live.artidijitalmedya.com/artidijital_kanal15/kanal15/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "https://live.artidijitalmedya.com/artidijital_kanal15/kanal15/playlist.m3u8",
+    "logo": "https://i.imgur.com/wb1Cdc9.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 232
+    "source": "Türkçe",
+    "rank": 232,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_kanal15/kanal15/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_kanal15/kanal15/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Afroturk TV",
@@ -1750,20 +2782,32 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 233
+    "rank": 233,
+    "urls": [
+      {
+        "url": "https://edge2.taksimbilisim.com/naturaltv/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Anadolu Net TV",
-    "url": "https://live.artidijitalmedya.com/artidijital_anadolunet/anadolunet/chunks.m3u8",
-    "urls": [
-      "https://live.artidijitalmedya.com/artidijital_anadolunet/anadolunet/chunks.m3u8",
-      "https://live.artidijitalmedya.com/artidijital_anadolunet/anadolunet/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "https://live.artidijitalmedya.com/artidijital_anadolunet/anadolunet/playlist.m3u8",
+    "logo": "https://www.anadolunettv.com/d/r/logo.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 234
+    "source": "Türkçe",
+    "rank": 234,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_anadolunet/anadolunet/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_anadolunet/anadolunet/chunks.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Olay Türk",
@@ -1772,20 +2816,32 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 236
+    "rank": 236,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_olayturk/olayturk/chunks.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Life Tv",
-    "url": "https://live.artidijitalmedya.com/artidijital_lifetv/lifetv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "urls": [
-      "https://live.artidijitalmedya.com/artidijital_lifetv/lifetv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-      "https://live.artidijitalmedya.com/artidijital_lifetv/lifetv/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "https://live.artidijitalmedya.com/artidijital_lifetv/lifetv/playlist.m3u8",
+    "logo": "https://i.imgur.com/lWeJxm0.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 237
+    "source": "Türkçe",
+    "rank": 237,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_lifetv/lifetv/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_lifetv/lifetv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Üsküdar Üniversitesi TV",
@@ -1794,7 +2850,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 238
+    "rank": 238,
+    "urls": [
+      {
+        "url": "https://b01c02nl.mediatriple.net/videoonlylive/psikoyorum_live/broadcast_6128b034550bd.smil/chunklist_b200000.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Dim TV",
@@ -1803,7 +2865,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 239
+    "rank": 239,
+    "urls": [
+      {
+        "url": "https://canli.dimtv.tv/hls/dim/index.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "ERT Erbaa Radyo ve TV",
@@ -1812,7 +2880,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 240
+    "rank": 240,
+    "urls": [
+      {
+        "url": "https://yayin1.canlitv.fun/canlitv/erttv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Yaşlık Tv Türkmenistan",
@@ -1821,7 +2895,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 243
+    "rank": 243,
+    "urls": [
+      {
+        "url": "https://alpha.tv.online.tm/hls/ch002_720/index.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "TV38",
@@ -1830,33 +2910,51 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 244
+    "rank": 244,
+    "urls": [
+      {
+        "url": "https://yayin1.canlitv.fun/canlitv/tv38.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "ETV Kayseri",
-    "url": "https://live.artidijitalmedya.com/artidijital_etv/etv/chunks.m3u8",
-    "urls": [
-      "https://live.artidijitalmedya.com/artidijital_etv/etv/chunks.m3u8",
-      "https://live.artidijitalmedya.com/artidijital_etv/etv/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "https://live.artidijitalmedya.com/artidijital_etv/etv/playlist.m3u8",
+    "logo": "https://yt3.googleusercontent.com/ytc/AIdro_msPtG6zfPKIJIIdvG4dehXLoVoXcHM2-2HL9YxsNYzGQ=s512-c-k-c0x00ffffff-no-rj",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 245
+    "source": "Türkçe",
+    "rank": 245,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_etv/etv/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_etv/etv/chunks.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Fortuna Tv",
-    "url": "https://edge2.taksimbilisim.com/ftvturk/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "urls": [
-      "https://edge2.taksimbilisim.com/ftvturk/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-      "https://edge1.socialsmart.tv/ftvturk/bant1/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "https://edge1.socialsmart.tv/ftvturk/bant1/playlist.m3u8",
+    "logo": "https://i.imgur.com/ZbUSlOC.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 249
+    "source": "Türkçe",
+    "rank": 249,
+    "urls": [
+      {
+        "url": "https://edge1.socialsmart.tv/ftvturk/bant1/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://edge2.taksimbilisim.com/ftvturk/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "KTV Kazakistan",
@@ -1865,7 +2963,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 250
+    "rank": 250,
+    "urls": [
+      {
+        "url": "https://wz-kt.ktk.kz/ktklive/smil:ktk-live.smil/chunklist_w10227581_b928000_slrus.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Kontra Tv",
@@ -1874,20 +2978,32 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 251
+    "rank": 251,
+    "urls": [
+      {
+        "url": "https://kontralive.siliconweb.com/live/kontratv/kontralive/kontratv/chunks.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "TV Den",
-    "url": "https://canli.tvden.com.tr/hls/live.m3u8",
-    "urls": [
-      "https://canli.tvden.com.tr/hls/live.m3u8",
-      "http://canli.tvden.com.tr/hls/live.m3u8"
-    ],
-    "logo": "",
+    "url": "http://canli.tvden.com.tr/hls/live.m3u8",
+    "logo": "https://i.imgur.com/Uhg95Ze.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 252
+    "source": "Türkçe",
+    "rank": 252,
+    "urls": [
+      {
+        "url": "http://canli.tvden.com.tr/hls/live.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://canli.tvden.com.tr/hls/live.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Çankırı Tv",
@@ -1896,7 +3012,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 253
+    "rank": 253,
+    "urls": [
+      {
+        "url": "https://yayin1.canlitv.fun/canlitv/cankiritv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Türkmenistan Tv",
@@ -1905,7 +3027,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 256
+    "rank": 256,
+    "urls": [
+      {
+        "url": "https://alpha.tv.online.tm/hls/ch007_720/index.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Sat7 Türk",
@@ -1914,7 +3042,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 257
+    "rank": 257,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_sat7turk/sat7turk/chunks.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "FRT TV",
@@ -1923,7 +3057,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 262
+    "rank": 262,
+    "urls": [
+      {
+        "url": "https://edge1.taksimbilisim.com/frttv/bant1/chunks.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Askabat TV",
@@ -1932,7 +3072,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 264
+    "rank": 264,
+    "urls": [
+      {
+        "url": "https://alpha.tv.online.tm/hls/ch006_720/index.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Altın Asır Tv",
@@ -1941,7 +3087,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 265
+    "rank": 265,
+    "urls": [
+      {
+        "url": "https://alpha.tv.online.tm/hls/ch001_720/index.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Kent Türk TV",
@@ -1950,7 +3102,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 268
+    "rank": 268,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_kentturktv/kentturktv/chunks.m3u8?hash=b8a4c059a708b2aaabd02a9d87e7e409",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "OWAZY TV",
@@ -1959,29 +3117,47 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 269
+    "rank": 269,
+    "urls": [
+      {
+        "url": "https://alpha.tv.online.tm/hls/ch005_720/index.m3u8?hash=b8a4c059a708b2aaabd02a9d87e7e409",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Tv 264",
     "url": "https://b01c02nl.mediatriple.net/videoonlylive/mtdxkkitgbrckilive/broadcast_5ee244263fd6d.smil/playlist.m3u8",
-    "logo": "",
+    "logo": "https://i.imgur.com/tudXdOZ.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 273
+    "rank": 273,
+    "urls": [
+      {
+        "url": "https://b01c02nl.mediatriple.net/videoonlylive/mtdxkkitgbrckilive/broadcast_5ee244263fd6d.smil/playlist.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Kocaeli Tv",
-    "url": "https://edge2.taksimbilisim.com/kocaelitv/bant1/chunks.m3u8",
-    "urls": [
-      "https://edge2.taksimbilisim.com/kocaelitv/bant1/chunks.m3u8",
-      "https://edge.taksimbilisim.com/kocaelitv/bant1/playlist.m3u8"
-    ],
-    "logo": "",
+    "url": "https://edge.taksimbilisim.com/kocaelitv/bant1/playlist.m3u8",
+    "logo": "https://i.imgur.com/LeTP4zq.png",
     "group": "Türkiye",
     "tvgId": "",
-    "source": "Canlitv",
-    "rank": 274
+    "source": "Türkçe",
+    "rank": 274,
+    "urls": [
+      {
+        "url": "https://edge.taksimbilisim.com/kocaelitv/bant1/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://edge2.taksimbilisim.com/kocaelitv/bant1/chunks.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "Türkmen Sport Tv",
@@ -1990,7 +3166,13 @@
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
-    "rank": 279
+    "rank": 279,
+    "urls": [
+      {
+        "url": "https://alpha.tv.online.tm/hls/ch004_720/index.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ]
   },
   {
     "name": "4U TV (720p)",
@@ -1999,7 +3181,13 @@
     "group": "Eğlence",
     "tvgId": "4UTV.tr@SD",
     "source": "Türkiye",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://hls.4utv.live/hls/stream.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "A2TV (1080p)",
@@ -2008,7 +3196,13 @@
     "group": "Genel",
     "tvgId": "A2TV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/a2tv/a2tv.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Ada TV",
@@ -2017,7 +3211,13 @@
     "group": "Genel",
     "tvgId": "AdaTV.cy@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://yayin1.canlitv.fun/live/kibrisadatv.stream/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Al-Rafidain TV (720p) [Not 24/7]",
@@ -2026,7 +3226,13 @@
     "group": "Dini",
     "tvgId": "AlRafidainTV.tr@SD",
     "source": "Türkiye",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://arrafidain.tvplayer.online/arrafidaintv/source/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Al-Zahra TV Turkic (720p) [Not 24/7]",
@@ -2035,7 +3241,13 @@
     "group": "Dini",
     "tvgId": "AlZahraTVTurkic.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://live.al-zahratv.com/live/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Alanya Posta TV (1080p)",
@@ -2044,7 +3256,13 @@
     "group": "Genel",
     "tvgId": "AlanyaPostaTV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://api-tv3.yayin.com.tr/postatv/postatv/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Almahriah TV (576p)",
@@ -2053,7 +3271,13 @@
     "group": "Haber",
     "tvgId": "AlmahriahTV.tr@SD",
     "source": "Türkiye",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://starmenajo.com/hls/almahriah/index.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Altas TV (1080p)",
@@ -2062,7 +3286,13 @@
     "group": "Genel",
     "tvgId": "AltasTV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://edge1.socialsmart.tv/altastv/bant1/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Aras TV (576p) [Not 24/7]",
@@ -2071,7 +3301,13 @@
     "group": "Genel",
     "tvgId": "ArasTV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "http://1.rtmp.org/tv217/yayin.stream/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "ATV Alanya (1080p)",
@@ -2080,7 +3316,13 @@
     "group": "Genel",
     "tvgId": "ATVAlanya.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://cdn-alanyatv.yayin.com.tr/alanyatv/alanyatv/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "ATV Avrupa (576p)",
@@ -2089,7 +3331,13 @@
     "group": "Diğer",
     "tvgId": "ATVAvrupa.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://flask-api-hls-atvavrupahdtrkvz-live.onrender.com/hls_stream/master.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "BabyFirst (720p)",
@@ -2098,7 +3346,13 @@
     "group": "Çocuk",
     "tvgId": "BabyFirst.us@US",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://cdn.fast.jwp.services/v1/channel/1_jB6940Ei_TvhvIHDL/manifest.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "BabyTV Turkiye (1080p) [Geo-blocked]",
@@ -2107,7 +3361,13 @@
     "group": "Çocuk",
     "tvgId": "BabyTV.uk@Turkiye",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://saran-live.ercdn.net/babytv/index.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "BBC Earth Turkiye",
@@ -2116,7 +3376,13 @@
     "group": "Belgesel",
     "tvgId": "BBCEarth.uk@Turkiye",
     "source": "Türkiye",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://nord.ayakkabiparti.lol/bbc/index.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "BBC First Turkiye",
@@ -2125,7 +3391,13 @@
     "group": "Eğlence",
     "tvgId": "BBCFirst.uk@Turkiye",
     "source": "Türkiye",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "http://88.212.15.29/live/bbc_first/index.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "beIN Box Office 1",
@@ -2134,7 +3406,13 @@
     "group": "Film",
     "tvgId": "beINBoxOffice1.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://nord.ayakkabiparti.lol/box1/index.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "beIN Box Office 2",
@@ -2143,7 +3421,13 @@
     "group": "Film",
     "tvgId": "beINBoxOffice2.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://nord.ayakkabiparti.lol/box2/index.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "beIN Box Office 3",
@@ -2152,7 +3436,13 @@
     "group": "Film",
     "tvgId": "beINBoxOffice3.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://nord.ayakkabiparti.lol/box3/index.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "beIN Movies Stars",
@@ -2161,7 +3451,13 @@
     "group": "Film",
     "tvgId": "beINMoviesStars.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://nord.ayakkabiparti.lol/bsaction1/index.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "beIN Movies Turk",
@@ -2170,7 +3466,13 @@
     "group": "Film",
     "tvgId": "beINMoviesTurk.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://nord.ayakkabiparti.lol/bsturk/index.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Benguturk TV (1080p)",
@@ -2179,7 +3481,13 @@
     "group": "Genel",
     "tvgId": "BenguturkTV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "http://185.234.111.229:8000/play/a05u",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Bric ve Satranc TV (480p) [Not 24/7]",
@@ -2188,7 +3496,13 @@
     "group": "Diğer",
     "tvgId": "BricveSatrancTV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "http://139.162.182.79/live/test/index.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Bursa TV (720p) [Not 24/7]",
@@ -2197,7 +3511,13 @@
     "group": "Diğer",
     "tvgId": "BursaTV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://win1.yayin.com.tr/bursatv/bursatv/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Cay TV (720p)",
@@ -2206,7 +3526,13 @@
     "group": "Genel",
     "tvgId": "CayTV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://edge1.socialsmart.tv/caytv/bant1/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Cekmekoy TV (1080p)",
@@ -2215,7 +3541,13 @@
     "group": "Genel",
     "tvgId": "CekmekoyTV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://cdn-cekmekoybeltv.yayin.com.tr/cekmekoybeltv/cekmekoybeltv_1080p/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Ciftci TV (720p) [Not 24/7]",
@@ -2224,7 +3556,13 @@
     "group": "Kültür;Eğitim",
     "tvgId": "CiftciTV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_ciftcitv/ciftcitv/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Deniz Postasi TV (720p) [Not 24/7]",
@@ -2233,7 +3571,13 @@
     "group": "Genel",
     "tvgId": "DenizPostasiTV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_denizpostasi/denizpostasi/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "DHA (720p) [Not 24/7]",
@@ -2242,7 +3586,13 @@
     "group": "Haber",
     "tvgId": "DHA.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://603c568fccdf5.streamlock.net/live/dhaweb1_C5efC/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Disney Jr. (Turkiye) (1080p) [Geo-blocked]",
@@ -2251,7 +3601,13 @@
     "group": "Animasyon;Çocuk",
     "tvgId": "DisneyJr.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://saran-live.ercdn.net/disneyjunior/index.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Dream Turk (720p)",
@@ -2260,7 +3616,13 @@
     "group": "Müzik",
     "tvgId": "DreamTurk.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://live.duhnet.tv/S2/HLS_LIVE/dreamturknp/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Edessa TV (1080p)",
@@ -2269,7 +3631,13 @@
     "group": "Eğlence",
     "tvgId": "EdessaTV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://canli.edessatv.com/hls/stream.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Ekoturk (720p)",
@@ -2278,7 +3646,13 @@
     "group": "Haber",
     "tvgId": "Ekoturk.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://cdn.ekoturk.net/hls/master.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Elsharq TV (1080p) [Not 24/7]",
@@ -2287,7 +3661,13 @@
     "group": "Genel",
     "tvgId": "ElsharqTV.tr@SD",
     "source": "Türkiye",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://mn-nl.mncdn.com/elsharq_live/live/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "ERTV (1080p) [Geo-blocked]",
@@ -2296,7 +3676,13 @@
     "group": "Genel",
     "tvgId": "ERTV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_ertv_new/ertv/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Erzurum Web TV (720p)",
@@ -2305,7 +3691,13 @@
     "group": "Genel",
     "tvgId": "ErzurumWebTV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://win29.yayin.com.tr/erzurumwebtv/erzurumwebtv/iptvdelisi.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Euro D (720p)",
@@ -2314,7 +3706,13 @@
     "group": "Genel",
     "tvgId": "EuroD.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://live.duhnet.tv/S2/HLS_LIVE/eurodnp/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Finans Turk TV (720p)",
@@ -2323,7 +3721,13 @@
     "group": "Haber",
     "tvgId": "FinansTurkTV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://yayin30.haber100.com/live/finansturk/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Finest TV (288p) [Not 24/7]",
@@ -2332,7 +3736,13 @@
     "group": "Müzik",
     "tvgId": "FinestTV.de@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://media.finest.tv/hls/live.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Flash Haber TV",
@@ -2341,7 +3751,13 @@
     "group": "Haber",
     "tvgId": "FlashHaberTV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://b01c02nl.mediatriple.net/videoonlylive/mtyycglqauzjhlive/broadcast_67c053c48829f.smil/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Guneydogu TV (720p)",
@@ -2350,7 +3766,13 @@
     "group": "Haber",
     "tvgId": "GuneydoguTV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://edge1.socialsmart.tv/gtv/bant1/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Haber61 TV (720p) [Not 24/7]",
@@ -2359,7 +3781,13 @@
     "group": "Haber",
     "tvgId": "Haber61TV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://cdn-haber61tv.yayin.com.tr/haber61tv/smil:haber61tv.smil/index.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Haberturk TV (720p) [Not 24/7]",
@@ -2368,7 +3796,13 @@
     "group": "Haber",
     "tvgId": "HaberturkTV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://tv.ensonhaber.com/haberturk/haberturk.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "HTSpor TV (1080p)",
@@ -2377,7 +3811,13 @@
     "group": "Spor",
     "tvgId": "HTSporTV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://ciner.daioncdn.net/ht-spor/ht-spor.m3u8?app=web",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Icel TV (720p) [Not 24/7]",
@@ -2386,7 +3826,13 @@
     "group": "Diğer",
     "tvgId": "IcelTV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://edge1.socialsmart.tv/iceltv/bant1/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Ilke TV (1080p)",
@@ -2395,7 +3841,13 @@
     "group": "Diğer",
     "tvgId": "IlkeTV.tr@HD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://stream.ilketv.com.tr/hls/ilkecanli.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Imam Hussein TV 5 (720p)",
@@ -2404,7 +3856,13 @@
     "group": "Dini",
     "tvgId": "ImamHusseinTV5.iq@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "http://live.al-zahratv.com/live/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Kanal D Drama (1080p)",
@@ -2413,7 +3871,13 @@
     "group": "Eğlence",
     "tvgId": "KanalDDrama.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "http://190.93.224.42/KANAL-D-DRAMA/index.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Kanal Firat (720p) [Not 24/7]",
@@ -2422,7 +3886,13 @@
     "group": "Genel",
     "tvgId": "KanalFirat.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_kanalfirat/kanalfirat/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Kanal Hayat (1080p)",
@@ -2431,7 +3901,13 @@
     "group": "Genel",
     "tvgId": "KanalHayat.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://tbn02a.ltnschedule.com/hls/nx21i.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Kent Turk (1080p) [Not 24/7]",
@@ -2440,7 +3916,13 @@
     "group": "Genel",
     "tvgId": "KentTurk.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_kentturktv/kentturktv/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Kral Pop TV (720p)",
@@ -2449,7 +3931,13 @@
     "group": "Müzik",
     "tvgId": "KralPopTV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://dogus-live.daioncdn.net/kralpoptv/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Kurdistan TV (720p) [Not 24/7]",
@@ -2458,7 +3946,13 @@
     "group": "Genel",
     "tvgId": "KurdistanTV.iq@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://5a3ed7a72ed4b.streamlock.net/live/SMIL:myStream.smil/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Lalegul TV (1080p)",
@@ -2467,20 +3961,32 @@
     "group": "Dini",
     "tvgId": "LalegulTV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://lbl.netmedya.net/hls/lalegultv.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Love Nature (1080p)",
     "url": "https://aegis-cloudfront-1.tubi.video/6d6d0f24-8445-4b4c-bdf6-44f9e38beaa4/playlist.m3u8",
-    "urls": [
-      "https://aegis-cloudfront-1.tubi.video/6d6d0f24-8445-4b4c-bdf6-44f9e38beaa4/playlist.m3u8",
-      "https://mumbai-edge.smartplaytv.in/LoveNature/index.m3u8"
-    ],
     "logo": "https://tv.lovenature.com/wp-content/uploads/2024/10/LoveNature2024_Logo_full_colour-copy.png",
     "group": "Doğa",
     "tvgId": "LoveNature.ca@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://aegis-cloudfront-1.tubi.video/6d6d0f24-8445-4b4c-bdf6-44f9e38beaa4/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://mumbai-edge.smartplaytv.in/LoveNature/index.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Manas TV (1080p)",
@@ -2489,7 +3995,13 @@
     "group": "Kültür;Eğitim;Eğlence",
     "tvgId": "ManasTV.kg@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "http://212.42.111.152:8080/hls/manas.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "MaviKaradeniz TV (1080p) [Not 24/7]",
@@ -2498,7 +4010,13 @@
     "group": "Genel",
     "tvgId": "MaviKaradenizTV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_mavikaradeniz/mavikaradeniz/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "MC TV (720p)",
@@ -2507,7 +4025,13 @@
     "group": "Eğlence",
     "tvgId": "MCTV.de@HD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://rrr.sz.xlcdn.com/?account=mceutv&file=mc2&output=playlist.m3u8&protocol=https&service=wowza&type=live",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Med Muzik (1080p)",
@@ -2516,7 +4040,13 @@
     "group": "Müzik",
     "tvgId": "MedMuzik.tr@SD",
     "source": "Türkiye",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "http://54.36.110.140/live3/live3.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Mekameleen TV (1080p)",
@@ -2525,7 +4055,13 @@
     "group": "Haber",
     "tvgId": "MekameleenTV.tr@SD",
     "source": "Türkiye",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://mn-nl.mncdn.com/mekameleen/smil:mekameleentv.smil/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Minika Cocuk (720p)",
@@ -2534,7 +4070,13 @@
     "group": "Çocuk",
     "tvgId": "MinikaCocuk.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/minikago_cocuk/minikago_cocuk.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "MovieSmart Turk (576p)",
@@ -2543,7 +4085,13 @@
     "group": "Film",
     "tvgId": "MovieSmartTurk.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "http://playhdnewjj.xyz:8080/recc121412/KVqfhtdJ2nQ7/174",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "MTurk TV (1080p)",
@@ -2552,7 +4100,13 @@
     "group": "Genel",
     "tvgId": "MTurkTV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://edge1.socialsmart.tv/muglaturk/bant1/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "MyZen TV (1080p)",
@@ -2561,7 +4115,13 @@
     "group": "Rahatlama",
     "tvgId": "MyZenTV.fr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01255-secomcofites-my-myzen-en-plex/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "National Geographic (Turkiye)",
@@ -2570,7 +4130,13 @@
     "group": "Belgesel",
     "tvgId": "NationalGeographic.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://nord.ayakkabiparti.lol/natgeo/index.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "National Geographic Wild (Turkiye)",
@@ -2579,7 +4145,13 @@
     "group": "Belgesel",
     "tvgId": "NationalGeographicWild.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://nord.ayakkabiparti.lol/natgeowild/index.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Natural TV (720p) [Not 24/7]",
@@ -2588,7 +4160,13 @@
     "group": "Kültür",
     "tvgId": "NaturalTV.tr@SD",
     "source": "Türkiye",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "http://broadcasttr.com:1935/naturaltv/bant1/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Number 1 Ask (720p)",
@@ -2597,7 +4175,13 @@
     "group": "Müzik",
     "tvgId": "Number1Ask.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://b01c02nl.mediatriple.net/videoonlylive/mtkgeuihrlfwlive/u_stream_5c9e18f9cea15_1/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Number 1 Damar (720p)",
@@ -2606,7 +4190,13 @@
     "group": "Müzik",
     "tvgId": "Number1Damar.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://b01c02nl.mediatriple.net/videoonlylive/mtkgeuihrlfwlive/u_stream_5c9e198784bdc_1/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Number 1 Dance (720p)",
@@ -2615,7 +4205,13 @@
     "group": "Müzik",
     "tvgId": "Number1Dance.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://b01c02nl.mediatriple.net/videoonlylive/mtkgeuihrlfwlive/u_stream_5c9e2aa8acf44_1/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Number 1 TV (720p)",
@@ -2624,7 +4220,13 @@
     "group": "Müzik",
     "tvgId": "Number1TV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://b01c02nl.mediatriple.net/videoonlylive/mtkgeuihrlfwlive/broadcast_5c9e17cd59e8b.smil/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "OlayTurk TV (720p) [Geo-blocked]",
@@ -2633,7 +4235,13 @@
     "group": "Haber",
     "tvgId": "OlayTurkTV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_olayturk/olayturk/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Persiana Turkiye",
@@ -2642,7 +4250,13 @@
     "group": "Eğlence",
     "tvgId": "PersianaTurkiye.fr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://turkhls.persiana.live/hls/stream.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Power Dance (1080p)",
@@ -2651,7 +4265,13 @@
     "group": "Müzik",
     "tvgId": "PowerDance.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://livetv.powerapp.com.tr/dance/dance.smil/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Power TV (Turkiye) (1080p)",
@@ -2660,7 +4280,13 @@
     "group": "Diğer",
     "tvgId": "PowerTV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://livetv.powerapp.com.tr/powerTV/powerhd.smil/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "PowerTurk Akustik (1080p)",
@@ -2669,7 +4295,13 @@
     "group": "Müzik",
     "tvgId": "PowerTurkAkustik.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://livetv.powerapp.com.tr/pturkakustik/akustik.smil/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "PowerTurk Slow (1080p)",
@@ -2678,7 +4310,13 @@
     "group": "Müzik",
     "tvgId": "PowerTurkSlow.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://livetv.powerapp.com.tr/pturkslow/slow.smil/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "PowerTurk Taptaze (1080p)",
@@ -2687,7 +4325,13 @@
     "group": "Müzik",
     "tvgId": "PowerTurkTaptaze.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://livetv.powerapp.com.tr/pturktaptaze/taptaze.smil/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "PowerTurk TV (720p)",
@@ -2696,7 +4340,13 @@
     "group": "Diğer",
     "tvgId": "PowerTurkTV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_powerturktv/powerturktv/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Qaf TV (1080p)",
@@ -2705,7 +4355,13 @@
     "group": "Diğer",
     "tvgId": "QafTV.tr@SD",
     "source": "Türkiye",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://customer-9vqui33qma2rownb.cloudflarestream.com/7792e558fe54e23bdd4b462ec275cdba/manifest/video.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "RTG int.",
@@ -2714,7 +4370,13 @@
     "group": "Gezi",
     "tvgId": "RTGint.ru@SD",
     "source": "Türkiye",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "http://213.91.179.28:8000/play/a0bw",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "RTG TV (720p)",
@@ -2723,7 +4385,13 @@
     "group": "Gezi",
     "tvgId": "RTGTV.ru@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "http://31.148.48.15/RTG_HD/index.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "S Sport (720p)",
@@ -2732,7 +4400,13 @@
     "group": "Spor",
     "tvgId": "SSport.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://corestream.siteyaptim.live/s-sport/index.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "S Sport 2 (720p)",
@@ -2741,7 +4415,13 @@
     "group": "Spor",
     "tvgId": "SSport2.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://corestream.siteyaptim.live/s-sport2/index.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Sat 7 Turk (1080p)",
@@ -2750,7 +4430,13 @@
     "group": "Diğer",
     "tvgId": "Sat7Turk.cy@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_sat7turk/sat7turk/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Sercem TV (1080p)",
@@ -2759,7 +4445,13 @@
     "group": "Kültür;Genel;Dini",
     "tvgId": "SercemTV.tr@HD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://canli.sercemtv.com.tr/hls/0/stream.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Show Turk (1080p)",
@@ -2768,7 +4460,13 @@
     "group": "Diğer",
     "tvgId": "ShowTurk.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://raw.githubusercontent.com/bnyusuf67-crypto/streams/refs/heads/main/streams/shturk.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Spacetoon Turkey (720p) [Not 24/7]",
@@ -2777,7 +4475,13 @@
     "group": "Animasyon;Çocuk",
     "tvgId": "SpacetoonTurkey.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://live-tr-next.spacetoongo.com/ST_TR_NEXT/hls/h7qefeiwfbjn1.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Stingray Naturescape (1080p)",
@@ -2786,7 +4490,13 @@
     "group": "Müzik",
     "tvgId": "StingrayNaturescape.ca@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://lotus.stingray.com/manifest/naturescape-a003-montreal/samsungtvplus/master.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Sun RTV (720p) [Not 24/7]",
@@ -2795,7 +4505,13 @@
     "group": "Diğer",
     "tvgId": "SunRTV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_sunrtv/sunrtv/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Tele 1 (1080p)",
@@ -2804,7 +4520,13 @@
     "group": "Diğer",
     "tvgId": "Tele1.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://tele1-live.ercdn.net/tele1/tele1.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Timeless Dizi Channel (Poland) (1080p)",
@@ -2813,7 +4535,13 @@
     "group": "Diğer",
     "tvgId": "TimelessDiziChannel.pl@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "http://hls127.freeott.top:8080/BG_Dizi_HD/video.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Tivi 6 (720p)",
@@ -2822,7 +4550,13 @@
     "group": "Genel",
     "tvgId": "Tivi6.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_tivi6/tivi6/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "TJK TV 2 (1080p) [Not 24/7]",
@@ -2831,7 +4565,13 @@
     "group": "Spor",
     "tvgId": "TJKTV2.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://tjktv-live.tjk.org/tjktv2/tjktv2.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "TRT 3 (720p)",
@@ -2840,7 +4580,13 @@
     "group": "Diğer",
     "tvgId": "TRT3.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://tv-trt3.live.trt.com.tr/master.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "TRT Arabi (1080p) [Not 24/7]",
@@ -2849,7 +4595,13 @@
     "group": "Haber",
     "tvgId": "TRTArabi.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://tv-trtarabi.medya.trt.com.tr/master.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "TRT Cocuk (1440p)",
@@ -2858,7 +4610,13 @@
     "group": "Çocuk",
     "tvgId": "TRTCocuk.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://tv-trtcocuk.medya.trt.com.tr/master.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "TRT Diyanet Cocuk (720p)",
@@ -2867,7 +4625,13 @@
     "group": "Çocuk",
     "tvgId": "TRTDiyanetCocuk.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://tv-trtdiyanetcocuk.medya.trt.com.tr/master.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "TRT EBA Ilkokul (720p)",
@@ -2876,7 +4640,13 @@
     "group": "Eğitim",
     "tvgId": "TRTEBAIlkokul.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://tv-e-okul00.medya.trt.com.tr/master.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "TRT EBA Lise (720p)",
@@ -2885,7 +4655,13 @@
     "group": "Eğitim",
     "tvgId": "TRTEBALise.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://tv-e-okul02.medya.trt.com.tr/master.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "TRT Genc (1440p) [Geo-blocked]",
@@ -2894,7 +4670,13 @@
     "group": "Kültür;Genel",
     "tvgId": "TRTGenc.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://tv-trtgenc.medya.trt.com.tr/master.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "TRT Kurdi (720p)",
@@ -2903,7 +4685,13 @@
     "group": "Diğer",
     "tvgId": "TRTKurdi.tr@SD",
     "source": "Türkiye",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://tv-trtkurdi.medya.trt.com.tr/master.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "TRT Muzik (720p)",
@@ -2912,7 +4700,13 @@
     "group": "Müzik",
     "tvgId": "TRTMuzik.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://tv-trtmuzik.medya.trt.com.tr/master.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "TRT Spor Yildiz (1440p) [Geo-blocked]",
@@ -2921,7 +4715,13 @@
     "group": "Spor",
     "tvgId": "TRTSporYildiz.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://trt.daioncdn.net/trtspor-yildiz/master.m3u8?app=web&platform=trtspor",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "TRT Turk (720p)",
@@ -2930,7 +4730,13 @@
     "group": "Diğer",
     "tvgId": "TRTTurk.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://tv-trtturk.medya.trt.com.tr/master.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "TurkHaber TV (720p)",
@@ -2939,7 +4745,13 @@
     "group": "Haber",
     "tvgId": "TurkHaberTV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://edge1.socialsmart.tv/turkhaber/bant1/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "TV 4 (720p)",
@@ -2948,7 +4760,13 @@
     "group": "Diğer",
     "tvgId": "TV4.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://turkmedya-live.ercdn.net/tv4/tv4.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "TV 52 (720p) [Not 24/7]",
@@ -2957,7 +4775,13 @@
     "group": "Diğer",
     "tvgId": "TV52.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://edge1.socialsmart.tv/tv52/bant1/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Ulke TV",
@@ -2966,7 +4790,13 @@
     "group": "Diğer",
     "tvgId": "UlkeTV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "http://217.174.229.138:8000/play/a0el",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Urfa Natik TV (720p)",
@@ -2975,7 +4805,13 @@
     "group": "Diğer",
     "tvgId": "UrfaNatikTV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_urfanatiktv/urfanatiktv/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Van 65 TV",
@@ -2984,7 +4820,13 @@
     "group": "Genel",
     "tvgId": "Van65TV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://live.artidijitalmedya.com/artidijital_van65/van65/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Vav TV",
@@ -2993,7 +4835,13 @@
     "group": "Diğer",
     "tvgId": "VavTV.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://playlist.fasttvcdn.com/pl/rfrk9821hdy9dayo8wfyha/kltr-sanat-tv/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Viasat History (Turkiye) (720p)",
@@ -3002,7 +4850,13 @@
     "group": "Belgesel",
     "tvgId": "ViasatHistory.tr@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://nord.ayakkabiparti.lol/viasathistory/index.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "West Azerbaijan TV",
@@ -3011,7 +4865,13 @@
     "group": "Genel",
     "tvgId": "WestAzerbaijanTV.ir@SD",
     "source": "Türkçe",
-    "rank": 200000
+    "rank": 200000,
+    "urls": [
+      {
+        "url": "https://ncdn.telewebion.ir/azarbayjangharbi/live/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Demo · Apple BipBop",
@@ -3020,7 +4880,13 @@
     "group": "Demo",
     "tvgId": "",
     "source": "Demo",
-    "rank": 300000
+    "rank": 300000,
+    "urls": [
+      {
+        "url": "https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_fmp4/master.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Demo · Big Buck Bunny",
@@ -3029,7 +4895,13 @@
     "group": "Demo",
     "tvgId": "",
     "source": "Demo",
-    "rank": 300000
+    "rank": 300000,
+    "urls": [
+      {
+        "url": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Demo · Mux PTS Shift",
@@ -3038,7 +4910,13 @@
     "group": "Demo",
     "tvgId": "",
     "source": "Demo",
-    "rank": 300000
+    "rank": 300000,
+    "urls": [
+      {
+        "url": "https://test-streams.mux.dev/pts_shift/master.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   },
   {
     "name": "Demo · Tears of Steel",
@@ -3047,6 +4925,12 @@
     "group": "Demo",
     "tvgId": "",
     "source": "Demo",
-    "rank": 300000
+    "rank": 300000,
+    "urls": [
+      {
+        "url": "https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.ism/.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ]
   }
 ]

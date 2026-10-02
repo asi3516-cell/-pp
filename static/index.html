@@ -4,8 +4,14 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0b0f19" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="IPTV Player" />
 <title>IPTV Player</title>
 <link rel="icon" href="icons/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="icons/logo.svg" />
+<link rel="manifest" href="manifest.webmanifest" />
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -137,6 +143,14 @@
       <span id="macStatus" class="muted"></span>
     </div>
 
+    <hr class="sep" />
+    <p class="muted"><b>İndir &amp; telefonda aç</b> — kanal listesini uygulamaya (M3U), programı bilgisayara indirin. Telefonda bu sayfayı tarayıcıda açıp menüden <b>“Ana ekrana ekle”</b> derseniz uygulama gibi çalışır.</p>
+    <div class="dlg-actions">
+      <a class="btn" href="channels.m3u" download>⬇ Kanal listesi (M3U)</a>
+      <a class="btn ghost" href="download/all">⬇ Tüm paket (ZIP)</a>
+      <a class="btn ghost" href="download/player">⬇ Program (tek dosya)</a>
+    </div>
+
     <p class="muted" style="margin:6px 0 0">Yedekleme / taşıma — listenizi dosyaya indirip başka cihazda geri yükleyin.</p>
     <div class="dlg-actions">
       <button id="exportPl" type="button" class="btn ghost">⬇ Yedek indir (JSON)</button>
@@ -182,5 +196,12 @@
 
 <script src="vendor/hls.min.js"></script>
 <script src="app.js"></script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("sw.js").catch(function () {});
+  });
+}
+</script>
 </body>
 </html>

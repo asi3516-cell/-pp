@@ -139,3 +139,28 @@ yapısı yalnızca macOS'ta üretilir. Üçü için birden GitHub Actions iş ak
 - Tarayıcı, `https` sayfadan `http` yayın açamaz (mixed content). Böyle durumlarda
   `/api/proxy` kullanılır, ancak kaynak yine de erişilebilir olmalıdır.
 - Yalnızca erişim hakkına sahip olduğunuz yayınları oynatın.
+
+## Telefon (Android) kullanımı
+
+- **En kolay yol:** Bu sunucu adresini telefon tarayıcısında aç. Chrome menüsünden
+  **“Ana ekrana ekle”** (Add to Home screen) seçeneğini kullan; uygulama tam ekran
+  açılır ve simge gibi görünür (PWA). iOS/Safari'de **Paylaş → Ana Ekrana Ekle**.
+- **Kendi IPTV uygulamanı kullanmak istersen:** Kanal listesini indir
+  (`/channels.m3u`) ve telefonundaki uygulamaya (VLC, IPTV Pro, Tivimate vb.)
+  bu dosyayı veya adresi ver.
+
+## Kanal listesi indirme
+
+| Ne | Adres |
+|----|-------|
+| Kanal listesi (M3U, 370 kayıt) | `/channels.m3u` |
+| Tüm paket (kaynak + program + liste) | `/download/all` |
+| Tek dosyalık program | `/download/player` |
+
+## Sunucu ne kadar çalışır?
+
+Bu adres, kodun çalıştığı **sandbox/oturum** yaşadığı sürece açıktır. Yeni bir
+oturum başında bu geçici adres değişir/silinir. Kalıcı bir adres için paketi
+indirip kendi bilgisayarında ya da bir sunucuda `python server.py` ile
+çalıştır; veriler (`data/store.json`) ve liste (`data/channels.json`) yanında
+durur, favoriler/playlistler kaybolmaz.

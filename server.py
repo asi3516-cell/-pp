@@ -262,7 +262,46 @@ class Handler(BaseHTTPRequestHandler):
             return self._download_player(head_only)
         if path == "/download/all":
             return self._download_all(head_only)
+        if path == "/channels.m3u":
+            return self._download_channels(head_only)
         return self._static(path, head_only)
+
+    def _download_channels(self, head_only: bool) -> None:
+        """Serve the merged Turkish list as a plain M3U, so it can be opened in
+        any IPTV app (Android, VLC, TV boxes). Every stream alternative becomes
+        its own entry, so same-name backups appear as separate lines."""
+        lines = ["#EXTM3U"]
+        defaults = BUNDLED_DATA_DIR / "channels.json"
+        channels = []
+        if defaults.exists():
+            try:
+                channels = json.loads(defaults.read_text("utf-8"))
+            except (OSError, ValueError):
+                pass
+        for ch in channels:
+            name = ch.get("name", "Kanal")
+            logo = ch.get("logo", "")
+            group = ch.get("group", "Genel")
+            urls = ch.get("urls") or [{"url": ch.get("url", ""), "label": ""}]
+            for i, item in enumerate(urls):
+                url = item.get("url") if isinstance(item, dict) else item
+                if not url:
+                    continue
+                label = item.get("label", "") if isinstance(item, dict) else ""
+                title = name if i == 0 else f"{name} (yedek: {label})"
+                lines.append(
+                    f'#EXTINF:-1 tvg-logo="{logo}" group-title="{group}",{title}')
+                lines.append(url)
+        body = ("\n".join(lines) + "\n").encode("utf-8")
+        self.send_response(200)
+        self._cors()
+        self.send_header("Content-Type", "audio/x-mpegurl; charset=utf-8")
+        self.send_header("Content-Disposition",
+                         'attachment; filename="turkce-kanallar.m3u"')
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        if not head_only:
+            self.wfile.write(body)
 
     def _download_all(self, head_only: bool) -> None:
         """Serve the whole project (source + built binary + channel list) as a

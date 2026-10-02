@@ -16,7 +16,9 @@
     current: null,
     group: "all",
     tab: "all",
-    query: ""
+    query: "",
+    queue: [],
+    streamIdx: 0
   };
 
   var video = $("#video");
@@ -161,13 +163,25 @@
   }
 
   function normalize(ch) {
+    var raw = ch.urls;
+    var urls = [];
+    if (raw && raw.length) {
+      raw.forEach(function (u) {
+        if (typeof u === "string") urls.push({ url: u, label: "" });
+        else if (u && u.url) urls.push({ url: u.url, label: u.label || "" });
+      });
+    } else if (ch.url) {
+      urls.push({ url: ch.url, label: "" });
+    }
     return {
       name: ch.name || "Unnamed",
-      url: ch.url,
+      url: (urls[0] && urls[0].url) || ch.url,
+      urls: urls,
       logo: ch["tvg-logo"] || ch.logo || "",
       group: ch["group-title"] || ch.group || "Genel",
       tvgId: ch["tvg-id"] || ch.tvgId || "",
-      source: ch.source || "Özel"
+      source: ch.source || "Özel",
+      headers: ch.headers || null
     };
   }
 
@@ -265,38 +279,91 @@
     state.filtered = list;
   }
 
+  function logoHue(name) {
+    var h = 0;
+    for (var i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) % 360;
+    return h;
+  }
+
   function render() {
     applyFilter();
     var box = $("#channels");
     box.innerHTML = "";
-    var tpl = $("#chRow");
     var frag = document.createDocumentFragment();
 
     state.filtered.slice(0, 1500).forEach(function (ch) {
-      var node = tpl.content.firstElementChild.cloneNode(true);
+      var node = document.createElement("div");
+      node.className = "ch";
+      node.tabIndex = 0;
       node.dataset.url = ch.url;
       if (state.current && state.current.url === ch.url) node.classList.add("active");
-      $(".ch-name", node).textContent = ch.name;
-      $(".ch-sub", node).textContent = ch.group || "Genel";
 
-      var img = $(".ch-logo img", node);
-      var ph = $(".ch-logo .ph", node);
-      ph.textContent = (ch.name || "?").trim().charAt(0).toUpperCase();
+      var logo = document.createElement("div");
+      logo.className = "ch-logo";
+      var initial = (ch.name || "?").trim().charAt(0).toUpperCase();
+      logo.style.background =
+        "linear-gradient(135deg,hsl(" + logoHue(ch.name || "") + " 55% 34%),hsl(" +
+        ((logoHue(ch.name || "") + 40) % 360) + " 55% 22%))";
+      var ph = document.createElement("span");
+      ph.className = "ph";
+      ph.textContent = initial;
+      logo.appendChild(ph);
       if (ch.logo) {
+        var img = document.createElement("img");
+        img.alt = "";
+        img.loading = "lazy";
+        img.onload = function () { ph.style.display = "none"; };
+        img.onerror = function () { img.remove(); };
         img.src = ch.logo;
-        img.onerror = function () { img.removeAttribute("src"); };
-      } else {
-        img.removeAttribute("src");
+        logo.appendChild(img);
       }
 
-      var favBtn = $(".ch-fav", node);
-      if (isFav(ch.url)) { favBtn.classList.add("on"); favBtn.textContent = "★"; }
-      favBtn.onclick = function (ev) {
-        ev.stopPropagation();
-        toggleFav(ch.url);
-      };
+      var text = document.createElement("div");
+      text.className = "ch-text";
+      var nm = document.createElement("span");
+      nm.className = "ch-name";
+      nm.textContent = ch.name;
+      var sub = document.createElement("span");
+      sub.className = "ch-sub muted";
+      sub.textContent = ch.group || "Genel";
+      text.appendChild(nm);
+      text.appendChild(sub);
 
-      node.onclick = function () { play(ch); };
+      var favBtn = document.createElement("button");
+      favBtn.className = "ch-fav" + (isFav(ch.url) ? " on" : "");
+      favBtn.textContent = isFav(ch.url) ? "★" : "☆";
+      favBtn.title = "Favori";
+      favBtn.onclick = function (ev) { ev.stopPropagation(); toggleFav(ch.url); };
+
+      var head = document.createElement("div");
+      head.className = "ch-head";
+      head.appendChild(logo);
+      head.appendChild(text);
+      head.appendChild(favBtn);
+      head.onclick = function () { play(ch); };
+      node.appendChild(head);
+
+      // Stream alternatives: the bundled list first, the site's stream below.
+      if (ch.urls && ch.urls.length > 1) {
+        var alts = document.createElement("div");
+        alts.className = "ch-alts";
+        var label = document.createElement("span");
+        label.className = "alt-label";
+        label.textContent = ch.urls.length + " yayın:";
+        alts.appendChild(label);
+        ch.urls.forEach(function (a, idx) {
+          var b = document.createElement("button");
+          b.className = "alt" + (idx === 0 ? " primary" : "");
+          b.textContent = (idx + 1) + ". " + (a.label || "yayın");
+          b.onclick = function (ev) {
+            ev.stopPropagation();
+            play(ch, a.url);
+          };
+          alts.appendChild(b);
+        });
+        node.appendChild(alts);
+      }
+
       node.onkeydown = function (ev) {
         if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); play(ch); }
       };
@@ -341,20 +408,50 @@
     if (hls) { try { hls.destroy(); } catch (e) {} hls = null; }
   }
 
-  function play(ch) {
+  function play(ch, overrideUrl) {
     state.current = ch;
     pushRecent(ch.url);
     render();
+
+    var streams = (ch.urls && ch.urls.length) ? ch.urls.slice() : [{ url: ch.url, label: "" }];
+    var start = 0;
+    if (overrideUrl) {
+      var idx = streams.map(function (s) { return s.url; }).indexOf(overrideUrl);
+      if (idx > 0) { streams.splice(0, 0, streams.splice(idx, 1)[0]); }
+    }
+    state.queue = streams;
+    state.streamIdx = start;
 
     $("#npName").textContent = ch.name;
     $("#npMeta").textContent = (ch.group || "Genel") + " · " + (ch.source || "");
     $("#iName").textContent = ch.name;
     $("#iGroup").textContent = ch.group || "Genel";
     $("#iSource").textContent = ch.source || "—";
-    $("#iUrl").textContent = ch.url;
     updateFavBtn();
     loadEpgFor(ch);
     if (window.innerWidth <= 900) $("#sidebar").classList.remove("open");
+    loadStream(0);
+  }
+
+  function loadStream(i) {
+    var ch = state.current;
+    if (!ch) return;
+    var streams = state.queue || [];
+    if (i >= streams.length) {
+      spinner.hidden = true;
+      destroyHls();
+      setOverlay(true,
+        "<h2>Yayın açılamadı</h2><p>Denenen tüm yayın adresleri yanıt vermedi. " +
+        "Kaynak coğrafi olarak engelli olabilir.</p>");
+      return;
+    }
+    state.streamIdx = i;
+    var stream = streams[i];
+    var url = stream.url;
+
+    $("#iUrl").textContent = url;
+    $("#npMeta").textContent = (ch.group || "Genel") + " · " + (stream.label || ch.source || "");
+    if (i > 0) showOsd("Yedek yayın " + i + " deneniyor: " + (stream.label || ""));
 
     destroyHls();
     spinner.hidden = false;
@@ -363,23 +460,25 @@
     video.load();
 
     // MAC/portal streams need the session headers, so always go via the proxy.
-    var url = ch.headers ? proxyFor(ch, ch.url) : ch.url;
-    var lower = ch.url.split("?")[0].toLowerCase();
+    var src = ch.headers ? proxyFor(ch, url) : url;
+    var lower = url.split("?")[0].toLowerCase();
 
     if (/\.(mp4|webm|ogv|m4v|mov)$/.test(lower)) {
-      video.src = url;
+      video.src = src;
       finishInit();
+      video.onerror = function () { loadStream(i + 1); };
       return;
     }
 
     if (window.Hls && Hls.isSupported()) {
-      startHls(url);
+      startHls(src, i);
       return;
     }
 
     if (video.canPlayType("application/vnd.apple.mpegurl")) {
-      video.src = url; // native HLS (Safari / iOS)
+      video.src = src; // native HLS (Safari / iOS)
       finishInit();
+      video.onerror = function () { loadStream(i + 1); };
       return;
     }
 
@@ -387,7 +486,7 @@
     spinner.hidden = true;
   }
 
-  function startHls(url) {
+  function startHls(url, index) {
     hls = new Hls({
       lowLatencyMode: true,
       enableWorker: true,
@@ -402,36 +501,23 @@
     hls.on(Hls.Events.ERROR, function (evt, data) {
       if (!data || !data.fatal) return;
       // CORS or network trouble: retry once through the server-side proxy.
-      if (!triedProxy) {
+      if (!triedProxy && data.type === Hls.ErrorTypes.NETWORK_ERROR) {
         triedProxy = true;
         showOsd("Sunucu üzerinden yeniden deneniyor...");
         hls.loadSource(proxied(url, { h: originOf(url) }));
         hls.startLoad();
         return;
       }
-      if (data.type === Hls.ErrorTypes.NETWORK_ERROR) {
-        showOsd("Ağ hatası, tekrar deneniyor...");
-        hls.startLoad();
-      } else if (data.type === Hls.ErrorTypes.MEDIA_ERROR) {
-        showOsd("Medya hatası, kurtarılıyor...");
-        hls.recoverMediaError();
-      } else {
-        fail(data);
-      }
+      // Still fatal: fall through to the next stream alternative.
+      spinner.hidden = true;
+      destroyHls();
+      loadStream(index + 1);
     });
 
     hls.on(Hls.Events.MANIFEST_PARSED, function () {
       finishInit();
       video.play().catch(function () { showOsd("Oynatmak için ▶ tuşuna basın"); });
     });
-
-    function fail(data) {
-      spinner.hidden = true;
-      destroyHls();
-      setOverlay(true,
-        "<h2>Yayın açılamadı</h2><p>Kaynak yanıt vermiyor veya coğrafi/bölgesel olarak engelli olabilir.</p>" +
-        "<p class='muted'>" + escapeHtml(String(data && data.details || "")) + "</p>");
-    }
 
     hls.loadSource(url);
     hls.attachMedia(video);

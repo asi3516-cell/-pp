@@ -17,7 +17,7 @@
   {
     "name": "Show TV",
     "url": "https://rmtftbjlne.turknet.ercdn.net/bpeytmnqyp/showtv/showtv.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/show-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -308,7 +308,7 @@
   {
     "name": "Tivibu Spor",
     "url": "https://yayin2.canlitv.fun/live/tivibuspor.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/tivibu-spor-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -342,7 +342,7 @@
   {
     "name": "TRT Spor Yıldız",
     "url": "https://tv-trtspor2.medya.trt.com.tr/master.m3u8",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/trt-spor-yildiz-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -436,7 +436,7 @@
   {
     "name": "Yaban TV",
     "url": "https://yayin1.canlitv.fun/canlitv/yabantv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/yaban-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -451,7 +451,7 @@
   {
     "name": "TRT Çocuk",
     "url": "https://tv-trtcocuk.medya.trt.com.tr/master.m3u8",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/trt-cocuk-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -594,7 +594,7 @@
   {
     "name": "A Para",
     "url": "https://trkvz.daioncdn.net/apara/apara.m3u8",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/a-para-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -673,7 +673,7 @@
   {
     "name": "Cem Tv",
     "url": "https://panel.5gtvhosting.com:2020/hls/cemtv/cemtv.m3u8",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/cem-tv-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -707,7 +707,7 @@
   {
     "name": "Tv4",
     "url": "https://turkmedya-live.ercdn.net/tv4/tv4.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/tv4-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -722,7 +722,7 @@
   {
     "name": "Show Max",
     "url": "https://rmtftbjlne.turknet.ercdn.net/bpeytmnqyp/showmax/showmax.m3u8",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/show-max-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -850,7 +850,7 @@
   {
     "name": "Lalegül Tv",
     "url": "https://lbl.netmedya.net/hls/lalegultv.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/lalegul-tv-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -865,7 +865,7 @@
   {
     "name": "Rehber Tv",
     "url": "https://cdn4.yayin.com.tr/rehbertv/tracks-v1a1/mono.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/rehber-tv-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -963,7 +963,7 @@
   {
     "name": "TRT Genç",
     "url": "https://tv-trtgenc.medya.trt.com.tr/master.m3u8",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/trt-gen%C3%A7-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -978,7 +978,7 @@
   {
     "name": "TRT Türk",
     "url": "https://tv-trtturk.medya.trt.com.tr/master.m3u8",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/trt-turk-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -1008,7 +1008,7 @@
   {
     "name": "TRT Kürdi",
     "url": "https://tv-trtkurdi.medya.trt.com.tr/master.m3u8",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/trt-kurdi-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -1023,7 +1023,7 @@
   {
     "name": "TRT Müzik",
     "url": "https://tv-trtmuzik.medya.trt.com.tr/master.m3u8",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/trt-muzik-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -1106,7 +1106,7 @@
   {
     "name": "Power Türk",
     "url": "http://livetv.powerapp.com.tr/powerturkTV/powerturkhd.smil/playlist.m3u8",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/powerturk-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -1121,7 +1121,7 @@
   {
     "name": "Power Türk Slow",
     "url": "https://listen.powerapp.com.tr/pturkslow/slow.smil/chunks.m3u8",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/powerturk-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -1155,7 +1155,7 @@
   {
     "name": "Kon TV",
     "url": "https://canli.kontv.com.tr/live/kontv.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/kon-tv-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -1223,7 +1223,7 @@
   {
     "name": "Tivi6",
     "url": "https://live.artidijitalmedya.com/artidijital_tivi6/tivi6/chunks.m3u8",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/tivi6-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -1253,7 +1253,7 @@
   {
     "name": "Tv Kayseri",
     "url": "https://yayin1.canlitv.fun/canlitv/tvkayseri.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/tv-kayseri-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -1449,7 +1449,7 @@
   {
     "name": "Kanal Sim",
     "url": "https://yayin1.canlitv.fun/canlitv/kanalsim.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/kanal-sim-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -1464,7 +1464,7 @@
   {
     "name": "Kanal T",
     "url": "https://edge.kuzeykibrissmart.tv/kanalt/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/kanal-t-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -1479,7 +1479,7 @@
   {
     "name": "BRT 1",
     "url": "https://edge.kuzeykibrissmart.tv/brt1hd/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/brt-1-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -1494,7 +1494,7 @@
   {
     "name": "BRT 2",
     "url": "https://edge.kuzeykibrissmart.tv/brt2hd/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/brt-2-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -1509,7 +1509,7 @@
   {
     "name": "Kardelen Tv",
     "url": "https://edge2.taksimbilisim.com/kardelentv/bant1/chunks.m3u8",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/kardelen-tv-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -1554,7 +1554,7 @@
   {
     "name": "Tarım Tv",
     "url": "https://content.tvkur.com/l/c7e1da7mm25p552d9u9g/master.m3u8",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/tarim-tv-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -1569,7 +1569,7 @@
   {
     "name": "Köy Tv",
     "url": "https://yayin1.canlitv.fun/canlitv/koytv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/koy-tv-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -1584,7 +1584,7 @@
   {
     "name": "Çiftçi Tv",
     "url": "https://live.artidijitalmedya.com/artidijital_ciftcitv/ciftcitv/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/ciftci-tv-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -1599,7 +1599,7 @@
   {
     "name": "Toprak TV",
     "url": "https://yayin1.canlitv.fun/canlitv/topraktv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/toprak-tv-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -1734,7 +1734,7 @@
   {
     "name": "Flash Tv",
     "url": "https://b01c02nl.mediatriple.net/videoonlylive/mtyycglqauzjhlive/broadcast_67c053c48829f.smil/mt_0.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/flash-tv-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -2017,7 +2017,7 @@
   {
     "name": "TV52",
     "url": "https://edge2.taksimbilisim.com/tv52/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/tv52-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -2202,7 +2202,7 @@
   {
     "name": "Kanal Urfa",
     "url": "https://edge2.taksimbilisim.com/kanalurfa/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/kanal-urfa-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -2277,7 +2277,7 @@
   {
     "name": "Kanal Fırat",
     "url": "https://live.artidijitalmedya.com/artidijital_kanalfirat/kanalfirat/chunks.m3u8",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/kanal-firat-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -2364,7 +2364,7 @@
   {
     "name": "Kanal B",
     "url": "https://tv.kanalb.tr/hls/kanalb/index.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/kanal-b-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -2394,7 +2394,7 @@
   {
     "name": "Çay Tv",
     "url": "https://edge.taksimbilisim.com/caytv/bant1/playlist.m3u8",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/cay-tv-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -2409,7 +2409,7 @@
   {
     "name": "Mavi Karadeniz Tv",
     "url": "https://live.artidijitalmedya.com/artidijital_mavikaradeniz/mavikaradeniz/chunks.m3u8",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/mavi-karadeniz-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -2424,7 +2424,7 @@
   {
     "name": "Kanal Avrupa",
     "url": "https://cdn-kanalavrupa.yayin.com.tr/kanalavrupa/tracks-v2a1/mono.m3u8",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/kanal-avrupa-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -2729,7 +2729,7 @@
   {
     "name": "Altaş Tv",
     "url": "https://edge1.taksimbilisim.com/altastv/bant1/chunks.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/altas-tv-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -3038,7 +3038,7 @@
   {
     "name": "Sat7 Türk",
     "url": "https://live.artidijitalmedya.com/artidijital_sat7turk/sat7turk/chunks.m3u8",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/sat7-turk-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -3098,7 +3098,7 @@
   {
     "name": "Kent Türk TV",
     "url": "https://live.artidijitalmedya.com/artidijital_kentturktv/kentturktv/chunks.m3u8?hash=b8a4c059a708b2aaabd02a9d87e7e409",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/kent-turk-tr.png",
     "group": "Türkiye",
     "tvgId": "",
     "source": "Canlitv",
@@ -3747,7 +3747,7 @@
   {
     "name": "Flash Haber TV",
     "url": "https://b01c02nl.mediatriple.net/videoonlylive/mtyycglqauzjhlive/broadcast_67c053c48829f.smil/playlist.m3u8",
-    "logo": "",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/flash-haber-tr.png",
     "group": "Haber",
     "tvgId": "FlashHaberTV.tr@SD",
     "source": "Türkçe",

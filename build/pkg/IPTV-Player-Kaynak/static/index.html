@@ -37,6 +37,20 @@
       <button class="tab" data-filter="recent">Son</button>
     </div>
 
+    <div class="tabs kinds" id="kinds">
+      <button class="tab active" data-kind="all">Hepsi</button>
+      <button class="tab" data-kind="live">📺 Canlı TV</button>
+      <button class="tab" data-kind="vod">🎬 Film</button>
+      <button class="tab" data-kind="series">📽 Dizi</button>
+    </div>
+
+    <div class="source-bar">
+      <span class="source-title">Liste</span>
+      <button id="srcPrev" class="src-nav" title="Önceki liste">‹</button>
+      <div class="sources" id="sources"></div>
+      <button id="srcNext" class="src-nav" title="Sonraki liste">›</button>
+    </div>
+
     <div class="groups" id="groups"></div>
 
     <div class="channel-list" id="channels" role="list"></div>
@@ -116,6 +130,29 @@
       </label>
     </div>
 
+    <hr class="sep" />
+    <p class="muted"><b>Xtream Codes / XUI (kullanıcı adı + şifre)</b> — aboneliğinizin portal adresi ile kullanıcı adı ve şifresini girin.</p>
+    <label class="field">
+      <span>Portal adresi</span>
+      <input id="xcPortal" type="url" placeholder="http://panel.ornek.com:8080" />
+    </label>
+    <label class="field">
+      <span>Kullanıcı adı</span>
+      <input id="xcUser" type="text" placeholder="kullanici" autocomplete="off" />
+    </label>
+    <label class="field">
+      <span>Şifre</span>
+      <input id="xcPass" type="password" placeholder="sifre" autocomplete="off" />
+    </label>
+    <label class="field">
+      <span>Ad (opsiyonel)</span>
+      <input id="xcName" type="text" placeholder="Ana liste" />
+    </label>
+    <div class="dlg-actions">
+      <button id="addXc" type="button" class="btn">XC hesabı ekle</button>
+      <span id="xcStatus" class="muted"></span>
+    </div>
+
     <label class="field">
       <span>XMLTV (EPG) adresi</span>
       <input id="epgUrl" type="url" placeholder="https://ornek.com/epg.xml" />
@@ -144,18 +181,9 @@
     </div>
 
     <hr class="sep" />
-    <p class="muted"><b>İndir &amp; telefonda aç</b> — kanal listesini uygulamaya (M3U), programı bilgisayara indirin. Telefonda bu sayfayı tarayıcıda açıp menüden <b>“Ana ekrana ekle”</b> derseniz uygulama gibi çalışır.</p>
+    <p class="muted"><b>Yedekleme / taşıma</b> — listenizi dosyaya indirip başka cihazda geri yükleyin.</p>
     <div class="dlg-actions">
-      <a class="btn" href="download/apk">⬇ Android APK</a>
-      <a class="btn ghost" href="download/windows-rar">⬇ Windows paketi (RAR)</a>
-      <a class="btn ghost" href="download/source-rar">⬇ Kaynak kod (RAR, exe'siz)</a>
       <a class="btn ghost" href="channels.m3u" download>⬇ Kanal listesi (M3U)</a>
-      <a class="btn ghost" href="download/all">⬇ Tüm paket (ZIP)</a>
-      <a class="btn ghost" href="download/player">⬇ Masaüstü program</a>
-    </div>
-
-    <p class="muted" style="margin:6px 0 0">Yedekleme / taşıma — listenizi dosyaya indirip başka cihazda geri yükleyin.</p>
-    <div class="dlg-actions">
       <button id="exportPl" type="button" class="btn ghost">⬇ Yedek indir (JSON)</button>
       <label class="btn ghost file">
         ⬆ Yedek / M3U yükle

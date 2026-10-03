@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import json
 import re
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -217,10 +218,74 @@ def main() -> None:
         items.append(g)
 
     items.sort(key=lambda c: (c["rank"], c["name"].casefold()))
+    fill_logos(items)
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(items, ensure_ascii=False, indent=2), "utf-8")
     multi = sum(1 for c in items if len(c["urls"]) > 1)
     print(f"wrote {len(items)} channels ({multi} with alternatives) -> {OUT}")
+
+
+# Curated aliases for channels whose names differ from the tv-logos filename.
+LOGO_ALIAS = {
+    "show-tv": "show-tr.png", "show-max": "show-max-tr.png",
+    "trt-spor-yildiz": "trt-spor-yildiz-tr.png", "trt-cocuk": "trt-cocuk-tr.png",
+    "trt-turk": "trt-turk-tr.png", "trt-kurdi": "trt-kurdi-tr.png",
+    "trt-muzik": "trt-muzik-tr.png", "a-para": "a-para-tr.png",
+    "power-turk": "powerturk-tr.png", "power-turk-slow": "powerturk-tr.png",
+    "yaban-tv": "yaban-tr.png", "ekoturk": "ekoturk-tr.png",
+    "flash-haber-tv": "flash-haber-tr.png", "kent-turk-tv": "kent-turk-tr.png",
+    "sat7-turk": "sat7-turk-tr.png", "mavi-karadeniz-tv": "mavi-karadeniz-tr.png",
+    "cem-tv": "cem-tv-tr.png", "tarim-tv": "tarim-tv-tr.png",
+    "koy-tv": "koy-tv-tr.png", "ciftci-tv": "ciftci-tv-tr.png",
+    "toprak-tv": "toprak-tv-tr.png", "kanal-avrupa": "kanal-avrupa-tr.png",
+    "tivibu-spor": "tivibu-spor-tr.png",
+}
+LOGO_BASE = ("https://raw.githubusercontent.com/tv-logo/tv-logos/"
+             "main/countries/turkey/")
+
+
+def logo_slug(name: str) -> str:
+    s = name.lower()
+    for a, b in (("ı", "i"), ("ş", "s"), ("ğ", "g"), ("ü", "u"),
+                 ("ö", "o"), ("ç", "c"), ("â", "a"), ("î", "i")):
+        s = s.replace(a, b)
+    s = re.sub(r"\((?:1080p|720p|576p|1440p|480p|hd|sd)\)", " ", s)
+    return re.sub(r"[^a-z0-9]+", "-", s).strip("-")
+
+
+def fetch_logo_index() -> dict[str, str]:
+    """Map slug -> filename for the tv-logos Turkey set. Best-effort: an empty
+    index just means we keep the placeholder initials in the UI."""
+    try:
+        raw = fetch("https://api.github.com/repos/tv-logo/tv-logos/"
+                    "contents/countries/turkey?per_page=200")
+        files = [f["name"] for f in json.loads(raw) if f["name"].endswith(".png")]
+    except Exception as exc:
+        print(f"! logo list unavailable ({exc}); using aliases only")
+        return {}
+    index: dict[str, str] = {}
+    for f in files:
+        base = f[:-4]
+        if base.endswith("-tr"):
+            base = base[:-3]
+        index.setdefault(logo_slug(base), f)
+    return index
+
+
+def fill_logos(items: list[dict]) -> None:
+    """Give channels that came without a logo one from the tv-logos set, so
+    popular Turkish channels no longer show a bare initial."""
+    index = fetch_logo_index()
+    filled = 0
+    for ch in items:
+        if ch.get("logo"):
+            continue
+        key = logo_slug(ch["name"])
+        fname = LOGO_ALIAS.get(key) or index.get(key)
+        if fname:
+            ch["logo"] = LOGO_BASE + urllib.parse.quote(fname)
+            filled += 1
+    print(f"+ {filled} logos filled from tv-logos")
 
 
 if __name__ == "__main__":

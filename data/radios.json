@@ -1,18 +1,19 @@
 [
   {
     "name": "Arabesk FM",
-    "url": "http://yayin.arabeskfm.biz:8042/",
+    "url": "https://yayin.radyoarabesk.com.tr:8000/stream",
     "logo": "",
     "group": "Radyo",
     "tvgId": "",
     "source": "Radyo",
     "kind": "radio",
     "votes": 28505,
-    "homepage": "http://www.arabeskfm.biz/",
+    "homepage": "https://s1lhouttefm.radiostream123.com/",
     "tags": [
       "müzik",
       "türkçe"
-    ]
+    ],
+    "fixed": true
   },
   {
     "name": "Virgin Radio Türkiye",
@@ -30,7 +31,7 @@
   },
   {
     "name": "DAMAR TURK FM",
-    "url": "https://live.radyositesihazir.com:10997/",
+    "url": "https://live.radyositesihazir.com:10997/;",
     "logo": "https://www.damarturkfm.com/favicon.ico",
     "group": "Radyo",
     "tvgId": "",
@@ -38,19 +39,21 @@
     "kind": "radio",
     "votes": 16821,
     "homepage": "https://www.damarturkfm.com/",
-    "tags": []
+    "tags": [],
+    "fixed": true
   },
   {
     "name": "Radyo 7",
-    "url": "http://46.20.3.250/;stream",
+    "url": "https://anadolu.liderhost.com.tr/8126/stream",
     "logo": "https://cdn.kanal7.com/radyo7//application/assets/home/common/images/apple-touch-icon-114x114.png",
     "group": "Radyo",
     "tvgId": "",
     "source": "Radyo",
     "kind": "radio",
     "votes": 16684,
-    "homepage": "http://www.radyo7.com/",
-    "tags": []
+    "homepage": "https://anadolu.liderhost.com.tr/8126/stream",
+    "tags": [],
+    "fixed": true
   },
   {
     "name": "Türkülerle Türkiye",
@@ -125,7 +128,7 @@
   },
   {
     "name": "NTV Radyo",
-    "url": "http://46.20.3.207/listen.pls",
+    "url": "http://ntvrdwmp.radyotvonline.com/",
     "logo": "http://www.ntvradyo.com.tr/favicon.ico",
     "group": "Radyo",
     "tvgId": "",
@@ -138,7 +141,8 @@
       "haberler",
       "news",
       "türkçe"
-    ]
+    ],
+    "fixed": true
   },
   {
     "name": "Alem FM",
@@ -305,18 +309,6 @@
     "kind": "radio",
     "votes": 4619,
     "homepage": "http://37.247.98.8/stream/166/",
-    "tags": []
-  },
-  {
-    "name": "Pal station",
-    "url": "http://shoutcast.radyogrup.com:1020/",
-    "logo": "https://palstation106.com/img/logo/pal-station.ico",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 3887,
-    "homepage": "https://palstation106.com/",
     "tags": []
   },
   {
@@ -505,7 +497,7 @@
   },
   {
     "name": "Dost",
-    "url": "http://yayin1.yayindakiler.com:3156/",
+    "url": "http://yayin1.yayindakiler.com:3156/;",
     "logo": "http://dostfm.com/favicon.ico",
     "group": "Radyo",
     "tvgId": "",
@@ -513,7 +505,8 @@
     "kind": "radio",
     "votes": 1767,
     "homepage": "http://dostfm.com/",
-    "tags": []
+    "tags": [],
+    "fixed": true
   },
   {
     "name": "Metro fm turkey",
@@ -525,18 +518,6 @@
     "kind": "radio",
     "votes": 1692,
     "homepage": "https://playerservices.streamtheworld.com/api/livestream-redirect/METRO_FM_SC?",
-    "tags": []
-  },
-  {
-    "name": "Habertürk Radyo",
-    "url": "https://haberturkradyo.radyotvonline.net/haberturkradyo",
-    "logo": "https://www.haberturkradyo.com.tr/wp-content/uploads/2017/07/cropped-RADYO_LOGO_Son-180x180.png",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 1532,
-    "homepage": "https://www.haberturkradyo.com.tr/",
     "tags": []
   },
   {
@@ -585,17 +566,18 @@
   },
   {
     "name": "Radyo Spor",
-    "url": "http://46.20.4.5:8170/",
+    "url": "https://moondigitaledge.radyotvonline.net/radyospor/playlist.m3u8",
     "logo": "",
     "group": "Radyo",
     "tvgId": "",
     "source": "Radyo",
     "kind": "radio",
     "votes": 1461,
-    "homepage": "http://www.radyospor.com/",
+    "homepage": "https://moondigitaledge.radyotvonline.net/radyospor/playlist.m3u8",
     "tags": [
       "sport"
-    ]
+    ],
+    "fixed": true
   },
   {
     "name": "POWER TÜRK FM",
@@ -652,15 +634,16 @@
   },
   {
     "name": "Radyo ODTU",
-    "url": "http://stream.radyoodtu.com.tr/;",
+    "url": "https://stream3.radyoodtu.com.tr:8000/easy",
     "logo": "",
     "group": "Radyo",
     "tvgId": "",
     "source": "Radyo",
     "kind": "radio",
     "votes": 1206,
-    "homepage": "http://www.radyoodtu.com.tr/",
-    "tags": []
+    "homepage": "https://radyoodtu.com.tr/",
+    "tags": [],
+    "fixed": true
   },
   {
     "name": "Kafa Radyo",
@@ -742,29 +725,18 @@
   },
   {
     "name": "Radyo Ekin",
-    "url": "http://yayin.turkhosted.com:6006/",
-    "logo": "",
+    "url": "https://yayin.turkhosted.com/6006/stream",
+    "logo": "https://www.radyoekin.net/favicon.ico",
     "group": "Radyo",
     "tvgId": "",
     "source": "Radyo",
     "kind": "radio",
     "votes": 1102,
-    "homepage": "",
+    "homepage": "https://www.radyoekin.net/",
     "tags": [
       "classical"
-    ]
-  },
-  {
-    "name": "TRT FM",
-    "url": "https://trt.radyotvonline.net/trtfm",
-    "logo": "https://trt-public-static.trt.com.tr/eradyo/public/dm_upload/modul2/dd24ba9f-7f22-4b79-a226-9704169bd953.png",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 1089,
-    "homepage": "https://radyo.trt.net.tr/",
-    "tags": []
+    ],
+    "fixed": true
   },
   {
     "name": "Radio Ava Turkiye",
@@ -779,18 +751,6 @@
     "tags": [
       "pop music"
     ]
-  },
-  {
-    "name": "Magic FM",
-    "url": "http://yayin1.yayindakiler.com:3032/",
-    "logo": "",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 1067,
-    "homepage": "",
-    "tags": []
   },
   {
     "name": "Radyo A (Radyo Anadolu Üniversitesi)",
@@ -986,20 +946,6 @@
     "homepage": "",
     "tags": [
       "pop"
-    ]
-  },
-  {
-    "name": "Avrasya Türk Radyo",
-    "url": "https://sslyayin.netyayin.net:10909/",
-    "logo": "",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 877,
-    "homepage": "https://sslyayin.netyayin.net:10909/",
-    "tags": [
-      "classical"
     ]
   },
   {
@@ -1255,32 +1201,6 @@
     ]
   },
   {
-    "name": "Pir Yolu",
-    "url": "http://radyopiryolu.canliyayinda.com:8165/",
-    "logo": "http://radyopiryolu.canliyayinda.com:8165/favicon.ico",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 708,
-    "homepage": "http://radyopiryolu.canliyayinda.com:8165/",
-    "tags": [
-      "classical"
-    ]
-  },
-  {
-    "name": "TRT Radyo 1",
-    "url": "https://trt.radyotvonline.net/trt1",
-    "logo": "https://static.wikia.nocookie.net/logopedia/images/2/27/TRT_Radyo_1_logo.svg/",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 708,
-    "homepage": "https://radyo.trt.net.tr/kanallar/radyo-1",
-    "tags": []
-  },
-  {
     "name": "POWER XL TURKEY",
     "url": "https://listen.powerapp.com.tr/powerextralounge/abr/powerextralounge/96/playlist.m3u8",
     "logo": "",
@@ -1290,18 +1210,6 @@
     "kind": "radio",
     "votes": 704,
     "homepage": "https://listen.powerapp.com.tr/powerextralounge/abr/powerextralounge/96/playlist.m3u8",
-    "tags": []
-  },
-  {
-    "name": "KİSS LOVE RADYO TURKEY",
-    "url": "https://anadolu.liderhost.com.tr:10964/",
-    "logo": "",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 663,
-    "homepage": "https://anadolu.liderhost.com.tr:10964/",
     "tags": []
   },
   {
@@ -1350,18 +1258,6 @@
     "tags": [
       "classical"
     ]
-  },
-  {
-    "name": "Max Fm 95.8 Maximum Music",
-    "url": "http://live2.radyotvonline.com:8025/",
-    "logo": "",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 632,
-    "homepage": "http://www.maxfm.com.tr/",
-    "tags": []
   },
   {
     "name": "Gundi FM",
@@ -1415,18 +1311,6 @@
     "kind": "radio",
     "votes": 580,
     "homepage": "https://www.karadenizfm.com.tr/",
-    "tags": []
-  },
-  {
-    "name": "BİLECİK FM TURKEY",
-    "url": "http://bilecikfm.kesintisizyayin.com:9980/",
-    "logo": "",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 579,
-    "homepage": "http://bilecikfm.kesintisizyayin.com:9980/",
     "tags": []
   },
   {
@@ -1528,20 +1412,6 @@
     "tags": []
   },
   {
-    "name": "Radyo Slow Time",
-    "url": "http://46.20.7.103:8040/;",
-    "logo": "",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 488,
-    "homepage": "",
-    "tags": [
-      "classical"
-    ]
-  },
-  {
     "name": "Risalet Radyo",
     "url": "https://eustr73.mediatriple.net/videoonlylive/mtikoimxnztxlive/broadcast_5e3c1520b2626.smil/playlist.m3u8",
     "logo": "",
@@ -1552,32 +1422,6 @@
     "votes": 484,
     "homepage": "https://risaletradyo.com/Canli-Dinle",
     "tags": []
-  },
-  {
-    "name": "Cnn Türk Radyo",
-    "url": "https://moondigitaledge2.radyotvonline.net/cnnturk/playlist.m3u8?listeningSessionID=669e367246737fe5_6249184_Zq120UIn__0000001w2Bs&downloadSessionID=0",
-    "logo": "null",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 478,
-    "homepage": "http://cnnturk.com/",
-    "tags": []
-  },
-  {
-    "name": "Pazarcık",
-    "url": "http://yayin.pazarcikfm.com:9090/",
-    "logo": "",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 469,
-    "homepage": "",
-    "tags": [
-      "classical"
-    ]
   },
   {
     "name": "Türkiyem FM",
@@ -1618,18 +1462,6 @@
     "tags": []
   },
   {
-    "name": "GÖKKUŞAĞI RADYO TURKEY",
-    "url": "http://gokkusagiradyo.kesintisizyayin.com:8008/",
-    "logo": "",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 441,
-    "homepage": "http://gokkusagiradyo.kesintisizyayin.com:8008/",
-    "tags": []
-  },
-  {
     "name": "Radyo Hayat",
     "url": "http://live4.radyotvonline.com:9450/",
     "logo": "",
@@ -1656,22 +1488,6 @@
     ]
   },
   {
-    "name": "Radyo Trafik 104.2 Ankara",
-    "url": "http://live2.radyotvonline.com:8000/",
-    "logo": "http://www.otomobil.com.tr/wp-content/uploads/2012/04/RADYO_TRAFIK_1.jpg",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 426,
-    "homepage": "http://radyotrafik.com/",
-    "tags": [
-      "ankara",
-      "traffic",
-      "trafik"
-    ]
-  },
-  {
     "name": "LALEGÜL FM",
     "url": "https://icecast.netmedya.net/lalegulfm",
     "logo": "",
@@ -1681,18 +1497,6 @@
     "kind": "radio",
     "votes": 423,
     "homepage": "https://icecast.netmedya.net/lalegulfm",
-    "tags": []
-  },
-  {
-    "name": "KUZEY FM TURKEY",
-    "url": "http://yayin.yayindakiler.com:3028/",
-    "logo": "",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 402,
-    "homepage": "http://yayin.yayindakiler.com:3028/",
     "tags": []
   },
   {
@@ -1720,18 +1524,6 @@
     "tags": [
       "news talk music"
     ]
-  },
-  {
-    "name": "MERKEZ FM SAMSUN TURKEY",
-    "url": "http://uydu.radyotvyayini.com:8016/",
-    "logo": "",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 371,
-    "homepage": "http://uydu.radyotvyayini.com:8016/",
-    "tags": []
   },
   {
     "name": "Radyo Eksen 96.2",
@@ -1774,18 +1566,6 @@
     "kind": "radio",
     "votes": 335,
     "homepage": "https://www.artuklumezopotamyaradyo.com/",
-    "tags": []
-  },
-  {
-    "name": "Kiss Türk",
-    "url": "https://kiss.radyotvonline.net/kissturk",
-    "logo": "https://kissapp.com.tr/content/files/IIMG_BE9E7FDE-27B7-466A-BE72-C344A3DCCD4C.jpg",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 332,
-    "homepage": "https://kissfm.kissapp.com.tr/",
     "tags": []
   },
   {
@@ -1849,18 +1629,6 @@
     "tags": []
   },
   {
-    "name": "KLAS RADİO TURKEY",
-    "url": "https://anadolu.liderhost.com.tr:10929/",
-    "logo": "",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 313,
-    "homepage": "https://anadolu.liderhost.com.tr:10929/",
-    "tags": []
-  },
-  {
     "name": "S1lhoutte Arabesk FM",
     "url": "https://yayin.radyoarabesk.com.tr:8000/stream",
     "logo": "",
@@ -1888,15 +1656,16 @@
   },
   {
     "name": "Radyo Gol",
-    "url": "https://edge1.radyotvonline.net/shoutcast/play/radyogol",
+    "url": "https://moondigitaledge.radyotvonline.net/radyogol/playlist.m3u8",
     "logo": "null",
     "group": "Radyo",
     "tvgId": "",
     "source": "Radyo",
     "kind": "radio",
     "votes": 306,
-    "homepage": "https://edge1.radyotvonline.net/shoutcast/play/radyogol",
-    "tags": []
+    "homepage": "https://moondigitaledge.radyotvonline.net/radyogol/playlist.m3u8",
+    "tags": [],
+    "fixed": true
   },
   {
     "name": "MaxFM",
@@ -1909,20 +1678,6 @@
     "votes": 304,
     "homepage": "",
     "tags": []
-  },
-  {
-    "name": "Denge Gundeme",
-    "url": "http://kesintisizyayin.com:1656/",
-    "logo": "",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 295,
-    "homepage": "",
-    "tags": [
-      "classical"
-    ]
   },
   {
     "name": "Tezene",
@@ -2131,38 +1886,6 @@
     "tags": []
   },
   {
-    "name": "Onur Radyo",
-    "url": "http://anadolu.liderhost.com.tr:8094/",
-    "logo": "",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 214,
-    "homepage": "",
-    "tags": [
-      "classical"
-    ]
-  },
-  {
-    "name": "FG 93.8 (Future Generation) mp3 128k",
-    "url": "https://edge1.radyotvonline.net/shoutcast/play/fg",
-    "logo": "https://i1.sndcdn.com/avatars-6lAdUGxB5DjlvwWt-6IBY7g-t200x200.jpg",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 213,
-    "homepage": "https://www.futuregeneration.net/",
-    "tags": [
-      "chill-out",
-      "edm",
-      "no ads",
-      "progressive",
-      "trance"
-    ]
-  },
-  {
     "name": "90 lar Pop",
     "url": "https://moondigitaledge.radyotvonline.net/radyolanddoksanlar/playlist.m3u8",
     "logo": "",
@@ -2211,30 +1934,6 @@
     "tags": []
   },
   {
-    "name": "HOS MİX",
-    "url": "https://anadolu.liderhost.com.tr:10871/",
-    "logo": "",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 199,
-    "homepage": "https://anadolu.liderhost.com.tr:10871/",
-    "tags": []
-  },
-  {
-    "name": "Radyo D",
-    "url": "https://moondigitaledge2.radyotvonline.net/radyod/playlist.m3u8",
-    "logo": "https://cdn-radiotime-logos.tunein.com/s14264d.png",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 198,
-    "homepage": "https://www.radyod.com/",
-    "tags": []
-  },
-  {
     "name": "Radyo Munzur 97.7",
     "url": "http://yayin1.yayindakiler.com:3002/;stream.nsv",
     "logo": "",
@@ -2247,6 +1946,19 @@
     "tags": [
       "dersim"
     ]
+  },
+  {
+    "name": "Radyo D",
+    "url": "https://wowza1.radyotvonline.com/idilpr/radyodelal.stream/playlist.m3u8",
+    "logo": "https://cdn-radiotime-logos.tunein.com/s14264d.png",
+    "group": "Radyo",
+    "tvgId": "",
+    "source": "Radyo",
+    "kind": "radio",
+    "votes": 198,
+    "homepage": "http://radyodelal.com./",
+    "tags": [],
+    "fixed": true
   },
   {
     "name": "Dost FM",
@@ -2303,18 +2015,6 @@
     "kind": "radio",
     "votes": 181,
     "homepage": "https://www.powerapp.com.tr/radios/powerturkakustik/",
-    "tags": []
-  },
-  {
-    "name": "BRTK",
-    "url": "http://sc.brtk.net:8000/",
-    "logo": "https://brtk.net/wp-content/uploads/2024/11/28/cropped-brt-icon-180x180.png?ver=ebc4c4ff24f512d1ba2ae8331bfa527d",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 181,
-    "homepage": "http://www.brtk.net/",
     "tags": []
   },
   {
@@ -2384,34 +2084,6 @@
     "tags": []
   },
   {
-    "name": "KURAN ve TÜRKÇE MEAL",
-    "url": "http://baserorg.duckdns.org:8000/",
-    "logo": "http://baser.org/Kuran.jpg",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 162,
-    "homepage": "http://baser.org/",
-    "tags": [
-      "dini",
-      "eğitim",
-      "islamic"
-    ]
-  },
-  {
-    "name": "Best FM",
-    "url": "https://ssldyg.radyotvonline.com/best/bestfm.stream/playlist.m3u8",
-    "logo": "https://www.bestfm.com.tr/wp-content/uploads/2024/12/LOGOWHITE-2-1.png",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 157,
-    "homepage": "https://www.bestfm.com.tr/",
-    "tags": []
-  },
-  {
     "name": "Radyo 35",
     "url": "https://yayin.turkhosted.com/6012/stream",
     "logo": "https://www.radyo35.com/img/logo.png",
@@ -2460,6 +2132,18 @@
     ]
   },
   {
+    "name": "Govend radyo",
+    "url": "https://stream-56.zeno.fm/xzzu8kynq2zuv?zs=nZP7ZCRXQPOpDFenayr0bQ",
+    "logo": "",
+    "group": "Radyo",
+    "tvgId": "",
+    "source": "Radyo",
+    "kind": "radio",
+    "votes": 137,
+    "homepage": "https://stream-56.zeno.fm/",
+    "tags": []
+  },
+  {
     "name": ".Al quran radio",
     "url": "https://n0a.radiojar.com/0tpy1h0kxtzuv?rj-ttl=5&rj-tok=AAABhdgGORQA-2acfyF3_4WY2g",
     "logo": "https://i.pinimg.com/564x/3a/a1/a1/3aa1a107c9434ca52b42b2dd0ffc896f.jpg",
@@ -2472,18 +2156,6 @@
     "tags": [
       "classical"
     ]
-  },
-  {
-    "name": "Govend radyo",
-    "url": "https://stream-56.zeno.fm/xzzu8kynq2zuv?zs=nZP7ZCRXQPOpDFenayr0bQ",
-    "logo": "",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 137,
-    "homepage": "https://stream-56.zeno.fm/",
-    "tags": []
   },
   {
     "name": "FENOMEN AKUSTIK",
@@ -2577,20 +2249,6 @@
     "tags": []
   },
   {
-    "name": "İTÜ Radyosu Rock",
-    "url": "http://160.75.86.29:8095/",
-    "logo": "http://www.radyo.itu.edu.tr/Sitefinity/WebsiteTemplates/GenelTemplate/App_Themes/ITUGenelTemplate/Images/favicon.ico",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 114,
-    "homepage": "http://www.radyo.itu.edu.tr/",
-    "tags": [
-      "rock"
-    ]
-  },
-  {
     "name": "اذاعة القرآن الكريم 🇹🇷",
     "url": "http://stream.radiojar.com/0tpy1h0kxtzuv",
     "logo": "",
@@ -2618,15 +2276,16 @@
   },
   {
     "name": "Kıyı Caz",
-    "url": "http://caz.radioca.st/",
+    "url": "https://caz.radioca.st/stream",
     "logo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAbYAAABzCAMAAADDhdfxAAAAsVBMVEX///8Ai/8Ah/8Ajf8Aif Ux//q9f9zuf8Ahf/3/P azP 03f8smP Qzf8AjP Cwv9crP8AgP/m8/8Af/85pP9Hqf Cv/8hmv8AfP/y v8Akf/M6P 74P/k8v/e7/9ptf v2P84n//U7P l0f8AeP/H5P9Zsv9Pp/91wf GyP8mlf Y0P m1/ 93P9Cmf9Xs/9ErP99u/9Mov9nr/ iyv96t/9lrP9luf95xP8hoP/D5v9kzvXAAAAKDElEQVR4nO2dCXeiSBCAuUTwiKJGBBQVNInE3DubSf7/D1tMPKqguwt3Mm/DbH3zXt4bsEH9LOijutG070LLP5L17P/63TAVaehHjDlrqwsN86StydrqAmurJaytlrC2WsLaaglrqyWsrZawtlrC2moJa6slrK2WsLZawtpqCWurJaytlrC2WsLaaglrqyWsrZawtlrC2moJa6slrK2WsLZawtpqCWurJaytlrC2WvLF2gIbEFQp4cIS/LupSAVtyaYHGHePNpLGaXP6sdVdXPdPNBP6/HYLFLhufR7bXYMTTr/iY/5p0NriFxNwYW6Pe9qdi8Nm/XLwsWmdWcfj6WaDPv96CQuknxvdlnU8YTj 9Q/550Fqm83B96pb5sI97mp3jrusvbagZ4AXX5LhFvTA0Y2X HOr2zodxex9yef8w6C02dhamJ6s5dqAoU9tWuSD11 k1OkjUbCxNhJCm910gDUdWRNqC8bAg3VNhFvQgMHZP7yatVGotdlj8LXm1lqocijSpk3PCbf4TXgrZG0USm3ozqPrWQNX6aG2x4M2uwlKGP2Z6uR51QME23N02s7a1Ki0FayFvUJDTBhtsKKSf kL1clnI/jS3vECzNooFNpcsIrC7vsbF4NRrM2ew3C7UrWgF CV1nJ9OjNrI5Brc1sh0vZUEiDWpi06oJR5Jz 3DYPtoglPzdrUSLW5rQxKcwTVTIk2 wWFm1sqd2ABr8EZ6A1hbRRSbSmMGd2ZCzoYJdq0LRRurssF91xCbVAva6OQaStYexTdomTagmsUbrJTT6E1sw32sDYKibaFT1uTatNuTVDYikRltUKwXcI9rI1CrK0N28y6g5yckGoLljDcHsRnjlCv2RbuYm0UQm3TDvpKJdbk2rQujFVD3MN1BZvab2gXa6MQaVujWNOl/fhybQE8gvUqKhzB5oVxi/axNgqBtmiJOiKvZfcmhTbtFh4iFHmHfWCWj uprI2irK1oTV6BV2gL4HCp3iyXjWBN1ejinayNoqQtGiFrz4qcAIU2bQOP4pfDrQcqm1ZW6HBmbRRFbQm2tlRlcqi0DVCHcumrT57hqPamsBdp46QEAQVt8TW0ZvltVVmVNg1mJ jL4v2xASskWTEYobYL1iYAaQviPqr5Z4p YI3QFvuKZKDkGux0xsVuS442CqhtnMAxl7wGuFCXVWpzeyCdoZidkKJgK1V6WBsF0Kb3H2GnVKl V0KpTUtgh3LYgrviF3hnK48tsDYKqA1J2yUaEGXV2oIxDLd DHYtYLCF5Ssxa6NoFFyhcCvW8AqoteVNMxBTIUgGms1BdcWYl0uyNgqVNt18V5YltAUw7csA4XZHBBtrI1Fq00fKuRSENm2Nwm1x2Gw3UXJkXC7I2ijU2i5KdXMIpc1 Qpnih66QNaqriDIpWRuFWpuVLRRlKW3aHQq3/dWwQt4ya6NQa9N1VTo41DYSaRug3Lv9k49QTcVsiMKZe0koRNpgjcEcyycXktpw7l340b/p9sSZyBDWRiHQNoepdlYmT OntQ1Q7l1z9wvAnV7i7n3WRlHSZl3Z O4zqjRMKtampaj6sTvSBh7bFw/msTaKojZjl6SVoHEA6ZTuCtrsPjz2q6vZviQTGcLaKArajLcPRws0lzeVtAIqaNNQRnqYaF34g8gko3msjQJrM/zPyHLHYKPlC1rEO6pos9F46I2Gsov6kjfF2iiQNuvt0CSO4YCYIc5uraRN68ITdG5gsJmyQVjWRoG0LU NtDasujst4WWykrbBEoUz/JFcSoqwNhKgDc4wwzk6eiis8VXShlNdITgTGcLaKKQzbmawDmiNRI3uatpsnCwLfiXS/k7WRiGflrhGl0lRuxhpk0/S3qDFFk6nu5WWYG0UiknAXTSRSVBXr6jNxrNSDyV8ea8Za6NQaAse4bjYc7kVUFGb9lMUbqqhc9ZGoVopIUFh0izdiqpqi0XhlklvhqyNRrkuSYq6NEp9ylW1aTflcBPeLA wNgr1cjJX0FtpkKWytqQcbpmk5 UD1kahXrwJjbLoxWn3lbUFqHPkI9gUw3isjYZYKg0u FLIUT1DG56D HEo6WjQDtZGQWjDQ2 F TfVtQV4yTVqfV/WRkGtJxnDlXqsOZJTXRvO1pJ1lh1hbRTk6q146K0lW0 S0IZy74r6S7A2ClJbgOZ9 jCH AxtboqCbaF U6yNgl7iOkF5BTCJ AxtA7h2rzATGcLaKCosKL9Aq5T04BLXlbXhtP W8rVYm/507kf6P1BBm4uH3k5D0tW12c1zVlBmbSRVnroxuwTarCVYp7Wqtgjl3ZGPB2BtFJUeljKF3/ppUZ/K2lz0dIDS/Pvy61kbQc9wDnhzaRt4YzmAw/jmIjxtk2V3fRCjBSbpOobb8E5H/nHmJ/pfEHVPTOVZArfgZZtDDkgMtm5VfYxwbRmro25ql9/VeR I SpstJLT/L9 O0w1unDuvSwTmfn9BJUezbbHPY3 GHr48tveFKPZSSI3E9w9jdeq2cGY7THYjPvxbYVnujH/juDux3I5ln3BwdjzvDCtHHCHNZEtR7VcHvOrDHphXgEfimd6asHTxLAMTzYPJ7hbYKHTfcvQcF4SzV2k8voq8yskL4bnOfk/4aqEwdgxPCt0vGwh/P4XoY6fqrJfE9kxn2Za8MO0sr/Y229g uwNs3E67nhep1W6EiY/cqfNu3UjHApXUVh3ht7xqYc73ndNbctw/NTWZi/5j8FTP66I TfYm3DozKNAC5Ke5 l/t1FoDFpLa2jeBbsBtHBolqd159Yy33HuT/3Nc8uyHKfTi1wtunY83c jmOzdYs4i3twbE vwPN6pNTHM5020/ 9g2rzXndV BV23pXtWcbWZbbjK2rOroae/7i UkW9ZnYc0zl94mxkTPx6kjidfNZs5lyDqjnRvtQLrx8ejVV430bPlw8PDo28aeT1ldXXsMx7n 9AqyIMHZ7XrunI33tDJPh/0HMziQbCT 37t5Nbsne Jp4snzDHVuX29 Xlz9RY6k9VqaL2iQHC3HW Y28n/fP69hLWUvHLiDC/fP6y49vvDcOXtgyzyJ95Qf30/3BoH26XnWJPl58O5G3nIEuPbDMXtKK8W5lYussub93IQRDejUDcMw9Kzx25hdGYb7uLP8UeXb508Tp3RaUW8rp5bnjjL15vX16vOcOLlodo8WIx 8lXyCwjiJEkG0uuW/T5tt6eJYP/s5zKzcul5RFr3V6i9YG/uL/JK52QynOR7DcPsc1v7  Am281Nc7y5fS 1FYJ28/o C00zzJ7/7nF81Qc3nm7TdDud5ZE6UCYiM98He7YPwSCO0maF4VHmG2A3 k tNKf11F SyZHMN2HdcYwLM fCcAxBlwrzHUFPW dgqwvxEi65S2UiM98DtwHXkyczkZnvwewx6xzx/4hg wfBk7e iXC8NQAAAABJRU5ErkJggg==",
     "group": "Radyo",
     "tvgId": "",
     "source": "Radyo",
     "kind": "radio",
     "votes": 108,
-    "homepage": "https://kiyimuzik.com/category/caz/",
-    "tags": []
+    "homepage": "https://kiyimuzik.com/",
+    "tags": [],
+    "fixed": true
   },
   {
     "name": "Radyo S",
@@ -2660,18 +2319,6 @@
     ]
   },
   {
-    "name": "107.4 Radio Voyage",
-    "url": "https://dygedge.radyotvonline.net/radyovoyage/playlist.m3u8?listenerid=29d0a6a85b59cea2ca801b70d2a3ebaf&awparams=companionAds%3Atrue",
-    "logo": "",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 106,
-    "homepage": "https://radyovoyage.com/",
-    "tags": []
-  },
-  {
     "name": "Loops Radio House Station",
     "url": "https://loopsdeep.ozelip.com/7806/stream",
     "logo": "https://loopsradio.com/wp-content/uploads/2023/09/cropped-loopsradiofaviconred-180x180.png",
@@ -2683,20 +2330,6 @@
     "homepage": "https://loopsradio.com/radiochannel/loops-radio-house-station/",
     "tags": [
       "house"
-    ]
-  },
-  {
-    "name": "Batı Radyo",
-    "url": "https://sslyayin.netyayin.net:10902/",
-    "logo": "",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 105,
-    "homepage": "",
-    "tags": [
-      "classical"
     ]
   },
   {
@@ -2804,20 +2437,6 @@
     "tags": []
   },
   {
-    "name": "Haber Türk Radyo",
-    "url": "http://haberturkradyo.radyotvonline.net/haberturkradyo",
-    "logo": "",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 94,
-    "homepage": "https://www.haberturkradyo.com.tr/",
-    "tags": [
-      "news"
-    ]
-  },
-  {
     "name": "Discoland",
     "url": "https://moondigitaledge.radyotvonline.net/discoland/playlist.m3u8",
     "logo": "",
@@ -2874,18 +2493,6 @@
     ]
   },
   {
-    "name": "Fakir Fm",
-    "url": "https://live.radyositesihazir.com/1025/stream/",
-    "logo": "https://www.fakirfm.com/favicon.ico",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 89,
-    "homepage": "https://www.fakirfm.com/",
-    "tags": []
-  },
-  {
     "name": "TRT Diyarbakır",
     "url": "https://radio-trtgap.medya.trt.com.tr/master.m3u8",
     "logo": "https://trt-public-static.trt.com.tr/eradyo/public/dm_upload/modul2/41d20783-0d27-48af-a16b-d1df88610d70.png",
@@ -2900,15 +2507,15 @@
     ]
   },
   {
-    "name": "Radyo Mori",
-    "url": "https://amed.ozelip.com/8040/stream",
-    "logo": "",
+    "name": "Fakir Fm",
+    "url": "https://live.radyositesihazir.com/1025/stream/",
+    "logo": "https://www.fakirfm.com/favicon.ico",
     "group": "Radyo",
     "tvgId": "",
     "source": "Radyo",
     "kind": "radio",
-    "votes": 88,
-    "homepage": "https://amed.ozelip.com/",
+    "votes": 89,
+    "homepage": "https://www.fakirfm.com/",
     "tags": []
   },
   {
@@ -2921,6 +2528,18 @@
     "kind": "radio",
     "votes": 88,
     "homepage": "http://radyomaranata.com/",
+    "tags": []
+  },
+  {
+    "name": "Radyo Mori",
+    "url": "https://amed.ozelip.com/8040/stream",
+    "logo": "",
+    "group": "Radyo",
+    "tvgId": "",
+    "source": "Radyo",
+    "kind": "radio",
+    "votes": 88,
+    "homepage": "https://amed.ozelip.com/",
     "tags": []
   },
   {
@@ -2938,18 +2557,6 @@
     ]
   },
   {
-    "name": "Fenomen Dans 256",
-    "url": "https://live.radyofenomen.com/fenomendans/256/chunks.m3u8",
-    "logo": "",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 86,
-    "homepage": "https://www.radyofenomen.com/",
-    "tags": []
-  },
-  {
     "name": "https://turkmedya-live.ercdn.net/tv24/tv24.m3u8",
     "url": "https://turkmedya-live.ercdn.net/tv24/tv24.m3u8",
     "logo": "",
@@ -2962,6 +2569,18 @@
     "tags": [
       "classical"
     ]
+  },
+  {
+    "name": "Fenomen Dans 256",
+    "url": "https://live.radyofenomen.com/fenomendans/256/chunks.m3u8",
+    "logo": "",
+    "group": "Radyo",
+    "tvgId": "",
+    "source": "Radyo",
+    "kind": "radio",
+    "votes": 86,
+    "homepage": "https://www.radyofenomen.com/",
+    "tags": []
   },
   {
     "name": "TRT Antalya",
@@ -2988,20 +2607,6 @@
     "votes": 75,
     "homepage": "https://moondigitalmaster.radyotvonline.net/pophome/playlist.m3u8",
     "tags": []
-  },
-  {
-    "name": "Bizim Radyo",
-    "url": "https://ip132.ozelip.com:7017/",
-    "logo": "",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 74,
-    "homepage": "https://www.bizimradyo.com/",
-    "tags": [
-      "talk & speech"
-    ]
   },
   {
     "name": "Mayday Records",
@@ -3062,20 +2667,17 @@
     ]
   },
   {
-    "name": "Radio Wanderlust",
-    "url": "http://radyo.yayin.com.tr:5898/",
-    "logo": "",
+    "name": "TRT Erzurum",
+    "url": "https://radio-trterzurum.medya.trt.com.tr/master.m3u8",
+    "logo": "https://trt-public-static.trt.com.tr/eradyo/public/dm_upload/modul2/60b756f6-d53d-42dd-909b-7e09f2c38d82.png",
     "group": "Radyo",
     "tvgId": "",
     "source": "Radyo",
     "kind": "radio",
-    "votes": 68,
-    "homepage": "https://www.radiowanderlust.com/",
+    "votes": 66,
+    "homepage": "https://radyo.trt.net.tr/kanallar/erzurum",
     "tags": [
-      "journey",
-      "travel",
-      "traveler",
-      "wanderlust"
+      "local radio"
     ]
   },
   {
@@ -3089,20 +2691,6 @@
     "votes": 66,
     "homepage": "https://www.gimsa.com.tr/radyo.php",
     "tags": []
-  },
-  {
-    "name": "TRT Erzurum",
-    "url": "https://radio-trterzurum.medya.trt.com.tr/master.m3u8",
-    "logo": "https://trt-public-static.trt.com.tr/eradyo/public/dm_upload/modul2/60b756f6-d53d-42dd-909b-7e09f2c38d82.png",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 66,
-    "homepage": "https://radyo.trt.net.tr/kanallar/erzurum",
-    "tags": [
-      "local radio"
-    ]
   },
   {
     "name": "Kalp FM",
@@ -3121,18 +2709,6 @@
     ]
   },
   {
-    "name": "POP LAND",
-    "url": "https://moondigitaledge.radyotvonline.net/popland/playlist.m3u8",
-    "logo": "",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 64,
-    "homepage": "https://moondigitaledge.radyotvonline.net/popland/playlist.m3u8",
-    "tags": []
-  },
-  {
     "name": "Elazığ Mavi Radyo",
     "url": "https://yayin.turkhosted.com/6066/stream",
     "logo": "https://maviradyo.net/assets/images/logo2.png",
@@ -3142,6 +2718,18 @@
     "kind": "radio",
     "votes": 64,
     "homepage": "https://maviradyo.net/",
+    "tags": []
+  },
+  {
+    "name": "POP LAND",
+    "url": "https://moondigitaledge.radyotvonline.net/popland/playlist.m3u8",
+    "logo": "",
+    "group": "Radyo",
+    "tvgId": "",
+    "source": "Radyo",
+    "kind": "radio",
+    "votes": 64,
+    "homepage": "https://moondigitaledge.radyotvonline.net/popland/playlist.m3u8",
     "tags": []
   },
   {
@@ -3162,17 +2750,42 @@
   },
   {
     "name": "Radyo Eksen",
-    "url": "https://dygedge.radyotvonline.net/radyoeksen/playlist.m3u8",
+    "url": "http://eksenwmp.radyotvonline.com/;stream.mp3",
     "logo": "",
     "group": "Radyo",
     "tvgId": "",
     "source": "Radyo",
     "kind": "radio",
     "votes": 62,
-    "homepage": "https://radioeksen.com/",
+    "homepage": "http://www.radioeksen.com/",
     "tags": [
       "rock"
-    ]
+    ],
+    "fixed": true
+  },
+  {
+    "name": "TRT Çukurova",
+    "url": "https://radio-trtcukurova.medya.trt.com.tr/master.m3u8",
+    "logo": "https://trt-public-static.trt.com.tr/eradyo/public/dm_upload/modul2/12de3bf5-2267-4eea-9e1c-22cec7288294.png",
+    "group": "Radyo",
+    "tvgId": "",
+    "source": "Radyo",
+    "kind": "radio",
+    "votes": 61,
+    "homepage": "https://radyo.trt.net.tr/kanallar/cukurova",
+    "tags": []
+  },
+  {
+    "name": "Mega Site .",
+    "url": "http://yayin.netradyom.com:7900/;stream.mp3RADYO%20MEGAS%C4%B0TE%20=",
+    "logo": "null",
+    "group": "Radyo",
+    "tvgId": "",
+    "source": "Radyo",
+    "kind": "radio",
+    "votes": 61,
+    "homepage": "http://yayin.netradyom.com:7900/;stream.mp3RADYO%20MEGAS%C4%B0TE%20=",
+    "tags": []
   },
   {
     "name": "Fırat FM",
@@ -3189,30 +2802,6 @@
       "pop",
       "turkish music"
     ]
-  },
-  {
-    "name": "Mega Site .",
-    "url": "http://yayin.netradyom.com:7900/;stream.mp3RADYO%20MEGAS%C4%B0TE%20=",
-    "logo": "null",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 61,
-    "homepage": "http://yayin.netradyom.com:7900/;stream.mp3RADYO%20MEGAS%C4%B0TE%20=",
-    "tags": []
-  },
-  {
-    "name": "TRT Çukurova",
-    "url": "https://radio-trtcukurova.medya.trt.com.tr/master.m3u8",
-    "logo": "https://trt-public-static.trt.com.tr/eradyo/public/dm_upload/modul2/12de3bf5-2267-4eea-9e1c-22cec7288294.png",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "kind": "radio",
-    "votes": 61,
-    "homepage": "https://radyo.trt.net.tr/kanallar/cukurova",
-    "tags": []
   },
   {
     "name": "TRT Trabzon",
@@ -3258,15 +2847,15 @@
     "tags": []
   },
   {
-    "name": "TheRockRadio",
-    "url": "https://ssl4.radyotvonline.com/radyohome/therockradio.stream/playlist.m3u8",
-    "logo": "https://therock.com.tr/images/favicon.png",
+    "name": "Özel FM",
+    "url": "https://ozelfm.80.yayin.com.tr/;stream/1",
+    "logo": "",
     "group": "Radyo",
     "tvgId": "",
     "source": "Radyo",
     "kind": "radio",
     "votes": 59,
-    "homepage": "https://therock.com.tr/",
+    "homepage": "https://ozelfm.net/",
     "tags": []
   },
   {
@@ -3294,15 +2883,15 @@
     "tags": []
   },
   {
-    "name": "Özel FM",
-    "url": "https://ozelfm.80.yayin.com.tr/;stream/1",
-    "logo": "",
+    "name": "TheRockRadio",
+    "url": "https://ssl4.radyotvonline.com/radyohome/therockradio.stream/playlist.m3u8",
+    "logo": "https://therock.com.tr/images/favicon.png",
     "group": "Radyo",
     "tvgId": "",
     "source": "Radyo",
     "kind": "radio",
     "votes": 59,
-    "homepage": "https://ozelfm.net/",
+    "homepage": "https://therock.com.tr/",
     "tags": []
   },
   {

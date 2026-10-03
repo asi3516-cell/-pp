@@ -30,7 +30,7 @@ html, body {
   height: 100%;
   background: var(--bg);
   color: var(--fg);
-  font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -124,6 +124,40 @@ h1, h2, h3 { margin: 0; }
 }
 .groups .gchip.active { color: var(--fg); border-color: var(--accent); }
 
+/* Content-type tabs (Live / Movies / Series), a second, lighter row. */
+.tabs.kinds { border-bottom: none; padding-top: 0; }
+.tabs.kinds .tab { font-size: 12px; padding: 4px 9px; }
+
+/* Source (playlist) switcher: jump between the bundled list and any playlist
+   or MAC portal the user added. */
+.source-bar {
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 10px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+}
+.source-title { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; }
+.sources {
+  display: flex; gap: 6px; overflow-x: auto; flex: 1;
+  scrollbar-width: none;
+}
+.sources::-webkit-scrollbar { display: none; }
+.schip {
+  border: 1px solid var(--line); background: transparent; color: var(--muted);
+  border-radius: 8px; padding: 5px 10px; font-size: 12px; cursor: pointer;
+  white-space: nowrap; max-width: 200px; overflow: hidden; text-overflow: ellipsis;
+}
+.schip:hover { color: var(--fg); border-color: var(--accent); }
+.schip.active { color: #fff; background: var(--accent); border-color: var(--accent); }
+.schip .n { opacity: .75; margin-left: 5px; font-size: 11px; }
+.src-nav {
+  border: 1px solid var(--line); background: transparent; color: var(--muted);
+  border-radius: 8px; width: 26px; height: 26px; cursor: pointer;
+  display: grid; place-items: center; font-size: 15px; line-height: 1; flex: 0 0 auto;
+}
+.src-nav:hover { color: var(--fg); border-color: var(--accent); }
+
 .channel-list {
   flex: 1;
   overflow-y: auto;
@@ -166,7 +200,7 @@ h1, h2, h3 { margin: 0; }
   background: transparent;
   color: var(--muted);
   border-radius: 7px;
-  font-size: 11px;
+  font-size: 12px;
   padding: 3px 8px;
   cursor: pointer;
   white-space: nowrap;
@@ -211,8 +245,8 @@ h1, h2, h3 { margin: 0; }
 }
 
 .ch-text { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-.ch-name { font-size: 13.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.ch-sub { font-size: 11px; }
+.ch-name { font-size: 14.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ch-sub { font-size: 12px; }
 
 .ch-fav {
   border: 0; background: transparent; cursor: pointer;
@@ -226,8 +260,8 @@ h1, h2, h3 { margin: 0; }
   gap: 4px; margin-left: auto; flex: 0 1 auto; min-width: 0;
 }
 .alt {
-  font-size: 10.5px;
-  padding: 2px 7px;
+  font-size: 12.5px;
+  padding: 5px 12px;
   border-radius: 20px;
   border: 1px solid var(--line);
   background: transparent;

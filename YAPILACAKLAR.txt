@@ -211,10 +211,14 @@ pakette duruyor (yedek / kaynak), ancak launcher artik native arayuz.
     -> Tam ekran dugmesi artik sistem cubuklarini gercekten gizliyor.
 [x] Widget uygulama kapaliyken radyoyu baslatabiliyor: PlayerService radyo
     listesini kendisi yukluyor, boylece widget asla TV yayinina dusmuyor.
+[x] Oynatici kontrol katmani marka renkleriyle uyumlu: media3 varsayilan
+    kontrolu kapatildi (use_controller=false), yerine ozel ust/alt katman
+    yazildi (geri, kanal/grup adi, ekran modu, tam ekran, onceki/oynat/sonraki).
+[x] Tam ekran dugmesi sistem cubuklarini gizleyip gosteriyor.
 [ ] WebView (MainActivity) ile native arayuz arasindaki gecis dugmesi
     (istege bagli; su an launcher native).
-[ ] PlayerView kontrol katmaninin (media3 varsayilan) marka renkleriyle
-    uyumlu hale getirilmesi.
+[ ] CI APK isi Gradle wrapper ile duzeltildi (android-actions/setup-android
+    kaldirilan 'tools' paketini kurmaya calisiyordu). Ilk push'ta dogrulanacak.
 
 Calisan komutlar (Android):
   APK derle: cd android && JAVA_HOME=/workspace/tools/jdk-17.0.20.1+1 \

@@ -391,6 +391,10 @@ class Handler(BaseHTTPRequestHandler):
             return self._send_file(
                 ROOT / "build" / "pkg" / "hh-Windows.rar",
                 "hh-Windows.rar", "application/vnd.rar", head_only)
+        if path == "/download/windows-exe":
+            return self._send_file(
+                ROOT / "build" / "pkg" / "hh.exe",
+                "hh.exe", "application/vnd.microsoft.portable-executable", head_only)
         if path == "/download/source-zip":
             return self._send_file(
                 ROOT / "build" / "pkg" / "hh-Kaynak.zip",
@@ -918,7 +922,7 @@ def main() -> None:
     url = f"http://127.0.0.1:{args.port}/"
     print(f"hh player running at {url}")
     print("Press Ctrl+C to stop.")
-    if args.open or os.environ.get("HH_OPEN"):
+    if args.open or os.environ.get("HH_OPEN") or getattr(sys, "frozen", False):
         _open_browser(url)
     try:
         httpd.serve_forever()

@@ -200,6 +200,17 @@ pakette duruyor (yedek / kaynak), ancak launcher artik native arayuz.
 
 [~] Native arayuz cihazda elle test edilmedi (emulator/cihaz yok).
     -> Derleme basarili; davranis kodu okunarak dogrulandi.
+[x] Arayuz yeniden tasarlandi (2026-10-03):
+    -> Kanal listesi: marka ikonu + sekme adi + temizleme dugmeli arama
+       kutusu iceren baslik; altinda "N kanal" sayaci; baglama duyarli bos
+       durum (sonuc yok / favori yok / liste bos).
+    -> Agac satirlari yuvarlak kart: kategori sayaci ve daha yumusak vurgu.
+    -> Oynatici: ust bar (geri, kanal adi, grup adi, ekran modu, tam ekran)
+       + alt transport cubugu (onceki / oynat-durdur / sonraki), yukleme
+       spinneri ve ayri "yeniden deniyor" mesaji.
+    -> Tam ekran dugmesi artik sistem cubuklarini gercekten gizliyor.
+[x] Widget uygulama kapaliyken radyoyu baslatabiliyor: PlayerService radyo
+    listesini kendisi yukluyor, boylece widget asla TV yayinina dusmuyor.
 [ ] WebView (MainActivity) ile native arayuz arasindaki gecis dugmesi
     (istege bagli; su an launcher native).
 [ ] PlayerView kontrol katmaninin (media3 varsayilan) marka renkleriyle

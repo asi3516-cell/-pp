@@ -69,19 +69,29 @@ jobs:
           distribution: temurin
           java-version: "17"
 
-      - uses: android-actions/setup-android@v3
-
+      # The runner image already ships an Android SDK. Calling sdkmanager
+      # directly avoids the android-actions/setup-android default that tries to
+      # install the removed "tools" package and fails.
       - name: Install SDK packages
-        run: sdkmanager "platforms;android-34" "build-tools;34.0.0"
+        run: |
+          SDKMGR="$(ls -d "$ANDROID_SDK_ROOT"/cmdline-tools/*/bin/sdkmanager | tail -1)"
+          yes | "$SDKMGR" --licenses > /dev/null 2>&1 || true
+          "$SDKMGR" "platforms;android-34" "build-tools;34.0.0"
+          echo "sdk.dir=$ANDROID_SDK_ROOT" > android/local.properties
 
       - name: Build APK
-        run: python build_apk.py
+        run: cd android && ./gradlew :app:assembleRelease --no-daemon --stacktrace
+
+      - name: Collect APK
+        run: |
+          mkdir -p dist
+          cp android/app/build/outputs/apk/release/app-release.apk dist/TV-Player.apk
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: hh-apk
-          path: dist/hh.apk
+          path: dist/TV-Player.apk
 
   release:
     needs: [build, apk]

@@ -10,9 +10,10 @@ build/android/
 static/TV-Player-linux
 android/app/src/main/assets/
 android/**/*.class
+android/local.properties
 android/.gradle/
 android/build/
 android/app/build/
-android/local.properties
 data/channels.cache.json.gz
 *.idsig
+!android/gradle/wrapper/gradle-wrapper.jar

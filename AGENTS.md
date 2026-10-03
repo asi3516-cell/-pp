@@ -74,3 +74,39 @@ A widget press cold-starts the activity, so `widgetCmd` queues the command in
 - Selecting a channel opens the player full screen (`#app.playing`); the back
   button returns to the list.
 - On the phone, show "TV Player" wherever the source says "hh".
+
+### Native UI (Kotlin)
+
+The launcher is `BottomNavActivity` (see `ui/`). Layouts are:
+
+- `activity_bottom_nav.xml` — `fragmentHost` + `BottomNavigationView`. The nav
+  bar uses `bg_nav_bar` (hairline on top), `nav_item_tint` and the
+  `NavItemIndicator` pill for the checked item.
+- `fragment_channel_list.xml` — fixed header (`bg_header`: brand mark
+  `bg_brand_mark` + `ic_brand_mic`, active tab name, search card `bg_search`
+  with `ic_search` and a `searchClear` button) over the `ExpandableListView`.
+  `listCount` shows the filtered total; `emptyState` is contextual (search
+  miss / no favourites / empty list). `ChannelListFragment` fills `headerTitle`
+  per tab and toggles `searchClear` from the text watcher.
+- `list_group_item.xml` / `list_child_item.xml` — rounded cards
+  (`bg_group_card` / `bg_children_card`). The group row has an accent bar
+  (`bg_group_accent`), a count pill (`bg_count_pill`) and a chevron rotated by
+  `ExpandableChannelAdapter`. The child row has a logo tile (`bg_logo_tile`)
+  with a letter fallback and a favourite star.
+- `activity_player.xml` — `PlayerView` with `use_controller=false`, so the
+  built-in controller never shows. A top scrim (`bg_player_top`) holds back,
+  title, group, screen-mode and fullscreen; a bottom scrim
+  (`bg_player_bottom`) holds prev / play-pause / next and the status line.
+
+`PlayerActivity` reuses the single `PlaybackController` player, loads the whole
+group as a playlist (so Next/Previous change channels) and cycles
+FIT/FILL/ZOOM. The fullscreen button toggles the system bars via
+`WindowInsetsControllerCompat`.
+
+Widgets work from a cold start: `PlayerService.ensureRadioLoaded()` loads the
+radio list itself before handling PLAY/TOGGLE/NEXT/PREV, so a widget tap can
+never start a TV stream.
+
+Build: `cd android && ./gradlew :app:assembleRelease` (wrapper is checked in;
+CI uses the same command). Do not run `build_apk.py` for the native app — it
+only packages the WebView fallback.

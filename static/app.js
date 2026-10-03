@@ -201,6 +201,10 @@
   // treated as live television.
   function contentKind(ch) {
     var u = (ch.url || "").toLowerCase();
+    // A channel can carry several iptv-org group titles joined by semicolons;
+    // the first one is the primary category, so the tree shows one clear name.
+    var group = (ch.group || "Genel").split(";")[0].trim() || "Genel";
+    ch.group = group;
     if (ch.kind === "radio") return "radio";
     if (ch.kind === "vod" || ch.kind === "series") return ch.kind;
     if (/\/movie\//.test(u) || /\.(mkv|mp4|avi)$/.test(u) && /\/movie/.test(u)) return "vod";
@@ -537,7 +541,9 @@
       box.appendChild(treeBranch({
         label: (s.name === "Canlı TV" ? "📌 " : s.name === "Radyo" ? "📻 " : "") + s.name,
         count: s.pending ? "—" : s.count,
-        groups: false,
+        // Every list — Canlı TV and Radyo included — shows its categories as a
+        // tree level so a station can be reached by genre, not just by name.
+        groups: true,
         key: s.name, active: state.tab === "all" && state.source === s.name
       }));
     });
@@ -647,24 +653,29 @@
   function treeBranch(o) {
     var wrap = document.createElement("div");
     wrap.className = "tree-branch";
-    var open = state.expanded[o.key] || state.source === o.key;
+    var open = !!state.expanded[o.key];
     var row = document.createElement("button");
     row.className = "tree-row" + (o.active ? " active" : "");
     row.innerHTML = '<span class="tw">' + (open ? "▾" : "▸") + "</span>" +
       '<span class="tl">' + escapeHtml(o.label) + "</span>" +
       '<span class="tn">' + o.count + "</span>";
     row.onclick = function () {
-      state.expanded[o.key] = !open;
-      state.source = o.key;
-      state.tab = "all";
-      state.kind = "all";
-      state.group = "all";
+      // The branch follows the click only: selecting a list must not force it
+      // back open, otherwise the row can never be collapsed again.
+      var willOpen = !open;
+      state.expanded[o.key] = willOpen;
+      if (willOpen) {
+        state.source = o.key;
+        state.tab = "all";
+        state.kind = "all";
+        state.group = "all";
+      }
       renderTree();
       buildGroups();
       render();
       // A personal list is fetched the first time it is opened from the tree,
       // so the branch fills in with its own Live TV / Movies / Series leaves.
-      if (!state.loaded[o.key]) {
+      if (willOpen && !state.loaded[o.key]) {
         var pl = state.playlists.filter(function (p) { return p.name === o.key; })[0];
         if (pl) {
           setOverlay(true, "<h2>" + escapeHtml(o.key) + "</h2><p>Liste yükleniyor…</p>");
@@ -689,32 +700,36 @@
       // No "Hepsi" child: tapping the branch row itself already selects every
       // channel in the list, so a duplicate leaf only adds noise.
       var kinds = o.kinds === false ? [] : kindsFor(o.key);
+      var activeKind = null;
       kinds.forEach(function (k) {
-        var kindOpen = state.source === o.key && state.kind === k.kind;
+        if (state.source === o.key && state.kind === k.kind) activeKind = k.kind;
         kids.appendChild(treeLeaf({
           label: KIND_ICON[k.kind] + " " + KIND_LABEL[k.kind], count: k.count,
-          active: kindOpen,
+          active: state.source === o.key && state.kind === k.kind,
           onPick: function () { selectKind(o.key, k.kind); }
         }));
-        // Groups sit under the content type that is currently open, so the
-        // tree reads list → Live TV / Movies / Series → group → channels.
-        // Sources that opt out (radio, the bundled list) skip this level.
-        if (kindOpen && o.groups !== false) {
-          var groups = groupCountsFor(o.key, k.kind);
-          if (groups.length > 1) {
-            var gkids = document.createElement("div");
-            gkids.className = "tree-kids";
-            groups.forEach(function (g) {
-              gkids.appendChild(treeLeaf({
-                label: g.name, count: g.count,
-                active: state.group === g.name,
-                onPick: function () { selectGroup(o.key, k.kind, g.name); }
-              }));
-            });
-            kids.appendChild(gkids);
-          }
-        }
       });
+      // Categories show as soon as the list is opened. A list with a single
+      // content type (Canlı TV, Radyo) needs no extra tap; a multi-type portal
+      // shows the groups of whichever type is currently selected.
+      if (o.groups !== false && !activeKind && kinds.length === 1) {
+        activeKind = kinds[0].kind;
+      }
+      if (o.groups !== false && activeKind) {
+        var groups = groupCountsFor(o.key, activeKind);
+        if (groups.length > 1) {
+          var gkids = document.createElement("div");
+          gkids.className = "tree-kids";
+          groups.forEach(function (g) {
+            gkids.appendChild(treeLeaf({
+              label: g.name, count: g.count,
+              active: state.group === g.name,
+              onPick: function () { selectGroup(o.key, activeKind, g.name); }
+            }));
+          });
+          kids.appendChild(gkids);
+        }
+      }
       wrap.appendChild(kids);
     }
     return wrap;
@@ -1181,14 +1196,6 @@
       inspectBtn.onclick = function (ev) { ev.stopPropagation(); inspect(ch); };
       head.appendChild(inspectBtn);
 
-      var delBtn = document.createElement("button");
-      delBtn.className = "ch-del";
-      delBtn.type = "button";
-      delBtn.textContent = "🗑";
-      delBtn.title = "Kanalı sil";
-      delBtn.onclick = function (ev) { ev.stopPropagation(); deleteChannel(ch); };
-      head.appendChild(delBtn);
-
       head.onclick = function () { play(ch); };
       node.appendChild(head);
 
@@ -1349,6 +1356,10 @@
         (ch.headers ? "&u=" + encodeURIComponent(ch.headers["User-Agent"] || "") : "");
       finishInit();
       video.onerror = function () { loadStream(i + 1); };
+      // A live radio stream has no duration, so the HLS manifest handler never
+      // runs and nothing else would start playback; it has to be kicked off
+      // here. The rejection is harmless when autoplay is blocked.
+      video.play().catch(function () { showOsd("Oynatmak için ▶ tuşuna basın"); });
       return;
     }
 

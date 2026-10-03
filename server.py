@@ -667,8 +667,11 @@ class Handler(BaseHTTPRequestHandler):
             extra_qs = ""
             if fwd_headers.get("User-Agent"):
                 extra_qs += "&u=" + urllib.parse.quote(fwd_headers["User-Agent"], safe="")
+            # Only forward a cookie when there is one; an empty "&c=" would be
+            # glued onto every child URL and turn it into a 404 upstream.
             cookie = fwd_headers.get("Cookie")
-            extra_qs += "&c=" + urllib.parse.quote(cookie or "", safe="")
+            if cookie:
+                extra_qs += "&c=" + urllib.parse.quote(cookie, safe="")
             rewritten = rewrite_playlist(text, url, extra_qs)
             body = rewritten.encode("utf-8")
             return self._send(

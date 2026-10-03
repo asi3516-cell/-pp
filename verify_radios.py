@@ -22,6 +22,16 @@ ROOT = Path(__file__).resolve().parent
 SRC = ROOT / "data" / "radios.json"
 DEAD = ROOT / "data" / "radios-dead.json"
 
+# Stations that play oyun havası / wedding-dance music. Their names rarely say
+# so, so they are listed explicitly and pinned to the "Oyun Havası" category.
+OYUN_HAVASI_NAMES = {
+    "radyo seymen", "radyo banko", "park fm", "can radyo", "aşk fm",
+    "radyo megasite", "radyo ankara havaları", "ankara havalari",
+    "radyo 7 ankara havaları", "radyo 06", "best kına", "kral ankara",
+    "radyo oyun havası", "ankara rüzgarı fm", "dost fm ankara havaları",
+    "deva fm oyun havası",
+}
+
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
 CTX = ssl.create_default_context()
@@ -84,6 +94,55 @@ def probe(station: dict) -> tuple[dict, str, int]:
     return station, last, 0
 
 
+def categorize(station: dict) -> str:
+    """Assign a Turkish category from the station name and its tags.
+
+    radio-browser has no reliable Turkish genre field, so the name and the
+    free-form tags are matched against keyword lists. The first category that
+    matches wins; stations that match nothing land in "Diğer"."""
+    name = (station.get("name") or "").casefold()
+    tags = " ".join(t.casefold() for t in (station.get("tags") or []))
+    hay = name + " " + tags
+    # Stations the keyword rules below would misplace. These are known oyun
+    # havası / wedding-dance broadcasters, so they are pinned by exact name.
+    if name.strip() in OYUN_HAVASI_NAMES:
+        return "Oyun Havası"
+    rules = [
+        # Oyun havası sits first: wedding/dance-hall music is its own popular
+        # category in Turkey and its names also contain "havası"/"düğün".
+        ("Oyun Havası", ("oyun havası", "oyun havasi", "oyunhavasi",
+                         "düğün", "dugun", "halay", "çiftetelli", "ciftetelli",
+                         "roman havası", "gazino", "eğlence havası",
+                         "davul zurna", "kına")),
+        ("Haber", ("haber", "news", "cnn", "ntv", "gazete", "ekonomi",
+                   "bloomberg", "politika")),
+        ("Spor", ("spor", "sport", "fitness", "maç")),
+        ("Dini", ("islam", "kuran", "kur'an", "dini", "ilahi", "mevlana",
+                  "cami", "risale", "muslim", "hac", "diyanet")),
+        ("Türkü / Halk", ("türkü", "folk", "ozan", "halk", "anadolu",
+                          "bozkurt", "mahalli")),
+        ("Arabesk / Fantazi", ("arabesk", "fantazi", "damar", "aşk")),
+        ("Rock / Alternatif", ("rock", "metal", "alternatif", "indie",
+                               "punk", "grunge")),
+        ("Elektronik / Dans", ("house", "techno", "dance", "electron",
+                               "disco", "dj", "chill", "lounge", "deep",
+                               "trance", "dub", "downtempo", "ambient",
+                               "nu ", "club", "remix")),
+        ("Klasik / Caz", ("classic", "klasik", "jazz", "caz", "senfoni",
+                          "opera", "saz")),
+        ("Pop", ("pop", "hit", "top ", "power", "number", "hot ")),
+        ("Türkçe Müzik", ("türkçe", "turkish music", "turk", "slow",
+                          "kral", "fenomen", "metro", "süper", "joy",
+                          "mydonose", "alem", "best fm", "radyo d")),
+        ("Çocuk / Aile", ("çocuk", "kids", "çizgi")),
+        ("Yerel", ("local", "yerel", "il radyosu")),
+    ]
+    for label, words in rules:
+        if any(w in hay for w in words):
+            return label
+    return "Diğer"
+
+
 def main() -> int:
     stations = json.loads(SRC.read_text("utf-8"))
     print(f"Toplam {len(stations)} radyo kontrol ediliyor...")
@@ -103,6 +162,9 @@ def main() -> int:
                 print(f"  {done}/{len(stations)}  calisan={len(ok)}  sorunlu={len(bad)}")
 
     ok.sort(key=lambda s: s.get("votes", 0) or 0, reverse=True)
+    # Radios carry their own Turkish category so the tree can group them.
+    for s in ok:
+        s["group"] = categorize(s)
     SRC.write_text(json.dumps(ok, ensure_ascii=False, indent=2), "utf-8")
     DEAD.write_text(json.dumps(bad, ensure_ascii=False, indent=2), "utf-8")
     print(f"\nCalisan: {len(ok)}   Sorunlu: {len(bad)}")

@@ -3,7 +3,7 @@
     "name": "TRT 1",
     "url": "https://tv-trt1.medya.trt.com.tr/master.m3u8",
     "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/TRT_1_logo_%282021-%29.svg/960px-TRT_1_logo_%282021-%29.svg.png",
-    "group": "Türkiye",
+    "group": "Ulusal",
     "tvgId": "",
     "source": "Canlitv",
     "rank": 1,
@@ -12,32 +12,14 @@
         "url": "https://tv-trt1.medya.trt.com.tr/master.m3u8",
         "label": "Site (canlitv)"
       }
-    ]
-  },
-  {
-    "name": "ATV",
-    "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/atv/atv_1080p.m3u8",
-    "logo": "https://i.imgur.com/HyVUwFC.png",
-    "group": "Türkiye",
-    "tvgId": "",
-    "source": "Türkçe",
-    "rank": 5,
-    "urls": [
-      {
-        "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/atv/atv_1080p.m3u8",
-        "label": "Liste (iptv-org)"
-      },
-      {
-        "url": "https://trkvz.daioncdn.net/atv/atv.m3u8?ce=3&app=866e32e3-9fea-477f-a5ef-64ebe32956f3",
-        "label": "Site (canlitv)"
-      }
-    ]
+    ],
+    "national": 1
   },
   {
     "name": "Show TV",
     "url": "https://rmtftbjlne.turknet.ercdn.net/bpeytmnqyp/showtv/showtv.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
     "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/show-tr.png",
-    "group": "Türkiye",
+    "group": "Ulusal",
     "tvgId": "",
     "source": "Canlitv",
     "rank": 2,
@@ -46,13 +28,14 @@
         "url": "https://rmtftbjlne.turknet.ercdn.net/bpeytmnqyp/showtv/showtv.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
         "label": "Site (canlitv)"
       }
-    ]
+    ],
+    "national": 2
   },
   {
     "name": "Star TV",
     "url": "https://dogus.daioncdn.net/startv/startv_720p.m3u8?app=a20ac41e-bdc3-4aa1-934d-26b484480ac9&ce=3&sid=8l4w3lst4co5",
     "logo": "https://i.imgur.com/9O3DHRB.png",
-    "group": "Türkiye",
+    "group": "Ulusal",
     "tvgId": "",
     "source": "Türkçe",
     "rank": 3,
@@ -65,28 +48,14 @@
         "url": "https://dogus.daioncdn.net/startv/startv.m3u8?app=a20ac41e-bdc3-4aa1-934d-26b484480ac9&hash=fe96d103350bc846e52be8c7ab97fa5b",
         "label": "Site (canlitv)"
       }
-    ]
-  },
-  {
-    "name": "NOW TV (720p)",
-    "url": "https://uycyyuuzyh.turknet.ercdn.net/nphindgytw/nowtv/nowtv.m3u8",
-    "logo": "https://i.imgur.com/5EYjWK7.png",
-    "group": "Eğlence",
-    "tvgId": "NOWTV.tr@SD",
-    "source": "Türkçe",
-    "rank": 7,
-    "urls": [
-      {
-        "url": "https://uycyyuuzyh.turknet.ercdn.net/nphindgytw/nowtv/nowtv.m3u8",
-        "label": "Liste (iptv-org)"
-      }
-    ]
+    ],
+    "national": 3
   },
   {
     "name": "Kanal 7",
     "url": "https://kanal7.blutv.com/blutv_kanal7_live/live.m3u8",
     "logo": "https://i.imgur.com/0gq9xOm.png",
-    "group": "Türkiye",
+    "group": "Ulusal",
     "tvgId": "",
     "source": "Türkçe",
     "rank": 4,
@@ -99,13 +68,82 @@
         "url": "https://kanal7-live.daioncdn.net/kanal7/kanal7.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
         "label": "Site (canlitv)"
       }
-    ]
+    ],
+    "national": 4
+  },
+  {
+    "name": "ATV",
+    "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/atv/atv_1080p.m3u8",
+    "logo": "https://i.imgur.com/HyVUwFC.png",
+    "group": "Ulusal",
+    "tvgId": "",
+    "source": "Türkçe",
+    "rank": 5,
+    "urls": [
+      {
+        "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/atv/atv_1080p.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://trkvz.daioncdn.net/atv/atv.m3u8?ce=3&app=866e32e3-9fea-477f-a5ef-64ebe32956f3",
+        "label": "Site (canlitv)"
+      }
+    ],
+    "national": 5
+  },
+  {
+    "name": "Kanal D (Turkiye) (1080p)",
+    "url": "https://demiroren.daioncdn.net/kanald/kanald.m3u8?app=kanald_web&ce=3",
+    "logo": "https://i.imgur.com/9o1atM6.png",
+    "group": "Ulusal",
+    "tvgId": "KanalD.tr@SD",
+    "source": "Türkçe",
+    "rank": 6,
+    "urls": [
+      {
+        "url": "https://demiroren.daioncdn.net/kanald/kanald.m3u8?app=kanald_web&ce=3",
+        "label": "Liste (iptv-org)"
+      }
+    ],
+    "national": 6
+  },
+  {
+    "name": "NOW TV (720p)",
+    "url": "https://uycyyuuzyh.turknet.ercdn.net/nphindgytw/nowtv/nowtv.m3u8",
+    "logo": "https://i.imgur.com/5EYjWK7.png",
+    "group": "Ulusal",
+    "tvgId": "NOWTV.tr@SD",
+    "source": "Türkçe",
+    "rank": 7,
+    "urls": [
+      {
+        "url": "https://uycyyuuzyh.turknet.ercdn.net/nphindgytw/nowtv/nowtv.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ],
+    "national": 7
+  },
+  {
+    "name": "TV8 (Turkiye) (1080p)",
+    "url": "https://tv8.daioncdn.net/tv8/tv8.m3u8?app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3",
+    "logo": "https://upload.wikimedia.org/wikipedia/tr/thumb/6/68/Tv8_Yeni_Logo.png/960px-Tv8_Yeni_Logo.png",
+    "group": "Ulusal",
+    "tvgId": "TV8.tr@SD",
+    "source": "Türkçe",
+    "rank": 8,
+    "urls": [
+      {
+        "url": "https://tv8.daioncdn.net/tv8/tv8.m3u8?app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3",
+        "label": "Liste (iptv-org)"
+      }
+    ],
+    "national": 8
   },
   {
     "name": "Beyaz TV",
     "url": "https://mn-nl.mncdn.com/blutv_beyaztv2/live.m3u8",
     "logo": "https://i.imgur.com/uykIdML.png",
-    "group": "Türkiye",
+    "group": "Ulusal",
     "tvgId": "",
     "source": "Türkçe",
     "rank": 9,
@@ -118,7 +156,272 @@
         "url": "https://beyaztv-live.daioncdn.net/beyaztv/beyaztv.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
         "label": "Site (canlitv)"
       }
-    ]
+    ],
+    "national": 9
+  },
+  {
+    "name": "TRT Haber",
+    "url": "https://tv-trthaber.medya.trt.com.tr/master.m3u8",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/TRT_Haber_Eyl%C3%BCl_2020_Logo.svg/960px-TRT_Haber_Eyl%C3%BCl_2020_Logo.svg.png",
+    "group": "Ulusal",
+    "tvgId": "",
+    "source": "Canlitv",
+    "rank": 10,
+    "urls": [
+      {
+        "url": "https://tv-trthaber.medya.trt.com.tr/master.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ],
+    "national": 10
+  },
+  {
+    "name": "NTV (Turkiye)",
+    "url": "https://dogus.daioncdn.net/ntv/ntv.m3u8?app=ntv_web",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/NTV_%28Turkey%29_logo.svg/960px-NTV_%28Turkey%29_logo.svg.png",
+    "group": "Ulusal",
+    "tvgId": "NTV.tr@SD",
+    "source": "Türkçe",
+    "rank": 12,
+    "urls": [
+      {
+        "url": "https://dogus.daioncdn.net/ntv/ntv.m3u8?app=ntv_web",
+        "label": "Liste (iptv-org)"
+      }
+    ],
+    "national": 11
+  },
+  {
+    "name": "A Haber",
+    "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/ahaber/ahaber.m3u8",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/7/7c/Ahaber_Logo.png",
+    "group": "Ulusal",
+    "tvgId": "",
+    "source": "Türkçe",
+    "rank": 13,
+    "urls": [
+      {
+        "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/ahaber/ahaber.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://yayin2.canlitv.fun/live/ahaber.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ],
+    "national": 12
+  },
+  {
+    "name": "Halk TV SD (1080p)",
+    "url": "https://halktv-live.daioncdn.net/halktv/halktv.m3u8",
+    "logo": "https://i.imgur.com/xM0HA30.png",
+    "group": "Ulusal",
+    "tvgId": "HalkTV.tr@SD",
+    "source": "Türkçe",
+    "rank": 15,
+    "urls": [
+      {
+        "url": "https://halktv-live.daioncdn.net/halktv/halktv.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ],
+    "national": 13
+  },
+  {
+    "name": "Haber Global (720p) [Not 24/7]",
+    "url": "https://tv.ensonhaber.com/haberglobal/haberglobal.m3u8",
+    "logo": "https://i.imgur.com/fu6XeGS.png",
+    "group": "Ulusal",
+    "tvgId": "HaberGlobal.tr@SD",
+    "source": "Türkçe",
+    "rank": 17,
+    "urls": [
+      {
+        "url": "https://tv.ensonhaber.com/haberglobal/haberglobal.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ],
+    "national": 14
+  },
+  {
+    "name": "TV 100",
+    "url": "https://7nyaler.streamhostingcdn.top/stream/46/index.m3u8",
+    "logo": "https://upload.wikimedia.org/wikipedia/tr/thumb/0/0f/TV100_logo.png/960px-TV100_logo.png",
+    "group": "Ulusal",
+    "tvgId": "",
+    "source": "Türkçe",
+    "rank": 18,
+    "urls": [
+      {
+        "url": "https://7nyaler.streamhostingcdn.top/stream/46/index.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://yayin2.canlitv.fun/live/tv100.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ],
+    "national": 15
+  },
+  {
+    "name": "360 TV",
+    "url": "https://turkmedya-live.ercdn.net/tv360/tv360.m3u8",
+    "logo": "https://i.imgur.com/agn47sQ.png",
+    "group": "Ulusal",
+    "tvgId": "",
+    "source": "Türkçe",
+    "rank": 19,
+    "urls": [
+      {
+        "url": "https://turkmedya-live.ercdn.net/tv360/tv360.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://turkmedya-live.ercdn.net/tv360/tv360.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ],
+    "national": 16
+  },
+  {
+    "name": "TRT Spor",
+    "url": "https://corestream.siteyaptim.live/trt-spor/index.m3u8",
+    "logo": "https://i.imgur.com/6tv0zxh.png",
+    "group": "Ulusal",
+    "tvgId": "",
+    "source": "Türkçe",
+    "rank": 21,
+    "urls": [
+      {
+        "url": "https://corestream.siteyaptim.live/trt-spor/index.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://tv-trtspor1.medya.trt.com.tr/master.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ],
+    "national": 17
+  },
+  {
+    "name": "A Spor",
+    "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/aspor/aspor.m3u8",
+    "logo": "https://i.imgur.com/ZhkZzLf.png",
+    "group": "Ulusal",
+    "tvgId": "",
+    "source": "Türkçe",
+    "rank": 24,
+    "urls": [
+      {
+        "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/aspor/aspor.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/aspor/aspor_480p.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ],
+    "national": 18
+  },
+  {
+    "name": "Tivibu Spor",
+    "url": "https://yayin2.canlitv.fun/live/tivibuspor.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/tivibu-spor-tr.png",
+    "group": "Ulusal",
+    "tvgId": "",
+    "source": "Canlitv",
+    "rank": 25,
+    "urls": [
+      {
+        "url": "https://yayin2.canlitv.fun/live/tivibuspor.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ],
+    "national": 19
+  },
+  {
+    "name": "FB TV",
+    "url": "http://1hskrdto.rocketcdn.com/fenerbahcetv.smil/playlist.m3u8",
+    "logo": "https://i.imgur.com/qBVqtYd.png",
+    "group": "Ulusal",
+    "tvgId": "",
+    "source": "Türkçe",
+    "rank": 26,
+    "urls": [
+      {
+        "url": "http://1hskrdto.rocketcdn.com/fenerbahcetv.smil/playlist.m3u8",
+        "label": "Liste (iptv-org)"
+      },
+      {
+        "url": "https://fbtv.fenerbahce.org/fenerbahcetv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ],
+    "national": 20
+  },
+  {
+    "name": "TRT Spor Yıldız",
+    "url": "https://tv-trtspor2.medya.trt.com.tr/master.m3u8",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/trt-spor-yildiz-tr.png",
+    "group": "Ulusal",
+    "tvgId": "",
+    "source": "Canlitv",
+    "rank": 27,
+    "urls": [
+      {
+        "url": "https://tv-trtspor2.medya.trt.com.tr/master.m3u8",
+        "label": "Site (canlitv)"
+      }
+    ],
+    "national": 21
+  },
+  {
+    "name": "TJK TV (1080p)",
+    "url": "https://tjktv-live.tjk.org/tjktv.m3u8",
+    "logo": "https://i.imgur.com/3zHdkYG.png",
+    "group": "Ulusal",
+    "tvgId": "TJKTV.tr@SD",
+    "source": "Türkçe",
+    "rank": 30,
+    "urls": [
+      {
+        "url": "https://tjktv-live.tjk.org/tjktv.m3u8",
+        "label": "Liste (iptv-org)"
+      }
+    ],
+    "national": 22
+  },
+  {
+    "name": "TLC",
+    "url": "https://yayin2.canlitv.fun/live/tlc.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "logo": "",
+    "group": "Ulusal",
+    "tvgId": "",
+    "source": "Canlitv",
+    "rank": 32,
+    "urls": [
+      {
+        "url": "https://yayin2.canlitv.fun/live/tlc.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ],
+    "national": 23
+  },
+  {
+    "name": "DMAX",
+    "url": "https://yayin2.canlitv.fun/live/dmax.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+    "logo": "",
+    "group": "Ulusal",
+    "tvgId": "",
+    "source": "Canlitv",
+    "rank": 33,
+    "urls": [
+      {
+        "url": "https://yayin2.canlitv.fun/live/dmax.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+        "label": "Site (canlitv)"
+      }
+    ],
+    "national": 24
   },
   {
     "name": "TRT 2",
@@ -132,74 +435,6 @@
       {
         "url": "https://tv-trt2.medya.trt.com.tr/master.m3u8",
         "label": "Site (canlitv)"
-      }
-    ]
-  },
-  {
-    "name": "TV 100",
-    "url": "https://7nyaler.streamhostingcdn.top/stream/46/index.m3u8",
-    "logo": "https://upload.wikimedia.org/wikipedia/tr/thumb/0/0f/TV100_logo.png/960px-TV100_logo.png",
-    "group": "Türkiye",
-    "tvgId": "",
-    "source": "Türkçe",
-    "rank": 18,
-    "urls": [
-      {
-        "url": "https://7nyaler.streamhostingcdn.top/stream/46/index.m3u8",
-        "label": "Liste (iptv-org)"
-      },
-      {
-        "url": "https://yayin2.canlitv.fun/live/tv100.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-        "label": "Site (canlitv)"
-      }
-    ]
-  },
-  {
-    "name": "360 TV",
-    "url": "https://turkmedya-live.ercdn.net/tv360/tv360.m3u8",
-    "logo": "https://i.imgur.com/agn47sQ.png",
-    "group": "Türkiye",
-    "tvgId": "",
-    "source": "Türkçe",
-    "rank": 19,
-    "urls": [
-      {
-        "url": "https://turkmedya-live.ercdn.net/tv360/tv360.m3u8",
-        "label": "Liste (iptv-org)"
-      },
-      {
-        "url": "https://turkmedya-live.ercdn.net/tv360/tv360.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-        "label": "Site (canlitv)"
-      }
-    ]
-  },
-  {
-    "name": "Halk TV SD (1080p)",
-    "url": "https://halktv-live.daioncdn.net/halktv/halktv.m3u8",
-    "logo": "https://i.imgur.com/xM0HA30.png",
-    "group": "Haber",
-    "tvgId": "HalkTV.tr@SD",
-    "source": "Türkçe",
-    "rank": 15,
-    "urls": [
-      {
-        "url": "https://halktv-live.daioncdn.net/halktv/halktv.m3u8",
-        "label": "Liste (iptv-org)"
-      }
-    ]
-  },
-  {
-    "name": "Haber Global (720p) [Not 24/7]",
-    "url": "https://tv.ensonhaber.com/haberglobal/haberglobal.m3u8",
-    "logo": "https://i.imgur.com/fu6XeGS.png",
-    "group": "Haber",
-    "tvgId": "HaberGlobal.tr@SD",
-    "source": "Türkçe",
-    "rank": 17,
-    "urls": [
-      {
-        "url": "https://tv.ensonhaber.com/haberglobal/haberglobal.m3u8",
-        "label": "Liste (iptv-org)"
       }
     ]
   },
@@ -394,21 +629,6 @@
     "urls": [
       {
         "url": "https://edge1.socialsmart.tv/turkhaber/bant1/playlist.m3u8",
-        "label": "Liste (iptv-org)"
-      }
-    ]
-  },
-  {
-    "name": "TJK TV (1080p)",
-    "url": "https://tjktv-live.tjk.org/tjktv.m3u8",
-    "logo": "https://i.imgur.com/3zHdkYG.png",
-    "group": "Spor",
-    "tvgId": "TJKTV.tr@SD",
-    "source": "Türkçe",
-    "rank": 30,
-    "urls": [
-      {
-        "url": "https://tjktv-live.tjk.org/tjktv.m3u8",
         "label": "Liste (iptv-org)"
       }
     ]
@@ -1194,202 +1414,6 @@
       {
         "url": "https://nord.ayakkabiparti.lol/bsturk/index.m3u8",
         "label": "Liste (iptv-org)"
-      }
-    ]
-  },
-  {
-    "name": "Kanal D (Turkiye) (1080p)",
-    "url": "https://demiroren.daioncdn.net/kanald/kanald.m3u8?app=kanald_web&ce=3",
-    "logo": "https://i.imgur.com/9o1atM6.png",
-    "group": "Genel",
-    "tvgId": "KanalD.tr@SD",
-    "source": "Türkçe",
-    "rank": 6,
-    "urls": [
-      {
-        "url": "https://demiroren.daioncdn.net/kanald/kanald.m3u8?app=kanald_web&ce=3",
-        "label": "Liste (iptv-org)"
-      }
-    ]
-  },
-  {
-    "name": "TV8 (Turkiye) (1080p)",
-    "url": "https://tv8.daioncdn.net/tv8/tv8.m3u8?app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3",
-    "logo": "https://upload.wikimedia.org/wikipedia/tr/thumb/6/68/Tv8_Yeni_Logo.png/960px-Tv8_Yeni_Logo.png",
-    "group": "Genel",
-    "tvgId": "TV8.tr@SD",
-    "source": "Türkçe",
-    "rank": 8,
-    "urls": [
-      {
-        "url": "https://tv8.daioncdn.net/tv8/tv8.m3u8?app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3",
-        "label": "Liste (iptv-org)"
-      }
-    ]
-  },
-  {
-    "name": "TRT Haber",
-    "url": "https://tv-trthaber.medya.trt.com.tr/master.m3u8",
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/TRT_Haber_Eyl%C3%BCl_2020_Logo.svg/960px-TRT_Haber_Eyl%C3%BCl_2020_Logo.svg.png",
-    "group": "Türkiye",
-    "tvgId": "",
-    "source": "Canlitv",
-    "rank": 10,
-    "urls": [
-      {
-        "url": "https://tv-trthaber.medya.trt.com.tr/master.m3u8",
-        "label": "Site (canlitv)"
-      }
-    ]
-  },
-  {
-    "name": "NTV (Turkiye)",
-    "url": "https://dogus.daioncdn.net/ntv/ntv.m3u8?app=ntv_web",
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/NTV_%28Turkey%29_logo.svg/960px-NTV_%28Turkey%29_logo.svg.png",
-    "group": "Genel",
-    "tvgId": "NTV.tr@SD",
-    "source": "Türkçe",
-    "rank": 12,
-    "urls": [
-      {
-        "url": "https://dogus.daioncdn.net/ntv/ntv.m3u8?app=ntv_web",
-        "label": "Liste (iptv-org)"
-      }
-    ]
-  },
-  {
-    "name": "A Haber",
-    "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/ahaber/ahaber.m3u8",
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/7/7c/Ahaber_Logo.png",
-    "group": "Türkiye",
-    "tvgId": "",
-    "source": "Türkçe",
-    "rank": 13,
-    "urls": [
-      {
-        "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/ahaber/ahaber.m3u8",
-        "label": "Liste (iptv-org)"
-      },
-      {
-        "url": "https://yayin2.canlitv.fun/live/ahaber.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-        "label": "Site (canlitv)"
-      }
-    ]
-  },
-  {
-    "name": "TRT Spor",
-    "url": "https://corestream.siteyaptim.live/trt-spor/index.m3u8",
-    "logo": "https://i.imgur.com/6tv0zxh.png",
-    "group": "Türkiye",
-    "tvgId": "",
-    "source": "Türkçe",
-    "rank": 21,
-    "urls": [
-      {
-        "url": "https://corestream.siteyaptim.live/trt-spor/index.m3u8",
-        "label": "Liste (iptv-org)"
-      },
-      {
-        "url": "https://tv-trtspor1.medya.trt.com.tr/master.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-        "label": "Site (canlitv)"
-      }
-    ]
-  },
-  {
-    "name": "A Spor",
-    "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/aspor/aspor.m3u8",
-    "logo": "https://i.imgur.com/ZhkZzLf.png",
-    "group": "Türkiye",
-    "tvgId": "",
-    "source": "Türkçe",
-    "rank": 24,
-    "urls": [
-      {
-        "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/aspor/aspor.m3u8",
-        "label": "Liste (iptv-org)"
-      },
-      {
-        "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/aspor/aspor_480p.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-        "label": "Site (canlitv)"
-      }
-    ]
-  },
-  {
-    "name": "Tivibu Spor",
-    "url": "https://yayin2.canlitv.fun/live/tivibuspor.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/tivibu-spor-tr.png",
-    "group": "Türkiye",
-    "tvgId": "",
-    "source": "Canlitv",
-    "rank": 25,
-    "urls": [
-      {
-        "url": "https://yayin2.canlitv.fun/live/tivibuspor.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-        "label": "Site (canlitv)"
-      }
-    ]
-  },
-  {
-    "name": "FB TV",
-    "url": "http://1hskrdto.rocketcdn.com/fenerbahcetv.smil/playlist.m3u8",
-    "logo": "https://i.imgur.com/qBVqtYd.png",
-    "group": "Türkiye",
-    "tvgId": "",
-    "source": "Türkçe",
-    "rank": 26,
-    "urls": [
-      {
-        "url": "http://1hskrdto.rocketcdn.com/fenerbahcetv.smil/playlist.m3u8",
-        "label": "Liste (iptv-org)"
-      },
-      {
-        "url": "https://fbtv.fenerbahce.org/fenerbahcetv.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-        "label": "Site (canlitv)"
-      }
-    ]
-  },
-  {
-    "name": "TRT Spor Yıldız",
-    "url": "https://tv-trtspor2.medya.trt.com.tr/master.m3u8",
-    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/trt-spor-yildiz-tr.png",
-    "group": "Türkiye",
-    "tvgId": "",
-    "source": "Canlitv",
-    "rank": 27,
-    "urls": [
-      {
-        "url": "https://tv-trtspor2.medya.trt.com.tr/master.m3u8",
-        "label": "Site (canlitv)"
-      }
-    ]
-  },
-  {
-    "name": "TLC",
-    "url": "https://yayin2.canlitv.fun/live/tlc.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvgId": "",
-    "source": "Canlitv",
-    "rank": 32,
-    "urls": [
-      {
-        "url": "https://yayin2.canlitv.fun/live/tlc.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-        "label": "Site (canlitv)"
-      }
-    ]
-  },
-  {
-    "name": "DMAX",
-    "url": "https://yayin2.canlitv.fun/live/dmax.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-    "logo": "",
-    "group": "Türkiye",
-    "tvgId": "",
-    "source": "Canlitv",
-    "rank": 33,
-    "urls": [
-      {
-        "url": "https://yayin2.canlitv.fun/live/dmax.stream/playlist.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
-        "label": "Site (canlitv)"
       }
     ]
   },
@@ -4937,7 +4961,7 @@
     "name": "Arabesk FM",
     "url": "https://yayin.radyoarabesk.com.tr:8000/stream",
     "logo": "",
-    "group": "Radyo",
+    "group": "Arabesk / Fantazi",
     "tvgId": "",
     "source": "Radyo",
     "rank": 28505,
@@ -4953,7 +4977,7 @@
     "name": "Virgin Radio Türkiye",
     "url": "http://28933.live.streamtheworld.com:3690/VIRGIN_RADIO_SC",
     "logo": "https://i.karnavalcdn.com/media/site_media/icons/android-icon-192x192.png",
-    "group": "Radyo",
+    "group": "Rock / Alternatif",
     "tvgId": "",
     "source": "Radyo",
     "rank": 20545,
@@ -4969,7 +4993,7 @@
     "name": "DAMAR TURK FM",
     "url": "https://live.radyositesihazir.com:10997/;",
     "logo": "https://www.damarturkfm.com/favicon.ico",
-    "group": "Radyo",
+    "group": "Arabesk / Fantazi",
     "tvgId": "",
     "source": "Radyo",
     "rank": 16821,
@@ -4985,7 +5009,7 @@
     "name": "Radyo 7",
     "url": "https://anadolu.liderhost.com.tr/8126/stream",
     "logo": "https://cdn.kanal7.com/radyo7//application/assets/home/common/images/apple-touch-icon-114x114.png",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 16684,
@@ -5001,7 +5025,7 @@
     "name": "Türkülerle Türkiye",
     "url": "http://37.247.98.8/stream/22/;",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkü / Halk",
     "tvgId": "",
     "source": "Radyo",
     "rank": 15862,
@@ -5017,7 +5041,7 @@
     "name": "Radyo Şiran",
     "url": "https://live.radyositesihazir.com/8078/stream",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkü / Halk",
     "tvgId": "",
     "source": "Radyo",
     "rank": 14222,
@@ -5033,7 +5057,7 @@
     "name": "Metro FM",
     "url": "http://25703.live.streamtheworld.com/METRO_FMAAC_SC",
     "logo": "https://metrofm.com.tr/favicon.ico",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 12215,
@@ -5049,7 +5073,7 @@
     "name": "Power POP",
     "url": "https://listen.powerapp.com.tr/powerpop/128/chunks.m3u8",
     "logo": "https://www.powerapp.com.tr/i/favicov2/apple-icon-120x120.png?v=817",
-    "group": "Radyo",
+    "group": "Rock / Alternatif",
     "tvgId": "",
     "source": "Radyo",
     "rank": 11296,
@@ -5065,7 +5089,7 @@
     "name": "KRAL TÜRK FM",
     "url": "https://live.radyositesihazir.com/8032/stream",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 10564,
@@ -5081,7 +5105,7 @@
     "name": "NTV Radyo",
     "url": "http://ntvrdwmp.radyotvonline.com/",
     "logo": "http://www.ntvradyo.com.tr/favicon.ico",
-    "group": "Radyo",
+    "group": "Haber",
     "tvgId": "",
     "source": "Radyo",
     "rank": 10494,
@@ -5097,7 +5121,7 @@
     "name": "Alem FM",
     "url": "http://turkmedya.radyotvonline.com/turkmedya/alemfm.stream/playlist.m3u8",
     "logo": "https://www.alemfm.com/assets/img/alemfm-apple-touch-icon.png",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 10195,
@@ -5113,7 +5137,7 @@
     "name": "Ankara Havalari",
     "url": "http://37.247.98.8/stream/30/;",
     "logo": "",
-    "group": "Radyo",
+    "group": "Oyun Havası",
     "tvgId": "",
     "source": "Radyo",
     "rank": 8709,
@@ -5129,7 +5153,7 @@
     "name": "Baba Radyo",
     "url": "http://46.20.7.116/",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkü / Halk",
     "tvgId": "",
     "source": "Radyo",
     "rank": 8559,
@@ -5145,7 +5169,7 @@
     "name": "ALTIN SARKILAR",
     "url": "http://37.247.98.8/stream/25/;",
     "logo": "",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 8106,
@@ -5161,7 +5185,7 @@
     "name": "a HABER",
     "url": "https://trkvz-radyolar.ercdn.net/ahaberradyo/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Haber",
     "tvgId": "",
     "source": "Radyo",
     "rank": 7014,
@@ -5177,7 +5201,7 @@
     "name": "Radyo Fenomen",
     "url": "https://live.radyofenomen.com/fenomen/128/icecast.audio",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 6814,
@@ -5193,7 +5217,7 @@
     "name": "Süper FM",
     "url": "http://27943.live.streamtheworld.com/SUPER_FMAAC_SC",
     "logo": "",
-    "group": "Radyo",
+    "group": "Pop",
     "tvgId": "",
     "source": "Radyo",
     "rank": 6213,
@@ -5209,7 +5233,7 @@
     "name": "dinamo.fm sleep",
     "url": "http://channels.dinamo.fm/sleep-mp3",
     "logo": "https://www.dinamo.fm/favicons/dinamo-sleep-favicon.jpg",
-    "group": "Radyo",
+    "group": "Elektronik / Dans",
     "tvgId": "",
     "source": "Radyo",
     "rank": 6111,
@@ -5225,7 +5249,7 @@
     "name": "Radyo Seymen",
     "url": "https://yayin.radyoseymen.com.tr:1070/stream",
     "logo": "",
-    "group": "Radyo",
+    "group": "Oyun Havası",
     "tvgId": "",
     "source": "Radyo",
     "rank": 5608,
@@ -5241,7 +5265,7 @@
     "name": "DamarTurk FM",
     "url": "https://live.radyositesihazir.com:10997/stream?type=http&nocache=99881",
     "logo": "https://www.damarturkfm.com/favicon.ico",
-    "group": "Radyo",
+    "group": "Arabesk / Fantazi",
     "tvgId": "",
     "source": "Radyo",
     "rank": 5273,
@@ -5257,7 +5281,7 @@
     "name": "Radyo Voyage",
     "url": "http://voyagewmp.radyotvonline.com/;stream.mp3",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkü / Halk",
     "tvgId": "",
     "source": "Radyo",
     "rank": 4635,
@@ -5273,7 +5297,7 @@
     "name": "90lar turkey",
     "url": "http://37.247.98.8/stream/166/",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 4619,
@@ -5289,7 +5313,7 @@
     "name": "pop 90 turkey",
     "url": "http://21633.live.streamtheworld.com:3690/POP90AAC_SC",
     "logo": "",
-    "group": "Radyo",
+    "group": "Pop",
     "tvgId": "",
     "source": "Radyo",
     "rank": 3823,
@@ -5305,7 +5329,7 @@
     "name": "Turku Radyo",
     "url": "http://radyo.turkuradyo.net:4591/turkuradyo",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkü / Halk",
     "tvgId": "",
     "source": "Radyo",
     "rank": 3820,
@@ -5321,7 +5345,7 @@
     "name": "RS FM",
     "url": "http://nfw.video.ria.ru/flv/audio.aspx?ID=99244423&type=mp3",
     "logo": "",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 3592,
@@ -5337,7 +5361,7 @@
     "name": "JOY TÜRK TURKEY",
     "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/JOY_TURK_SC?/",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 3279,
@@ -5353,7 +5377,7 @@
     "name": "Slow Turk",
     "url": "https://radyo.duhnet.tv/ak_dtvh_slowturk",
     "logo": "https://www.slowturk.com.tr/_next/image?url=https%3A%2F%2Fassets.blupoint.io%2Fimg%2F85%2F330x175%2F6410d8c4310c17000763c62b&w=256&q=75",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 3193,
@@ -5369,7 +5393,7 @@
     "name": "KRAL FM",
     "url": "https://dygedge2.radyotvonline.net/kralfm/playlist.m3u8?listenerid=29d0a6a85b59cea2ca801b70d2a3ebaf&awparams=companionAds%3Atrue",
     "logo": "https://cdn1.kralmuzik.com.tr/media/content/19-05/17/kralfm.png",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 3107,
@@ -5385,7 +5409,7 @@
     "name": "Joy Fm",
     "url": "http://29053.live.streamtheworld.com/JOY_FMAAC_SC",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 2806,
@@ -5401,7 +5425,7 @@
     "name": "dinamo.fm deep",
     "url": "http://channels.dinamo.fm/deep-mp3",
     "logo": "https://www.dinamo.fm/favicons/dinamo-deep-favicon.jpg",
-    "group": "Radyo",
+    "group": "Elektronik / Dans",
     "tvgId": "",
     "source": "Radyo",
     "rank": 2743,
@@ -5417,7 +5441,7 @@
     "name": "Diyanet Radyo",
     "url": "https://eustr73.mediatriple.net/videoonlylive/mtikoimxnztxlive/broadcast_5e3c1171d7d2a.smil/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Dini",
     "tvgId": "",
     "source": "Radyo",
     "rank": 2442,
@@ -5433,7 +5457,7 @@
     "name": "Radyo 45lik yeni",
     "url": "https://stream.radyo45lik.com:4545/",
     "logo": "",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 2340,
@@ -5449,7 +5473,7 @@
     "name": "SUPER FM 2 TURKEY",
     "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/SUPER2_SC?/",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 2165,
@@ -5465,7 +5489,7 @@
     "name": "TRT Türkü",
     "url": "https://rd-trtturku.medya.trt.com.tr/master_128.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkü / Halk",
     "tvgId": "",
     "source": "Radyo",
     "rank": 1933,
@@ -5481,7 +5505,7 @@
     "name": "Ahaber",
     "url": "http://trkvz-radyolar.ercdn.net/ahaberradyo/chunklist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Haber",
     "tvgId": "",
     "source": "Radyo",
     "rank": 1877,
@@ -5497,7 +5521,7 @@
     "name": "HOUSELAND TURKEY",
     "url": "https://moondigitaledge.radyotvonline.net/houseland/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Elektronik / Dans",
     "tvgId": "",
     "source": "Radyo",
     "rank": 1774,
@@ -5513,7 +5537,7 @@
     "name": "Dost",
     "url": "http://yayin1.yayindakiler.com:3156/;",
     "logo": "http://dostfm.com/favicon.ico",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 1767,
@@ -5529,7 +5553,7 @@
     "name": "Metro fm turkey",
     "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/METRO_FM_SC?",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 1692,
@@ -5545,7 +5569,7 @@
     "name": "dinamo.fm caffe",
     "url": "http://channels.dinamo.fm/caffe-mp3",
     "logo": "https://www.dinamo.fm/favicons/dinamo-caffe-favicon.jpg",
-    "group": "Radyo",
+    "group": "Elektronik / Dans",
     "tvgId": "",
     "source": "Radyo",
     "rank": 1529,
@@ -5561,7 +5585,7 @@
     "name": "Kurd1 FM",
     "url": "https://listen.radioking.com/radio/119251/stream/158701",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkü / Halk",
     "tvgId": "",
     "source": "Radyo",
     "rank": 1516,
@@ -5577,7 +5601,7 @@
     "name": "TRT NAĞME",
     "url": "https://tv-trtmuzik.medya.trt.com.tr/master_720.m3u8",
     "logo": "https://cdn-i.pr.trt.com.tr/trtdinle//w768/q70/12467465.jpeg",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 1476,
@@ -5593,7 +5617,7 @@
     "name": "Radyo Spor",
     "url": "https://moondigitaledge.radyotvonline.net/radyospor/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Spor",
     "tvgId": "",
     "source": "Radyo",
     "rank": 1461,
@@ -5609,7 +5633,7 @@
     "name": "POWER TÜRK FM",
     "url": "https://live.powerapp.com.tr/powerturk/abr/powerturk/128/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Pop",
     "tvgId": "",
     "source": "Radyo",
     "rank": 1445,
@@ -5625,7 +5649,7 @@
     "name": "POWER TÜRK DANS TÜRKİYE",
     "url": "https://listen.powerapp.com.tr/powerturkdans/abr/powerturkdans/128/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Pop",
     "tvgId": "",
     "source": "Radyo",
     "rank": 1429,
@@ -5641,7 +5665,7 @@
     "name": "Radyo Turkuvaz",
     "url": "https://trkvz-radyolar.ercdn.net/radyoturkuvaz/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 1420,
@@ -5657,7 +5681,7 @@
     "name": "dinamo.fm discotheque",
     "url": "http://channels.dinamo.fm/discotheque-mp3",
     "logo": "https://www.dinamo.fm/favicons/dinamo-disco-favicon.jpg",
-    "group": "Radyo",
+    "group": "Elektronik / Dans",
     "tvgId": "",
     "source": "Radyo",
     "rank": 1349,
@@ -5673,7 +5697,7 @@
     "name": "Radyo ODTU",
     "url": "https://stream3.radyoodtu.com.tr:8000/easy",
     "logo": "",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 1206,
@@ -5689,7 +5713,7 @@
     "name": "Kafa Radyo",
     "url": "https://moondigitalmaster.radyotvonline.net/kafaradyo/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 1153,
@@ -5705,7 +5729,7 @@
     "name": "Gözyaşı FM",
     "url": "http://yayin1.canliyayin.org:8700/;*.mp3",
     "logo": "",
-    "group": "Radyo",
+    "group": "Dini",
     "tvgId": "",
     "source": "Radyo",
     "rank": 1141,
@@ -5721,7 +5745,7 @@
     "name": "FENOMEN KARISIK",
     "url": "https://live.radyofenomen.com/fenomenkarisik/abr/fenomenkarisik/128/chunks.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 1137,
@@ -5737,7 +5761,7 @@
     "name": "Park Fm",
     "url": "http://yayin.netradyom.com:8050/PARKFM/",
     "logo": "",
-    "group": "Radyo",
+    "group": "Oyun Havası",
     "tvgId": "",
     "source": "Radyo",
     "rank": 1133,
@@ -5753,7 +5777,7 @@
     "name": "lokum fm",
     "url": "http://37.247.98.9/stream/493/?/;stream.mp3",
     "logo": "",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 1118,
@@ -5769,7 +5793,7 @@
     "name": "Vav Radyo",
     "url": "https://trkvz-radyolar.ercdn.net/radyovav/playlist.m3u8",
     "logo": "https://i.tmgrup.com.tr/vavradyo/site/v2/c/i/apple-touch-icon-new-120x120.png",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 1105,
@@ -5785,7 +5809,7 @@
     "name": "Radyo Ekin",
     "url": "https://yayin.turkhosted.com/6006/stream",
     "logo": "https://www.radyoekin.net/favicon.ico",
-    "group": "Radyo",
+    "group": "Klasik / Caz",
     "tvgId": "",
     "source": "Radyo",
     "rank": 1102,
@@ -5801,7 +5825,7 @@
     "name": "Radio Ava Turkiye",
     "url": "http://play.markaradyo.com:8002/stream",
     "logo": "",
-    "group": "Radyo",
+    "group": "Pop",
     "tvgId": "",
     "source": "Radyo",
     "rank": 1082,
@@ -5817,7 +5841,7 @@
     "name": "Radyo A (Radyo Anadolu Üniversitesi)",
     "url": "http://canli.radyoa.anadolu.edu.tr:44445/Radyo_A_MP3",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkü / Halk",
     "tvgId": "",
     "source": "Radyo",
     "rank": 1061,
@@ -5831,15 +5855,15 @@
   },
   {
     "name": "TRT Radyo Haber",
-    "url": "https://radio-trtradyohaber.live.trt.com.tr/master.m3u8",
+    "url": "https://trt.radyotvonline.net/trthaber?.mp3",
     "logo": "https://cdn-i.pr.trt.com.tr/trtdinle//w410/h315/q70/12530424_0-0-2048-1536.jpeg",
-    "group": "Radyo",
+    "group": "Haber",
     "tvgId": "",
     "source": "Radyo",
     "rank": 1039,
     "urls": [
       {
-        "url": "https://radio-trtradyohaber.live.trt.com.tr/master.m3u8",
+        "url": "https://trt.radyotvonline.net/trthaber?.mp3",
         "label": "Radyo (radio-browser)"
       }
     ],
@@ -5849,7 +5873,7 @@
     "name": "TRT Radyo Kurdî",
     "url": "https://radio-trtradyo6.medya.trt.com.tr/master.m3u8",
     "logo": "https://trtkurdi.com.tr/favicon.ico",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 1021,
@@ -5865,7 +5889,7 @@
     "name": "FENOMEN POP",
     "url": "https://live.radyofenomen.com/fenomenpop/abr/fenomenpop/128/chunks.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Pop",
     "tvgId": "",
     "source": "Radyo",
     "rank": 1013,
@@ -5881,7 +5905,7 @@
     "name": "Halk Radyo",
     "url": "https://anadolu.liderhost.com.tr:10876/;",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkü / Halk",
     "tvgId": "",
     "source": "Radyo",
     "rank": 1008,
@@ -5897,7 +5921,7 @@
     "name": "dinamo.fm locodyno",
     "url": "http://channels.dinamo.fm/locodyno-mp3",
     "logo": "https://www.dinamo.fm/favicons/dinamo-locodyno-favicon.jpg",
-    "group": "Radyo",
+    "group": "Elektronik / Dans",
     "tvgId": "",
     "source": "Radyo",
     "rank": 983,
@@ -5913,7 +5937,7 @@
     "name": "Akra FM",
     "url": "https://d3r5bwwuab2v60.cloudfront.net/akracanli2/_definst_/livestream_aac/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Dini",
     "tvgId": "",
     "source": "Radyo",
     "rank": 972,
@@ -5929,7 +5953,7 @@
     "name": "Havin FM",
     "url": "http://yayin6.radyohizmeti.com:7050/;stream.mp3",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkü / Halk",
     "tvgId": "",
     "source": "Radyo",
     "rank": 954,
@@ -5945,7 +5969,7 @@
     "name": "KRAL POP ALTERNATİF 2",
     "url": "https://ssldyg.radyotvonline.com/smil/smil:kralpop.smil/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Pop",
     "tvgId": "",
     "source": "Radyo",
     "rank": 944,
@@ -5961,7 +5985,7 @@
     "name": "Halk Tv",
     "url": "https://halktv.daioncdn.net/halktv/halktv_1080p.m3u8?sid=6vahxsup0jxl&app=c86957d3-74a7-44da-9ad2-dc358c769609&ce=3",
     "logo": "null",
-    "group": "Radyo",
+    "group": "Türkü / Halk",
     "tvgId": "",
     "source": "Radyo",
     "rank": 918,
@@ -5977,7 +6001,7 @@
     "name": "Power FM Türkiye",
     "url": "https://listen.powerapp.com.tr/powerfm/256/chunks.m3u8",
     "logo": "https://cdn.powergroup.com.tr/image/100x100/powerapp/channels/v3/inverse/logo_37.png?v=716",
-    "group": "Radyo",
+    "group": "Pop",
     "tvgId": "",
     "source": "Radyo",
     "rank": 900,
@@ -5993,7 +6017,7 @@
     "name": "Pal Fm",
     "url": "https://ssl4.radyotvonline.com/radyohome/palfmhome.stream/playlist.m3u8",
     "logo": "http://www.palfm.com.tr/img/logo/pal-fm.ico",
-    "group": "Radyo",
+    "group": "Pop",
     "tvgId": "",
     "source": "Radyo",
     "rank": 894,
@@ -6009,7 +6033,7 @@
     "name": "FENOMEN DANS",
     "url": "https://live.radyofenomen.com/fenomendans/abr/fenomendans/128/chunks.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 883,
@@ -6025,7 +6049,7 @@
     "name": "KEYF STATION",
     "url": "http://yayin.radyomadyo.com:8002/stream",
     "logo": "",
-    "group": "Radyo",
+    "group": "Pop",
     "tvgId": "",
     "source": "Radyo",
     "rank": 879,
@@ -6041,7 +6065,7 @@
     "name": "PAL Nostalji",
     "url": "https://moondigitaledge.radyotvonline.net/palnostalji/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 870,
@@ -6057,7 +6081,7 @@
     "name": "BAYRAM FM TURKEY",
     "url": "https://sslyayin.netyayin.net/3442/stream",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 857,
@@ -6073,7 +6097,7 @@
     "name": "Pal Doğa",
     "url": "http://shoutcast.radyogrup.com:1040/;*.mp3",
     "logo": "",
-    "group": "Radyo",
+    "group": "Klasik / Caz",
     "tvgId": "",
     "source": "Radyo",
     "rank": 852,
@@ -6089,7 +6113,7 @@
     "name": "Diyanet Kur'an Radyo",
     "url": "https://eustr73.mediatriple.net/videoonlylive/mtikoimxnztxlive/broadcast_5e3c14192aa92.smil/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Dini",
     "tvgId": "",
     "source": "Radyo",
     "rank": 840,
@@ -6105,7 +6129,7 @@
     "name": "Radio Antalya",
     "url": "https://my.radiolize.com/radio/8000/radio.mp3",
     "logo": "https://radioantalya.com/favicon.ico",
-    "group": "Radyo",
+    "group": "Rock / Alternatif",
     "tvgId": "",
     "source": "Radyo",
     "rank": 830,
@@ -6121,7 +6145,7 @@
     "name": "Radyo Fenomen Clubbin",
     "url": "https://live.radyofenomen.com/fenomenclubbin/128/icecast.audio",
     "logo": "https://cdn.radyofenomen.com/artwork/logo20.png",
-    "group": "Radyo",
+    "group": "Elektronik / Dans",
     "tvgId": "",
     "source": "Radyo",
     "rank": 796,
@@ -6137,7 +6161,7 @@
     "name": "Turkuaz Anadolu",
     "url": "https://trkvz-radyolar.ercdn.net/turkuvazanadolu/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkü / Halk",
     "tvgId": "",
     "source": "Radyo",
     "rank": 792,
@@ -6153,7 +6177,7 @@
     "name": "Turkuvaz Anadolu",
     "url": "http://trkvz-radyolar.ercdn.net/turkuvazanadolu/Playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkü / Halk",
     "tvgId": "",
     "source": "Radyo",
     "rank": 782,
@@ -6169,7 +6193,7 @@
     "name": "JOY TÜRK ROCK TURKEY",
     "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/JOYTURK_ROCK_SC?/",
     "logo": "",
-    "group": "Radyo",
+    "group": "Rock / Alternatif",
     "tvgId": "",
     "source": "Radyo",
     "rank": 780,
@@ -6183,15 +6207,15 @@
   },
   {
     "name": "Radyo Viva",
-    "url": "https://moondigitaledge.radyotvonline.net/radyoviva/playlist.m3u8",
+    "url": "https://edge1.radyotvonline.net/shoutcast/play/radyoviva",
     "logo": "",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 775,
     "urls": [
       {
-        "url": "https://moondigitaledge.radyotvonline.net/radyoviva/playlist.m3u8",
+        "url": "https://edge1.radyotvonline.net/shoutcast/play/radyoviva",
         "label": "Radyo (radio-browser)"
       }
     ],
@@ -6201,7 +6225,7 @@
     "name": "EFSANE 4LÜ TURKEY",
     "url": "https://moondigitalmaster.radyotvonline.net/efsane4lu/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 767,
@@ -6217,7 +6241,7 @@
     "name": "EGE HAVALARI TURKEY",
     "url": "https://moondigitalmaster.radyotvonline.net/egehavalari/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 766,
@@ -6233,7 +6257,7 @@
     "name": "Erzincan Cem Radyo",
     "url": "https://erzincan.80.yayin.com.tr/stream",
     "logo": "",
-    "group": "Radyo",
+    "group": "Klasik / Caz",
     "tvgId": "",
     "source": "Radyo",
     "rank": 763,
@@ -6249,7 +6273,7 @@
     "name": "Borusan Klasik",
     "url": "http://23543.live.streamtheworld.com/BORUSAN_KLASIKAAC_SC",
     "logo": "",
-    "group": "Radyo",
+    "group": "Klasik / Caz",
     "tvgId": "",
     "source": "Radyo",
     "rank": 760,
@@ -6265,7 +6289,7 @@
     "name": "Radio 44",
     "url": "https://radyo44.80.yayin.com.tr/stream",
     "logo": "https://radyo44.com.tr/favicons/favicon-32x32.png",
-    "group": "Radyo",
+    "group": "Pop",
     "tvgId": "",
     "source": "Radyo",
     "rank": 750,
@@ -6281,7 +6305,7 @@
     "name": "FENOMEN TÜRK",
     "url": "https://live.radyofenomen.com/fenomenturk/abr/fenomenturk/256/chunks.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 729,
@@ -6297,7 +6321,7 @@
     "name": "Power dance",
     "url": "https://listen.powerapp.com.tr/powerdance/abr/powerdance/128/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Elektronik / Dans",
     "tvgId": "",
     "source": "Radyo",
     "rank": 727,
@@ -6313,7 +6337,7 @@
     "name": "TRT3",
     "url": "http://rd-trtradyo3.medya.trt.com.tr/master.m3u8",
     "logo": "https://cdn-i.pr.trt.com.tr/trtdinle//w360/q70/12467462.jpeg",
-    "group": "Radyo",
+    "group": "Klasik / Caz",
     "tvgId": "",
     "source": "Radyo",
     "rank": 711,
@@ -6329,7 +6353,7 @@
     "name": "POWER XL TURKEY",
     "url": "https://listen.powerapp.com.tr/powerextralounge/abr/powerextralounge/96/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Pop",
     "tvgId": "",
     "source": "Radyo",
     "rank": 704,
@@ -6345,7 +6369,7 @@
     "name": "Radyo Sputnik",
     "url": "https://icecast-rian.cdnvideo.ru/voicestm",
     "logo": "https://cdn.img.anlatilaninotesi.com.tr/i/favicon/favicon-192x192.png",
-    "group": "Radyo",
+    "group": "Haber",
     "tvgId": "",
     "source": "Radyo",
     "rank": 657,
@@ -6361,7 +6385,7 @@
     "name": "102.1 Arabeskin Merkezi Fm",
     "url": "http://canli.arabeskinmerkezi.com:9180/stream",
     "logo": "https://images.keepone.net/1376-2022-10-17.png",
-    "group": "Radyo",
+    "group": "Arabesk / Fantazi",
     "tvgId": "",
     "source": "Radyo",
     "rank": 646,
@@ -6377,7 +6401,7 @@
     "name": "Can Radyo",
     "url": "http://yayin1.yayindakiler.com:3124/;",
     "logo": "",
-    "group": "Radyo",
+    "group": "Oyun Havası",
     "tvgId": "",
     "source": "Radyo",
     "rank": 637,
@@ -6393,7 +6417,7 @@
     "name": "Gundi FM",
     "url": "http://gundifm.ozelip.com:7830/;",
     "logo": "https://yt3.ggpht.com/ytc/AKedOLSnbp3j7UCOUCra41mcQXEaeuobWPad1G7bwOsZDw=s900-c-k-c0x00ffffff-no-rj",
-    "group": "Radyo",
+    "group": "Türkü / Halk",
     "tvgId": "",
     "source": "Radyo",
     "rank": 626,
@@ -6409,7 +6433,7 @@
     "name": "Azadi Fm",
     "url": "https://amed.ozelip.com/8040/;",
     "logo": "http://canlikurtceradyodinle.com/favicon.ico",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 618,
@@ -6425,7 +6449,7 @@
     "name": "Radyo Banko",
     "url": "http://yayin.netradyom.com:9910/RADYOBANKO",
     "logo": "",
-    "group": "Radyo",
+    "group": "Oyun Havası",
     "tvgId": "",
     "source": "Radyo",
     "rank": 596,
@@ -6441,7 +6465,7 @@
     "name": "Karadeniz FM",
     "url": "https://moondigitaledge.radyotvonline.net/karadenizfm/playlist.m3u8",
     "logo": "https://static.wixstatic.com/media/9477e9_88c8630d8926464eac285c1df9d8ce54~mv2.png/v1/fill/w_350,h_350,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/karadeniz-fm-logopng.png",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 580,
@@ -6457,7 +6481,7 @@
     "name": "dinamo.fm smog",
     "url": "http://channels.dinamo.fm/smog-mp3",
     "logo": "https://www.dinamo.fm/favicons/dinamo-smog-favicon.jpg",
-    "group": "Radyo",
+    "group": "Elektronik / Dans",
     "tvgId": "",
     "source": "Radyo",
     "rank": 578,
@@ -6473,7 +6497,7 @@
     "name": "HAYATMİX",
     "url": "https://hayatmix.yayin.com.tr/mp3",
     "logo": "",
-    "group": "Radyo",
+    "group": "Klasik / Caz",
     "tvgId": "",
     "source": "Radyo",
     "rank": 569,
@@ -6489,7 +6513,7 @@
     "name": "Ribat FM",
     "url": "http://yayin1.canliyayin.org:7010/;*.mp3",
     "logo": "",
-    "group": "Radyo",
+    "group": "Dini",
     "tvgId": "",
     "source": "Radyo",
     "rank": 545,
@@ -6505,7 +6529,7 @@
     "name": "KRAL POP",
     "url": "https://dygedge2.radyotvonline.net/kralfm/playlist.m3u8",
     "logo": "https://cdn1.kralmuzik.com.tr/media/content/19-05/20/kralpop.png",
-    "group": "Radyo",
+    "group": "Pop",
     "tvgId": "",
     "source": "Radyo",
     "rank": 510,
@@ -6521,7 +6545,7 @@
     "name": "dinamo.fm fluent",
     "url": "http://channels.dinamo.fm/fluent-mp3",
     "logo": "https://www.dinamo.fm/favicons/dinamo-fluent-favicon.jpg",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 505,
@@ -6537,7 +6561,7 @@
     "name": "Turkuvaz Musiki",
     "url": "https://trkvz-radyolar.ercdn.net/turkuvazmusiki/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 501,
@@ -6553,7 +6577,7 @@
     "name": "Danceland turkey",
     "url": "https://moondigitaledge.radyotvonline.net/danceland/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Elektronik / Dans",
     "tvgId": "",
     "source": "Radyo",
     "rank": 500,
@@ -6569,7 +6593,7 @@
     "name": "Risalet Radyo",
     "url": "https://eustr73.mediatriple.net/videoonlylive/mtikoimxnztxlive/broadcast_5e3c1520b2626.smil/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Dini",
     "tvgId": "",
     "source": "Radyo",
     "rank": 484,
@@ -6585,7 +6609,7 @@
     "name": "Türkiyem FM",
     "url": "https://server7.streamserver24.com/proxy/turkiyemfm?mp=/stream",
     "logo": "https://turkiyemfm.com",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 464,
@@ -6601,7 +6625,7 @@
     "name": "retro turk",
     "url": "http://29053.live.streamtheworld.com:3690/RETROTURKAAC_SC",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 463,
@@ -6617,7 +6641,7 @@
     "name": "Radyo Alaturka",
     "url": "https://yayin.jumboserver.net:9100/stream",
     "logo": "https://radyoalaturka.com.tr/site/assets/img/alaturkaLogo.png",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 449,
@@ -6633,7 +6657,7 @@
     "name": "Radyo Hayat",
     "url": "http://live4.radyotvonline.com:9450/",
     "logo": "",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 438,
@@ -6649,7 +6673,7 @@
     "name": "powerturk",
     "url": "https://live.powerapp.com.tr/powerturk/abr/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Pop",
     "tvgId": "",
     "source": "Radyo",
     "rank": 432,
@@ -6665,7 +6689,7 @@
     "name": "LALEGÜL FM",
     "url": "https://icecast.netmedya.net/lalegulfm",
     "logo": "",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 423,
@@ -6681,7 +6705,7 @@
     "name": "Radyo Trio",
     "url": "https://radyotrio.radyotvonline.net/radyotrio",
     "logo": "null",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 381,
@@ -6697,7 +6721,7 @@
     "name": "TGRT FM",
     "url": "https://icecasttgrt.ihlasdigitalassets.com/tgrtfm",
     "logo": "",
-    "group": "Radyo",
+    "group": "Haber",
     "tvgId": "",
     "source": "Radyo",
     "rank": 374,
@@ -6713,7 +6737,7 @@
     "name": "Radyo Eksen 96.2",
     "url": "http://eksenwmp.radyotvonline.com/;stream.mp3",
     "logo": "",
-    "group": "Radyo",
+    "group": "Rock / Alternatif",
     "tvgId": "",
     "source": "Radyo",
     "rank": 367,
@@ -6729,7 +6753,7 @@
     "name": "Med Radyo",
     "url": "http://medradyo.kesintisizyayin.com:8062/stream",
     "logo": "",
-    "group": "Radyo",
+    "group": "Klasik / Caz",
     "tvgId": "",
     "source": "Radyo",
     "rank": 338,
@@ -6745,7 +6769,7 @@
     "name": "radyo mezopotamya",
     "url": "https://anadolu.liderhost.com.tr/9404/stream",
     "logo": "",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 335,
@@ -6761,7 +6785,7 @@
     "name": "A spor",
     "url": "https://trkvz-radyolar.ercdn.net/asporradyo/chunklist.m3u8",
     "logo": "null",
-    "group": "Radyo",
+    "group": "Spor",
     "tvgId": "",
     "source": "Radyo",
     "rank": 331,
@@ -6777,7 +6801,7 @@
     "name": "HOME KLASİK TURKEY",
     "url": "https://ssl4.radyotvonline.com/radyohome/klasikhome.stream_aac/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 328,
@@ -6793,7 +6817,7 @@
     "name": "Powerturk R&B Hip Hop",
     "url": "https://listen.powerapp.com.tr/powerrbhiphop/abr/playlist.m3u8",
     "logo": "https://www.powerapp.com.tr/i/favicov2/apple-icon-120x120.png?v=843",
-    "group": "Radyo",
+    "group": "Pop",
     "tvgId": "",
     "source": "Radyo",
     "rank": 322,
@@ -6809,7 +6833,7 @@
     "name": "Radio Mydonose",
     "url": "https://29083.live.streamtheworld.com/RADIO_MYDONOSE128AAC.aac?/;stream.mp3",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 314,
@@ -6825,7 +6849,7 @@
     "name": "Power love",
     "url": "https://listen.powerapp.com.tr/powerlove/abr/powerlove/128/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Pop",
     "tvgId": "",
     "source": "Radyo",
     "rank": 313,
@@ -6841,7 +6865,7 @@
     "name": "S1lhoutte Arabesk FM",
     "url": "https://yayin.radyoarabesk.com.tr:8000/stream",
     "logo": "",
-    "group": "Radyo",
+    "group": "Arabesk / Fantazi",
     "tvgId": "",
     "source": "Radyo",
     "rank": 311,
@@ -6857,7 +6881,7 @@
     "name": "CLASSICLAND TURKEY",
     "url": "https://moondigitaledge.radyotvonline.net/classicland/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Klasik / Caz",
     "tvgId": "",
     "source": "Radyo",
     "rank": 309,
@@ -6871,15 +6895,15 @@
   },
   {
     "name": "Radyo Gol",
-    "url": "https://moondigitaledge.radyotvonline.net/radyogol/playlist.m3u8",
+    "url": "https://edge1.radyotvonline.net/shoutcast/play/radyogol",
     "logo": "null",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 306,
     "urls": [
       {
-        "url": "https://moondigitaledge.radyotvonline.net/radyogol/playlist.m3u8",
+        "url": "https://edge1.radyotvonline.net/shoutcast/play/radyogol",
         "label": "Radyo (radio-browser)"
       }
     ],
@@ -6889,7 +6913,7 @@
     "name": "MaxFM",
     "url": "http://live.radyotvonline.com:8090/;",
     "logo": "",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 304,
@@ -6905,7 +6929,7 @@
     "name": "Tezene",
     "url": "http://37.247.98.8/stream/22/.mp3?%26token=Bsx3vK2u28-xMp98IZDV2Q%26expires=1618686860%27%20type=%27audio/mp3%27&rd2=%27https://radyo.vip/stream",
     "logo": "",
-    "group": "Radyo",
+    "group": "Klasik / Caz",
     "tvgId": "",
     "source": "Radyo",
     "rank": 294,
@@ -6921,7 +6945,7 @@
     "name": "Axa Rojava",
     "url": "https://stream.zeno.fm/h6mn2c8ha8zuv",
     "logo": "http://zeno.fm/favicon.ico",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 283,
@@ -6937,7 +6961,7 @@
     "name": "Dost Radyo",
     "url": "http://yayin1.yayindakiler.com:3156/;",
     "logo": "",
-    "group": "Radyo",
+    "group": "Klasik / Caz",
     "tvgId": "",
     "source": "Radyo",
     "rank": 273,
@@ -6953,7 +6977,7 @@
     "name": "BABYLAND TURKEY",
     "url": "https://moondigitaledge.radyotvonline.net/babyland/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 272,
@@ -6969,7 +6993,7 @@
     "name": "BloombergHTradyo",
     "url": "https://ciner-live.ercdn.net/bloombergradyo/bloombergradyo_1.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Haber",
     "tvgId": "",
     "source": "Radyo",
     "rank": 262,
@@ -6985,7 +7009,7 @@
     "name": "RADYO 42 FM MEDYA KONYA PR MUSIC TURKIYE",
     "url": "https://a8.asurahosting.com/hls/radyo_42_fm_medya_konya_pr_music/live.m3u8",
     "logo": "https://www.radio.net/300/radio-42-fm-medya-konya-pr-music.png",
-    "group": "Radyo",
+    "group": "Rock / Alternatif",
     "tvgId": "",
     "source": "Radyo",
     "rank": 260,
@@ -7001,7 +7025,7 @@
     "name": "ASPOR",
     "url": "http://trkvz-radyolar.ercdn.net/asporradyo/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Spor",
     "tvgId": "",
     "source": "Radyo",
     "rank": 259,
@@ -7015,15 +7039,15 @@
   },
   {
     "name": "Lig Radyo",
-    "url": "https://turkmedya.radyotvonline.com/turkmedya/ligradyo.stream/playlist.m3u8",
+    "url": "https://ligradyo.radyotvonline.net/ligradyo",
     "logo": "https://www.ligradyo.com.tr/assets/img/ligradyo-apple-touch-icon.png",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 246,
     "urls": [
       {
-        "url": "https://turkmedya.radyotvonline.com/turkmedya/ligradyo.stream/playlist.m3u8",
+        "url": "https://ligradyo.radyotvonline.net/ligradyo",
         "label": "Radyo (radio-browser)"
       }
     ],
@@ -7033,7 +7057,7 @@
     "name": "Radyo Taksi",
     "url": "https://live.radyo.in/8006/stream",
     "logo": "",
-    "group": "Radyo",
+    "group": "Pop",
     "tvgId": "",
     "source": "Radyo",
     "rank": 240,
@@ -7049,7 +7073,7 @@
     "name": "Radyo Gül",
     "url": "http://yayin2.canliyayin.org:8866/;*.mp3",
     "logo": "",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 239,
@@ -7065,7 +7089,7 @@
     "name": "PowerTürk Dans",
     "url": "https://listen.powerapp.com.tr/powerturkdans/abr/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Pop",
     "tvgId": "",
     "source": "Radyo",
     "rank": 237,
@@ -7081,7 +7105,7 @@
     "name": "Kent FM",
     "url": "https://moondigitalmaster.radyotvonline.net/kentfm/playlist.m3u8",
     "logo": "https://static.wixstatic.com/media/9477e9_5d00a2e59e4d4bada251627401f75c91~mv2.png/v1/fill/w_150,h_114,al_c,q_85,usm_0.66_1.00_0.01/KENT_FM_LOGO.webp",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 236,
@@ -7097,7 +7121,7 @@
     "name": "Hemdem Radyo",
     "url": "http://yayin.hemdemradyo.com/",
     "logo": "https://hemdemradyo.com/favicon.ico",
-    "group": "Radyo",
+    "group": "Türkü / Halk",
     "tvgId": "",
     "source": "Radyo",
     "rank": 225,
@@ -7113,7 +7137,7 @@
     "name": "Aşk FM",
     "url": "http://yayin.asymedya.com:8020/;",
     "logo": "https://www.radyoreklamankara.com/wp-content/uploads/2016/05/aşk-fm-300x300.png",
-    "group": "Radyo",
+    "group": "Oyun Havası",
     "tvgId": "",
     "source": "Radyo",
     "rank": 218,
@@ -7129,7 +7153,7 @@
     "name": "Fenomen Türk 256",
     "url": "https://live.radyofenomen.com/fenomenturk/256/chunks.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 217,
@@ -7145,7 +7169,7 @@
     "name": "90 lar Pop",
     "url": "https://moondigitaledge.radyotvonline.net/radyolanddoksanlar/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Pop",
     "tvgId": "",
     "source": "Radyo",
     "rank": 213,
@@ -7161,7 +7185,7 @@
     "name": "TürküRadyo",
     "url": "https://yayin.turkhosted.com/4591/stream",
     "logo": "https://turkuradyo.net/wp-content/themes/TurkuRadyo/images/logo.png",
-    "group": "Radyo",
+    "group": "Türkü / Halk",
     "tvgId": "",
     "source": "Radyo",
     "rank": 212,
@@ -7177,7 +7201,7 @@
     "name": "RadyoVoyage",
     "url": "http://voyagesc.radyotvonline.com/",
     "logo": "",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 206,
@@ -7193,7 +7217,7 @@
     "name": "Mydonose Türk",
     "url": "https://27913.live.streamtheworld.com/MYDONOSE_TURK128AAC.aac?/;stream.mp3",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 205,
@@ -7209,7 +7233,7 @@
     "name": "Radyo D",
     "url": "https://wowza1.radyotvonline.com/idilpr/radyodelal.stream/playlist.m3u8",
     "logo": "https://cdn-radiotime-logos.tunein.com/s14264d.png",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 198,
@@ -7225,7 +7249,7 @@
     "name": "Radyo Munzur 97.7",
     "url": "http://yayin1.yayindakiler.com:3002/;stream.nsv",
     "logo": "",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 198,
@@ -7241,7 +7265,7 @@
     "name": "Dost FM",
     "url": "http://yayin.dostfm.com:8920/;.mp3?no_dl",
     "logo": "",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 195,
@@ -7257,7 +7281,7 @@
     "name": "dinamo.fm legacy",
     "url": "http://channels.dinamo.fm/legacy-mp3",
     "logo": "https://www.dinamo.fm/favicons/dinamo-legacy-favicon.jpg",
-    "group": "Radyo",
+    "group": "Elektronik / Dans",
     "tvgId": "",
     "source": "Radyo",
     "rank": 190,
@@ -7273,7 +7297,7 @@
     "name": "HaYaTMiX Slow",
     "url": "https://radyo.yayin.com.tr:4090/mp3",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 184,
@@ -7289,7 +7313,7 @@
     "name": "PowerTürk Akustik",
     "url": "https://listen.powerapp.com.tr/powerturkakustik/abr/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Pop",
     "tvgId": "",
     "source": "Radyo",
     "rank": 181,
@@ -7305,7 +7329,7 @@
     "name": "RADYO AKDENIZ",
     "url": "https://yayin.radyoakdeniz.com/9470/stream",
     "logo": "https://www.radyoakdeniz.com/wp-content/uploads/2024/03/cropped-radyoakdeniz-180x180.png",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 180,
@@ -7321,7 +7345,7 @@
     "name": "meteorolojinin sesi",
     "url": "http://radyomgm.canliyayinda.com/;stream.mp3",
     "logo": "",
-    "group": "Radyo",
+    "group": "Haber",
     "tvgId": "",
     "source": "Radyo",
     "rank": 179,
@@ -7337,7 +7361,7 @@
     "name": "Radyo Yalova",
     "url": "https://studio25.radiolize.com/radio/8200/radio.mp3",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkü / Halk",
     "tvgId": "",
     "source": "Radyo",
     "rank": 178,
@@ -7353,7 +7377,7 @@
     "name": "Enderun FM",
     "url": "http://yayin2.canliyayin.org:7052/;*.mp3",
     "logo": "https://enderunfm.com/wp-content/uploads/2023/07/cropped-enderun_fm-180x180.png",
-    "group": "Radyo",
+    "group": "Dini",
     "tvgId": "",
     "source": "Radyo",
     "rank": 165,
@@ -7369,7 +7393,7 @@
     "name": "a PARA",
     "url": "https://trkvz-radyolar.ercdn.net/apararadyo/playlist.m3u8",
     "logo": "https://i.tmgrup.com.tr/apara/site/v1/i/favicon.png",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 162,
@@ -7385,7 +7409,7 @@
     "name": "Radyo 35",
     "url": "https://yayin.turkhosted.com/6012/stream",
     "logo": "https://www.radyo35.com/img/logo.png",
-    "group": "Radyo",
+    "group": "Pop",
     "tvgId": "",
     "source": "Radyo",
     "rank": 141,
@@ -7401,7 +7425,7 @@
     "name": "Doğan 22",
     "url": "http://yayin1.yayindakiler.com:3024/;",
     "logo": "",
-    "group": "Radyo",
+    "group": "Klasik / Caz",
     "tvgId": "",
     "source": "Radyo",
     "rank": 140,
@@ -7417,7 +7441,7 @@
     "name": "Radyo Can",
     "url": "http://yayin2.yayindakiler.com:4174/;stream.mp3",
     "logo": "http://www.radyocan.net/favicon.ico",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 139,
@@ -7433,7 +7457,7 @@
     "name": ".Al quran radio",
     "url": "https://n0a.radiojar.com/0tpy1h0kxtzuv?rj-ttl=5&rj-tok=AAABhdgGORQA-2acfyF3_4WY2g",
     "logo": "https://i.pinimg.com/564x/3a/a1/a1/3aa1a107c9434ca52b42b2dd0ffc896f.jpg",
-    "group": "Radyo",
+    "group": "Klasik / Caz",
     "tvgId": "",
     "source": "Radyo",
     "rank": 137,
@@ -7449,7 +7473,7 @@
     "name": "Govend radyo",
     "url": "https://stream-56.zeno.fm/xzzu8kynq2zuv?zs=nZP7ZCRXQPOpDFenayr0bQ",
     "logo": "",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 137,
@@ -7465,7 +7489,7 @@
     "name": "FENOMEN AKUSTIK",
     "url": "https://live.radyofenomen.com/fenomenakustik/abr/fenomenakustik/128/chunks.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 135,
@@ -7481,7 +7505,7 @@
     "name": "GREEKLAND",
     "url": "https://moondigitaledge.radyotvonline.net/greekland/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 133,
@@ -7497,7 +7521,7 @@
     "name": "Küpe FM",
     "url": "https://icecast.netmedya.net/kupefm",
     "logo": "",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 132,
@@ -7513,7 +7537,7 @@
     "name": "Erkam Radyo",
     "url": "https://api-tv5.yayin.com.tr:8002/mp3",
     "logo": "",
-    "group": "Radyo",
+    "group": "Dini",
     "tvgId": "",
     "source": "Radyo",
     "rank": 128,
@@ -7529,7 +7553,7 @@
     "name": "TRT Diyanet Çocuk",
     "url": "https://tv-trtdiyanetcocuk.medya.trt.com.tr/master_720.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Dini",
     "tvgId": "",
     "source": "Radyo",
     "rank": 122,
@@ -7545,7 +7569,7 @@
     "name": "Standart.fm",
     "url": "https://moondigitaledge.radyotvonline.net/standartfm/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 121,
@@ -7561,7 +7585,7 @@
     "name": "Dijital radyo",
     "url": "https://anadolu.liderhost.com.tr:10961/;",
     "logo": "",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 120,
@@ -7574,26 +7598,10 @@
     "kind": "radio"
   },
   {
-    "name": "اذاعة القرآن الكريم 🇹🇷",
-    "url": "http://stream.radiojar.com/0tpy1h0kxtzuv",
-    "logo": "",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "rank": 113,
-    "urls": [
-      {
-        "url": "http://stream.radiojar.com/0tpy1h0kxtzuv",
-        "label": "Radyo (radio-browser)"
-      }
-    ],
-    "kind": "radio"
-  },
-  {
     "name": "Radyo Fenomen Dans",
     "url": "https://live.radyofenomen.com/fenomendans/abr/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 111,
@@ -7609,7 +7617,7 @@
     "name": "Kıyı Caz",
     "url": "https://caz.radioca.st/stream",
     "logo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAbYAAABzCAMAAADDhdfxAAAAsVBMVEX///8Ai/8Ah/8Ajf8Aif Ux//q9f9zuf8Ahf/3/P azP 03f8smP Qzf8AjP Cwv9crP8AgP/m8/8Af/85pP9Hqf Cv/8hmv8AfP/y v8Akf/M6P 74P/k8v/e7/9ptf v2P84n//U7P l0f8AeP/H5P9Zsv9Pp/91wf GyP8mlf Y0P m1/ 93P9Cmf9Xs/9ErP99u/9Mov9nr/ iyv96t/9lrP9luf95xP8hoP/D5v9kzvXAAAAKDElEQVR4nO2dCXeiSBCAuUTwiKJGBBQVNInE3DubSf7/D1tMPKqguwt3Mm/DbH3zXt4bsEH9LOijutG070LLP5L17P/63TAVaehHjDlrqwsN86StydrqAmurJaytlrC2WsLaaglrqyWsrZawtlrC2moJa6slrK2WsLZawtpqCWurJaytlrC2WsLaaglrqyWsrZawtlrC2moJa6slrK2WsLZawtpqCWurJaytlrC2WvLF2gIbEFQp4cIS/LupSAVtyaYHGHePNpLGaXP6sdVdXPdPNBP6/HYLFLhufR7bXYMTTr/iY/5p0NriFxNwYW6Pe9qdi8Nm/XLwsWmdWcfj6WaDPv96CQuknxvdlnU8YTj 9Q/550Fqm83B96pb5sI97mp3jrusvbagZ4AXX5LhFvTA0Y2X HOr2zodxex9yef8w6C02dhamJ6s5dqAoU9tWuSD11 k1OkjUbCxNhJCm910gDUdWRNqC8bAg3VNhFvQgMHZP7yatVGotdlj8LXm1lqocijSpk3PCbf4TXgrZG0USm3ozqPrWQNX6aG2x4M2uwlKGP2Z6uR51QME23N02s7a1Ki0FayFvUJDTBhtsKKSf kL1clnI/jS3vECzNooFNpcsIrC7vsbF4NRrM2ew3C7UrWgF CV1nJ9OjNrI5Brc1sh0vZUEiDWpi06oJR5Jz 3DYPtoglPzdrUSLW5rQxKcwTVTIk2 wWFm1sqd2ABr8EZ6A1hbRRSbSmMGd2ZCzoYJdq0LRRurssF91xCbVAva6OQaStYexTdomTagmsUbrJTT6E1sw32sDYKibaFT1uTatNuTVDYikRltUKwXcI9rI1CrK0N28y6g5yckGoLljDcHsRnjlCv2RbuYm0UQm3TDvpKJdbk2rQujFVD3MN1BZvab2gXa6MQaVujWNOl/fhybQE8gvUqKhzB5oVxi/axNgqBtmiJOiKvZfcmhTbtFh4iFHmHfWCWj uprI2irK1oTV6BV2gL4HCp3iyXjWBN1ejinayNoqQtGiFrz4qcAIU2bQOP4pfDrQcqm1ZW6HBmbRRFbQm2tlRlcqi0DVCHcumrT57hqPamsBdp46QEAQVt8TW0ZvltVVmVNg1mJ jL4v2xASskWTEYobYL1iYAaQviPqr5Z4p YI3QFvuKZKDkGux0xsVuS442CqhtnMAxl7wGuFCXVWpzeyCdoZidkKJgK1V6WBsF0Kb3H2GnVKl V0KpTUtgh3LYgrviF3hnK48tsDYKqA1J2yUaEGXV2oIxDLd DHYtYLCF5Ssxa6NoFFyhcCvW8AqoteVNMxBTIUgGms1BdcWYl0uyNgqVNt18V5YltAUw7csA4XZHBBtrI1Fq00fKuRSENm2Nwm1x2Gw3UXJkXC7I2ijU2i5KdXMIpc1 Qpnih66QNaqriDIpWRuFWpuVLRRlKW3aHQq3/dWwQt4ya6NQa9N1VTo41DYSaRug3Lv9k49QTcVsiMKZe0koRNpgjcEcyycXktpw7l340b/p9sSZyBDWRiHQNoepdlYmT OntQ1Q7l1z9wvAnV7i7n3WRlHSZl3Z O4zqjRMKtampaj6sTvSBh7bFw/msTaKojZjl6SVoHEA6ZTuCtrsPjz2q6vZviQTGcLaKArajLcPRws0lzeVtAIqaNNQRnqYaF34g8gko3msjQJrM/zPyHLHYKPlC1rEO6pos9F46I2Gsov6kjfF2iiQNuvt0CSO4YCYIc5uraRN68ITdG5gsJmyQVjWRoG0LU NtDasujst4WWykrbBEoUz/JFcSoqwNhKgDc4wwzk6eiis8VXShlNdITgTGcLaKKQzbmawDmiNRI3uatpsnCwLfiXS/k7WRiGflrhGl0lRuxhpk0/S3qDFFk6nu5WWYG0UiknAXTSRSVBXr6jNxrNSDyV8ea8Za6NQaAse4bjYc7kVUFGb9lMUbqqhc9ZGoVopIUFh0izdiqpqi0XhlklvhqyNRrkuSYq6NEp9ylW1aTflcBPeLA wNgr1cjJX0FtpkKWytqQcbpmk5 UD1kahXrwJjbLoxWn3lbUFqHPkI9gUw3isjYZYKg0u FLIUT1DG56D HEo6WjQDtZGQWjDQ2 F TfVtQV4yTVqfV/WRkGtJxnDlXqsOZJTXRvO1pJ1lh1hbRTk6q146K0lW0 S0IZy74r6S7A2ClJbgOZ9 jCH AxtboqCbaF U6yNgl7iOkF5BTCJ AxtA7h2rzATGcLaKCosKL9Aq5T04BLXlbXhtP W8rVYm/507kf6P1BBm4uH3k5D0tW12c1zVlBmbSRVnroxuwTarCVYp7Wqtgjl3ZGPB2BtFJUeljKF3/ppUZ/K2lz0dIDS/Pvy61kbQc9wDnhzaRt4YzmAw/jmIjxtk2V3fRCjBSbpOobb8E5H/nHmJ/pfEHVPTOVZArfgZZtDDkgMtm5VfYxwbRmro25ql9/VeR I SpstJLT/L9 O0w1unDuvSwTmfn9BJUezbbHPY3 GHr48tveFKPZSSI3E9w9jdeq2cGY7THYjPvxbYVnujH/juDux3I5ln3BwdjzvDCtHHCHNZEtR7VcHvOrDHphXgEfimd6asHTxLAMTzYPJ7hbYKHTfcvQcF4SzV2k8voq8yskL4bnOfk/4aqEwdgxPCt0vGwh/P4XoY6fqrJfE9kxn2Za8MO0sr/Y229g uwNs3E67nhep1W6EiY/cqfNu3UjHApXUVh3ht7xqYc73ndNbctw/NTWZi/5j8FTP66I TfYm3DozKNAC5Ke5 l/t1FoDFpLa2jeBbsBtHBolqd159Yy33HuT/3Nc8uyHKfTi1wtunY83c jmOzdYs4i3twbE vwPN6pNTHM5020/ 9g2rzXndV BV23pXtWcbWZbbjK2rOroae/7i UkW9ZnYc0zl94mxkTPx6kjidfNZs5lyDqjnRvtQLrx8ejVV430bPlw8PDo28aeT1ldXXsMx7n 9AqyIMHZ7XrunI33tDJPh/0HMziQbCT 37t5Nbsne Jp4snzDHVuX29 Xlz9RY6k9VqaL2iQHC3HW Y28n/fP69hLWUvHLiDC/fP6y49vvDcOXtgyzyJ95Qf30/3BoH26XnWJPl58O5G3nIEuPbDMXtKK8W5lYussub93IQRDejUDcMw9Kzx25hdGYb7uLP8UeXb508Tp3RaUW8rp5bnjjL15vX16vOcOLlodo8WIx 8lXyCwjiJEkG0uuW/T5tt6eJYP/s5zKzcul5RFr3V6i9YG/uL/JK52QynOR7DcPsc1v7  Am281Nc7y5fS 1FYJ28/o C00zzJ7/7nF81Qc3nm7TdDud5ZE6UCYiM98He7YPwSCO0maF4VHmG2A3 k tNKf11F SyZHMN2HdcYwLM fCcAxBlwrzHUFPW dgqwvxEi65S2UiM98DtwHXkyczkZnvwewx6xzx/4hg wfBk7e iXC8NQAAAABJRU5ErkJggg==",
-    "group": "Radyo",
+    "group": "Klasik / Caz",
     "tvgId": "",
     "source": "Radyo",
     "rank": 108,
@@ -7625,7 +7633,7 @@
     "name": "Loops Radio House Station",
     "url": "https://loopsdeep.ozelip.com/7806/stream",
     "logo": "https://loopsradio.com/wp-content/uploads/2023/09/cropped-loopsradiofaviconred-180x180.png",
-    "group": "Radyo",
+    "group": "Elektronik / Dans",
     "tvgId": "",
     "source": "Radyo",
     "rank": 106,
@@ -7641,7 +7649,7 @@
     "name": "Radyo S",
     "url": "http://icecast.netmedya.net/radyos",
     "logo": "http://radyos.com.tr/apple-touch-icon.png",
-    "group": "Radyo",
+    "group": "Elektronik / Dans",
     "tvgId": "",
     "source": "Radyo",
     "rank": 106,
@@ -7657,7 +7665,7 @@
     "name": "TRT Memleketim FM",
     "url": "https://radio-trtmemleketimfm.medya.trt.com.tr/master.m3u8",
     "logo": "https://trt-public-static.trt.com.tr/eradyo/public/dm_upload/modul2/34a7a0ae-669e-4449-9f60-ad17563021c8.png",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 106,
@@ -7673,7 +7681,7 @@
     "name": "AFN 360 Incirlik",
     "url": "http://29103.live.streamtheworld.com/AFNE_ICK_SC",
     "logo": "",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 104,
@@ -7689,7 +7697,7 @@
     "name": "Trt Spor",
     "url": "https://rd-trtradyo1.medya.trt.com.tr/master_128.m3u8",
     "logo": "null",
-    "group": "Radyo",
+    "group": "Spor",
     "tvgId": "",
     "source": "Radyo",
     "rank": 104,
@@ -7705,7 +7713,7 @@
     "name": "KIYI Muzik",
     "url": "https://kiyi.radioca.st/stream",
     "logo": "",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 103,
@@ -7721,7 +7729,7 @@
     "name": "POWER EARTH",
     "url": "http://listen.powerapp.com.tr/powerearth/abr/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Pop",
     "tvgId": "",
     "source": "Radyo",
     "rank": 103,
@@ -7737,7 +7745,7 @@
     "name": "Fenomen Karışık 256",
     "url": "https://live.radyofenomen.com/fenomenkarisik/256/chunks.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 100,
@@ -7753,7 +7761,7 @@
     "name": "Loops Radio Progressive",
     "url": "https://progressive.ozelip.com/7670/stream",
     "logo": "https://loopsradio.com/wp-content/uploads/2023/09/cropped-loopsradiofaviconred-180x180.png",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 99,
@@ -7769,7 +7777,7 @@
     "name": "Süper 2 FM",
     "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/SUPER2_SC.mp3",
     "logo": "",
-    "group": "Radyo",
+    "group": "Pop",
     "tvgId": "",
     "source": "Radyo",
     "rank": 99,
@@ -7785,7 +7793,7 @@
     "name": "Fenomen Clubbin 256",
     "url": "https://live.radyofenomen.com/fenomenclubbin/256/chunks.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Elektronik / Dans",
     "tvgId": "",
     "source": "Radyo",
     "rank": 96,
@@ -7801,7 +7809,7 @@
     "name": "Discoland",
     "url": "https://moondigitaledge.radyotvonline.net/discoland/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Elektronik / Dans",
     "tvgId": "",
     "source": "Radyo",
     "rank": 94,
@@ -7817,7 +7825,7 @@
     "name": "Serhat FM 91.5",
     "url": "http://yayin.serhatfm.com:9150/stream",
     "logo": "",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 93,
@@ -7833,7 +7841,7 @@
     "name": "Mega Ask FM",
     "url": "https://embed.tawk.to/_s/v4/assets/audio/chat_sound.mp3",
     "logo": "",
-    "group": "Radyo",
+    "group": "Pop",
     "tvgId": "",
     "source": "Radyo",
     "rank": 92,
@@ -7849,7 +7857,7 @@
     "name": "Radio Glamorize",
     "url": "https://live.radioglamorize.com/stream1",
     "logo": "https://radioglamorize.com/wp-content/uploads/2020/05/cropped-sdiavatar2-180x180.png",
-    "group": "Radyo",
+    "group": "Elektronik / Dans",
     "tvgId": "",
     "source": "Radyo",
     "rank": 92,
@@ -7865,7 +7873,7 @@
     "name": "Fakir Fm",
     "url": "https://live.radyositesihazir.com/1025/stream/",
     "logo": "https://www.fakirfm.com/favicon.ico",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 89,
@@ -7881,7 +7889,7 @@
     "name": "TRT Diyarbakır",
     "url": "https://radio-trtgap.medya.trt.com.tr/master.m3u8",
     "logo": "https://trt-public-static.trt.com.tr/eradyo/public/dm_upload/modul2/41d20783-0d27-48af-a16b-d1df88610d70.png",
-    "group": "Radyo",
+    "group": "Yerel",
     "tvgId": "",
     "source": "Radyo",
     "rank": 89,
@@ -7897,7 +7905,7 @@
     "name": "Radyo Maranata",
     "url": "http://medya.radyomaranata.com:8005/live",
     "logo": "",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 88,
@@ -7913,7 +7921,7 @@
     "name": "Radyo Mori",
     "url": "https://amed.ozelip.com/8040/stream",
     "logo": "",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 88,
@@ -7929,7 +7937,7 @@
     "name": "Loops Radio Elektronica Station",
     "url": "https://ssl22.radyotelekom.com/8232/stream",
     "logo": "https://i.postimg.cc/XYRRHwry/android-chrome-512x512.png",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 87,
@@ -7945,7 +7953,7 @@
     "name": "Fenomen Dans 256",
     "url": "https://live.radyofenomen.com/fenomendans/256/chunks.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 86,
@@ -7961,7 +7969,7 @@
     "name": "https://turkmedya-live.ercdn.net/tv24/tv24.m3u8",
     "url": "https://turkmedya-live.ercdn.net/tv24/tv24.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Klasik / Caz",
     "tvgId": "",
     "source": "Radyo",
     "rank": 86,
@@ -7977,7 +7985,7 @@
     "name": "TRT Antalya",
     "url": "https://radio-trtantalya.medya.trt.com.tr/master.m3u8",
     "logo": "https://trt-public-static.trt.com.tr/eradyo/public/dm_upload/modul2/25a3f157-c5a0-4506-b513-5e63518173bb.png",
-    "group": "Radyo",
+    "group": "Yerel",
     "tvgId": "",
     "source": "Radyo",
     "rank": 85,
@@ -7993,7 +8001,7 @@
     "name": "POP HOME",
     "url": "https://moondigitalmaster.radyotvonline.net/pophome/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Pop",
     "tvgId": "",
     "source": "Radyo",
     "rank": 75,
@@ -8009,7 +8017,7 @@
     "name": "Mayday Records",
     "url": "https://stream.maydayrecords.net/radio/8000/maydayrecords.mp3",
     "logo": "https://i.postimg.cc/ZnsgHRtW/android-chrome-512x512.png",
-    "group": "Radyo",
+    "group": "Elektronik / Dans",
     "tvgId": "",
     "source": "Radyo",
     "rank": 73,
@@ -8025,7 +8033,7 @@
     "name": "Radyo Sinerji",
     "url": "https://radio.guventechnology.com/9994/stream",
     "logo": "",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 73,
@@ -8041,7 +8049,7 @@
     "name": "MEGA SİTE",
     "url": "http://yayin.netradyom.com:7900/;stream.mp3",
     "logo": "",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 69,
@@ -8057,7 +8065,7 @@
     "name": "Abuzer FM",
     "url": "http://live.radyotvonline.com:9030/;stream.nsv",
     "logo": "https://oetpai.fra1.digitaloceanspaces.com/new_images/onestop_51424770_294131.png",
-    "group": "Radyo",
+    "group": "Pop",
     "tvgId": "",
     "source": "Radyo",
     "rank": 68,
@@ -8073,7 +8081,7 @@
     "name": "GİMSA RADYO",
     "url": "http://yayin1.canliyayin.org:9482/stream",
     "logo": "https://www.gimsa.com.tr/images/apple-touch-icon.png",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 66,
@@ -8089,7 +8097,7 @@
     "name": "TRT Erzurum",
     "url": "https://radio-trterzurum.medya.trt.com.tr/master.m3u8",
     "logo": "https://trt-public-static.trt.com.tr/eradyo/public/dm_upload/modul2/60b756f6-d53d-42dd-909b-7e09f2c38d82.png",
-    "group": "Radyo",
+    "group": "Yerel",
     "tvgId": "",
     "source": "Radyo",
     "rank": 66,
@@ -8105,7 +8113,7 @@
     "name": "Kalp FM",
     "url": "https://yayin.kalpfm.com:8080/",
     "logo": "https://kalpfm.com/favicon.ico",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 65,
@@ -8121,7 +8129,7 @@
     "name": "Elazığ Mavi Radyo",
     "url": "https://yayin.turkhosted.com/6066/stream",
     "logo": "https://maviradyo.net/assets/images/logo2.png",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 64,
@@ -8137,7 +8145,7 @@
     "name": "POP LAND",
     "url": "https://moondigitaledge.radyotvonline.net/popland/playlist.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Pop",
     "tvgId": "",
     "source": "Radyo",
     "rank": 64,
@@ -8153,7 +8161,7 @@
     "name": "Radyo Havaları",
     "url": "http://37.247.98.8/stream/30/",
     "logo": "",
-    "group": "Radyo",
+    "group": "Pop",
     "tvgId": "",
     "source": "Radyo",
     "rank": 63,
@@ -8169,7 +8177,7 @@
     "name": "Radyo Eksen",
     "url": "http://eksenwmp.radyotvonline.com/;stream.mp3",
     "logo": "",
-    "group": "Radyo",
+    "group": "Rock / Alternatif",
     "tvgId": "",
     "source": "Radyo",
     "rank": 62,
@@ -8185,7 +8193,7 @@
     "name": "Fırat FM",
     "url": "https://anadolu.liderhost.com.tr:10912/;",
     "logo": "",
-    "group": "Radyo",
+    "group": "Pop",
     "tvgId": "",
     "source": "Radyo",
     "rank": 61,
@@ -8201,7 +8209,7 @@
     "name": "Mega Site .",
     "url": "http://yayin.netradyom.com:7900/;stream.mp3RADYO%20MEGAS%C4%B0TE%20=",
     "logo": "null",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 61,
@@ -8217,7 +8225,7 @@
     "name": "TRT Çukurova",
     "url": "https://radio-trtcukurova.medya.trt.com.tr/master.m3u8",
     "logo": "https://trt-public-static.trt.com.tr/eradyo/public/dm_upload/modul2/12de3bf5-2267-4eea-9e1c-22cec7288294.png",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 61,
@@ -8233,7 +8241,7 @@
     "name": "Radyo Nida",
     "url": "https://anadolu.liderhost.com.tr/8106/stream",
     "logo": "https://radyonida.com.tr/dist/img/radyo-nida.jpg?2",
-    "group": "Radyo",
+    "group": "Dini",
     "tvgId": "",
     "source": "Radyo",
     "rank": 60,
@@ -8249,7 +8257,7 @@
     "name": "TRT Trabzon",
     "url": "https://radio-trttrabzon.medya.trt.com.tr/master.m3u8",
     "logo": "https://trt-public-static.trt.com.tr/eradyo/public/dm_upload/modul2/da27e57f-8cc2-4c2b-ad46-a90350e38f14.png",
-    "group": "Radyo",
+    "group": "Yerel",
     "tvgId": "",
     "source": "Radyo",
     "rank": 60,
@@ -8265,7 +8273,7 @@
     "name": "Fenomen Pop 256",
     "url": "https://live.radyofenomen.com/fenomenpop/256/chunks.m3u8",
     "logo": "",
-    "group": "Radyo",
+    "group": "Pop",
     "tvgId": "",
     "source": "Radyo",
     "rank": 59,
@@ -8281,7 +8289,7 @@
     "name": "Power R&B Hip-Hop",
     "url": "https://listen.powerapp.com.tr/powerrbhiphop/256/chunks.m3u8",
     "logo": "https://cdn.powergroup.com.tr/image/100x100/powerapp/channels/v3/inverse/logo_57.png?v=716",
-    "group": "Radyo",
+    "group": "Pop",
     "tvgId": "",
     "source": "Radyo",
     "rank": 59,
@@ -8297,7 +8305,7 @@
     "name": "Radyo 2000 Erzincan",
     "url": "https://radyo.yayindakiler.com:3030/stream?/;stream.mp3",
     "logo": "",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 59,
@@ -8313,7 +8321,7 @@
     "name": "TheRockRadio",
     "url": "https://ssl4.radyotvonline.com/radyohome/therockradio.stream/playlist.m3u8",
     "logo": "https://therock.com.tr/images/favicon.png",
-    "group": "Radyo",
+    "group": "Rock / Alternatif",
     "tvgId": "",
     "source": "Radyo",
     "rank": 59,
@@ -8329,7 +8337,7 @@
     "name": "Özel FM",
     "url": "https://ozelfm.80.yayin.com.tr/;stream/1",
     "logo": "",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 59,
@@ -8345,7 +8353,7 @@
     "name": "DanceLand Anthems",
     "url": "https://likeradiostream.com/dancelandanthems",
     "logo": "https://like.radio/favicon.ico",
-    "group": "Radyo",
+    "group": "Elektronik / Dans",
     "tvgId": "",
     "source": "Radyo",
     "rank": 58,
@@ -8361,7 +8369,7 @@
     "name": "JoyTürk Akustik",
     "url": "http://playerservices.streamtheworld.com/api/livestream-redirect/JOYTURK_AKUSTIK128AAC.aac",
     "logo": "",
-    "group": "Radyo",
+    "group": "Pop",
     "tvgId": "",
     "source": "Radyo",
     "rank": 58,
@@ -8377,7 +8385,7 @@
     "name": "Fenomen 256",
     "url": "https://live.radyofenomen.com/fenomen/256/chunks.m3u8",
     "logo": "https://cdn.radyofenomen.com/image/200x200/u/Channels/v2/logo_20.png?v=",
-    "group": "Radyo",
+    "group": "Türkçe Müzik",
     "tvgId": "",
     "source": "Radyo",
     "rank": 57,
@@ -8393,29 +8401,13 @@
     "name": "MEGASITE",
     "url": "https://stream.netradyom.com/listen/megasite/radio.mp3",
     "logo": "https://www.megasite.com.tr/wp-content/uploads/2022/10/logo.png",
-    "group": "Radyo",
+    "group": "Diğer",
     "tvgId": "",
     "source": "Radyo",
     "rank": 56,
     "urls": [
       {
         "url": "https://stream.netradyom.com/listen/megasite/radio.mp3",
-        "label": "Radyo (radio-browser)"
-      }
-    ],
-    "kind": "radio"
-  },
-  {
-    "name": "TRT Radyo Arabi / عربي",
-    "url": "https://radio-trtarabi.medya.trt.com.tr/master.m3u8",
-    "logo": "",
-    "group": "Radyo",
-    "tvgId": "",
-    "source": "Radyo",
-    "rank": 55,
-    "urls": [
-      {
-        "url": "https://radio-trtarabi.medya.trt.com.tr/master.m3u8",
         "label": "Radyo (radio-browser)"
       }
     ],

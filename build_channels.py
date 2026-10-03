@@ -119,6 +119,32 @@ def clean_name(name: str) -> str:
     return re.sub(r"\s+", " ", s).strip()
 
 
+NATIONAL_GROUP = "Ulusal"
+NATIONAL_TOP = 24
+
+
+def mark_national(tv: list, ranks_by_name: dict) -> list:
+    """Give the 24 most-watched channels the "Ulusal" group.
+
+    The ranking comes from canlitv view counts; only channels already present
+    in the list are marked, so no station is invented. Marked channels are
+    returned in ranking order so the caller can also put them up front."""
+    ranked = sorted(ranks_by_name.items(), key=lambda kv: kv[1])
+    picked = []
+    for raw, _rank in ranked:
+        for ch in tv:
+            if ch.get("national"):
+                continue
+            if name_key(ch["name"]) == name_key(raw):
+                ch["group"] = NATIONAL_GROUP
+                ch["national"] = len(picked) + 1
+                picked.append(ch)
+                break
+        if len(picked) >= NATIONAL_TOP:
+            break
+    return picked
+
+
 def tkgs_key(ch: dict) -> tuple:
     """Sort key implementing the TKGS block order."""
     name = ch.get("name", "")
@@ -299,7 +325,10 @@ def main() -> None:
         # and to play it as audio.
         if g.pop("kind") == "radio":
             g["kind"] = "radio"
-            g["group"] = "Radyo"
+            # Radios keep the Turkish category assigned in verify_radios.py
+            # (Pop, Haber, Oyun Havası, …) instead of collapsing to "Radyo".
+            if g.get("group") in ("Radyo", "", None):
+                g["group"] = "Diğer"
         if not g.get("headers"):
             g.pop("headers", None)
         items.append(g)
@@ -308,6 +337,11 @@ def main() -> None:
     tv = [c for c in items if c.get("kind") != "radio"]
     radio = [c for c in items if c.get("kind") == "radio"]
     tv.sort(key=tkgs_key)
+    national = mark_national(tv, ranks_by_name)
+    # The most-watched channels form the "Ulusal" group and lead the list.
+    tv.sort(key=lambda c: (0, c["national"]) if c.get("national")
+            else (1,) + tkgs_key(c))
+    print(f"+ {len(national)} channels marked as Ulusal (en cok izlenen)")
     radio.sort(key=lambda c: (-c.get("rank", 0), c["name"].casefold()))
     items = tv + radio
     fill_logos(items)

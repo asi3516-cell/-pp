@@ -1,6 +1,6 @@
 /* Minimal service worker: makes the player installable on Android/iOS.
    Network-first for the API (live data), cache-first for the shell. */
-const SHELL = "iptv-shell-v5";
+const SHELL = "iptv-shell-v10";
 const ASSETS = [
   "./",
   "index.html",

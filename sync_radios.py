@@ -29,7 +29,7 @@ def main() -> int:
             "name": s["name"],
             "url": s["url"],
             "logo": s.get("logo", ""),
-            "group": "Radyo",
+            "group": s.get("group") or "Diğer",
             "tvgId": "",
             "source": "Radyo",
             "rank": s.get("votes", 0) or 0,

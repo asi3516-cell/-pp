@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+data/store.json
+data/store.tmp
+.DS_Store
+dist/
+build/work/
+build/__pycache__/
+build/android/
+static/TV-Player-linux
+android/app/src/main/assets/
+android/**/*.class
+data/channels.cache.json.gz
+*.idsig

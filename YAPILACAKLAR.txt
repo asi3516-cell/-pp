@@ -1,0 +1,183 @@
+========================================================================
+hh - YAPILACAKLAR VE DURUM LISTESI
+Son guncelleme: 2026-10-02
+Depo: https://github.com/asi3516-cell/-pp (gizli/private)
+========================================================================
+
+Bu dosya, simdiye kadar istenen her seyi tek yerde toplar.
+Yarin devam etmek istediginde buradan "TAMAM" / "EKSIK" durumuna bakip
+kaldigin yerden devam edebilirsin.
+
+Durum isaretleri:
+  [x] TAMAM    -> yapildi ve calisiyor
+  [~] KISMI    -> yapildi ama tam dogrulanmadi / eksik parcasi var
+  [ ] BEKLIYOR -> henuz yapilmadi
+
+
+========================================================================
+1) GENEL PROJE
+========================================================================
+
+[x] Tarayicida calisan, kurulum gerektirmeyen hh — canli TV ve radyo oynatici
+    ("TV Player - canli TV & m3u8 oynatici"), Turkce arayuz.
+[x] HLS / m3u8 oynatma (hls.js + yerel HLS destegi).
+[x] Yerlesik (bundled) Turkce kanal listesi.
+[x] Kanallar arasinda arama.
+[x] Gruplar (kanal gruplari).
+[x] Favoriler.
+[x] Kisisel playlist (m3u) ekleme.
+[x] EPG (yayin akisi) destegi + EPG adresi kaydetme.
+[x] Ayarlarin kalici saklanmasi (localStorage + sunucu store.json).
+[x] MAC / Stalker portal destegi (/api/stalker).
+[x] Xtream (XC) sunucu destegi (/api/xtream).
+[x] canlitv.you + iptv-org listelerinin birlestirilmesi.
+[x] Ayni isimli kanallarin yedek (alternatif) adres olarak saklanmasi.
+[x] En cok izlenenlerin (oy/rank) once gelmesi.
+[x] Agac (tree-view) navigasyonu.
+[x] Tasinabilir paketler: Windows .exe/.rar, kaynak .rar/.zip, Android APK.
+
+
+========================================================================
+2) RADYO
+========================================================================
+
+[x] Radyolarin ayri bir ust baslik olarak gosterilmesi (Canli TV'den ayri).
+[~] Radyo yayinlarinin calmasi (http yayin + .pls dosyalari).
+    -> Sunucuya /api/stream eklendi; http yayinlar ve .pls dosyalari
+       ayni kaynak uzerinden aktariliyor. Radyo Seymen test edildi: CALISIYOR.
+    -> 2026-10-02: verify_radios.py ile TUM radyolar tek tek kontrol edildi.
+       250 radyodan 206'si calisiyordu. 12'si radio-browser'dan dogru
+       adresle duzeltildi (Arabesk FM, Radyo 7, NTV Radyo, Radyo Spor,
+       Radyo Ekin, Magic FM yerine, Radyo ODTU, Kiyi Caz, Radyo Gol,
+       Radyo D, Radyo Eksen, DAMAR TURK FM, Dost).
+    -> Sonuc: data/radios.json = 218 calisan radyo, oy sayisina gore sirali.
+    -> Kalan: data/radios-dead.json = 32 radyo adresi hala duzeltilmeli
+       (Pal station, TRT FM, CNN Turk Radyo, TRT Radyo 1, Kiss Turk,
+       Max FM, Bilecik FM, Kuzey FM, vb.).
+[ ] Radyolarin dogrudan (direct) yayin adreslerinin toplanmasi.
+[ ] Radyo gruplari / treeview - canliradyodinle.fm gibi gruplama.
+[x] Radyolarin oy (popularity) sayisina gore siralanmasi.
+    -> 2026-10-02: dogrulandi; data/radios.json votes alanina gore
+       buyukten kucuge sirali (Arabesk FM 28505 en ustte).
+[~] Radyo ikonlari (logo).
+    -> Bazi radyolarda logo var, 248 radyodan yaklasik 153'unde YOK.
+    -> EKSIK: eksik logolar site adreslerinden doldurulacak.
+[x] "Radyo favorileri" ayri bir ust baslik (Canli TV favorilerinden ayri).
+[x] Radyolarin gruplanmamasi (duz liste).
+
+
+========================================================================
+3) FAVORILER
+========================================================================
+
+[x] Favorilerin ikiye ayrilmasi: "Canli TV favorileri" ve "Radyo favorileri",
+    ikisi de agacin en ustunde.
+[x] Her listenin kendi favori alt-dali (listeye ozel favoriler).
+[~] Favori secilince ilgili listenin favorilerinin gorunmesi.
+    -> Canli TV favorileri artik radyo favorilerini karistirmiyor.
+    -> Dogrulama: secili favori gittigin listede gorunuyor.
+
+
+========================================================================
+4) LISTELER (PLAYLIST) VE SIRALAMA
+========================================================================
+
+[x] Playlist ekleme ekraninda ISIM ZORUNLU (m3u icin), boylece liste secilebiliyor.
+[x] "Liste Sec" acilir menusunde kullanici listelerinin gorunmesi.
+[x] Kullanicinin kendi listesi en USTTE (altta degil).
+[x] Mevcut hazir IPTV listesine isim verildi: "hh Listem".
+    -> data/store.json icinde kayitli ve "Liste Sec"te gorunuyor.
+[x] Liste/kanal seciminin tiklamayla acilmasi.
+[x] Listelerin birbirine karismamasi (her liste kendi kanallarini korur).
+
+
+========================================================================
+5) KANAL ISLEMLERI (INCELE / SIL)
+========================================================================
+
+[x] Kanala tiklayinca inceleme (inspect) penceresi acilmasi.
+[x] Incele penceresinde kanal adi ve adres duzenleme.
+[x] Incele penceresinde "Adresi kontrol et" (probe) dugmesi.
+[x] Incele penceresinde KALICI SILME dugmesi ("Kanalı sil", kirmizi).
+    -> Kullanici istegi: silme secenegi incele penceresinde gorunecek. YAPILDI.
+[x] Kanal satirinda hizli silme (cop kutusu) dugmesi.
+[x] Ayni listede AYNI ADRESE sahip kopya kanallarin tek kanal olarak birlestirilmesi.
+[x] Silinen kanallarin kalici saklanmasi (state.deleted).
+
+
+========================================================================
+6) FILM (VOD) / SERI
+========================================================================
+
+[ ] Film tiklama: oynaticinin gizlenip afis (poster) + isim gosterilmesi.
+[~] Film/dizi afis davranisi.
+[ ] Xtream sunucu girisi: isim / sifre / adres ile giris ve gruplarin
+    KARISTIRILMAMASI.
+
+
+========================================================================
+7) ARAYUZ / GORUNUM
+========================================================================
+
+[x] Icerik turu sekmeleri (Canli TV / Film / Dizi / Radyo) agac altinda.
+[ ] Kutu (box) yazi renginin duzeltilmesi.
+    -> EKSIK / kontrol edilecek.
+[x] Yan panel (sidebar) genisligi daraltildi.
+[x] Tek sutunlu kanal listesi.
+[~] Ikonlarin/dugme yerlesimlerinin son kontrolu.
+
+
+========================================================================
+8) TEKNIK / ALTYAPI
+========================================================================
+
+[x] Sunucu ucnoktalari:
+    /api/channels, /api/stalker, /api/xtream, /api/proxy, /api/stream,
+    /api/fetch, /api/probe, /download/player, /download/apk,
+    /download/all, /download/windows-rar, /download/source-rar,
+    /download/source-zip, /channels.m3u
+[x] /api/stream : http radyo ve .pls yayinlarini ayni kaynak uzerinden aktarir
+    (mixed-content ve CORS engelini asar).
+[x] Python yalnizca standart kutuphane ile calisiyor.
+[x] Derleme dosyalari: build_channels.py, build_radio.py.
+[x] Kaynak ZIP indirme: /download/source-zip (build/pkg/TV-Player-Kaynak.zip).
+[x] Veri dosyalari: data/channels.json (562 kanal), data/radios.json (248 radyo).
+
+
+========================================================================
+9) YAYIN VE PAYLASIM
+========================================================================
+
+[x] Web yayini calisiyor:
+    https://work-1-efbizjmmuesjftge.prod-runtime.all-hands.dev/
+[x] GitHub gizli (private) depo olusturuldu ve kod yuklendi:
+    https://github.com/asi3516-cell/-pp
+    -> OpenHands AI GitHub App kuruldu (tum depolara erisim).
+    -> NOT: GITHUB_TOKEN 8 saatte bir doluyor; gerekirse yeniden yetkilendir.
+
+
+========================================================================
+10) YARIN DEVAM ICIN NOTLAR
+========================================================================
+
+Yeni bir OpenHands konusmasi acip su sekilde yaz:
+  "asi3516-cell/-pp deposunda hh projesine devam et, kodu klonla."
+
+Oncelikli isler (sirasiyla):
+  1) data/radios-dead.json icindeki 32 radyonun adresini elle duzelt
+     (TRT FM, CNN Turk Radyo, TRT Radyo 1, Kiss Turk, Pal station, ...).
+  2) Eksik radyo logolarini (yaklasik 153 adet) doldur.
+  3) Radyo gruplari / treeview (canliradyodinle.fm gibi) yap.
+  4) Film (VOD) tiklayinca afis gosterme davranisini tamamla.
+  5) Xtream sunucu girisi: isim/sifre/adres ve gruplari karistirmama.
+  6) Kutu yazi rengini duzelt.
+  7) Liste/kanal tiklama davranisini son kez dogrula.
+
+Calisan komutlar:
+  Sunucuyu baslat:   PORT=12000 HOST=0.0.0.0 python3 server.py
+  Kanallari derle:   python3 build_channels.py
+  Radyolari derle:   python3 build_radio.py
+  Radyolari dogrula: python3 verify_radios.py   (radios.json + radios-dead.json)
+  Radyolari duzelt:  python3 fix_radios.py      (radio-browser'dan adres bulur)
+
+========================================================================

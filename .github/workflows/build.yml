@@ -1,0 +1,98 @@
+name: Build portable players
+
+# Produces a single self-contained file per OS (no installation needed):
+#   Windows -> IPTV-Player.exe
+#   macOS   -> IPTV-Player-macos.zip  (contains IPTV Player.app)
+#   Linux   -> IPTV-Player
+# Download them from the workflow run's "Artifacts" section, or from a
+# GitHub Release when triggered by a tag.
+
+on:
+  push:
+    branches: [master, main]
+    tags: ["v*"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            artifact: IPTV-Player-windows
+          - os: macos-latest
+            artifact: IPTV-Player-macos
+          - os: ubuntu-latest
+            artifact: IPTV-Player-linux
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install PyInstaller
+        run: pip install -r build/requirements-build.txt
+
+      - name: Build
+        run: python build/make.py
+
+      - name: Package macOS app
+        if: runner.os == 'macOS'
+        run: |
+          cd dist
+          if [ -d "IPTV Player.app" ]; then
+            zip -r IPTV-Player-macos.zip "IPTV Player.app" IPTV-Player
+          else
+            zip -r IPTV-Player-macos.zip IPTV-Player
+          fi
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: |
+            dist/IPTV-Player
+            dist/IPTV-Player.exe
+            dist/IPTV-Player-macos.zip
+          if-no-files-found: ignore
+
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - uses: android-actions/setup-android@v3
+
+      - name: Install SDK packages
+        run: sdkmanager "platforms;android-34" "build-tools;34.0.0"
+
+      - name: Build APK
+        run: python build_apk.py
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: IPTV-Player-apk
+          path: dist/IPTV-Player.apk
+
+  release:
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/**/*

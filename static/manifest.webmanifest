@@ -1,0 +1,20 @@
+{
+  "name": "TV Player – canlı TV & m3u8",
+  "short_name": "TV Player",
+  "description": "Türkçe canlı TV ve m3u8 oynatıcı; kanallar, favoriler, EPG.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0b0f19",
+  "theme_color": "#0b0f19",
+  "lang": "tr",
+  "icons": [
+    {
+      "src": "icons/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

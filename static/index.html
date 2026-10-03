@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0b0f19" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="hh" />
+<title>hh</title>
+<link rel="icon" href="icons/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="icons/logo.svg" />
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="stylesheet" href="style.css?v=20261002f" />
+</head>
+<body>
+<div id="app">
+  <aside id="sidebar" class="sidebar">
+    <div class="brand">
+      <img src="icons/logo.svg" alt="" class="brand-logo" />
+      <div>
+        <h1>hh</h1>
+        <span class="brand-sub">canlı TV &amp; m3u8 oynatıcı</span>
+      </div>
+    </div>
+
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" class="ic"><path d="M10 2a8 8 0 105.3 14l4.4 4.4 1.4-1.4-4.4-4.4A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z"/></svg>
+      <input id="search" type="search" placeholder="Kanal ara..." autocomplete="off" />
+      <button id="clearSearch" class="clear" title="Temizle" hidden>&times;</button>
+    </div>
+
+    <div class="nav-tree" id="navTree"></div>
+
+    <div class="groups" id="groups"></div>
+
+    <!-- Content-type tabs under the tree: tap to jump straight to that list. -->
+    <div class="kind-tabs" id="kindTabs">
+      <button class="ktab" data-kind="live" type="button">📺 Canlı TV</button>
+      <button class="ktab" data-kind="vod" type="button">🎬 Film</button>
+      <button class="ktab" data-kind="series" type="button">📽 Dizi</button>
+      <button class="ktab" data-kind="radio" type="button">📻 Radyo</button>
+    </div>
+
+    <div class="channel-list" id="channels" role="list"></div>
+
+    <div class="sidebar-foot">
+      <button id="openLists" class="btn ghost sm">Liste Seç</button>
+      <button id="openAdd" class="btn ghost sm">+ Kanal</button>
+      <span id="chCount" class="muted"></span>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <button id="menuBtn" class="btn icon only-mobile" title="Menü">☰</button>
+      <div class="now-playing">
+        <span id="npName">Kanal seçin</span>
+        <span id="npMeta" class="muted"></span>
+      </div>
+      <div class="topbar-actions">
+        <button id="favBtn" class="btn icon" title="Favorilere ekle">☆</button>
+        <button id="reloadBtn" class="btn icon" title="Yeniden yükle">⟳</button>
+        <button id="pipBtn" class="btn icon" title="Resim içinde resim">⧉</button>
+        <button id="fullBtn" class="btn icon" title="Tam ekran">⛶</button>
+        <button id="themeBtn" class="btn icon" title="Tema">◐</button>
+      </div>
+    </header>
+
+    <div class="stage" id="stage">
+      <video id="video" playsinline controls crossorigin="anonymous"></video>
+      <div id="overlay" class="overlay">
+        <div class="spinner" id="spinner" hidden></div>
+        <div class="overlay-msg" id="overlayMsg">
+          <h2>TV Player</h2>
+          <p>Soldaki listeden bir kanal seçin ya da <b>Playlistler</b> ile kendi M3U listenizi ekleyin.</p>
+        </div>
+      </div>
+      <div class="osd" id="osd"></div>
+      <div class="vod-info hide" id="vodInfo">
+        <img id="vodPoster" alt="" />
+        <div class="vod-text">
+          <h3 id="vodTitle">—</h3>
+          <p id="vodSub" class="muted"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="browse hide" id="browse">
+      <div class="browse-head">
+        <button id="browseBack" class="btn ghost sm" hidden>‹ Geri</button>
+        <h2 id="browseTitle">Filmler</h2>
+        <span id="browseCount" class="muted"></span>
+      </div>
+      <div class="browse-body" id="browseBody"></div>
+    </div>
+
+  </main>
+</div>
+
+<!-- List picker -->
+<dialog id="listsDlg" class="dlg">
+  <form method="dialog" class="dlg-form">
+    <h2>Liste seç</h2>
+    <p class="muted">Hangi listeyi izlemek istediğinizi seçin. Seçilen liste açık olarak gelir.</p>
+    <div id="listsBody" class="lists-body"></div>
+    <div class="dlg-actions end">
+      <button class="btn ghost" value="close">Kapat</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Add channel -->
+<dialog id="addDlg" class="dlg">
+  <form method="dialog" class="dlg-form">
+    <h2>Kanal ekle</h2>
+    <label class="field"><span>Kanal adı</span><input id="addName" type="text" placeholder="Kanal adı" /></label>
+    <label class="field"><span>Yayın adresi (m3u8 / mp4 / mpd)</span><input id="addUrl" type="url" placeholder="https://.../stream.m3u8" /></label>
+    <label class="field"><span>Grup</span><input id="addGroup" type="text" placeholder="Özel" /></label>
+    <label class="field"><span>Logo adresi (opsiyonel)</span><input id="addLogo" type="url" placeholder="https://.../logo.png" /></label>
+    <div class="dlg-actions end">
+      <button id="saveChannel" type="button" class="btn">Kaydet</button>
+      <button class="btn ghost" value="close">İptal</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="inspectDlg" class="dlg">
+  <div class="dlg-form">
+    <h2 id="inspectTitle">Yayın incelemesi</h2>
+    <p class="muted" id="inspectHint">Yayın adresleri kontrol ediliyor…</p>
+    <div id="inspectBody" class="inspect-body"></div>
+    <div class="dlg-actions end">
+      <button type="button" class="btn ghost" id="inspectClose">Kapat</button>
+    </div>
+  </div>
+</dialog>
+
+<template id="chRow">
+  <div class="ch" role="listitem" tabindex="0">
+    <div class="ch-logo"><img alt="" loading="lazy" /><span class="ph"></span></div>
+    <div class="ch-text">
+      <span class="ch-name"></span>
+      <span class="ch-sub muted"></span>
+    </div>
+    <button class="ch-fav" title="Favori">☆</button>
+  </div>
+</template>
+
+<script src="vendor/hls.min.js"></script>
+<script src="app.js?v=20261002f"></script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("sw.js").catch(function () {});
+  });
+}
+</script>
+</body>
+</html>

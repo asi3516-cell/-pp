@@ -95,7 +95,7 @@ public class MainActivity extends Activity {
 
         createSession();
 
-        server = new LocalServer(getAssets(), 8737);
+        server = new LocalServer(getApplicationContext(), getAssets(), 8737);
         try {
             server.start();
         } catch (Exception first) {
@@ -103,7 +103,7 @@ public class MainActivity extends Activity {
             // live in localStorage keyed by origin, so the fixed port keeps
             // them across restarts whenever it is available.
             try {
-                server = new LocalServer(getAssets(), 0);
+                server = new LocalServer(getApplicationContext(), getAssets(), 0);
                 server.start();
             } catch (Exception e) {
                 web.loadData("<h2>Sunucu başlatılamadı: " + e.getMessage() + "</h2>",

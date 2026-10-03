@@ -10,7 +10,7 @@
   --danger: #ff5c72;
   --radius: 12px;
   --shadow: 0 10px 30px rgba(0, 0, 0, .45);
-  --sidebar-w: clamp(300px, 24vw, 360px);
+  --sidebar-w: clamp(340px, 30vw, 470px);
 }
 
 :root[data-theme="light"] {
@@ -218,8 +218,10 @@ h1, h2, h3 { margin: 0; }
   overflow-y: auto;
   padding: 4px 10px 12px;
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 6px;
+  /* Two channels per row: the sidebar is wide enough and it halves the
+     scrolling on a phone. */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px 8px;
   align-content: start;
 }
 .channel-list::-webkit-scrollbar,
@@ -491,6 +493,29 @@ h1, h2, h3 { margin: 0; }
   place-items: center;
 }
 .stage video { width: 100%; height: 100%; object-fit: contain; background: #000; }
+
+/* Touch control bar: big targets for a phone/TV remote, auto-hides while
+   watching and comes back on tap. */
+.ctl {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 14px;
+  background: linear-gradient(transparent, rgba(0,0,0,.85));
+  opacity: 0; transition: opacity .25s;
+  z-index: 5;
+}
+.ctl.show { opacity: 1; }
+.ctl-gap { flex: 1; }
+.ctl-btn {
+  min-width: 52px; height: 46px;
+  border: 0; border-radius: 12px;
+  background: rgba(255,255,255,.14);
+  color: #fff; font-size: 20px; line-height: 1;
+  cursor: pointer;
+}
+.ctl-btn:active { background: rgba(255,255,255,.3); }
+.ctl-btn.sm { min-width: 60px; font-size: 15px; font-weight: 600; }
+.ctl-btn.on { background: var(--accent); }
 
 .overlay {
   position: absolute; inset: 0;

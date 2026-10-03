@@ -1,6 +1,6 @@
 /* Minimal service worker: makes the player installable on Android/iOS.
    Network-first for the API (live data), cache-first for the shell. */
-const SHELL = "tv-shell-v3";
+const SHELL = "tv-shell-v4";
 const ASSETS = [
   "./",
   "index.html",

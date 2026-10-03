@@ -1519,6 +1519,89 @@
   }
   window.tvZap = zap;
 
+  /* ----------------------- on-screen controls ------------------------ */
+  // The Android WebView's built-in controls are unreliable and cannot zap
+  // channels, so the bar drives the video element directly.
+  var ctlTimer = null;
+
+  function ctlShow(autoHide) {
+    var bar = $("#ctl");
+    if (!bar) return;
+    bar.classList.add("show");
+    clearTimeout(ctlTimer);
+    if (autoHide) ctlTimer = setTimeout(ctlHide, 4000);
+  }
+
+  function ctlHide() {
+    var bar = $("#ctl");
+    if (bar) bar.classList.remove("show");
+  }
+
+  function ctlSeek(delta) {
+    if (!isFinite(video.duration) || video.duration <= 0) {
+      showOsd("Canlı yayında atlama yok");
+      return;
+    }
+    video.currentTime = Math.max(0, Math.min(video.duration, video.currentTime + delta));
+    showOsd(delta > 0 ? "10 sn ileri" : "10 sn geri");
+  }
+
+  function ctlToggle() {
+    if (video.paused) video.play().catch(function () {});
+    else video.pause();
+    syncCtl();
+    ctlShow(true);
+  }
+
+  function syncCtl() {
+    var play = $("#ctlPlay");
+    if (play) play.textContent = video.paused ? "▶" : "❚❚";
+    var mute = $("#ctlMute");
+    if (mute) {
+      mute.textContent = video.muted || !video.volume ? "🔇" : "🔊";
+      mute.classList.toggle("on", video.muted);
+    }
+  }
+
+  function bindControls() {
+    var bar = $("#ctl");
+    if (!bar) return;
+    var stage = $("#stage");
+
+    on("#ctlPrev", function () { zap(-1); ctlShow(true); });
+    on("#ctlNext", function () { zap(1); ctlShow(true); });
+    on("#ctlPlay", function () { ctlToggle(); });
+    on("#ctlBack", function () { ctlSeek(-10); ctlShow(true); });
+    on("#ctlFwd", function () { ctlSeek(10); ctlShow(true); });
+    on("#ctlMute", function () {
+      video.muted = !video.muted;
+      if (!video.muted && video.volume === 0) video.volume = 1;
+      syncCtl();
+      ctlShow(true);
+    });
+    on("#ctlFull", function () {
+      if (document.fullscreenElement) document.exitFullscreen();
+      else if (stage && stage.requestFullscreen) stage.requestFullscreen();
+      ctlShow(true);
+    });
+
+    // Tap the picture to reveal the bar, tap again (after it shows) to hide.
+    if (stage) {
+      stage.addEventListener("click", function (e) {
+        if (e.target.closest && e.target.closest(".ctl")) return;
+        if (bar.classList.contains("show")) ctlHide();
+        else ctlShow(true);
+      });
+    }
+
+    ["play", "pause", "volumechange", "playing", "waiting"].forEach(function (evt) {
+      video.addEventListener(evt, syncCtl);
+    });
+    // A live stream has no timeline, so the seek buttons say so instead of
+    // jumping to an arbitrary position.
+    syncCtl();
+  }
+
   function finishInit() {
     spinner.hidden = true;
     setOverlay(false);
@@ -1529,6 +1612,8 @@
   function onPlaying() {
     spinner.hidden = true;
     setOverlay(false);
+    syncCtl();
+    ctlShow(true);
     var cur = state.current;
     // Radio keeps its logo on stage: there is no video frame to show instead.
     if (!cur || contentKind(cur) !== "radio") hideVodInfo();
@@ -1798,7 +1883,7 @@
 
     loadLocal();
     // A broken binding must never stop the channel list from loading.
-    try { bind(); } catch (e) { showFatal(e); }
+    try { bind(); bindControls(); } catch (e) { showFatal(e); }
 
     // Prefer the shared server copy (lets you open your list from any device).
     loadServerStore().then(function () {

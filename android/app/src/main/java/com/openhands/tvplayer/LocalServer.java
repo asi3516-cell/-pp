@@ -1,11 +1,15 @@
 package com.openhands.tvplayer;
 
+import android.content.Context;
 import android.content.res.AssetManager;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -26,10 +30,12 @@ import fi.iki.elonen.NanoHTTPD;
 public class LocalServer extends NanoHTTPD {
 
     private final AssetManager assets;
+    private final Context context;
     private final Map<String, String> mime = new HashMap<>();
 
-    public LocalServer(AssetManager assets, int port) {
+    public LocalServer(Context context, AssetManager assets, int port) {
         super("127.0.0.1", port);
+        this.context = context;
         this.assets = assets;
         mime.put("html", "text/html; charset=utf-8");
         mime.put("js", "application/javascript; charset=utf-8");
@@ -47,6 +53,14 @@ public class LocalServer extends NanoHTTPD {
         try {
             if (uri.equals("/api/channels")) return channels();
             if (uri.equals("/api/proxy")) return proxy(q);
+            if (uri.equals("/api/fetch")) return fetch(q);
+            if (uri.equals("/api/store")) {
+                if ("POST".equalsIgnoreCase(session.getMethod().name())) {
+                    return storeSave(session);
+                }
+                return json(storeLoad());
+            }
+            if (uri.equals("/api/stream")) return stream(q);
             if (uri.equals("/channels.m3u")) return m3u();
             return asset(uri);
         } catch (Exception e) {
@@ -147,6 +161,148 @@ public class LocalServer extends NanoHTTPD {
         }
         return newFixedLengthResponse(Response.Status.lookup(status), ctype,
                 new java.io.ByteArrayInputStream(raw), raw.length);
+    }
+
+    /**
+     * Relay a live audio/video stream through the app itself.
+     *
+     * The player is served from http://127.0.0.1, but most radio stations and
+     * several TV feeds are plain http or reject the WebView's origin. Fetching
+     * the bytes here and piping them back as a same-origin response removes
+     * both problems, and unwraps .pls/.m3u pointers to the real stream. */
+    private Response stream(Map<String, String> q) throws Exception {
+        String target = q.get("url");
+        if (target == null || !(target.startsWith("http://") || target.startsWith("https://"))) {
+            return text(Response.Status.BAD_REQUEST, "url yok");
+        }
+        String ua = orDefault(q.get("u"), "Mozilla/5.0 (Android) TV Player");
+        String resolved = resolveStream(target, ua, q.get("h"), q.get("o"));
+        String ctype = guessStreamType(resolved);
+
+        HttpURLConnection conn = (HttpURLConnection) new URL(resolved).openConnection();
+        conn.setInstanceFollowRedirects(true);
+        conn.setConnectTimeout(15000);
+        conn.setReadTimeout(30000);
+        conn.setRequestProperty("User-Agent", ua);
+        conn.setRequestProperty("Accept", "*/*");
+        conn.setRequestProperty("Icy-MetaData", "0");
+        if (q.get("h") != null) conn.setRequestProperty("Referer", q.get("h"));
+        if (q.get("o") != null) conn.setRequestProperty("Origin", q.get("o"));
+        String upstreamType = conn.getContentType();
+        if (upstreamType != null && upstreamType.contains("mpegurl")) {
+            ctype = "application/vnd.apple.mpegurl";
+        }
+        InputStream in = conn.getInputStream();
+        Response res = newChunkedResponse(Response.Status.OK, ctype, in);
+        res.addHeader("Cache-Control", "no-cache");
+        res.addHeader("Access-Control-Allow-Origin", "*");
+        return res;
+    }
+
+    private String resolveStream(String url, String ua, String referer, String origin) {
+        String path = url.split("\\?")[0].toLowerCase();
+        if (!(path.endsWith(".pls") || path.endsWith(".m3u") || path.endsWith(".m3u8"))) {
+            return url;
+        }
+        try {
+            HttpURLConnection c = (HttpURLConnection) new URL(url).openConnection();
+            c.setConnectTimeout(12000);
+            c.setReadTimeout(12000);
+            c.setRequestProperty("User-Agent", ua);
+            if (referer != null) c.setRequestProperty("Referer", referer);
+            if (origin != null) c.setRequestProperty("Origin", origin);
+            InputStream in = c.getInputStream();
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] buf = new byte[8192];
+            int n;
+            while ((n = in.read(buf)) > 0 && bos.size() < 65536) bos.write(buf, 0, n);
+            in.close();
+            String text = bos.toString("UTF-8");
+            if (text.trim().toUpperCase().startsWith("#EXTM3U") && path.endsWith(".m3u8")) {
+                return url;
+            }
+            for (String line : text.split("\\r?\\n")) {
+                String t = line.trim();
+                if (t.isEmpty() || t.startsWith("#")) continue;
+                if (t.toLowerCase().startsWith("file")) {
+                    int eq = t.indexOf('=');
+                    if (eq > 0) t = t.substring(eq + 1).trim();
+                }
+                return resolve(url, t);
+            }
+        } catch (Exception ignored) { }
+        return url;
+    }
+
+    private static String guessStreamType(String url) {
+        String path = url.split("\\?")[0].toLowerCase();
+        if (path.endsWith(".m3u8")) return "application/vnd.apple.mpegurl";
+        if (path.endsWith(".mp3")) return "audio/mpeg";
+        if (path.endsWith(".aac") || path.endsWith(".m4a")) return "audio/aac";
+        if (path.endsWith(".ogg") || path.endsWith(".oga")) return "audio/ogg";
+        if (path.endsWith(".opus")) return "audio/opus";
+        if (path.endsWith(".mp4") || path.endsWith(".m4v")) return "video/mp4";
+        return "audio/mpeg";
+    }
+
+    private Response fetch(Map<String, String> q) throws Exception {
+        String target = q.get("url");
+        if (target == null) return text(Response.Status.BAD_REQUEST, "url yok");
+        HttpURLConnection conn = (HttpURLConnection) new URL(target).openConnection();
+        conn.setInstanceFollowRedirects(true);
+        conn.setConnectTimeout(15000);
+        conn.setReadTimeout(30000);
+        conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Android) TV Player");
+        int status = conn.getResponseCode();
+        InputStream in = status >= 400 ? conn.getErrorStream() : conn.getInputStream();
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        if (in != null) {
+            byte[] buf = new byte[16384];
+            int n;
+            while ((n = in.read(buf)) > 0) bos.write(buf, 0, n);
+            in.close();
+        }
+        String ctype = orDefault(conn.getContentType(), "text/plain; charset=utf-8");
+        byte[] raw = bos.toByteArray();
+        return newFixedLengthResponse(Response.Status.lookup(status), ctype,
+                new java.io.ByteArrayInputStream(raw), raw.length);
+    }
+
+    private File storeFile() {
+        return new File(context.getFilesDir(), "store.json");
+    }
+
+    private String storeLoad() {
+        try {
+            File f = storeFile();
+            if (!f.exists()) return "{}";
+            FileInputStream in = new FileInputStream(f);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] buf = new byte[8192];
+            int n;
+            while ((n = in.read(buf)) > 0) bos.write(buf, 0, n);
+            in.close();
+            String body = bos.toString("UTF-8");
+            return body.isEmpty() ? "{}" : body;
+        } catch (Exception e) {
+            return "{}";
+        }
+    }
+
+    private Response storeSave(IHTTPSession session) throws Exception {
+        Map<String, String> body = new HashMap<>();
+        session.parseBody(body);
+        String payload = body.get("postData");
+        if (payload == null || payload.isEmpty()) payload = "{}";
+        try {
+            new JSONObject(payload);
+        } catch (Exception e) {
+            return text(Response.Status.BAD_REQUEST, "gecersiz govde");
+        }
+        FileOutputStream out = new FileOutputStream(storeFile());
+        out.write(payload.getBytes("UTF-8"));
+        out.close();
+        return json(storeLoad());
     }
 
     private Response asset(String uri) throws Exception {

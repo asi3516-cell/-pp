@@ -12,7 +12,7 @@
 <link rel="icon" href="icons/favicon.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="icons/logo.svg" />
 <link rel="manifest" href="manifest.webmanifest" />
-<link rel="stylesheet" href="style.css?v=20261003a" />
+<link rel="stylesheet" href="style.css?v=20261003c" />
 </head>
 <body>
 <div id="app">
@@ -68,7 +68,20 @@
     </header>
 
     <div class="stage" id="stage">
-      <video id="video" playsinline controls crossorigin="anonymous"></video>
+      <video id="video" playsinline crossorigin="anonymous"></video>
+      <!-- Custom control bar: the native <video controls> is inconsistent in
+           the Android WebView and offers no channel zapping. -->
+      <div class="ctl" id="ctl">
+        <button id="ctlPrev" class="ctl-btn" title="Önceki kanal">⏮</button>
+        <button id="ctlPlay" class="ctl-btn" title="Oynat / Duraklat">▶</button>
+        <button id="ctlNext" class="ctl-btn" title="Sonraki kanal">⏭</button>
+        <span class="ctl-gap"></span>
+        <button id="ctlBack" class="ctl-btn sm" title="10 sn geri">−10</button>
+        <button id="ctlFwd" class="ctl-btn sm" title="10 sn ileri">+10</button>
+        <span class="ctl-gap"></span>
+        <button id="ctlMute" class="ctl-btn" title="Ses aç / kapat">🔊</button>
+        <button id="ctlFull" class="ctl-btn" title="Tam ekran">⛶</button>
+      </div>
       <div id="overlay" class="overlay">
         <div class="spinner" id="spinner" hidden></div>
         <div class="overlay-msg" id="overlayMsg">
@@ -136,8 +149,8 @@
 </template>
 
 <script src="vendor/hls.min.js"></script>
-<script src="channels-data.js?v=20261003b"></script>
-<script src="app.js?v=20261003b"></script>
+<script src="channels-data.js?v=20261003c"></script>
+<script src="app.js?v=20261003c"></script>
 <script>
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", function () {

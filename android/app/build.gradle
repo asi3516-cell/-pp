@@ -30,7 +30,12 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            // Shrinking matters here: the unshrunk APK carried ~16 MB of unused
+            // dex, which made install/startup on a real phone feel stuck.
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
+                    'proguard-rules.pro'
             signingConfig signingConfigs.debug
         }
     }

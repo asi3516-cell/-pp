@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Circular brand mark shown next to the app name in the list header. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
+    <gradient
+        android:startColor="@color/tv_accent"
+        android:endColor="@color/tv_accent_2"
+        android:angle="315" />
+</shape>

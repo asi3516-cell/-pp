@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  Host of the three tabs. The navigation bar sits at the bottom with a hairline
+  on top; the checked item is tinted with the accent selector and gets a soft
+  pill behind it.
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -16,10 +21,15 @@
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/tv_bg_2"
+        android:background="@drawable/bg_nav_bar"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        app:elevation="0dp"
         app:labelVisibilityMode="labeled"
-        app:itemIconTint="@color/tv_text"
-        app:itemTextColor="@color/tv_text"
+        app:itemIconSize="23dp"
+        app:itemIconTint="@color/nav_item_tint"
+        app:itemTextColor="@color/nav_item_tint"
+        app:itemActiveIndicatorStyle="@style/NavItemIndicator"
         app:menu="@menu/bottom_nav_menu" />
 
 </LinearLayout>

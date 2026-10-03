@@ -9,7 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ExpandableListView
+import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.openhands.tvplayer.R
@@ -25,8 +28,15 @@ import kotlinx.coroutines.withContext
 class ChannelListFragment : Fragment() {
 
     private lateinit var listView: ExpandableListView
-    private lateinit var emptyView: TextView
+    private lateinit var emptyState: View
+    private lateinit var emptyTitle: TextView
+    private lateinit var emptyHint: TextView
+    private lateinit var headerTitle: TextView
+    private lateinit var headerSub: TextView
+    private lateinit var listCount: TextView
+    private lateinit var searchClear: ImageButton
     private lateinit var adapter: ExpandableChannelAdapter
+
     private var allChannels: List<Channel> = emptyList()
     private var query: String = ""
     private var favouriteUrls: Set<String> = emptySet()
@@ -43,9 +53,24 @@ class ChannelListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         listView = view.findViewById(R.id.expandableList)
-        emptyView = view.findViewById(R.id.emptyText)
+        emptyState = view.findViewById(R.id.emptyState)
+        emptyTitle = view.findViewById(R.id.emptyTitle)
+        emptyHint = view.findViewById(R.id.emptyHint)
+        headerTitle = view.findViewById(R.id.headerTitle)
+        headerSub = view.findViewById(R.id.headerSub)
+        listCount = view.findViewById(R.id.listCount)
+        searchClear = view.findViewById(R.id.searchClear)
         val search = view.findViewById<EditText>(R.id.searchInput)
         search.hint = getString(R.string.search_hint)
+
+        headerTitle.setText(
+            when (mode) {
+                MODE_RADIO -> R.string.tab_radio
+                MODE_FAV -> R.string.tab_fav
+                else -> R.string.tab_live
+            }
+        )
+        headerSub.text = getString(R.string.app_name)
 
         adapter = ExpandableChannelAdapter(
             context = requireContext(),
@@ -62,11 +87,17 @@ class ChannelListFragment : Fragment() {
             false
         }
 
+        searchClear.setOnClickListener {
+            search.setText("")
+            search.clearFocus()
+        }
+
         search.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, a: Int, b: Int, c: Int) = Unit
             override fun onTextChanged(s: CharSequence?, a: Int, b: Int, c: Int) = Unit
             override fun afterTextChanged(s: Editable?) {
                 query = s?.toString()?.trim().orEmpty()
+                searchClear.isVisible = query.isNotEmpty()
                 render()
             }
         })
@@ -116,15 +147,36 @@ class ChannelListFragment : Fragment() {
         adapter.submit(ChannelRepository.grouped(filtered))
 
         val empty = filtered.isEmpty()
-        emptyView.visibility = if (empty) View.VISIBLE else View.GONE
-        emptyView.text = getString(
-            if (mode == MODE_FAV) R.string.no_favourites else R.string.no_channels
-        )
-        listView.visibility = if (empty) View.GONE else View.VISIBLE
+        emptyState.isVisible = empty
+        listView.isVisible = !empty
+        if (empty) {
+            showEmptyState()
+        } else {
+            listCount.text = resources.getQuantityString(
+                R.plurals.channel_count, filtered.size, filtered.size
+            )
+        }
 
         // A search result is easier to scan with the categories already open.
         if (query.isNotBlank()) {
             for (i in 0 until adapter.groupCount) listView.expandGroup(i)
+        }
+    }
+
+    private fun showEmptyState() {
+        when {
+            query.isNotBlank() -> {
+                emptyTitle.setText(R.string.no_results_title)
+                emptyHint.text = getString(R.string.no_results_hint, query)
+            }
+            mode == MODE_FAV -> {
+                emptyTitle.setText(R.string.no_favourites)
+                emptyHint.setText(R.string.no_favourites_hint)
+            }
+            else -> {
+                emptyTitle.setText(R.string.no_channels)
+                emptyHint.setText(R.string.no_channels_hint)
+            }
         }
     }
 

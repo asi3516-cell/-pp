@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Top bar of the player: a dark scrim over the video so the title and the
+     round buttons stay readable on bright frames. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <gradient
+        android:startColor="#E6080B12"
+        android:endColor="#00080B12"
+        android:angle="270" />
+</shape>

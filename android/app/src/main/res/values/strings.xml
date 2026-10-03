@@ -17,10 +17,21 @@
     <string name="loading">Yükleniyor…</string>
     <string name="stream_error">Yayın bekleniyor veya bağlantı kırık</string>
     <string name="retry">Tekrar dene</string>
+    <string name="back">Geri</string>
+    <string name="stream_retry">Bağlantı yeniden deniyor…</string>
     <string name="screen_mode">Ekran modu</string>
     <string name="fullscreen">Tam ekran</string>
     <string name="no_channels">Kanal bulunamadı</string>
+    <string name="no_channels_hint">Liste boş görünüyor. İnternet bağlantını kontrol et.</string>
     <string name="no_favourites">Henüz favori eklenmedi</string>
+    <string name="no_favourites_hint">Bir kanalın yanındaki yıldıza dokun, burada birikir.</string>
+    <string name="no_results_title">Sonuç yok</string>
+    <string name="no_results_hint">"%1$s" için kanal bulunamadı. Farklı bir kelime dene.</string>
+    <string name="clear_search">Aramayı temizle</string>
+    <plurals name="channel_count">
+        <item quantity="one">%1$d kanal</item>
+        <item quantity="other">%1$d kanal</item>
+    </plurals>
     <string name="resize_fit">Sığdır</string>
     <string name="resize_fill">Doldur</string>
     <string name="resize_zoom">Yakınlaştır</string>

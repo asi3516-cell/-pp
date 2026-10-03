@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Bottom control panel of the player: scrim fading up into the video. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <gradient
+        android:startColor="#00080B12"
+        android:endColor="#E6080B12"
+        android:angle="270" />
+</shape>

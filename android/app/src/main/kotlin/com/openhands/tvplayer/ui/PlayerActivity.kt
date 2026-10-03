@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import android.widget.ImageButton
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.core.view.isVisible
 import androidx.media3.ui.AspectRatioFrameLayout
 import androidx.media3.ui.PlayerView
 import com.openhands.tvplayer.R
@@ -27,7 +29,11 @@ class PlayerActivity : AppCompatActivity() {
 
     private lateinit var playerView: PlayerView
     private lateinit var titleView: TextView
+    private lateinit var groupView: TextView
     private lateinit var statusView: TextView
+    private lateinit var loadingView: ProgressBar
+    private lateinit var playButton: ImageButton
+    private var fullscreen = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,17 +42,23 @@ class PlayerActivity : AppCompatActivity() {
 
         playerView = findViewById(R.id.playerView)
         titleView = findViewById(R.id.playerTitle)
+        groupView = findViewById(R.id.playerGroup)
         statusView = findViewById(R.id.playerStatus)
+        loadingView = findViewById(R.id.playerLoading)
+        playButton = findViewById(R.id.btnPlay)
 
         playerView.player = PlaybackController.player(this)
         applyResizeMode()
-        PlaybackController.stateListener = { state, _, _ -> runOnUiThread { onPlayerState(state) } }
+        PlaybackController.stateListener = { state, _, _ ->
+            runOnUiThread { onPlayerState(state) }
+        }
 
         loadRequestedGroup()
 
+        findViewById<ImageButton>(R.id.btnBack).setOnClickListener { finish() }
         findViewById<ImageButton>(R.id.btnNext).setOnClickListener { PlaybackController.next(this) }
         findViewById<ImageButton>(R.id.btnPrev).setOnClickListener { PlaybackController.previous(this) }
-        findViewById<ImageButton>(R.id.btnPlay).setOnClickListener { PlaybackController.toggle(this) }
+        playButton.setOnClickListener { PlaybackController.toggle(this) }
         findViewById<ImageButton>(R.id.btnResize).setOnClickListener {
             PlaybackController.cycleResize()
             applyResizeMode()
@@ -73,7 +85,7 @@ class PlayerActivity : AppCompatActivity() {
             .takeIf { it >= 0 } ?: index.coerceIn(0, (groupChannels.size - 1).coerceAtLeast(0))
 
         PlaybackController.setPlaylist(this, groupChannels, startIndex)
-        titleView.text = PlaybackController.currentChannel?.name.orEmpty()
+        updateNowPlaying()
     }
 
     private fun applyResizeMode() {
@@ -84,22 +96,48 @@ class PlayerActivity : AppCompatActivity() {
         }
     }
 
+    private fun updateNowPlaying() {
+        val channel = PlaybackController.currentChannel
+        titleView.text = channel?.name.orEmpty()
+        groupView.text = channel?.group.orEmpty()
+    }
+
     private fun onPlayerState(state: String) {
-        titleView.text = PlaybackController.currentChannel?.name.orEmpty()
+        updateNowPlaying()
         when (state) {
-            "retry", "stopped" -> {
-                statusView.text = getString(R.string.stream_error)
-                statusView.visibility = View.VISIBLE
+            "playing" -> {
+                loadingView.isVisible = false
+                statusView.isVisible = false
+                playButton.setImageResource(R.drawable.ic_pause)
             }
-            else -> statusView.visibility = View.GONE
+            "paused" -> {
+                loadingView.isVisible = false
+                statusView.isVisible = false
+                playButton.setImageResource(R.drawable.ic_play)
+            }
+            "buffering" -> {
+                loadingView.isVisible = true
+                statusView.isVisible = false
+            }
+            "retry" -> {
+                loadingView.isVisible = false
+                statusView.setText(R.string.stream_retry)
+                statusView.isVisible = true
+                playButton.setImageResource(R.drawable.ic_play)
+            }
+            else -> {
+                loadingView.isVisible = false
+                statusView.setText(R.string.stream_error)
+                statusView.isVisible = true
+                playButton.setImageResource(R.drawable.ic_play)
+            }
         }
     }
 
     private fun toggleFullscreen() {
+        fullscreen = !fullscreen
         val controller = WindowCompat.getInsetsController(window, window.decorView)
-        val showing = WindowCompat.getInsetsController(window, window.decorView)
-            .isAppearanceLightStatusBars
-        if (!showing) {
+        if (fullscreen) {
             controller.hide(WindowInsetsCompat.Type.systemBars())
             controller.systemBarsBehavior =
                 WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE

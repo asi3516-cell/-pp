@@ -217,10 +217,28 @@ object PlaybackController {
 
     private fun notifyState() {
         val player = existingPlayer() ?: return
-        stateListener?.invoke(
-            if (player.isPlaying) "playing" else "paused",
-            player.currentMediaItemIndex,
-            player.isPlaying
-        )
+        val state = when {
+            player.playbackState == Player.STATE_BUFFERING -> "buffering"
+            player.isPlaying -> "playing"
+            else -> "paused"
+        }
+        stateListener?.invoke(state, player.currentMediaItemIndex, player.isPlaying)
+    }
+
+    /**
+     * Starts the first radio when nothing is loaded, so a widget tap works from
+     * a cold start. Returns false when a stream is already playing.
+     */
+    fun ensureRadioPlaying(context: Context, channels: List<Channel>): Boolean {
+        val player = existingPlayer()
+        if (player != null && player.isPlaying) return false
+        val current = currentChannel
+        if (player != null && current != null && current.isRadio) {
+            player.play()
+            return false
+        }
+        if (channels.isEmpty()) return false
+        setPlaylist(context, channels, 0)
+        return true
     }
 }

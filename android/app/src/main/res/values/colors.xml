@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Dark player palette, shared by the native screens and the widgets. -->
-    <color name="tv_bg">#0B0F19</color>
-    <color name="tv_bg_2">#121826</color>
-    <color name="tv_bg_3">#1B2334</color>
-    <color name="tv_line">#243049</color>
-    <color name="tv_text">#EDF1F8</color>
-    <color name="tv_muted">#93A0B8</color>
+    <color name="tv_bg">#080B12</color>
+    <color name="tv_bg_2">#101625</color>
+    <color name="tv_bg_3">#182034</color>
+    <color name="tv_bg_4">#212B42</color>
+    <color name="tv_line">#26324D</color>
+    <color name="tv_text">#F2F5FB</color>
+    <color name="tv_muted">#8C9AB4</color>
     <color name="tv_accent">#3B82F6</color>
     <color name="tv_accent_2">#22D3EE</color>
+    <color name="tv_accent_soft">#1E3A6E</color>
     <color name="tv_star">#FBBF24</color>
+    <color name="tv_danger">#F87171</color>
+    <color name="tv_scrim">#B3080B12</color>
 </resources>

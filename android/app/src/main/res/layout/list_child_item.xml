@@ -1,80 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Channel (child) row of the channel TreeView.
-  Left: channel logo (Glide). Centre: name and the group/quality subtitle.
-  Right: the favourite star, which toggles Room-backed state.
+  Channel (child) row of the channel TreeView, drawn as a compact card.
+  Left: channel logo (Glide) over a generated initial. Centre: name and the
+  group/quality subtitle. Right: the favourite star, backed by Room.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="60dp"
-    android:orientation="horizontal"
-    android:gravity="center_vertical"
-    android:background="?android:attr/selectableItemBackground"
-    android:paddingStart="30dp"
-    android:paddingEnd="8dp"
-    android:paddingTop="6dp"
-    android:paddingBottom="6dp">
-
-    <FrameLayout
-        android:layout_width="46dp"
-        android:layout_height="46dp"
-        android:layout_marginEnd="12dp"
-        android:background="@drawable/bg_logo_tile">
-
-        <TextView
-            android:id="@+id/childInitial"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:textColor="#FFFFFF"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            android:text="T" />
-
-        <ImageView
-            android:id="@+id/childLogo"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="3dp"
-            android:scaleType="fitCenter"
-            android:contentDescription="@null" />
-    </FrameLayout>
+    android:orientation="vertical"
+    android:paddingStart="12dp"
+    android:paddingEnd="12dp"
+    android:paddingTop="2dp"
+    android:paddingBottom="2dp">
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:minHeight="64dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/bg_children_card"
+        android:paddingStart="12dp"
+        android:paddingEnd="4dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp">
 
-        <TextView
-            android:id="@+id/childName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/tv_text"
-            android:textSize="15.5sp"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:text="TRT 1" />
+        <FrameLayout
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="13dp"
+            android:background="@drawable/bg_logo_tile">
 
-        <TextView
-            android:id="@+id/childSub"
-            android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/childInitial"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="T" />
+
+            <ImageView
+                android:id="@+id/childLogo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="3dp"
+                android:scaleType="fitCenter"
+                android:contentDescription="@null" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/tv_muted"
-            android:textSize="12sp"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:text="Ulusal" />
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/childName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/tv_text"
+                android:textSize="15.5sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:text="TRT 1" />
+
+            <TextView
+                android:id="@+id/childSub"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/tv_muted"
+                android:textSize="12sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:text="Ulusal" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/childFav"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_star_outline"
+            android:scaleType="fitCenter"
+            android:contentDescription="@string/favourite" />
     </LinearLayout>
-
-    <ImageButton
-        android:id="@+id/childFav"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/ic_star_outline"
-        android:scaleType="fitCenter"
-        android:contentDescription="@string/favourite" />
 
 </LinearLayout>

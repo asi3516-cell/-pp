@@ -4,9 +4,15 @@
         <item name="android:windowBackground">@color/tv_bg</item>
         <item name="colorPrimary">@color/tv_accent</item>
         <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorSecondary">@color/tv_accent_2</item>
         <item name="colorSurface">@color/tv_bg_2</item>
         <item name="colorOnSurface">@color/tv_text</item>
-        <item name="android:statusBarColor">@color/tv_bg_2</item>
+        <item name="android:statusBarColor">@color/tv_bg</item>
         <item name="android:navigationBarColor">@color/tv_bg_2</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <style name="NavItemIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/tv_accent_soft</item>
     </style>
 </resources>

@@ -217,12 +217,9 @@ h1, h2, h3 { margin: 0; }
   flex: 1;
   overflow-y: auto;
   padding: 4px 10px 12px;
-  display: grid;
-  /* Two channels per row: the sidebar is wide enough and it halves the
-     scrolling on a phone. */
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 6px 8px;
-  align-content: start;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 .channel-list::-webkit-scrollbar,
 .groups::-webkit-scrollbar,
@@ -494,28 +491,106 @@ h1, h2, h3 { margin: 0; }
 }
 .stage video { width: 100%; height: 100%; object-fit: contain; background: #000; }
 
-/* Touch control bar: big targets for a phone/TV remote, auto-hides while
-   watching and comes back on tap. */
-.ctl {
-  position: absolute; left: 0; right: 0; bottom: 0;
-  display: flex; align-items: center; gap: 8px;
-  padding: 10px 14px;
-  background: linear-gradient(transparent, rgba(0,0,0,.85));
-  opacity: 0; transition: opacity .25s;
+/* Always-on player layer, VLC / KMPlayer style. It sits above the picture and
+   stays put (no auto-hide), so the buttons are reachable on a phone and the
+   channel name is always visible. */
+.player {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  justify-content: space-between;
   z-index: 5;
+  pointer-events: none;               /* only the widgets take taps */
 }
-.ctl.show { opacity: 1; }
-.ctl-gap { flex: 1; }
-.ctl-btn {
-  min-width: 52px; height: 46px;
-  border: 0; border-radius: 12px;
-  background: rgba(255,255,255,.14);
-  color: #fff; font-size: 20px; line-height: 1;
+.player.hide { display: none; }
+.player > * { pointer-events: auto; }
+
+/* Auto-hide: tapping the picture hides the whole layer, including the bottom
+   buttons, so the video fills the screen. Tapping again brings it back. */
+.pl-top, .pl-bottom, .pl-center { transition: opacity .25s; }
+.player.hidden-ui .pl-top,
+.player.hidden-ui .pl-bottom,
+.player.hidden-ui .pl-center { opacity: 0; pointer-events: none; }
+
+.pl-top {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px;
+  background: linear-gradient(rgba(0,0,0,.78), transparent);
+}
+.pl-logo {
+  width: 38px; height: 38px; flex: 0 0 38px;
+  object-fit: contain; border-radius: 8px;
+  background: rgba(255,255,255,.08);
+}
+.pl-logo:not([src]), .pl-logo[src=""] { visibility: hidden; }
+.pl-meta { display: flex; flex-direction: column; min-width: 0; }
+.pl-song {
+  font-size: 12px; color: #9fe8b0;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.pl-song:empty { display: none; }
+.pl-live {
+  font-size: 11px; font-weight: 700; letter-spacing: .5px;
+  color: #ff5a5a;
+}
+.pl-live.off { color: var(--muted); }
+.pl-title { font-size: 15px; font-weight: 600; color: #fff;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pl-group { margin-left: auto; font-size: 12px; color: #cbd5e1;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.pl-center {
+  align-self: center;
+  width: 84px; height: 84px;
+  border: 0; border-radius: 50%;
+  background: rgba(0,0,0,.5);
+  color: #fff; font-size: 34px; line-height: 1;
+  display: grid; place-items: center;
+  opacity: 0; transition: opacity .2s;
+}
+.pl-center.show { opacity: 1; }
+
+.pl-bottom {
+  padding: 8px 14px 12px;
+  background: linear-gradient(transparent, rgba(0,0,0,.85));
+}
+.pl-seek { display: flex; align-items: center; gap: 10px; }
+.pl-time { font-size: 12px; color: #e2e8f0; font-variant-numeric: tabular-nums;
+  min-width: 44px; text-align: center; }
+#plRange {
+  flex: 1; height: 6px; margin: 0;
+  -webkit-appearance: none; appearance: none;
+  background: rgba(255,255,255,.3);
+  border-radius: 3px;
   cursor: pointer;
 }
-.ctl-btn:active { background: rgba(255,255,255,.3); }
-.ctl-btn.sm { min-width: 60px; font-size: 15px; font-weight: 600; }
-.ctl-btn.on { background: var(--accent); }
+#plRange::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid #fff;
+}
+#plRange:disabled { opacity: .4; cursor: default; }
+#plRange:disabled::-webkit-slider-thumb { background: #888; border-color: #bbb; }
+
+/* Fill screen: the sidebar and top bar go away and the stage takes over. */
+.stage.fill { position: fixed; inset: 0; z-index: 50; }
+.pl-btns { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+.pl-gap { flex: 1; }
+.pl-btn {
+  min-width: 48px; height: 44px;
+  border: 0; border-radius: 10px;
+  background: rgba(255,255,255,.14);
+  color: #fff; font-size: 19px; line-height: 1;
+  cursor: pointer;
+}
+.pl-btn:active { background: rgba(255,255,255,.32); }
+.pl-btn.sm { min-width: 56px; font-size: 14px; font-weight: 600; }
+.pl-btn.on { background: var(--accent); }
+
+@media (max-width: 700px) {
+  .pl-center { width: 68px; height: 68px; font-size: 28px; }
+  .pl-btn { min-width: 44px; height: 42px; font-size: 17px; }
+}
 
 .overlay {
   position: absolute; inset: 0;
@@ -539,8 +614,9 @@ h1, h2, h3 { margin: 0; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 .osd {
-  position: absolute; top: 14px; left: 14px;
-  background: rgba(0,0,0,.6);
+  position: absolute; top: 62px; left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,.66);
   color: #fff; padding: 6px 12px; border-radius: 8px;
   font-size: 13px; opacity: 0; transition: opacity .3s;
   pointer-events: none;

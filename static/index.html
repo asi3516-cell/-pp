@@ -12,7 +12,7 @@
 <link rel="icon" href="icons/favicon.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="icons/logo.svg" />
 <link rel="manifest" href="manifest.webmanifest" />
-<link rel="stylesheet" href="style.css?v=20261003c" />
+<link rel="stylesheet" href="style.css?v=20261003e" />
 </head>
 <body>
 <div id="app">
@@ -69,18 +69,40 @@
 
     <div class="stage" id="stage">
       <video id="video" playsinline crossorigin="anonymous"></video>
-      <!-- Custom control bar: the native <video controls> is inconsistent in
-           the Android WebView and offers no channel zapping. -->
-      <div class="ctl" id="ctl">
-        <button id="ctlPrev" class="ctl-btn" title="Önceki kanal">⏮</button>
-        <button id="ctlPlay" class="ctl-btn" title="Oynat / Duraklat">▶</button>
-        <button id="ctlNext" class="ctl-btn" title="Sonraki kanal">⏭</button>
-        <span class="ctl-gap"></span>
-        <button id="ctlBack" class="ctl-btn sm" title="10 sn geri">−10</button>
-        <button id="ctlFwd" class="ctl-btn sm" title="10 sn ileri">+10</button>
-        <span class="ctl-gap"></span>
-        <button id="ctlMute" class="ctl-btn" title="Ses aç / kapat">🔊</button>
-        <button id="ctlFull" class="ctl-btn" title="Tam ekran">⛶</button>
+      <!-- Always-on control layer (VLC / KMPlayer style): title on top, big
+           play in the middle, seek bar and buttons at the bottom. It is a
+           plain DOM layer, so it behaves the same on every Android WebView. -->
+      <div class="player" id="player">
+        <div class="pl-top">
+          <img class="pl-logo" id="plLogo" alt="" />
+          <div class="pl-meta">
+            <span class="pl-title" id="plTitle">Kanal seçin</span>
+            <span class="pl-song" id="plSong"></span>
+          </div>
+          <span class="pl-live" id="plLive">● CANLI</span>
+          <span class="pl-group" id="plGroup"></span>
+        </div>
+
+        <button class="pl-center" id="plCenter" title="Oynat / Duraklat">▶</button>
+
+        <div class="pl-bottom">
+          <div class="pl-seek">
+            <span class="pl-time" id="plCur">--:--</span>
+            <input id="plRange" type="range" min="0" max="1000" value="0" step="1" />
+            <span class="pl-time" id="plDur">--:--</span>
+          </div>
+          <div class="pl-btns">
+            <button id="ctlPrev" class="pl-btn" title="Önceki kanal">⏮</button>
+            <button id="ctlBack" class="pl-btn sm" title="10 sn geri">−10</button>
+            <button id="ctlPlay" class="pl-btn" title="Oynat / Duraklat">▶</button>
+            <button id="ctlFwd" class="pl-btn sm" title="10 sn ileri">+10</button>
+            <button id="ctlNext" class="pl-btn" title="Sonraki kanal">⏭</button>
+            <span class="pl-gap"></span>
+            <button id="ctlMute" class="pl-btn" title="Ses aç / kapat">🔊</button>
+            <button id="plReload" class="pl-btn" title="Yeniden başlat">⟳</button>
+            <button id="ctlFull" class="pl-btn" title="Tam ekran">⛶</button>
+          </div>
+        </div>
       </div>
       <div id="overlay" class="overlay">
         <div class="spinner" id="spinner" hidden></div>
@@ -149,8 +171,8 @@
 </template>
 
 <script src="vendor/hls.min.js"></script>
-<script src="channels-data.js?v=20261003c"></script>
-<script src="app.js?v=20261003c"></script>
+<script src="channels-data.js?v=20261003e"></script>
+<script src="app.js?v=20261003e"></script>
 <script>
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", function () {

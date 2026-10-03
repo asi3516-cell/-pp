@@ -1281,6 +1281,51 @@
     if (hls) { try { hls.destroy(); } catch (e) {} hls = null; }
   }
 
+  // Inside the APK a native ExoPlayer renders the video; the WebView only draws
+  // the channel list. On the desktop (no bridge) the web <video> is used.
+  function nativePlayer() {
+    return (typeof window.AndroidPlayer !== "undefined") ? window.AndroidPlayer : null;
+  }
+
+  function stageBounds() {
+    var st = $("#stage");
+    if (!st || !st.getBoundingClientRect) return null;
+    var r = st.getBoundingClientRect();
+    return {
+      x: Math.round(r.left), y: Math.round(r.top),
+      w: Math.round(r.width), h: Math.round(r.height)
+    };
+  }
+
+  function syncNativeBounds() {
+    var np = nativePlayer();
+    var b = stageBounds();
+    if (np && b) { try { np.setBounds(b.x, b.y, b.w, b.h); } catch (e) {} }
+  }
+
+  // The native side reports retries, stalls and give-ups back to the UI.
+  var nativeState = { position: 0, duration: -1, state: "idle", attempt: 0 };
+  window.tvNativeEvent = function (type, payload) {
+    if (type === "retry") {
+      spinner.hidden = false;
+      setOverlay(false);
+      showOsd("Yayın açılmadı, tekrar deneniyor (" + payload + "/5)");
+    } else if (type === "stopped") {
+      spinner.hidden = true;
+      setOverlay(true,
+        "<h2>Yayın açılamadı</h2><p>5 deneme başarısız oldu, yayın durduruldu. " +
+        "⟳ tuşuyla tekrar bağlanmayı deneyebilirsiniz.</p>");
+    } else if (type === "state") {
+      nativeState = payload || nativeState;
+      if (payload && payload.state === "playing") {
+        spinner.hidden = true;
+        setOverlay(false);
+      }
+      syncCtl();
+      syncSeek();
+    }
+  };
+
   function play(ch, overrideUrl) {
     state.current = ch;
     state.detail = null;
@@ -1300,6 +1345,9 @@
     $("#npName").textContent = ch.name;
     $("#npMeta").textContent = (ch.group || "Genel") + " · " + (ch.source || "");
     updateFavBtn();
+    updatePlayerInfo();
+    var layer = $("#player");
+    if (layer) layer.classList.remove("hide");
     showVodInfo(ch);
     loadEpgFor(ch);
     if (window.innerWidth <= 900) $("#sidebar").classList.remove("open");
@@ -1327,6 +1375,22 @@
     $("#npMeta").textContent = (ch.group || "Genel") +
       (i > 0 ? " · " + ch.name + " " + (i + 1) : " · " + (ch.source || ""));
     if (i > 0) showOsd(ch.name + " " + (i + 1) + " deneniyor");
+
+    // APK: hand the stream to the native ExoPlayer, which retries on its own.
+    var np = nativePlayer();
+    if (np) {
+      destroyHls();
+      spinner.hidden = false;
+      setOverlay(true, null);
+      syncNativeBounds();
+      showRadioArt(ch);
+      finishInit();
+      try {
+        np.play(url, ch.name || "", (ch.group || "Genel") + " · " + (ch.source || ""),
+                ch.headers ? JSON.stringify(ch.headers) : "");
+      } catch (e) { showFatal(e); }
+      return;
+    }
 
     destroyHls();
     spinner.hidden = false;
@@ -1519,87 +1583,256 @@
   }
   window.tvZap = zap;
 
-  /* ----------------------- on-screen controls ------------------------ */
-  // The Android WebView's built-in controls are unreliable and cannot zap
-  // channels, so the bar drives the video element directly.
-  var ctlTimer = null;
+  /* ----------------------- player layer ------------------------------ */
+  // A plain DOM layer over the picture (VLC / KMPlayer style) instead of the
+  // WebView's built-in controls, which cannot zap channels and look different
+  // on every device. It stays visible; only the big centre button fades out.
+  var seeking = false;
+  var hideTimer = null;
 
-  function ctlShow(autoHide) {
-    var bar = $("#ctl");
-    if (!bar) return;
-    bar.classList.add("show");
-    clearTimeout(ctlTimer);
-    if (autoHide) ctlTimer = setTimeout(ctlHide, 4000);
+  // Show the layer, then fade it away after a few seconds of no interaction.
+  function showUi(autoHide) {
+    var layer = $("#player");
+    if (!layer) return;
+    layer.classList.remove("hidden-ui");
+    clearTimeout(hideTimer);
+    if (autoHide) hideTimer = setTimeout(hideUi, 4000);
   }
 
-  function ctlHide() {
-    var bar = $("#ctl");
-    if (bar) bar.classList.remove("show");
+  function hideUi() {
+    var layer = $("#player");
+    if (!layer) return;
+    // Never hide while paused: the play button has to stay reachable.
+    if (video.paused) return;
+    layer.classList.add("hidden-ui");
+  }
+
+  function toggleUi() {
+    var layer = $("#player");
+    if (!layer) return;
+    if (layer.classList.contains("hidden-ui")) showUi(true);
+    else hideUi();
+  }
+
+  // Fill the screen with the picture: hides the browser/system bars and the
+  // control layer, so only the video is left.
+  function toggleFill() {
+    var stage = $("#stage");
+    var btn = $("#ctlFull");
+    var on = document.fullscreenElement || stage.classList.contains("fill");
+    var np = nativePlayer();
+    if (on) {
+      if (document.fullscreenElement) { document.exitFullscreen(); }
+      stage.classList.remove("fill");
+      if (btn) btn.classList.remove("on");
+      if (np) { try { np.setFullscreenMode(false); } catch (e) {} syncNativeBounds(); }
+      showUi(true);
+      return;
+    }
+    stage.classList.add("fill");
+    if (btn) btn.classList.add("on");
+    if (np) { try { np.setFullscreenMode(true); } catch (e) {} }
+    hideUi();
+    if (stage.requestFullscreen) {
+      stage.requestFullscreen().catch(function () {});
+    }
+  }
+
+  function fmtTime(sec) {
+    if (!isFinite(sec) || sec < 0) return "--:--";
+    sec = Math.floor(sec);
+    var h = Math.floor(sec / 3600);
+    var m = Math.floor((sec % 3600) / 60);
+    var s = sec % 60;
+    function p(n) { return (n < 10 ? "0" : "") + n; }
+    return (h > 0 ? h + ":" : "") + p(m) + ":" + p(s);
+  }
+
+  function setLive(on) {
+    var el = $("#plLive");
+    if (el) el.classList.toggle("off", !on);
+  }
+
+  function updatePlayerInfo() {
+    var ch = state.current;
+    var t = $("#plTitle"), g = $("#plGroup");
+    if (t) t.textContent = ch ? ch.name : "Kanal seçin";
+    if (g) g.textContent = ch ? (ch.group || "Genel") : "";
+    var logo = $("#plLogo");
+    if (logo) {
+      if (ch && ch.logo) { logo.src = ch.logo; }
+      else { logo.removeAttribute("src"); }
+    }
+    var song = $("#plSong");
+    if (song) song.textContent = ch && isRadioNow() ? icyTitle : "";
   }
 
   function ctlSeek(delta) {
-    if (!isFinite(video.duration) || video.duration <= 0) {
+    var np = nativePlayer();
+    if (np) { try { np.seekBy(delta); } catch (e) {} return; }
+    var info = seekInfo();
+    if (info.end <= info.start) {
       showOsd("Canlı yayında atlama yok");
       return;
     }
-    video.currentTime = Math.max(0, Math.min(video.duration, video.currentTime + delta));
+    var target = info.pos + delta;
+    video.currentTime = Math.max(info.start, Math.min(info.end - 0.5, target));
     showOsd(delta > 0 ? "10 sn ileri" : "10 sn geri");
   }
 
   function ctlToggle() {
+    var np = nativePlayer();
+    if (np) { try { np.toggle(); } catch (e) {} showUi(true); return; }
     if (video.paused) video.play().catch(function () {});
     else video.pause();
     syncCtl();
-    ctlShow(true);
   }
 
   function syncCtl() {
-    var play = $("#ctlPlay");
-    if (play) play.textContent = video.paused ? "▶" : "❚❚";
+    var np = nativePlayer();
+    var paused = np ? (nativeState.state !== "playing") : video.paused;
+    var icon = paused ? "▶" : "❚❚";
+    ["#ctlPlay", "#plCenter"].forEach(function (sel) {
+      var b = $(sel);
+      if (b) b.textContent = icon;
+    });
+    var center = $("#plCenter");
+    if (center) center.classList.toggle("show", paused);
     var mute = $("#ctlMute");
     if (mute) {
-      mute.textContent = video.muted || !video.volume ? "🔇" : "🔊";
-      mute.classList.toggle("on", video.muted);
+      var muted = np ? !!nativeState.muted : (video.muted || !video.volume);
+      mute.textContent = muted ? "🔇" : "🔊";
+      mute.classList.toggle("on", muted);
     }
   }
 
+  // Live HLS still exposes a seekable window (the DVR buffer), so the bar can
+  // scrub inside it. Only a stream with no window at all is "true live".
+  function seekInfo() {
+    var np = nativePlayer();
+    if (np) {
+      var dur = nativeState.duration;
+      if (dur && dur > 0) {
+        return { live: false, start: 0, end: dur, pos: nativeState.position };
+      }
+      return { live: true, start: 0, end: 0, pos: 0 };
+    }
+    var dur2 = video.duration;
+    if (isFinite(dur2) && dur2 > 0) {
+      return { live: false, start: 0, end: dur2, pos: video.currentTime };
+    }
+    var s = video.seekable;
+    if (s && s.length) {
+      var start = s.start(s.length - 1);
+      var end = s.end(s.length - 1);
+      if (end > start) {
+        return { live: true, start: start, end: end, pos: video.currentTime };
+      }
+    }
+    return { live: true, start: 0, end: 0, pos: 0 };
+  }
+
+  function syncSeek() {
+    if (seeking) return;
+    var info = seekInfo();
+    var canSeek = info.end > info.start;
+    setLive(!canSeek || info.live);
+    var range = $("#plRange");
+    var cur = $("#plCur"), d = $("#plDur");
+    if (range) {
+      range.disabled = !canSeek;
+      if (canSeek) {
+        range.value = Math.round(((info.pos - info.start) / (info.end - info.start)) * 1000);
+      }
+    }
+    if (!canSeek) {
+      if (cur) cur.textContent = "CANLI";
+      if (d) d.textContent = "";
+      return;
+    }
+    // A live window shows how far behind the edge we are instead of a clock.
+    var behind = Math.max(0, info.end - info.pos);
+    if (cur) cur.textContent = info.live ? "-" + fmtTime(behind) : fmtTime(info.pos);
+    if (d) d.textContent = info.live ? "CANLI" : fmtTime(info.end);
+  }
+
   function bindControls() {
-    var bar = $("#ctl");
-    if (!bar) return;
+    var layer = $("#player");
+    if (!layer) return;
     var stage = $("#stage");
 
-    on("#ctlPrev", function () { zap(-1); ctlShow(true); });
-    on("#ctlNext", function () { zap(1); ctlShow(true); });
+    on("#ctlPrev", function () { zap(-1); });
+    on("#ctlNext", function () { zap(1); });
     on("#ctlPlay", function () { ctlToggle(); });
-    on("#ctlBack", function () { ctlSeek(-10); ctlShow(true); });
-    on("#ctlFwd", function () { ctlSeek(10); ctlShow(true); });
+    on("#plCenter", function () { ctlToggle(); });
+    on("#ctlBack", function () { ctlSeek(-10); });
+    on("#ctlFwd", function () { ctlSeek(10); });
     on("#ctlMute", function () {
-      video.muted = !video.muted;
-      if (!video.muted && video.volume === 0) video.volume = 1;
+      var np = nativePlayer();
+      if (np) {
+        var m = !(nativeState.muted);
+        try { np.setMuted(m); } catch (e) {}
+        nativeState.muted = m;
+      } else {
+        video.muted = !video.muted;
+        if (!video.muted && video.volume === 0) video.volume = 1;
+      }
       syncCtl();
-      ctlShow(true);
     });
-    on("#ctlFull", function () {
-      if (document.fullscreenElement) document.exitFullscreen();
-      else if (stage && stage.requestFullscreen) stage.requestFullscreen();
-      ctlShow(true);
-    });
+    on("#plReload", function () { if (state.current) play(state.current); });
+    on("#ctlFull", function () { toggleFill(); });
 
-    // Tap the picture to reveal the bar, tap again (after it shows) to hide.
-    if (stage) {
-      stage.addEventListener("click", function (e) {
-        if (e.target.closest && e.target.closest(".ctl")) return;
-        if (bar.classList.contains("show")) ctlHide();
-        else ctlShow(true);
+    var range = $("#plRange");
+    if (range) {
+      range.addEventListener("input", function () {
+        seeking = true;
+        var np = nativePlayer();
+        if (np) {
+          var info = seekInfo();
+          if (info.end > info.start) {
+            try { np.seekTo(info.start + (range.value / 1000) * (info.end - info.start)); }
+            catch (e) {}
+          }
+          return;
+        }
+        var info2 = seekInfo();
+        if (info2.end > info2.start) {
+          video.currentTime = info2.start +
+            (range.value / 1000) * (info2.end - info2.start);
+        }
+      });
+      range.addEventListener("change", function () {
+        seeking = false;
+        syncSeek();
       });
     }
 
-    ["play", "pause", "volumechange", "playing", "waiting"].forEach(function (evt) {
+    // Tapping the picture toggles play/pause, like a phone video player.
+    if (stage) {
+      stage.addEventListener("click", function (e) {
+        if (e.target.closest && e.target.closest(".player")) return;
+        // While the layer is showing, a tap on the picture hides it (fill
+        // screen); once hidden, a tap toggles play/pause.
+        var layer = $("#player");
+        if (layer && !layer.classList.contains("hidden-ui")) { hideUi(); return; }
+        ctlToggle();
+      });
+    }
+
+    ["play", "pause", "volumechange", "playing"].forEach(function (evt) {
       video.addEventListener(evt, syncCtl);
     });
-    // A live stream has no timeline, so the seek buttons say so instead of
-    // jumping to an arbitrary position.
+    video.addEventListener("play", function () { showUi(true); });
+    video.addEventListener("pause", function () { showUi(false); });
+    video.addEventListener("timeupdate", syncSeek);
+    video.addEventListener("durationchange", syncSeek);
+    video.addEventListener("loadedmetadata", syncSeek);
+    // Live streams do not always fire timeupdate, so keep the bar moving.
+    setInterval(function () { if (!video.paused) syncSeek(); }, 1000);
+
+    updatePlayerInfo();
     syncCtl();
+    syncSeek();
   }
 
   function finishInit() {
@@ -1613,7 +1846,9 @@
     spinner.hidden = true;
     setOverlay(false);
     syncCtl();
-    ctlShow(true);
+    syncSeek();
+    showUi(true);
+    updatePlayerInfo();
     var cur = state.current;
     // Radio keeps its logo on stage: there is no video frame to show instead.
     if (!cur || contentKind(cur) !== "radio") hideVodInfo();
@@ -1882,6 +2117,13 @@
     } catch (e) {}
 
     loadLocal();
+    // In the APK the native ExoPlayer draws the video above the WebView and
+    // brings its own auto-hiding controller, so the web layer is not used.
+    if (nativePlayer()) {
+      var layer = $("#player");
+      if (layer) layer.classList.add("hide");
+      document.documentElement.classList.add("native-player");
+    }
     // A broken binding must never stop the channel list from loading.
     try { bind(); bindControls(); } catch (e) { showFatal(e); }
 

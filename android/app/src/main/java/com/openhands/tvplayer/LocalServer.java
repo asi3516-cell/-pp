@@ -54,6 +54,7 @@ public class LocalServer extends NanoHTTPD {
             if (uri.equals("/api/channels")) return channels();
             if (uri.equals("/api/proxy")) return proxy(q);
             if (uri.equals("/api/fetch")) return fetch(q);
+            if (uri.equals("/api/now")) return now(q);
             if (uri.equals("/api/store")) {
                 if ("POST".equalsIgnoreCase(session.getMethod().name())) {
                     return storeSave(session);
@@ -303,6 +304,72 @@ public class LocalServer extends NanoHTTPD {
         out.write(payload.getBytes("UTF-8"));
         out.close();
         return json(storeLoad());
+    }
+
+    /** Current song title for a radio stream, read from the ICY metadata
+     * block that Shoutcast/Icecast servers interleave into the audio. */
+    private Response now(Map<String, String> q) throws Exception {
+        String target = q.get("url");
+        if (target == null) return text(Response.Status.BAD_REQUEST, "url yok");
+        String ua = orDefault(q.get("u"), "Mozilla/5.0 (Android) TV Player");
+        String resolved = resolveStream(target, ua, q.get("h"), q.get("o"));
+        String title = "";
+        String station = "";
+        HttpURLConnection conn = null;
+        InputStream in = null;
+        try {
+            conn = (HttpURLConnection) new URL(resolved).openConnection();
+            conn.setInstanceFollowRedirects(true);
+            conn.setConnectTimeout(8000);
+            conn.setReadTimeout(8000);
+            conn.setRequestProperty("User-Agent", ua);
+            conn.setRequestProperty("Accept", "*/*");
+            conn.setRequestProperty("Icy-MetaData", "1");
+            int metaint = 0;
+            try { metaint = Integer.parseInt(orDefault(conn.getHeaderField("icy-metaint"), "0")); }
+            catch (NumberFormatException ignored) { }
+            if (metaint > 0) {
+                in = conn.getInputStream();
+                byte[] buf = new byte[metaint + 1];
+                int read = 0;
+                while (read < buf.length) {
+                    int n = in.read(buf, read, buf.length - read);
+                    if (n < 0) break;
+                    read += n;
+                }
+                if (read > metaint) {
+                    int len = (buf[metaint] & 0xFF) * 16;
+                    if (len > 0) {
+                        byte[] meta = new byte[len];
+                        int got = 0;
+                        while (got < len) {
+                            int n = in.read(meta, got, len - got);
+                            if (n < 0) break;
+                            got += n;
+                        }
+                        String block = new String(meta, 0, got, "ISO-8859-1");
+                        title = icyValue(block, "StreamTitle");
+                        station = icyValue(block, "StreamUrl");
+                    }
+                }
+            }
+        } catch (Exception ignored) {
+        } finally {
+            try { if (in != null) in.close(); } catch (Exception ignored) { }
+            if (conn != null) conn.disconnect();
+        }
+        JSONObject out = new JSONObject();
+        out.put("title", title);
+        out.put("station", station);
+        return json(out.toString());
+    }
+
+    private static String icyValue(String block, String key) {
+        java.util.regex.Matcher m = java.util.regex.Pattern
+                .compile(key + "='([^']*)'").matcher(block);
+        if (m.find()) return m.group(1).trim();
+        m = java.util.regex.Pattern.compile(key + "=\"([^\"]*)\"").matcher(block);
+        return m.find() ? m.group(1).trim() : "";
     }
 
     private Response asset(String uri) throws Exception {

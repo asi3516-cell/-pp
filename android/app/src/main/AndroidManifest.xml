@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  Deliberately minimal permissions: only network access is required.
+  * No storage permission: the channel lists are bundled inside the APK and the
+    player streams from the network, so the app never reads or writes shared
+    storage and cannot fill it up.
+  * No background/foreground-service permission is needed for the small
+    in-app playback session.
+  App data is bounded: the player keeps only an in-memory buffer (capped back
+  buffer) and writes no media cache to disk, so a long viewing session does not
+  grow the app's footprint.
+-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.openhands.tvplayer">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Guard against a transitive library pulling in storage access. -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        tools:node="remove" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:node="remove" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+        tools:node="remove" />
 
     <application
         android:label="@string/app_name"

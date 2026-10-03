@@ -83,11 +83,13 @@ The launcher is `BottomNavActivity` (see `ui/`). Layouts are:
   bar uses `bg_nav_bar` (hairline on top), `nav_item_tint` and the
   `NavItemIndicator` pill for the checked item.
 - `fragment_channel_list.xml` — fixed header (`bg_header`: brand mark
-  `bg_brand_mark` + `ic_brand_mic`, active tab name, search card `bg_search`
+  `bg_brand_mark` + `ic_brand_tv`, active tab name, search card `bg_search`
   with `ic_search` and a `searchClear` button) over the `ExpandableListView`.
   `listCount` shows the filtered total; `emptyState` is contextual (search
   miss / no favourites / empty list). `ChannelListFragment` fills `headerTitle`
-  per tab and toggles `searchClear` from the text watcher.
+  per tab and toggles `searchClear` from the text watcher. The bottom bar
+  (`bottom_nav_menu.xml`) has four tabs: Canlı TV, Radyo, Listeler (`MODE_ALL`,
+  live + radio grouped) and Favoriler.
 - `list_group_item.xml` / `list_child_item.xml` — rounded cards
   (`bg_group_card` / `bg_children_card`). The group row has an accent bar
   (`bg_group_accent`), a count pill (`bg_count_pill`) and a chevron rotated by
@@ -100,8 +102,12 @@ The launcher is `BottomNavActivity` (see `ui/`). Layouts are:
 
 `PlayerActivity` reuses the single `PlaybackController` player, loads the whole
 group as a playlist (so Next/Previous change channels) and cycles
-FIT/FILL/ZOOM. The fullscreen button toggles the system bars via
-`WindowInsetsControllerCompat`.
+FIT/FILL/ZOOM. It resolves that playlist through `UserChannelStore` — not
+`ChannelRepository` — so a channel the user added or edited is the one that
+plays, and it receives the tapped channel by URL (`EXTRA_URL`) rather than by
+index. The activity opens straight into fullscreen and auto-hides the top and
+bottom scrims after 4s; tapping the picture toggles them back. The fullscreen
+button toggles the system bars via `WindowInsetsControllerCompat`.
 
 Widgets work from a cold start: `PlayerService.ensureRadioLoaded()` loads the
 radio list itself before handling PLAY/TOGGLE/NEXT/PREV, so a widget tap can

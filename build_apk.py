@@ -65,6 +65,8 @@ def main() -> None:
     apksigner = find_tool(sdk, build_tools, "apksigner")
 
     # Keep assets in sync with the web player (single source of truth).
+    # The channel list is re-embedded so the app ships the current lists.
+    run([sys.executable, str(ROOT / "make_embedded_channels.py")])
     assets = SRC / "assets"
     shutil.rmtree(assets, ignore_errors=True)
     shutil.copytree(ROOT / "static", assets)

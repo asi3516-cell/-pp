@@ -422,14 +422,18 @@
   }
 
   function loadChannels() {
-    // Prefer the local server's API; if it fails or comes back empty (some
-    // Android WebViews), read the bundled channels.json directly so the app
-    // never opens with an empty list.
-    return api("/api/channels")
+    // The channel list is compiled straight into the app (channels-data.js),
+    // so it shows immediately with no server, network or permission needed.
+    // The server API is only a bonus for freshly added channels.
+    function embedded() {
+      return (window.HH_CHANNELS || []).slice();
+    }
+    var start = embedded().length ? Promise.resolve(embedded()) : api("/api/channels")
       .then(function (data) { return (data && data.channels) || []; })
-      .catch(function () { return bundledChannels(); })
+      .catch(function () { return []; });
+    return start
       .then(function (raw) {
-        if (!raw || !raw.length) return bundledChannels();
+        if (!raw || !raw.length) return embedded();
         return raw;
       })
       .then(function (raw) {
@@ -457,7 +461,12 @@
     });
   }
 
+  // The plain channels.json is a fallback for builds without the embedded
+  // script; every read path stays offline.
   function bundledChannels() {
+    if (window.HH_CHANNELS && window.HH_CHANNELS.length) {
+      return Promise.resolve(window.HH_CHANNELS.slice());
+    }
     return get("channels.json").then(function (r) {
       return r.json();
     }).catch(function () { return []; });

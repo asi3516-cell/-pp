@@ -1,20 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="12dp"
+    android:padding="14dp"
     android:background="@drawable/widget_card_bg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/widget_brand"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/widget_brand_mark"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_brand_mic"
+            android:contentDescription="@string/app_name" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/widget_section"
+            android:textColor="#7C93B5"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.14" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/widget_live"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/widget_badge_live"
+            android:paddingStart="9dp"
+            android:paddingEnd="9dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:text="@string/widget_live"
+            android:textColor="#FFFFFF"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.08"
+            android:visibility="gone" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/widget_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
+        android:layout_marginTop="10dp"
         android:maxLines="2"
         android:ellipsize="end"
         android:textColor="#FFFFFF"
-        android:textSize="17sp"
+        android:textSize="19sp"
         android:textStyle="bold"
         android:text="@string/widget_idle" />
 
@@ -34,29 +83,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:layout_marginTop="10dp">
 
         <ImageButton
             android:id="@+id/widget_prev"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="52dp"
-            android:layout_marginEnd="8dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="6dp"
             android:background="@drawable/widget_btn_side"
-            android:padding="12dp"
+            android:padding="13dp"
             android:scaleType="fitCenter"
+            android:tint="#EAF0FA"
             android:contentDescription="@string/widget_prev"
-            android:src="@android:drawable/ic_media_previous" />
+            android:src="@drawable/ic_prev" />
 
         <ImageButton
             android:id="@+id/widget_play"
             android:layout_width="0dp"
-            android:layout_weight="1.4"
-            android:layout_height="52dp"
+            android:layout_weight="1.5"
+            android:layout_height="50dp"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="4dp"
             android:background="@drawable/widget_btn_play"
-            android:padding="14dp"
+            android:padding="13dp"
             android:scaleType="fitCenter"
             android:contentDescription="@string/widget_play"
             android:src="@drawable/ic_widget_play" />
@@ -65,12 +116,26 @@
             android:id="@+id/widget_next"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="52dp"
-            android:layout_marginStart="8dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
             android:background="@drawable/widget_btn_side"
-            android:padding="12dp"
+            android:padding="13dp"
             android:scaleType="fitCenter"
+            android:tint="#EAF0FA"
             android:contentDescription="@string/widget_next"
-            android:src="@android:drawable/ic_media_next" />
+            android:src="@drawable/ic_next" />
+
+        <ImageButton
+            android:id="@+id/widget_stop"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:background="@drawable/widget_btn_side"
+            android:padding="14dp"
+            android:scaleType="fitCenter"
+            android:tint="#EAF0FA"
+            android:contentDescription="@string/widget_stop"
+            android:src="@drawable/ic_stop" />
     </LinearLayout>
 </LinearLayout>

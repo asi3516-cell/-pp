@@ -51,6 +51,11 @@ object PlaybackController {
     var resizeMode: Int = 0
         private set
 
+    /** Playback speed, kept here so it survives across channel changes. */
+    @Volatile
+    var speed: Float = 1f
+        private set
+
     private var retryCount = 0
     private var lastUrl: String? = null
     private var lastError: PlaybackException? = null
@@ -79,18 +84,22 @@ object PlaybackController {
         val client = OkHttpClient.Builder()
             .dispatcher(dispatcher)
             .connectionPool(ConnectionPool(MAX_CONNECTIONS, 5, TimeUnit.MINUTES))
-            .connectTimeout(15, TimeUnit.SECONDS)
-            .readTimeout(20, TimeUnit.SECONDS)
+            .connectTimeout(8, TimeUnit.SECONDS)
+            .readTimeout(12, TimeUnit.SECONDS)
             .retryOnConnectionFailure(true)
             .build()
         val dataSource = OkHttpDataSource.Factory(client)
 
-        // The back buffer is capped so a long session cannot grow without bound;
-        // only the forward buffer is allowed to reach the longer duration.
+        // Startup tuning: the third/fourth values are how much buffer is
+        // required before playback starts and after a rebuffer. Dropping them
+        // from 5s/10s to 1s/2s is what makes a slow channel appear almost
+        // immediately; the forward buffer can still grow to 60s in the
+        // background so a healthy stream never starves.
         val loadControl = DefaultLoadControl.Builder()
-            .setBufferDurationsMs(50_000, 120_000, 5_000, 10_000)
-            .setBackBuffer(30_000, false)
+            .setBufferDurationsMs(15_000, 60_000, 1_000, 2_000)
+            .setBackBuffer(20_000, false)
             .setTargetBufferBytes(C.LENGTH_UNSET)
+            .setPrioritizeTimeOverSizeThresholds(true)
             .build()
 
         val player = ExoPlayer.Builder(context)
@@ -108,6 +117,7 @@ object PlaybackController {
 
         // Repeat the whole playlist so Next on the last item loops to the first.
         player.repeatMode = Player.REPEAT_MODE_ALL
+        player.setPlaybackSpeed(speed)
         player.addListener(object : Player.Listener {
             override fun onPlaybackStateChanged(state: Int) {
                 if (state == Player.STATE_READY) retryCount = 0
@@ -158,7 +168,6 @@ object PlaybackController {
                     MediaMetadata.Builder()
                         .setTitle(ch.name)
                         .setArtist(ch.group)
-                        .setArtworkUri(ch.logo?.let { android.net.Uri.parse(it) })
                         .build()
                 )
                 .build()
@@ -200,6 +209,12 @@ object PlaybackController {
     fun cycleResize(): Int {
         resizeMode = (resizeMode + 1) % 3
         return resizeMode
+    }
+
+    /** Sets the playback speed and re-applies it to any live player. */
+    fun setSpeed(context: Context, value: Float) {
+        speed = value
+        player(context).setPlaybackSpeed(value)
     }
 
     private fun handleError(context: Context) {

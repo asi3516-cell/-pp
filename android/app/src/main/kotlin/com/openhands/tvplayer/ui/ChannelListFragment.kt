@@ -88,9 +88,13 @@ class ChannelListFragment : Fragment() {
             context = requireContext(),
             onChannelClick = { channels, index -> openPlayer(channels, index) },
             onFavouriteToggle = { channel, makeFav -> toggleFavourite(channel, makeFav) },
-            onChannelLongClick = { channel -> showChannelOptions(channel) }
+            onChannelLongClick = { channel -> showChannelOptions(channel) },
+            onGroupToggle = { groupPosition -> toggleGroup(groupPosition) }
         )
         listView.setAdapter(adapter)
+        // Let the D-pad move focus onto the individual rows instead of stopping
+        // on the list itself, which is what a remote control needs.
+        listView.setItemsCanFocus(true)
 
         addButton.setOnClickListener { showChannelEditor(null) }
         emptyAddButton.setOnClickListener { showChannelEditor(null) }
@@ -98,9 +102,7 @@ class ChannelListFragment : Fragment() {
 
         // One category open at a time, so the tree stays readable on a phone.
         listView.setOnGroupClickListener { _, _, groupPosition, _ ->
-            for (i in 0 until adapter.groupCount) {
-                if (i != groupPosition) listView.collapseGroup(i)
-            }
+            collapseOthers(groupPosition)
             false
         }
 
@@ -323,6 +325,23 @@ class ChannelListFragment : Fragment() {
                 emptyTitle.setText(R.string.no_channels)
                 emptyHint.setText(R.string.no_channels_hint)
             }
+        }
+    }
+
+    /** Closes every category except [groupPosition], keeping one open at a time. */
+    private fun collapseOthers(groupPosition: Int) {
+        for (i in 0 until adapter.groupCount) {
+            if (i != groupPosition) listView.collapseGroup(i)
+        }
+    }
+
+    /** D-pad activation of a category: expand it, or close it if already open. */
+    private fun toggleGroup(groupPosition: Int) {
+        if (listView.isGroupExpanded(groupPosition)) {
+            listView.collapseGroup(groupPosition)
+        } else {
+            collapseOthers(groupPosition)
+            listView.expandGroup(groupPosition)
         }
     }
 

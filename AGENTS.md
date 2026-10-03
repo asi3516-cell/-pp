@@ -113,6 +113,26 @@ Widgets work from a cold start: `PlayerService.ensureRadioLoaded()` loads the
 radio list itself before handling PLAY/TOGGLE/NEXT/PREV, so a widget tap can
 never start a TV stream.
 
+TV boxes: the manifest declares touchscreen and leanback as optional and the
+launcher activity carries `LEANBACK_LAUNCHER`, so the app installs and shows up
+on a box/Android TV home screen. Remote control works through `dispatchKeyEvent`
+in `PlayerActivity` (D-pad left/right and media keys change channel, centre and
+play/pause toggle, back exits) and through focusable list rows: the channel
+adapter needs `listView.setItemsCanFocus(true)` plus `focusable`/`clickable`
+row cards, otherwise the D-pad stops on the list itself and never reaches a
+row. The channel row's click listener lives on `rowCard`, not the outer row, so
+touch selection keeps working.
+
+Do not put `setArtworkUri` on `MediaItem` metadata. The legacy MediaSession stub
+scales artwork bitmaps on the main thread while building `MediaMetadata`, which
+blocks input long enough to trigger an ANR ("Input dispatching timed out") on
+the first channel change. Titles and artists are enough for the notification;
+logos are drawn by Glide in the UI.
+
 Build: `cd android && ./gradlew :app:assembleRelease` (wrapper is checked in;
 CI uses the same command). Do not run `build_apk.py` for the native app — it
 only packages the WebView fallback.
+
+Desktop build: `python build/make.py` produces `dist/hh` (Linux) or
+`dist/hh.exe` (Windows) and `build_exe.bat` is the double-click Windows path;
+`python build/package_source.py` refreshes `build/pkg/hh-Kaynak.zip`.

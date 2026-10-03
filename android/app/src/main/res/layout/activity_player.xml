@@ -42,6 +42,8 @@
 
         <ImageButton
             android:id="@+id/btnBack"
+            android:focusable="true"
+            android:focusableInTouchMode="false"
             android:layout_width="44dp"
             android:layout_height="44dp"
             android:background="?android:attr/selectableItemBackgroundBorderless"
@@ -80,18 +82,22 @@
 
         <ImageButton
             android:id="@+id/btnResize"
+            android:focusable="true"
+            android:focusableInTouchMode="false"
             android:layout_width="44dp"
             android:layout_height="44dp"
             android:layout_marginEnd="4dp"
-            android:background="@drawable/bg_control"
+            android:background="@drawable/bg_control_focus"
             android:src="@drawable/ic_resize"
             android:contentDescription="@string/screen_mode" />
 
         <ImageButton
             android:id="@+id/btnFullscreen"
+            android:focusable="true"
+            android:focusableInTouchMode="false"
             android:layout_width="44dp"
             android:layout_height="44dp"
-            android:background="@drawable/bg_control"
+            android:background="@drawable/bg_control_focus"
             android:src="@drawable/ic_fullscreen"
             android:contentDescription="@string/fullscreen" />
     </LinearLayout>
@@ -124,35 +130,180 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="6dp">
+
+            <TextView
+                android:id="@+id/timeCurrent"
+                android:layout_width="46dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:textColor="@color/tv_muted"
+                android:textSize="11.5sp"
+                android:fontFamily="monospace"
+                android:text="" />
+
+            <SeekBar
+                android:id="@+id/seekBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:max="1000"
+                android:progressTint="@color/tv_accent_2"
+                android:progressBackgroundTint="@color/tv_line"
+                android:thumbTint="@color/tv_accent_2"
+                android:maxHeight="3dp"
+                android:minHeight="3dp" />
+
+            <TextView
+                android:id="@+id/timeTotal"
+                android:layout_width="46dp"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:textColor="@color/tv_muted"
+                android:textSize="11.5sp"
+                android:fontFamily="monospace"
+                android:text="" />
+        </LinearLayout>
+
+        <!-- Primary transport row: shuffle, previous, play/pause, stop, next,
+             repeat. Mirrors the VLC button bar. -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:gravity="center"
             android:clipChildren="false"
             android:clipToPadding="false">
 
             <ImageButton
+                android:id="@+id/btnShuffle"
+            android:focusable="true"
+            android:focusableInTouchMode="false"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:layout_marginEnd="6dp"
+                android:background="@drawable/bg_control_focus"
+                android:src="@drawable/ic_shuffle"
+                android:contentDescription="@string/shuffle" />
+
+            <ImageButton
                 android:id="@+id/btnPrev"
-                android:layout_width="54dp"
-                android:layout_height="54dp"
-                android:layout_marginEnd="14dp"
-                android:background="@drawable/bg_control"
+            android:focusable="true"
+            android:focusableInTouchMode="false"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_marginEnd="6dp"
+                android:background="@drawable/bg_control_focus"
                 android:src="@drawable/ic_prev"
                 android:contentDescription="@string/widget_prev" />
 
             <ImageButton
                 android:id="@+id/btnPlay"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+            android:focusable="true"
+            android:focusableInTouchMode="false"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
                 android:background="@drawable/bg_control_accent"
                 android:src="@drawable/ic_play"
                 android:contentDescription="@string/widget_play" />
 
             <ImageButton
+                android:id="@+id/btnStop"
+            android:focusable="true"
+            android:focusableInTouchMode="false"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_marginStart="6dp"
+                android:background="@drawable/bg_control_focus"
+                android:src="@drawable/ic_stop"
+                android:contentDescription="@string/stop" />
+
+            <ImageButton
                 android:id="@+id/btnNext"
-                android:layout_width="54dp"
-                android:layout_height="54dp"
-                android:layout_marginStart="14dp"
-                android:background="@drawable/bg_control"
+            android:focusable="true"
+            android:focusableInTouchMode="false"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_marginStart="6dp"
+                android:background="@drawable/bg_control_focus"
                 android:src="@drawable/ic_next"
                 android:contentDescription="@string/widget_next" />
+
+            <ImageButton
+                android:id="@+id/btnRepeat"
+            android:focusable="true"
+            android:focusableInTouchMode="false"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="6dp"
+                android:background="@drawable/bg_control_focus"
+                android:src="@drawable/ic_repeat"
+                android:contentDescription="@string/repeat" />
+        </LinearLayout>
+
+        <!-- Secondary row: volume, playlist and speed. -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="10dp">
+
+            <ImageButton
+                android:id="@+id/btnMute"
+            android:focusable="true"
+            android:focusableInTouchMode="false"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_volume"
+                android:contentDescription="@string/mute" />
+
+            <SeekBar
+                android:id="@+id/volumeBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="10dp"
+                android:max="100"
+                android:progressTint="@color/tv_accent_2"
+                android:progressBackgroundTint="@color/tv_line"
+                android:thumbTint="@color/tv_accent_2"
+                android:maxHeight="3dp"
+                android:minHeight="3dp" />
+
+            <ImageButton
+                android:id="@+id/btnPlaylist"
+            android:focusable="true"
+            android:focusableInTouchMode="false"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="6dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_playlist"
+                android:contentDescription="@string/playlist" />
+
+            <TextView
+                android:id="@+id/btnSpeed"
+                android:focusable="true"
+                android:focusableInTouchMode="false"
+                android:clickable="true"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:minWidth="56dp"
+                android:gravity="center"
+                android:background="@drawable/bg_control_focus"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:textColor="@color/tv_text"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:text="1.00x"
+                android:contentDescription="@string/speed" />
         </LinearLayout>
     </LinearLayout>
 

@@ -20,7 +20,8 @@ class ExpandableChannelAdapter(
     private val context: Context,
     private val onChannelClick: (List<Channel>, Int) -> Unit,
     private val onFavouriteToggle: (Channel, Boolean) -> Unit,
-    private val onChannelLongClick: (Channel) -> Unit
+    private val onChannelLongClick: (Channel) -> Unit,
+    private val onGroupToggle: (Int) -> Unit
 ) : BaseExpandableListAdapter() {
 
     private val groups = ArrayList<String>()
@@ -75,6 +76,12 @@ class ExpandableChannelAdapter(
             .rotation(if (isExpanded) 90f else 0f)
             .setDuration(150)
             .start()
+        // A D-pad "click" on the focused card toggles the category, so TV
+        // boxes can open a group without a touchscreen. Touch taps still go
+        // through ExpandableListView's own group-click handling.
+        view.findViewById<View>(R.id.groupCard).setOnClickListener {
+            onGroupToggle(groupPosition)
+        }
         return view
     }
 
@@ -110,11 +117,12 @@ class ExpandableChannelAdapter(
             onFavouriteToggle(channel, !favouriteUrls.contains(channel.playUrl))
         }
 
-        view.setOnClickListener {
+        val card = view.findViewById<View>(R.id.rowCard)
+        card.setOnClickListener {
             val list = children[groups[groupPosition]] ?: return@setOnClickListener
             onChannelClick(list, childPosition)
         }
-        view.setOnLongClickListener {
+        card.setOnLongClickListener {
             onChannelLongClick(channel)
             true
         }

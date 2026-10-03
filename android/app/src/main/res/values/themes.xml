@@ -12,6 +12,16 @@
         <item name="android:windowLightStatusBar">false</item>
     </style>
 
+    <style name="Theme.TVPlayer.Player" parent="Theme.TVPlayer">
+        <item name="android:windowBackground">@android:color/black</item>
+        <!-- Draw edge to edge, including under the display cutout, so no black
+             strip is left on the notch side in landscape. -->
+        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
     <style name="NavItemIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:color">@color/tv_accent_soft</item>
     </style>

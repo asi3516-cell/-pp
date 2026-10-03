@@ -3,6 +3,8 @@
     <string name="app_name">TV Player</string>
     <string name="widget_idle">Radyo çalmıyor</string>
     <string name="widget_hint">Dinlemek için ▶ dokun</string>
+    <string name="widget_section">RADYO</string>
+    <string name="widget_live">CANLI</string>
     <string name="widget_prev">Önceki radyo</string>
     <string name="widget_play">Çal / Durdur</string>
     <string name="widget_start">Radyoyu başlat</string>
@@ -22,6 +24,16 @@
     <string name="retry">Tekrar dene</string>
     <string name="back">Geri</string>
     <string name="stream_retry">Bağlantı yeniden deniyor…</string>
+    <string name="live">CANLI</string>
+    <string name="stop">Durdur</string>
+    <string name="mute">Sesi kapat</string>
+    <string name="unmute">Sesi aç</string>
+    <string name="volume">Ses</string>
+    <string name="playlist">Çalma listesi</string>
+    <string name="shuffle">Karıştır</string>
+    <string name="repeat">Tekrarla</string>
+    <string name="repeat_one">Tek parçayı tekrarla</string>
+    <string name="speed">Oynatma hızı</string>
     <string name="screen_mode">Ekran modu</string>
     <string name="fullscreen">Tam ekran</string>
     <string name="no_channels">Kanal bulunamadı</string>

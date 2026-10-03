@@ -7,24 +7,21 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.view.View;
 import android.widget.RemoteViews;
 
 import com.openhands.tvplayer.player.PlaybackActions;
 import com.openhands.tvplayer.player.WidgetIntents;
 
 /**
- * Home-screen widget showing the radio station that is playing, with
- * previous / play-pause / next buttons. Three sizes share this logic and only
- * differ in layout, so the same state drives all of them.
+ * Home-screen radio widget. It shows the station that is playing and, for the
+ * medium and large sizes, drives playback through the MediaSessionService so
+ * the buttons keep working while the app is closed.
  *
- * Playback lives inside the WebView, so a button press starts (or resumes) the
- * activity with a command action; MainActivity turns that into a JS call.
+ * Playback state is published by the player into SharedPreferences and read
+ * back here on every update, so all three sizes stay in sync.
  */
 public abstract class RadioWidgetBase extends AppWidgetProvider {
-
-    public static final String ACTION_PREV = "com.openhands.tvplayer.WIDGET_PREV";
-    public static final String ACTION_PLAY = "com.openhands.tvplayer.WIDGET_PLAY";
-    public static final String ACTION_NEXT = "com.openhands.tvplayer.WIDGET_NEXT";
 
     static final String PREFS = "tv_widget";
     static final String K_TITLE = "title";
@@ -33,19 +30,22 @@ public abstract class RadioWidgetBase extends AppWidgetProvider {
 
     protected abstract int layoutId();
 
+    /** Whether this size carries the prev / play / next (and stop) buttons. */
     protected abstract boolean hasControls();
+
+    /** Whether this size carries the stop button. */
+    protected boolean hasStop() { return false; }
 
     @Override
     public void onUpdate(Context c, AppWidgetManager mgr, int[] ids) {
-        RemoteViews rv = build(c);
-        for (int id : ids) mgr.updateAppWidget(id, rv);
+        for (int id : ids) mgr.updateAppWidget(id, build(c));
     }
 
     @Override
     public void onReceive(Context c, Intent intent) {
         super.onReceive(c, intent);
-        // The button intents go straight to PlayerService; nothing to relay
-        // here, so only the periodic APPWIDGET_UPDATE reaches this method.
+        // Button presses are PendingIntents aimed straight at PlayerService;
+        // only APPWIDGET_UPDATE reaches this provider.
     }
 
     RemoteViews build(Context c) {
@@ -59,7 +59,12 @@ public abstract class RadioWidgetBase extends AppWidgetProvider {
                 title.isEmpty() ? c.getString(R.string.widget_idle) : title);
         rv.setTextViewText(R.id.widget_sub,
                 sub.isEmpty() ? c.getString(R.string.widget_hint) : sub);
+
+        // Tapping the card itself opens the app on the radio tab.
+        rv.setOnClickPendingIntent(R.id.widget_root, openApp(c));
+
         if (hasControls()) {
+            rv.setViewVisibility(R.id.widget_live, playing ? View.VISIBLE : View.GONE);
             rv.setImageViewResource(R.id.widget_play, playing
                     ? R.drawable.ic_widget_pause
                     : R.drawable.ic_widget_play);
@@ -72,13 +77,35 @@ public abstract class RadioWidgetBase extends AppWidgetProvider {
             rv.setOnClickPendingIntent(R.id.widget_prev, pending(c, PlaybackActions.ACTION_PREV, 1));
             rv.setOnClickPendingIntent(R.id.widget_play, pending(c, PlaybackActions.ACTION_TOGGLE, 2));
             rv.setOnClickPendingIntent(R.id.widget_next, pending(c, PlaybackActions.ACTION_NEXT, 3));
+            if (hasStop()) {
+                rv.setOnClickPendingIntent(R.id.widget_stop, pending(c, PlaybackActions.ACTION_STOP, 4));
+            }
+        } else {
+            // The compact size has only the play button.
+            rv.setImageViewResource(R.id.widget_play, playing
+                    ? R.drawable.ic_widget_pause
+                    : R.drawable.ic_widget_play);
+            rv.setInt(R.id.widget_play, "setBackgroundResource", playing
+                    ? R.drawable.widget_btn_play_active
+                    : R.drawable.widget_btn_play);
+            rv.setOnClickPendingIntent(R.id.widget_play, pending(c, PlaybackActions.ACTION_TOGGLE, 2));
         }
         return rv;
     }
 
+    /** Opens the app on the radio tab, so a tap on the card shows the station. */
+    private PendingIntent openApp(Context c) {
+        Intent intent = new Intent(c, com.openhands.tvplayer.ui.BottomNavActivity.class)
+                .setAction(Intent.ACTION_MAIN)
+                .addCategory(Intent.CATEGORY_LAUNCHER)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        return PendingIntent.getActivity(c, 9, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+    }
+
     /**
      * Buttons drive the MediaSessionService, not the activity: the widget must
-     * work while the UI is closed, and the service owns the player. The intents
+     * work while the UI is closed and the service owns the player. The intents
      * are immutable, which Android 12+ requires.
      */
     private PendingIntent pending(Context c, String action, int code) {

@@ -1,10 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp"
+    android:padding="12dp"
     android:background="@drawable/widget_card_bg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/widget_brand"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="7dp"
+            android:background="@drawable/widget_brand_mark"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_brand_mic"
+            android:contentDescription="@string/app_name" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/widget_section"
+            android:textColor="#7C93B5"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.14" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/widget_live"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/widget_badge_live"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:text="@string/widget_live"
+            android:textColor="#FFFFFF"
+            android:textSize="9sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.08"
+            android:visibility="gone" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/widget_title"
@@ -14,47 +63,61 @@
         android:gravity="center_vertical"
         android:maxLines="2"
         android:ellipsize="end"
+        android:layout_marginTop="6dp"
         android:textColor="#FFFFFF"
-        android:textSize="15sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         android:text="@string/widget_idle" />
+
+    <TextView
+        android:id="@+id/widget_sub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textColor="#8FA3B0"
+        android:textSize="11sp"
+        android:text="@string/widget_hint" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:layout_marginTop="8dp">
 
         <ImageButton
             android:id="@+id/widget_prev"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/widget_btn_side"
-            android:padding="10dp"
+            android:padding="12dp"
             android:scaleType="fitCenter"
+            android:tint="#EAF0FA"
             android:contentDescription="@string/widget_prev"
-            android:src="@android:drawable/ic_media_previous" />
+            android:src="@drawable/ic_prev" />
 
         <ImageButton
             android:id="@+id/widget_play"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:background="@drawable/widget_btn_play"
-            android:padding="16dp"
+            android:padding="15dp"
             android:scaleType="fitCenter"
             android:contentDescription="@string/widget_play"
             android:src="@drawable/ic_widget_play" />
 
         <ImageButton
             android:id="@+id/widget_next"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
             android:layout_marginStart="10dp"
             android:background="@drawable/widget_btn_side"
-            android:padding="10dp"
+            android:padding="12dp"
             android:scaleType="fitCenter"
+            android:tint="#EAF0FA"
             android:contentDescription="@string/widget_next"
-            android:src="@android:drawable/ic_media_next" />
+            android:src="@drawable/ic_next" />
     </LinearLayout>
 </LinearLayout>

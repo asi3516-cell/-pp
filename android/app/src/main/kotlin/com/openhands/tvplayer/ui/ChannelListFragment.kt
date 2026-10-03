@@ -77,11 +77,12 @@ class ChannelListFragment : Fragment() {
         headerTitle.setText(
             when (mode) {
                 MODE_RADIO -> R.string.tab_radio
+                MODE_ALL -> R.string.tab_lists
                 MODE_FAV -> R.string.tab_fav
                 else -> R.string.tab_live
             }
         )
-        headerSub.text = getString(R.string.app_name)
+        headerSub.text = getString(R.string.hero_tagline)
 
         adapter = ExpandableChannelAdapter(
             context = requireContext(),
@@ -93,7 +94,7 @@ class ChannelListFragment : Fragment() {
 
         addButton.setOnClickListener { showChannelEditor(null) }
         emptyAddButton.setOnClickListener { showChannelEditor(null) }
-        addButton.isVisible = mode != MODE_FAV
+        addButton.isVisible = mode != MODE_FAV && mode != MODE_ALL
 
         // One category open at a time, so the tree stays readable on a phone.
         listView.setOnGroupClickListener { _, _, groupPosition, _ ->
@@ -128,6 +129,7 @@ class ChannelListFragment : Fragment() {
             val list = withContext(Dispatchers.IO) {
                 when (mode) {
                     MODE_RADIO -> UserChannelStore.all(requireContext(), userDao).filter { it.isRadio }
+                    MODE_ALL -> UserChannelStore.all(requireContext(), userDao)
                     MODE_FAV -> emptyList()
                     else -> UserChannelStore.all(requireContext(), userDao).filter { !it.isRadio }
                 }
@@ -292,7 +294,7 @@ class ChannelListFragment : Fragment() {
         val empty = filtered.isEmpty()
         emptyState.isVisible = empty
         listView.isVisible = !empty
-        emptyAddButton.isVisible = empty && mode != MODE_FAV
+        emptyAddButton.isVisible = empty && mode != MODE_FAV && mode != MODE_ALL
         if (empty) {
             showEmptyState()
         } else {
@@ -325,17 +327,19 @@ class ChannelListFragment : Fragment() {
     }
 
     private fun openPlayer(channels: List<Channel>, index: Int) {
+        val clicked = channels.getOrNull(index) ?: return
         startActivity(
             Intent(requireContext(), PlayerActivity::class.java)
                 .putExtra(PlayerActivity.EXTRA_MODE, mode)
-                .putExtra(PlayerActivity.EXTRA_GROUP, channels.getOrNull(index)?.group)
-                .putExtra(PlayerActivity.EXTRA_INDEX, index)
+                .putExtra(PlayerActivity.EXTRA_GROUP, clicked.group)
+                .putExtra(PlayerActivity.EXTRA_URL, clicked.url)
         )
     }
 
     companion object {
         const val MODE_LIVE = "live"
         const val MODE_RADIO = "radio"
+        const val MODE_ALL = "all"
         const val MODE_FAV = "fav"
         private const val ARG_MODE = "mode"
 

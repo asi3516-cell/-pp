@@ -12,7 +12,10 @@
     <string name="favourite">Favori</string>
     <string name="tab_live">Canlı TV</string>
     <string name="tab_radio">Radyo</string>
+    <string name="tab_lists">Listeler</string>
     <string name="tab_fav">Favoriler</string>
+    <string name="hero_tagline">İnternetsiz liste • 300+ kanal</string>
+    <string name="lists_hint">Tüm kanallar ve radyolar grup grup listelenir. Bir kanala dokun, oynatıcı açılır; uzun bas, düzenle veya sil.</string>
     <string name="search_hint">Kanal ara…</string>
     <string name="loading">Yükleniyor…</string>
     <string name="stream_error">Yayın bekleniyor veya bağlantı kırık</string>

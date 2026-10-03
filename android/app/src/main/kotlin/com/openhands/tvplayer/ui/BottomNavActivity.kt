@@ -20,6 +20,7 @@ class BottomNavActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.tab_live -> show(ChannelListFragment.MODE_LIVE)
                 R.id.tab_radio -> show(ChannelListFragment.MODE_RADIO)
+                R.id.tab_lists -> show(ChannelListFragment.MODE_ALL)
                 R.id.tab_fav -> show(ChannelListFragment.MODE_FAV)
                 else -> return@setOnItemSelectedListener false
             }

@@ -9,6 +9,10 @@
         android:icon="@drawable/ic_tab_radio"
         android:title="@string/tab_radio" />
     <item
+        android:id="@+id/tab_lists"
+        android:icon="@drawable/ic_tab_lists"
+        android:title="@string/tab_lists" />
+    <item
         android:id="@+id/tab_fav"
         android:icon="@drawable/ic_tab_fav"
         android:title="@string/tab_fav" />

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark player palette, shared by the native screens and the widgets. -->
+    <color name="tv_bg">#0B0F19</color>
+    <color name="tv_bg_2">#121826</color>
+    <color name="tv_bg_3">#1B2334</color>
+    <color name="tv_line">#243049</color>
+    <color name="tv_text">#EDF1F8</color>
+    <color name="tv_muted">#93A0B8</color>
+    <color name="tv_accent">#3B82F6</color>
+    <color name="tv_accent_2">#22D3EE</color>
+    <color name="tv_star">#FBBF24</color>
+</resources>

@@ -8,4 +8,21 @@
     <string name="widget_start">Radyoyu başlat</string>
     <string name="widget_stop">Radyoyu durdur</string>
     <string name="widget_next">Sonraki radyo</string>
+    <string name="expand_collapse">Grubu aç veya kapat</string>
+    <string name="favourite">Favori</string>
+    <string name="tab_live">Canlı TV</string>
+    <string name="tab_radio">Radyo</string>
+    <string name="tab_fav">Favoriler</string>
+    <string name="search_hint">Kanal ara…</string>
+    <string name="loading">Yükleniyor…</string>
+    <string name="stream_error">Yayın bekleniyor veya bağlantı kırık</string>
+    <string name="retry">Tekrar dene</string>
+    <string name="screen_mode">Ekran modu</string>
+    <string name="fullscreen">Tam ekran</string>
+    <string name="no_channels">Kanal bulunamadı</string>
+    <string name="no_favourites">Henüz favori eklenmedi</string>
+    <string name="resize_fit">Sığdır</string>
+    <string name="resize_fill">Doldur</string>
+    <string name="resize_zoom">Yakınlaştır</string>
+    <string name="playing_channel">Oynatılıyor: %1$s</string>
 </resources>

@@ -1,6 +1,6 @@
 ========================================================================
 hh - YAPILACAKLAR VE DURUM LISTESI
-Son guncelleme: 2026-10-02
+Son guncelleme: 2026-10-03
 Depo: https://github.com/asi3516-cell/-pp (gizli/private)
 ========================================================================
 
@@ -154,6 +154,55 @@ Durum isaretleri:
     https://github.com/asi3516-cell/-pp
     -> OpenHands AI GitHub App kuruldu (tum depolara erisim).
     -> NOT: GITHUB_TOKEN 8 saatte bir doluyor; gerekirse yeniden yetkilendir.
+
+
+========================================================================
+11) ANDROID NATIVE KOTLIN YENIDEN YAZIM (2026-10-03)
+========================================================================
+
+Hedef: Java + WebView hibrit yapi yerine, ayni listede tamamen native
+(Kotlin + XML) bir Android arayuzu. WebView katmani ve yerel sunucu hala
+pakette duruyor (yedek / kaynak), ancak launcher artik native arayuz.
+
+[x] Kotlin + KSP + Room + Material altyapisi Gradle'a eklendi.
+    -> kotlin 1.9.24, ksp 1.9.24-1.0.20, room 2.6.1, material 1.11.0,
+       glide 4.16.0, viewBinding.
+[x] Veri katmani: Channel modeli, ChannelRepository (assets/channels.json
+    okur, gruplara ayirir), Room ile Favoriler (FavEntity/FavDao/FavDatabase).
+[x] Oynatici: PlaybackController (tek ExoPlayer, 20 paralel baglanti,
+    sinirli onbellek, REPEAT_MODE_ALL, 5 deneme) + PlayerService
+    (MediaSessionService, arka planda calma, MediaSession).
+[x] Alt menu (BottomNavigationView): Canli TV / Radyo / Favoriler.
+    -> BottomNavActivity + ChannelListFragment (3 sekme tek fragment).
+[x] TreeView (ExpandableListView) kanal listesi:
+    -> list_group_item.xml (kategori + ok + sayac),
+       list_child_item.xml (logo + isim + favori yildizi),
+       ExpandableChannelAdapter (ac/kapa, tek grup acik).
+[x] Oynatici ekrani: PlayerActivity + activity_player.xml, tam ekran.
+    -> Ekran modu butonu FIT -> FILL -> ZOOM dongusu.
+    -> Ileri/Geri videoyu sarmaz; gruptaki kanallari degistirir
+       (player.seekToNextMediaItem / seekToPreviousMediaItem).
+    -> Grup, MediaItem listesi olarak yuklenir; liste sonunda basa doner.
+[x] Widget onarimi: butonlar artik PlayerService'e PendingIntent
+    (FLAG_IMMUTABLE) gonderiyor; uygulama kapaliyken de calisir.
+    -> Widget sadece radyoyu gosterir; TV acikken temizlenir.
+[x] Manifest: BottomNavActivity (launcher), PlayerActivity, PlayerService
+    (foregroundServiceType=mediaPlayback), MainActivity (yedek, exported=false).
+[x] APK derlendi ve dist/TV-Player.apk olarak yedeklendi (18.6 MB).
+    -> Indirme: /download/apk  (HTTP 200).
+
+[~] Native arayuz cihazda elle test edilmedi (emulator/cihaz yok).
+    -> Derleme basarili; davranis kodu okunarak dogrulandi.
+[ ] WebView (MainActivity) ile native arayuz arasindaki gecis dugmesi
+    (istege bagli; su an launcher native).
+[ ] PlayerView kontrol katmaninin (media3 varsayilan) marka renkleriyle
+    uyumlu hale getirilmesi.
+
+Calisan komutlar (Android):
+  APK derle: cd android && JAVA_HOME=/workspace/tools/jdk-17.0.20.1+1 \
+             ANDROID_SDK_ROOT=/workspace/tools/android-sdk \
+             /workspace/tools/gradle/gradle-8.7/bin/gradle :app:assembleRelease
+  APK yedekle: cp android/app/build/outputs/apk/release/app-release.apk dist/TV-Player.apk
 
 
 ========================================================================

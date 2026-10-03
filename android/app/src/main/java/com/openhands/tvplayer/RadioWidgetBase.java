@@ -9,6 +9,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.RemoteViews;
 
+import com.openhands.tvplayer.player.PlaybackActions;
+import com.openhands.tvplayer.player.WidgetIntents;
+
 /**
  * Home-screen widget showing the radio station that is playing, with
  * previous / play-pause / next buttons. Three sizes share this logic and only
@@ -41,10 +44,8 @@ public abstract class RadioWidgetBase extends AppWidgetProvider {
     @Override
     public void onReceive(Context c, Intent intent) {
         super.onReceive(c, intent);
-        String a = intent.getAction();
-        if (ACTION_PREV.equals(a)) forward(c, "PREV");
-        else if (ACTION_NEXT.equals(a)) forward(c, "NEXT");
-        else if (ACTION_PLAY.equals(a)) forward(c, "TOGGLE");
+        // The button intents go straight to PlayerService; nothing to relay
+        // here, so only the periodic APPWIDGET_UPDATE reaches this method.
     }
 
     RemoteViews build(Context c) {
@@ -68,24 +69,34 @@ public abstract class RadioWidgetBase extends AppWidgetProvider {
             rv.setContentDescription(R.id.widget_play, c.getString(playing
                     ? R.string.widget_stop
                     : R.string.widget_start));
-            rv.setOnClickPendingIntent(R.id.widget_prev, pending(c, ACTION_PREV, 1));
-            rv.setOnClickPendingIntent(R.id.widget_play, pending(c, ACTION_PLAY, 2));
-            rv.setOnClickPendingIntent(R.id.widget_next, pending(c, ACTION_NEXT, 3));
+            rv.setOnClickPendingIntent(R.id.widget_prev, pending(c, PlaybackActions.ACTION_PREV, 1));
+            rv.setOnClickPendingIntent(R.id.widget_play, pending(c, PlaybackActions.ACTION_TOGGLE, 2));
+            rv.setOnClickPendingIntent(R.id.widget_next, pending(c, PlaybackActions.ACTION_NEXT, 3));
         }
         return rv;
     }
 
+    /**
+     * Buttons drive the MediaSessionService, not the activity: the widget must
+     * work while the UI is closed, and the service owns the player. The intents
+     * are immutable, which Android 12+ requires.
+     */
     private PendingIntent pending(Context c, String action, int code) {
-        Intent i = new Intent(c, getClass()).setAction(action);
-        int flags = PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE;
-        return PendingIntent.getBroadcast(c, code, i, flags);
+        return WidgetIntents.INSTANCE.service(c, action, code);
     }
 
-    private void forward(Context c, String what) {
-        Intent i = new Intent(c, MainActivity.class);
-        i.setAction("com.openhands.tvplayer.CMD_" + what);
-        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        c.startActivity(i);
+    /**
+     * Called by the player whenever the radio state changes. Only radio is
+     * shown: a TV channel clears the widget instead of driving it.
+     */
+    public static void publish(Context c, String title, String sub, boolean playing, boolean isRadio) {
+        SharedPreferences p = c.getSharedPreferences(PREFS, Context.MODE_PRIVATE);
+        p.edit()
+                .putString(K_TITLE, isRadio ? title : "")
+                .putString(K_SUB, isRadio ? sub : "")
+                .putBoolean(K_PLAYING, isRadio && playing)
+                .apply();
+        updateAll(c);
     }
 
     /** Refresh every placed widget after the now-playing state changes. */

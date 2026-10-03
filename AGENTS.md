@@ -1,14 +1,18 @@
 # AGENTS.md
 
-Portable Turkish-only IPTV/radio app ("hh" / TV Player). A WebView UI served from
-a local HTTP server, with a native Android shell.
+Portable Turkish-only IPTV/radio app ("hh" / TV Player). The Android launcher
+is a native Kotlin UI; a WebView shell and a local HTTP server still ship as the
+web/fallback layer.
 
 ## Layout
 
-- `static/` — the whole UI: `index.html`, `style.css`, `app.js`, embedded
+- `static/` — the web UI: `index.html`, `style.css`, `app.js`, embedded
   `channels-data.js` (`HH_CHANNELS`), `sw.js`, `icons/`, `vendor/hls.min.js`.
-- `android/` — Gradle project. `MainActivity.java` hosts the WebView, the native
-  ExoPlayer (Media3), and the JS bridges.
+- `android/app/src/main/kotlin/` — the native UI: `ui/` screens, `player/`
+  ExoPlayer + MediaSessionService, `data/` channel list + Room favourites,
+  `model/` the `Channel` type.
+- `android/` — Gradle project. `MainActivity.java` is the old WebView shell; it
+  is no longer the launcher.
 - `dist/` — release artifacts (`TV-Player.apk`).
 - `server.py` — serves the app and the APK download endpoints.
 

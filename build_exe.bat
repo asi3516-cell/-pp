@@ -1,15 +1,15 @@
 @echo off
 REM ===================================================================
-REM  TV Player - tek tikla Windows .exe olusturucu
+REM  hh - tek tikla Windows .exe olusturucu
 REM  Bilgisayarinda Python kurulu ise bu dosyaya cift tikla; gerekli
-REM  paketleri kurar ve dist\TV-Player.exe dosyasini uretir.
+REM  paketleri kurar ve dist\hh.exe dosyasini uretir.
 REM ===================================================================
 setlocal enabledelayedexpansion
 cd /d "%~dp0"
 chcp 65001 >nul 2>&1
 
 echo ============================================================
-echo   TV Player - Windows .exe olusturma
+echo   hh - Windows .exe olusturma
 echo ============================================================
 echo.
 
@@ -54,18 +54,18 @@ if errorlevel 1 (
 
 REM --- 4) Sonuc ------------------------------------------------------
 echo.
-if exist "dist\TV-Player.exe" (
+if exist "dist\hh.exe" (
   echo [3/3] TAMAM! Uygulama hazir:
   echo.
-  echo     %cd%\dist\TV-Player.exe
+  echo     %cd%\dist\hh.exe
   echo.
   echo Bu dosyayi cift tiklayarak calistirabilirsiniz. Kurulum gerekmez.
   echo Isterseniz dosyayi baska bir bilgisayara kopyalayabilirsiniz.
   echo.
   choice /c EH /n /m "Simdi calistirilsin mi? [E=evet / H=hayir]: "
-  if !errorlevel! equ 1 start "" "dist\TV-Player.exe"
+  if !errorlevel! equ 1 start "" "dist\hh.exe"
 ) else (
-  echo [HATA] dist\TV-Player.exe olusturulamadi.
+  echo [HATA] dist\hh.exe olusturulamadi.
   pause
   exit /b 1
 )

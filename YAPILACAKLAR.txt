@@ -19,7 +19,7 @@ Durum isaretleri:
 ========================================================================
 
 [x] Tarayicida calisan, kurulum gerektirmeyen hh — canli TV ve radyo oynatici
-    ("TV Player - canli TV & m3u8 oynatici"), Turkce arayuz.
+    ("hh - canli TV & m3u8 oynatici"), Turkce arayuz.
 [x] HLS / m3u8 oynatma (hls.js + yerel HLS destegi).
 [x] Yerlesik (bundled) Turkce kanal listesi.
 [x] Kanallar arasinda arama.
@@ -140,7 +140,7 @@ Durum isaretleri:
     (mixed-content ve CORS engelini asar).
 [x] Python yalnizca standart kutuphane ile calisiyor.
 [x] Derleme dosyalari: build_channels.py, build_radio.py.
-[x] Kaynak ZIP indirme: /download/source-zip (build/pkg/TV-Player-Kaynak.zip).
+[x] Kaynak ZIP indirme: /download/source-zip (build/pkg/hh-Kaynak.zip).
 [x] Veri dosyalari: data/channels.json (562 kanal), data/radios.json (248 radyo).
 
 

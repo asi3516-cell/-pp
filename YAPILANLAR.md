@@ -54,9 +54,9 @@ portalını/playlist'ini eklemek zorunda kalmadan açılır açılmaz çalışı
 - `run.bat` / `run.sh` — kaynaktan çalıştırma
 
 ## Derleme
-- **APK**: `python build_apk.py` → `dist/TV-Player.apk`
+- **APK**: `python build_apk.py` → `dist/hh.apk`
   (JDK 17 + Android SDK: platforms;android-34, build-tools;34.0.0)
-- **EXE**: Windows'ta `build_exe.bat` çift tık → `dist\TV-Player.exe`
+- **EXE**: Windows'ta `build_exe.bat` çift tık → `dist\hh.exe`
   (PyInstaller; Windows'ta derlenmesi gerekir, çapraz derleme yapmaz)
 
 ## Durum
@@ -65,6 +65,6 @@ portalını/playlist'ini eklemek zorunda kalmadan açılır açılmaz çalışı
 - [x] Yeni kanal ekleme + adres düzenleme korundu
 - [x] Ekranı doldur
 - [x] Radyo widget'ları (3 boyut) + arka planda çalma + şarkı adı
-- [x] APK derlendi (`dist/TV-Player.apk`)
+- [x] APK derlendi (`dist/hh.apk`)
 - [ ] Windows .exe (Windows makinede `build_exe.bat`)
 - [x] GitHub'a private "hh" olarak yedeklendi

@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""Build a portable, single-file TV Player for the current platform.
+"""Build a portable, single-file hh for the current platform.
 
     pip install -r build/requirements-build.txt
     python build/make.py
 
 Result lands in dist/:
-  * Windows  -> dist/TV-Player.exe
-  * Linux    -> dist/TV-Player
-  * macOS    -> dist/TV Player.app  and  dist/TV-Player
+  * Windows  -> dist/hh.exe
+  * Linux    -> dist/hh
+  * macOS    -> dist/hh.app  and  dist/hh
 
 The produced file is self-contained: it embeds the web UI and the channel
 list, and starts a local server, opening the browser automatically.

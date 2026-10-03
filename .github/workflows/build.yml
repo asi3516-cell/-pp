@@ -1,9 +1,9 @@
 name: Build portable players
 
 # Produces a single self-contained file per OS (no installation needed):
-#   Windows -> TV-Player.exe
-#   macOS   -> TV-Player-macos.zip  (contains TV Player.app)
-#   Linux   -> TV-Player
+#   Windows -> hh.exe
+#   macOS   -> hh-macos.zip  (contains hh.app)
+#   Linux   -> hh
 # Download them from the workflow run's "Artifacts" section, or from a
 # GitHub Release when triggered by a tag.
 
@@ -20,11 +20,11 @@ jobs:
       matrix:
         include:
           - os: windows-latest
-            artifact: TV-Player-windows
+            artifact: hh-windows
           - os: macos-latest
-            artifact: TV-Player-macos
+            artifact: hh-macos
           - os: ubuntu-latest
-            artifact: TV-Player-linux
+            artifact: hh-linux
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -43,10 +43,10 @@ jobs:
         if: runner.os == 'macOS'
         run: |
           cd dist
-          if [ -d "TV Player.app" ]; then
-            zip -r TV-Player-macos.zip "TV Player.app" TV-Player
+          if [ -d "hh.app" ]; then
+            zip -r hh-macos.zip "hh.app" hh
           else
-            zip -r TV-Player-macos.zip TV-Player
+            zip -r hh-macos.zip hh
           fi
 
       - name: Upload artifact
@@ -54,9 +54,9 @@ jobs:
         with:
           name: ${{ matrix.artifact }}
           path: |
-            dist/TV-Player
-            dist/TV-Player.exe
-            dist/TV-Player-macos.zip
+            dist/hh
+            dist/hh.exe
+            dist/hh-macos.zip
           if-no-files-found: ignore
 
   apk:
@@ -80,8 +80,8 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: TV-Player-apk
-          path: dist/TV-Player.apk
+          name: hh-apk
+          path: dist/hh.apk
 
   release:
     needs: [build, apk]

@@ -60,8 +60,14 @@ public abstract class RadioWidgetBase extends AppWidgetProvider {
                 sub.isEmpty() ? c.getString(R.string.widget_hint) : sub);
         if (hasControls()) {
             rv.setImageViewResource(R.id.widget_play, playing
-                    ? android.R.drawable.ic_media_pause
-                    : android.R.drawable.ic_media_play);
+                    ? R.drawable.ic_widget_pause
+                    : R.drawable.ic_widget_play);
+            rv.setInt(R.id.widget_play, "setBackgroundResource", playing
+                    ? R.drawable.widget_btn_play_active
+                    : R.drawable.widget_btn_play);
+            rv.setContentDescription(R.id.widget_play, c.getString(playing
+                    ? R.string.widget_stop
+                    : R.string.widget_start));
             rv.setOnClickPendingIntent(R.id.widget_prev, pending(c, ACTION_PREV, 1));
             rv.setOnClickPendingIntent(R.id.widget_play, pending(c, ACTION_PLAY, 2));
             rv.setOnClickPendingIntent(R.id.widget_next, pending(c, ACTION_NEXT, 3));

@@ -1,4 +1,4 @@
-# TV Player
+# hh
 
 Tarayıcıda çalışan, kurulum gerektirmeyen bir **hh — canlı TV ve radyo oynatıcı**. M3U/M3U8
 playlist'lerini yükler, HLS (`m3u8`) yayınlarını oynatır, kanal arama, favoriler,
@@ -30,9 +30,9 @@ python build/make.py
 
 | Platform | Dosya | Kullanım |
 |----------|-------|----------|
-| Windows  | `TV-Player.exe` | Çift tıkla |
-| macOS    | `TV Player.app` ve `TV-Player` | Çift tıkla |
-| Linux    | `TV-Player` | `./TV-Player` |
+| Windows  | `hh.exe` | Çift tıkla |
+| macOS    | `hh.app` ve `hh` | Çift tıkla |
+| Linux    | `hh` | `./hh` |
 
 Program açılınca yerel bir sunucu başlar ve tarayıcı otomatik açılır.
 **Paket kendi içinde web arayüzünü ve kanal listesini taşır**, ekstra dosya
@@ -47,7 +47,7 @@ dosyayı kopyalaman yeterli.
 | Platform | Yöntem |
 |----------|--------|
 | Windows  | `run.bat` dosyasına çift tıkla |
-| macOS    | `TV Player.command` dosyasına çift tıkla |
+| macOS    | `hh.command` dosyasına çift tıkla |
 | Linux    | `./run.sh` |
 
 Sunucu:
@@ -123,9 +123,9 @@ python build_exe.py
 Kendi bilgisayarında çalıştırdığın işletim sistemine göre `dist/` içinde
 kurulum gerektirmeyen tek dosya üretir:
 
-- **Windows:** `dist/TV-Player.exe`
-- **macOS:** `dist/TV-Player` (ve `TV Player.app`)
-- **Linux:** `dist/TV-Player`
+- **Windows:** `dist/hh.exe`
+- **macOS:** `dist/hh` (ve `hh.app`)
+- **Linux:** `dist/hh`
 
 PyInstaller çapraz derleme yapmaz: Windows `.exe` yalnızca Windows'ta, macOS
 yapısı yalnızca macOS'ta üretilir. Üçü için birden GitHub Actions iş akışı
@@ -136,7 +136,7 @@ yapısı yalnızca macOS'ta üretilir. Üçü için birden GitHub Actions iş ak
 ### En kolay yol (tek tık)
 Bilgisayarında **Python 3.10+** kuruluysa, **`build_exe.bat`** dosyasına çift
 tıkla. Betik gerekli paketi (PyInstaller) kurar, uygulamayı derler ve
-`dist\TV-Player.exe` dosyasını üretir; sonunda çalıştırmak isteyip
+`dist\hh.exe` dosyasını üretir; sonunda çalıştırmak isteyip
 istemediğini sorar.
 
 ### Elle
@@ -145,7 +145,7 @@ pip install -r build\requirements-build.txt
 python build\make.py
 ```
 
-Çıkan `dist\TV-Player.exe` tek dosyadır: kanal listesi ve arayüz içine
+Çıkan `dist\hh.exe` tek dosyadır: kanal listesi ve arayüz içine
 gömülüdür, kurulum gerektirmez, başka bilgisayara kopyalanabilir.
 
 ## Android APK oluşturma
@@ -153,7 +153,7 @@ gömülüdür, kurulum gerektirmez, başka bilgisayara kopyalanabilir.
 Telefona kurulabilen bir uygulama (APK) üretmek için:
 
 ```bash
-python build_apk.py        # -> dist/TV-Player.apk
+python build_apk.py        # -> dist/hh.apk
 ```
 
 Gerekenler: **JDK 17** (`JAVA_HOME`) ve **Android SDK** (`ANDROID_SDK_ROOT`,
@@ -165,7 +165,7 @@ yerel sunucu (NanoHTTPD) çalıştırır; böylece HLS yayınları ve MAC/Stalke
 portal desteği masaüstü sürümdekiyle aynı çalışır. Kanal listesi ve tüm site
 APK'nın içine gömülüdür, internet gerekmez (yayınlar hariç).
 
-Kurulum: `dist/TV-Player.apk` dosyasını telefona kopyalayıp açın; Android
+Kurulum: `dist/hh.apk` dosyasını telefona kopyalayıp açın; Android
 "bilinmeyen kaynaklardan" kurulum izni isteyecektir.
 
 **Kanal değiştirme:** Tam ekranda/oynatıcıda kumandadaki **ileri / geri**

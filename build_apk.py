@@ -10,7 +10,7 @@ Prerequisites (see tools/ setup):
   * Android SDK       -> $ANDROID_SDK_ROOT with platforms;android-34 and
                          build-tools;34.0.0
 
-Run:  python build_apk.py   ->  dist/TV-Player.apk
+Run:  python build_apk.py   ->  dist/hh.apk
 """
 
 from __future__ import annotations
@@ -24,7 +24,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 ANDROID = ROOT / "android"
 SRC = ANDROID / "app" / "src" / "main"
-OUT = ROOT / "dist" / "TV-Player.apk"
+OUT = ROOT / "dist" / "hh.apk"
 BUILD = ROOT / "build" / "android"
 
 PKG = "com.openhands.tvplayer"
@@ -124,7 +124,7 @@ def main() -> None:
         run([keytool, "-genkeypair", "-keystore", str(keystore),
              "-alias", "tv", "-storepass", "android", "-keypass", "android",
              "-keyalg", "RSA", "-keysize", "2048", "-validity", "10000",
-             "-dname", "CN=TV Player, OU=OpenHands, O=OpenHands, C=TR"])
+             "-dname", "CN=hh, OU=OpenHands, O=OpenHands, C=TR"])
     run([apksigner, "sign", "--ks", str(keystore), "--ks-pass", "pass:android",
          "--key-pass", "pass:android", "--ks-key-alias", "tv",
          "--out", str(OUT), str(aligned)])

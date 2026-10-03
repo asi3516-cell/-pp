@@ -30,7 +30,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name="TV-Player",
+    name="hh",
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -48,7 +48,7 @@ exe = EXE(
 if sys.platform == "darwin":
     app = BUNDLE(
         exe,
-        name="TV Player.app",
+        name="hh.app",
         icon=None,
         bundle_identifier="com.openhands.tvplayer",
         info_plist={

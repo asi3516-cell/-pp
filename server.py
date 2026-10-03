@@ -389,16 +389,16 @@ class Handler(BaseHTTPRequestHandler):
             return self._download_all(head_only)
         if path == "/download/windows-rar":
             return self._send_file(
-                ROOT / "build" / "pkg" / "TV-Player-Windows.rar",
-                "TV-Player-Windows.rar", "application/vnd.rar", head_only)
+                ROOT / "build" / "pkg" / "hh-Windows.rar",
+                "hh-Windows.rar", "application/vnd.rar", head_only)
         if path == "/download/source-zip":
             return self._send_file(
-                ROOT / "build" / "pkg" / "TV-Player-Kaynak.zip",
-                "TV-Player-Kaynak.zip", "application/zip", head_only)
+                ROOT / "build" / "pkg" / "hh-Kaynak.zip",
+                "hh-Kaynak.zip", "application/zip", head_only)
         if path == "/download/source-rar":
             return self._send_file(
-                ROOT / "build" / "pkg" / "TV-Player-Kaynak.rar",
-                "TV-Player-Kaynak.rar", "application/vnd.rar", head_only)
+                ROOT / "build" / "pkg" / "hh-Kaynak.rar",
+                "hh-Kaynak.rar", "application/vnd.rar", head_only)
         if path == "/channels.m3u":
             return self._download_channels(head_only)
         return self._static(path, head_only)
@@ -454,26 +454,26 @@ class Handler(BaseHTTPRequestHandler):
             for name in files:
                 f = ROOT / name
                 if f.exists():
-                    zf.write(f, f"TV-Player/{name}")
+                    zf.write(f, f"hh/{name}")
             for folder in ("static", "data", "android/app/src/main"):
                 for f in sorted((ROOT / folder).rglob("*")):
                     if not f.is_file() or f.name.endswith((".class", ".dex")):
                         continue
-                    zf.write(f, f"TV-Player/{f.relative_to(ROOT)}")
+                    zf.write(f, f"hh/{f.relative_to(ROOT)}")
             for extra in (ROOT / "android" / "libs").glob("*.jar"):
-                zf.write(extra, f"TV-Player/{extra.relative_to(ROOT)}")
-            binary = ROOT / "dist" / "TV-Player"
+                zf.write(extra, f"hh/{extra.relative_to(ROOT)}")
+            binary = ROOT / "dist" / "hh"
             if binary.exists():
-                zf.write(binary, "TV-Player/dist/TV-Player")
-            apk = ROOT / "dist" / "TV-Player.apk"
+                zf.write(binary, "hh/dist/hh")
+            apk = ROOT / "dist" / "hh.apk"
             if apk.exists():
-                zf.write(apk, "TV-Player/dist/TV-Player.apk")
+                zf.write(apk, "hh/dist/hh.apk")
         body = buf.getvalue()
         self.send_response(200)
         self._cors()
         self.send_header("Content-Type", "application/zip")
         self.send_header("Content-Disposition",
-                         'attachment; filename="TV-Player.zip"')
+                         'attachment; filename="hh.zip"')
         self.send_header("Content-Length", str(len(body)))
         self.end_headers()
         if not head_only:
@@ -501,7 +501,9 @@ class Handler(BaseHTTPRequestHandler):
 
     def _download_apk(self, head_only: bool) -> None:
         """Serve the built Android APK, if it has been assembled."""
-        apk = ROOT / "dist" / "TV-Player.apk"
+        apk = ROOT / "dist" / "hh.apk"
+        if not apk.exists():
+            apk = ROOT / "dist" / "TV-Player.apk"
         if not apk.exists():
             return self._send(404, b"apk not built", "text/plain", head_only=head_only)
         size = apk.stat().st_size
@@ -509,7 +511,7 @@ class Handler(BaseHTTPRequestHandler):
         self._cors()
         self.send_header("Content-Type", "application/vnd.android.package-archive")
         self.send_header("Content-Disposition",
-                         'attachment; filename="TV-Player.apk"')
+                         'attachment; filename="hh.apk"')
         self.send_header("Content-Length", str(size))
         self.end_headers()
         if head_only:
@@ -523,7 +525,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def _download_player(self, head_only: bool) -> None:
         """Serve the built portable binary (source checkout only)."""
-        binary = ROOT / "dist" / "TV-Player"
+        binary = ROOT / "dist" / "hh"
         if not binary.exists():
             return self._send(404, b"not built", "text/plain", head_only=head_only)
         size = binary.stat().st_size
@@ -531,7 +533,7 @@ class Handler(BaseHTTPRequestHandler):
         self._cors()
         self.send_header("Content-Type", "application/octet-stream")
         self.send_header("Content-Disposition",
-                         'attachment; filename="TV-Player"')
+                         'attachment; filename="hh"')
         self.send_header("Content-Length", str(size))
         self.end_headers()
         if head_only:

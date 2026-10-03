@@ -1,4 +1,4 @@
-/* TV Player - front-end logic */
+/* hh - canlı TV ve radyo oynatıcı */
 (function () {
   "use strict";
 
@@ -400,8 +400,18 @@
   }
 
   function loadChannels() {
-    return api("/api/channels").then(function (data) {
-      state.channels = (data.channels || []).map(function (c) {
+    // Prefer the local server's API; if it fails or comes back empty (some
+    // Android WebViews), read the bundled channels.json directly so the app
+    // never opens with an empty list.
+    return api("/api/channels")
+      .then(function (data) { return (data && data.channels) || []; })
+      .catch(function () { return bundledChannels(); })
+      .then(function (raw) {
+        if (!raw || !raw.length) return bundledChannels();
+        return raw;
+      })
+      .then(function (raw) {
+      state.channels = (raw || []).map(function (c) {
         // Radios are bundled alongside TV but are their own top-level source,
         // so they get their own list name and never mix into Canlı TV.
         c.listName = contentKind(c) === "radio" ? "Radyo" : "Canlı TV";
@@ -423,6 +433,12 @@
       render();
       return state.channels;
     });
+  }
+
+  function bundledChannels() {
+    return fetch("channels.json").then(function (r) {
+      return r.ok ? r.json() : [];
+    }).catch(function () { return []; });
   }
 
   // The same channel can arrive from several lists with different logo URLs.
@@ -600,47 +616,7 @@
     persist();
   }
 
-  // List picker shown from the sidebar's "Liste Seç" button. Selecting a list
-  // makes it the active one and opens it, so you land straight on its channels.
-  function renderListsDialog() {
-    var box = $("#listsBody");
-    if (!box) return;
-    box.innerHTML = "";
-    // The list picker shows one favorites row per list, so opening a list's
-    // favorites is a single tap and its count is that list's own count.
-    var rows = state.sources.slice();
-    if (!rows.some(function (s) { return s.name === "Canlı TV"; })) {
-      rows.unshift({ name: "Canlı TV", count: 0 });
-    }
-    rows.forEach(function (s) {
-      var fav = document.createElement("button");
-      fav.type = "button";
-      fav.className = "list-row" + (state.tab === "fav" && state.source === s.name ? " active" : "");
-      var n = favList(s.name).length;
-      fav.innerHTML = '<span class="ln">⭐ ' + escapeHtml(s.name) + " favorileri</span>" +
-        '<span class="lc muted">' + n + " kanal</span>";
-      fav.onclick = function () {
-        selectTab("fav", "all");
-        state.source = s.name;
-        buildGroups();
-        render();
-        $("#listsDlg").close();
-      };
-      box.appendChild(fav);
-
-      var b = document.createElement("button");
-      b.type = "button";
-      b.className = "list-row" + (state.tab === "all" && state.source === s.name ? " active" : "");
-      b.innerHTML = '<span class="ln">' + escapeHtml(s.name) + "</span>" +
-        '<span class="lc muted">' + s.count + " kanal</span>";
-      b.onclick = function () {
-        selectList(s.name);
-        $("#listsDlg").close();
-      };
-      box.appendChild(b);
-    });
-  }
-
+  /* ------------------------- tree ------------------------- */
   function treeBranch(o) {
     var wrap = document.createElement("div");
     wrap.className = "tree-branch";
@@ -1729,7 +1705,6 @@
     $("#menuBtn").onclick = function () { $("#sidebar").classList.toggle("open"); };
 
     // dialogs
-    $("#openLists").onclick = function () { renderListsDialog(); $("#listsDlg").showModal(); };
     $("#openAdd").onclick = function () { $("#addDlg").showModal(); };
     $("#inspectClose").onclick = function () { $("#inspectDlg").close(); };
 

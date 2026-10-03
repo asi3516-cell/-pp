@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">TV Player</string>
+    <string name="app_name">hh</string>
     <string name="widget_idle">Radyo çalmıyor</string>
-    <string name="widget_hint">Dinlemek için dokun</string>
+    <string name="widget_hint">Dinlemek için ▶ dokun</string>
     <string name="widget_prev">Önceki radyo</string>
     <string name="widget_play">Çal / Durdur</string>
+    <string name="widget_start">Radyoyu başlat</string>
+    <string name="widget_stop">Radyoyu durdur</string>
     <string name="widget_next">Sonraki radyo</string>
 </resources>

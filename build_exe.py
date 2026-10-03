@@ -8,9 +8,9 @@ Just run it on the machine you want the program for:
 It produces one file in `dist/` with everything bundled inside (the server,
 the web UI and the channel list) — no installation needed:
 
-    Windows -> dist/TV-Player.exe
-    macOS   -> dist/TV-Player          (and TV Player.app on request)
-    Linux   -> dist/TV-Player
+    Windows -> dist/hh.exe
+    macOS   -> dist/hh          (and hh.app on request)
+    Linux   -> dist/hh
 
 PyInstaller cannot cross-compile, so a Windows .exe must be built on Windows
 and a macOS build must be made on macOS. Run this script on each platform (or
@@ -65,25 +65,25 @@ def main() -> int:
 
     # Windows: make sure the extension is .exe; macOS: offer a double-clickable app.
     if system == "Windows":
-        src = DIST / "TV-Player"
-        exe = DIST / "TV-Player.exe"
+        src = DIST / "hh"
+        exe = DIST / "hh.exe"
         if src.exists() and not exe.exists():
             src.replace(exe)
         print(f"\nHazır: {exe}\nÇift tıklayarak çalıştırabilirsin.")
     elif system == "Darwin":
-        app = DIST / "TV Player.app"
+        app = DIST / "hh.app"
         note = f" (uygulama paketi: {app})" if app.exists() else ""
-        print(f"\nHazır: {DIST / 'TV-Player'}{note}\nÇift tıklayarak çalıştırabilirsin.")
+        print(f"\nHazır: {DIST / 'hh'}{note}\nÇift tıklayarak çalıştırabilirsin.")
     else:
-        binary = DIST / "TV-Player"
+        binary = DIST / "hh"
         if binary.exists():
             os.chmod(binary, 0o755)
-        print(f"\nHazır: {binary}\nÇalıştır: chmod +x 'TV-Player' && ./TV-Player")
+        print(f"\nHazır: {binary}\nÇalıştır: chmod +x 'hh' && ./hh")
 
     # Optional: copy the result next to the user's Desktop for convenience.
     desktop = Path.home() / "Desktop"
     if desktop.is_dir() and DIST.is_dir():
-        target_name = "TV-Player.exe" if system == "Windows" else "TV-Player"
+        target_name = "hh.exe" if system == "Windows" else "hh"
         try:
             shutil.copy2(DIST / target_name, desktop / target_name)
             print(f"Masaüstüne kopyalandı: {desktop / target_name}")

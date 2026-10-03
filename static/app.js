@@ -1361,6 +1361,9 @@
       }
       syncCtl();
       syncSeek();
+      // The native player does not fire DOM events, so the widget (radio only)
+      // is refreshed from the state notification instead.
+      pushWidgetState(payload && payload.state === "playing");
     }
   };
 
@@ -1921,6 +1924,10 @@
   }
 
   function pushWidgetState(playing) {
+    // The widget reflects the player that is actually running: the native
+    // ExoPlayer in the APK, the <video> element in the browser.
+    var np = nativePlayer();
+    if (np) playing = nativeState.state === "playing";
     widgetPlaying = !!playing;
     var b = widgetBridge();
     if (!b) return;
@@ -1937,6 +1944,7 @@
   }
 
   function widgetCmd(what) {
+    var np = nativePlayer();
     if (!isRadioNow()) {
       // Widgets only drive radio; if a TV channel is up, jump to the last
       // radio station so a widget press always does something useful.
@@ -1947,16 +1955,17 @@
       return;
     }
     if (what === "TOGGLE") toggleRadio();
-    else if (what === "PLAY") video.play().catch(function () {});
-    else if (what === "PAUSE") video.pause();
-    else if (what === "STOP") { video.pause(); }
+    else if (what === "PLAY") { if (np) np.toggle(); else video.play().catch(function () {}); }
+    else if (what === "PAUSE") { if (np) { if (nativeState.state === "playing") np.toggle(); } else video.pause(); }
+    else if (what === "STOP") { if (np) np.stop(); else video.pause(); }
     else if (what === "NEXT") zap(1);
     else if (what === "PREV") zap(-1);
   }
 
   function toggleRadio() {
-    if (video.paused) video.play().catch(function () {});
-    else video.pause();
+    var np = nativePlayer();
+    if (np) { np.toggle(); return; }
+    if (video.paused) video.play().catch(function () {}); else video.pause();
   }
 
   function lastRadio() {

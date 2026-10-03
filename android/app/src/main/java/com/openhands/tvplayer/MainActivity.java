@@ -525,6 +525,9 @@ public class MainActivity extends Activity {
     }
 
     private void widgetCmd(String what) {
+        // A widget press can cold-start the activity: hold the command until
+        // the web UI has loaded, otherwise the JS call lands on a blank page.
+        if (!pageReady) { pendingCmd = what; return; }
         evalJs("(window.tvWidgetCmd && window.tvWidgetCmd('" + what + "'));");
     }
 

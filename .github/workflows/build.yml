@@ -1,15 +1,15 @@
 name: Build portable players
 
 # Produces a single self-contained file per OS (no installation needed):
-#   Windows -> IPTV-Player.exe
-#   macOS   -> IPTV-Player-macos.zip  (contains IPTV Player.app)
-#   Linux   -> IPTV-Player
+#   Windows -> TV-Player.exe
+#   macOS   -> TV-Player-macos.zip  (contains TV Player.app)
+#   Linux   -> TV-Player
 # Download them from the workflow run's "Artifacts" section, or from a
 # GitHub Release when triggered by a tag.
 
 on:
   push:
-    branches: [master, main]
+    branches: [master, main, hh]
     tags: ["v*"]
   workflow_dispatch:
 
@@ -20,11 +20,11 @@ jobs:
       matrix:
         include:
           - os: windows-latest
-            artifact: IPTV-Player-windows
+            artifact: TV-Player-windows
           - os: macos-latest
-            artifact: IPTV-Player-macos
+            artifact: TV-Player-macos
           - os: ubuntu-latest
-            artifact: IPTV-Player-linux
+            artifact: TV-Player-linux
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -43,10 +43,10 @@ jobs:
         if: runner.os == 'macOS'
         run: |
           cd dist
-          if [ -d "IPTV Player.app" ]; then
-            zip -r IPTV-Player-macos.zip "IPTV Player.app" IPTV-Player
+          if [ -d "TV Player.app" ]; then
+            zip -r TV-Player-macos.zip "TV Player.app" TV-Player
           else
-            zip -r IPTV-Player-macos.zip IPTV-Player
+            zip -r TV-Player-macos.zip TV-Player
           fi
 
       - name: Upload artifact
@@ -54,9 +54,9 @@ jobs:
         with:
           name: ${{ matrix.artifact }}
           path: |
-            dist/IPTV-Player
-            dist/IPTV-Player.exe
-            dist/IPTV-Player-macos.zip
+            dist/TV-Player
+            dist/TV-Player.exe
+            dist/TV-Player-macos.zip
           if-no-files-found: ignore
 
   apk:
@@ -80,11 +80,11 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: IPTV-Player-apk
-          path: dist/IPTV-Player.apk
+          name: TV-Player-apk
+          path: dist/TV-Player.apk
 
   release:
-    needs: build
+    needs: [build, apk]
     if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     permissions:

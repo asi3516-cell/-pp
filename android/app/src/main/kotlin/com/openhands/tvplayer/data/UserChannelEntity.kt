@@ -47,9 +47,15 @@ data class UserChannelEntity(
             updatedAt = System.currentTimeMillis()
         )
 
-        fun edited(original: Channel, name: String, url: String, group: String, logo: String?):
-            UserChannelEntity = UserChannelEntity(
-            baseUrl = original.url,
+        fun edited(
+            baseUrl: String,
+            original: Channel,
+            name: String,
+            url: String,
+            group: String,
+            logo: String?
+        ): UserChannelEntity = UserChannelEntity(
+            baseUrl = baseUrl,
             name = name,
             url = url,
             logo = logo?.takeIf { it.isNotBlank() },
@@ -60,8 +66,8 @@ data class UserChannelEntity(
             updatedAt = System.currentTimeMillis()
         )
 
-        fun deleted(ch: Channel): UserChannelEntity = UserChannelEntity(
-            baseUrl = ch.url,
+        fun deleted(baseUrl: String, ch: Channel): UserChannelEntity = UserChannelEntity(
+            baseUrl = baseUrl,
             name = ch.name,
             url = ch.url,
             logo = ch.logo,

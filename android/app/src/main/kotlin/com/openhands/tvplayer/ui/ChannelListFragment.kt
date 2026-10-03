@@ -7,11 +7,14 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ExpandableListView
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -19,6 +22,8 @@ import com.openhands.tvplayer.R
 import com.openhands.tvplayer.data.ChannelRepository
 import com.openhands.tvplayer.data.FavDatabase
 import com.openhands.tvplayer.data.FavEntity
+import com.openhands.tvplayer.data.UserChannelEntity
+import com.openhands.tvplayer.data.UserChannelStore
 import com.openhands.tvplayer.model.Channel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -35,12 +40,16 @@ class ChannelListFragment : Fragment() {
     private lateinit var headerSub: TextView
     private lateinit var listCount: TextView
     private lateinit var searchClear: ImageButton
+    private lateinit var addButton: ImageButton
+    private lateinit var emptyAddButton: Button
     private lateinit var adapter: ExpandableChannelAdapter
 
     private var allChannels: List<Channel> = emptyList()
     private var query: String = ""
     private var favouriteUrls: Set<String> = emptySet()
-    private val dao by lazy { FavDatabase.get(requireContext()).favDao() }
+    private val db by lazy { FavDatabase.get(requireContext()) }
+    private val dao by lazy { db.favDao() }
+    private val userDao by lazy { db.userChannelDao() }
 
     private val mode: String get() = arguments?.getString(ARG_MODE) ?: MODE_LIVE
 
@@ -60,6 +69,8 @@ class ChannelListFragment : Fragment() {
         headerSub = view.findViewById(R.id.headerSub)
         listCount = view.findViewById(R.id.listCount)
         searchClear = view.findViewById(R.id.searchClear)
+        addButton = view.findViewById(R.id.addChannel)
+        emptyAddButton = view.findViewById(R.id.emptyAddButton)
         val search = view.findViewById<EditText>(R.id.searchInput)
         search.hint = getString(R.string.search_hint)
 
@@ -75,9 +86,14 @@ class ChannelListFragment : Fragment() {
         adapter = ExpandableChannelAdapter(
             context = requireContext(),
             onChannelClick = { channels, index -> openPlayer(channels, index) },
-            onFavouriteToggle = { channel, makeFav -> toggleFavourite(channel, makeFav) }
+            onFavouriteToggle = { channel, makeFav -> toggleFavourite(channel, makeFav) },
+            onChannelLongClick = { channel -> showChannelOptions(channel) }
         )
         listView.setAdapter(adapter)
+
+        addButton.setOnClickListener { showChannelEditor(null) }
+        emptyAddButton.setOnClickListener { showChannelEditor(null) }
+        addButton.isVisible = mode != MODE_FAV
 
         // One category open at a time, so the tree stays readable on a phone.
         listView.setOnGroupClickListener { _, _, groupPosition, _ ->
@@ -103,6 +119,7 @@ class ChannelListFragment : Fragment() {
         })
 
         loadChannels()
+        observeUserChannels()
         observeFavourites()
     }
 
@@ -110,13 +127,21 @@ class ChannelListFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             val list = withContext(Dispatchers.IO) {
                 when (mode) {
-                    MODE_RADIO -> ChannelRepository.radio(requireContext())
+                    MODE_RADIO -> UserChannelStore.all(requireContext(), userDao).filter { it.isRadio }
                     MODE_FAV -> emptyList()
-                    else -> ChannelRepository.live(requireContext())
+                    else -> UserChannelStore.all(requireContext(), userDao).filter { !it.isRadio }
                 }
             }
             allChannels = list
             render()
+        }
+    }
+
+    private fun observeUserChannels() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            userDao.observeAll().collect {
+                if (mode != MODE_FAV) loadChannels()
+            }
         }
     }
 
@@ -139,6 +164,124 @@ class ChannelListFragment : Fragment() {
         }
     }
 
+    /** Long press: offer to edit or delete the tapped channel. */
+    private fun showChannelOptions(channel: Channel) {
+        val actions = arrayOf(getString(R.string.edit), getString(R.string.delete))
+        AlertDialog.Builder(requireContext())
+            .setTitle(channel.name)
+            .setItems(actions) { _, which ->
+                when (which) {
+                    0 -> showChannelEditor(channel)
+                    1 -> confirmDelete(channel)
+                }
+            }
+            .show()
+    }
+
+    /** Opens the add (channel == null) or edit dialog. */
+    private fun showChannelEditor(channel: Channel?) {
+        val view = layoutInflater.inflate(R.layout.dialog_channel_edit, null)
+        val title = view.findViewById<TextView>(R.id.dialogTitle)
+        val nameInput = view.findViewById<EditText>(R.id.inputName)
+        val urlInput = view.findViewById<EditText>(R.id.inputUrl)
+        val groupInput = view.findViewById<EditText>(R.id.inputGroup)
+        val logoInput = view.findViewById<EditText>(R.id.inputLogo)
+        val errorText = view.findViewById<TextView>(R.id.errorText)
+
+        title.setText(if (channel == null) R.string.add_channel else R.string.edit_channel)
+        nameInput.setText(channel?.name.orEmpty())
+        urlInput.setText(channel?.url.orEmpty())
+        groupInput.setText(channel?.group.orEmpty())
+        logoInput.setText(channel?.logo.orEmpty())
+
+        val dialog = AlertDialog.Builder(requireContext())
+            .setView(view)
+            .setPositiveButton(R.string.save, null)
+            .setNegativeButton(R.string.cancel, null)
+            .create()
+        dialog.show()
+
+        // Validate by hand so the dialog stays open on a bad address.
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+            val name = nameInput.text.toString().trim()
+            val url = urlInput.text.toString().trim()
+            val group = groupInput.text.toString().trim().ifBlank { "Genel" }
+            val logo = logoInput.text.toString().trim().takeIf { it.isNotEmpty() }
+
+            val error = when {
+                name.isEmpty() -> getString(R.string.error_name_required)
+                !isValidAddress(url) -> getString(R.string.error_address_required)
+                else -> null
+            }
+            if (error != null) {
+                errorText.text = error
+                errorText.isVisible = true
+                return@setOnClickListener
+            }
+
+            saveChannel(channel, name, url, group, logo)
+            dialog.dismiss()
+        }
+    }
+
+    private fun isValidAddress(url: String): Boolean =
+        (url.startsWith("http://") || url.startsWith("https://")) && url.length > 8
+
+    private fun saveChannel(channel: Channel?, name: String, url: String, group: String, logo: String?) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val row = if (channel == null) {
+                UserChannelEntity.added(
+                    Channel(name = name, url = url, logo = logo, group = group,
+                        source = "user", kind = if (mode == MODE_RADIO) "radio" else "live")
+                )
+            } else {
+                val base = withContext(Dispatchers.IO) { resolveBaseUrl(channel) }
+                UserChannelEntity.edited(base, channel, name, url, group, logo)
+            }
+            withContext(Dispatchers.IO) { userDao.upsert(row) }
+            toast(if (channel == null) R.string.channel_added else R.string.channel_saved)
+        }
+    }
+
+    private fun confirmDelete(channel: Channel) {
+        AlertDialog.Builder(requireContext())
+            .setTitle(R.string.delete_channel_title)
+            .setMessage(getString(R.string.delete_channel_message, channel.name))
+            .setPositiveButton(R.string.delete) { _, _ -> deleteChannel(channel) }
+            .setNegativeButton(R.string.cancel, null)
+            .show()
+    }
+
+    private fun deleteChannel(channel: Channel) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val base = withContext(Dispatchers.IO) { resolveBaseUrl(channel) }
+            withContext(Dispatchers.IO) {
+                if (UserChannelStore.isUserAdded(channel)) {
+                    // No bundled row to fall back to: drop it outright.
+                    userDao.remove(base)
+                } else {
+                    userDao.upsert(UserChannelEntity.deleted(base, channel))
+                }
+            }
+            toast(R.string.channel_deleted)
+        }
+    }
+
+    /**
+     * The row key a channel maps to. After an edit the stream URL has already
+     * changed, so fall back to the user row that still carries the new URL and
+     * read its original key from there.
+     */
+    private suspend fun resolveBaseUrl(channel: Channel): String {
+        ChannelRepository.all(requireContext()).firstOrNull { it.url == channel.url }
+            ?.let { return it.url }
+        return userDao.all().firstOrNull { it.url == channel.url }?.baseUrl ?: channel.url
+    }
+
+    private fun toast(resId: Int) {
+        Toast.makeText(requireContext(), resId, Toast.LENGTH_SHORT).show()
+    }
+
     private fun render() {
         val filtered = if (query.isBlank()) allChannels else allChannels.filter {
             it.name.contains(query, ignoreCase = true) ||
@@ -149,6 +292,7 @@ class ChannelListFragment : Fragment() {
         val empty = filtered.isEmpty()
         emptyState.isVisible = empty
         listView.isVisible = !empty
+        emptyAddButton.isVisible = empty && mode != MODE_FAV
         if (empty) {
             showEmptyState()
         } else {

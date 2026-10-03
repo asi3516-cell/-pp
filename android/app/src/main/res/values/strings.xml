@@ -36,4 +36,23 @@
     <string name="resize_fill">Doldur</string>
     <string name="resize_zoom">Yakınlaştır</string>
     <string name="playing_channel">Oynatılıyor: %1$s</string>
+    <string name="add_channel">Kanal ekle</string>
+    <string name="edit_channel">Kanalı düzenle</string>
+    <string name="edit">Düzenle</string>
+    <string name="delete">Sil</string>
+    <string name="save">Kaydet</string>
+    <string name="cancel">İptal</string>
+    <string name="channel_name">Kanal adı</string>
+    <string name="channel_address">Yayın adresi (http/https)</string>
+    <string name="channel_group">Grup</string>
+    <string name="channel_logo">Logo adresi (isteğe bağlı)</string>
+    <string name="channel_options">Kanal seçenekleri</string>
+    <string name="error_name_required">Kanal adı boş olamaz</string>
+    <string name="error_address_required">http:// veya https:// ile başlayan geçerli bir adres gir</string>
+    <string name="delete_channel_title">Kanal silinsin mi?</string>
+    <string name="delete_channel_message">"%1$s" listeden kaldırılacak.</string>
+    <string name="channel_added">Kanal eklendi</string>
+    <string name="channel_saved">Kanal kaydedildi</string>
+    <string name="channel_deleted">Kanal silindi</string>
+    <string name="user_channel">Kullanıcı kanalı</string>
 </resources>

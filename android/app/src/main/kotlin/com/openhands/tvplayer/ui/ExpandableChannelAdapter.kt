@@ -19,7 +19,8 @@ import com.openhands.tvplayer.model.Channel
 class ExpandableChannelAdapter(
     private val context: Context,
     private val onChannelClick: (List<Channel>, Int) -> Unit,
-    private val onFavouriteToggle: (Channel, Boolean) -> Unit
+    private val onFavouriteToggle: (Channel, Boolean) -> Unit,
+    private val onChannelLongClick: (Channel) -> Unit
 ) : BaseExpandableListAdapter() {
 
     private val groups = ArrayList<String>()
@@ -112,6 +113,10 @@ class ExpandableChannelAdapter(
         view.setOnClickListener {
             val list = children[groups[groupPosition]] ?: return@setOnClickListener
             onChannelClick(list, childPosition)
+        }
+        view.setOnLongClickListener {
+            onChannelLongClick(channel)
+            true
         }
         return view
     }

@@ -465,9 +465,9 @@ class Handler(BaseHTTPRequestHandler):
             binary = ROOT / "dist" / "hh"
             if binary.exists():
                 zf.write(binary, "hh/dist/hh")
-            apk = ROOT / "dist" / "hh.apk"
+            apk = ROOT / "dist" / "TV-Player.apk"
             if apk.exists():
-                zf.write(apk, "hh/dist/hh.apk")
+                zf.write(apk, "hh/dist/TV-Player.apk")
         body = buf.getvalue()
         self.send_response(200)
         self._cors()
@@ -501,9 +501,9 @@ class Handler(BaseHTTPRequestHandler):
 
     def _download_apk(self, head_only: bool) -> None:
         """Serve the built Android APK, if it has been assembled."""
-        apk = ROOT / "dist" / "hh.apk"
+        apk = ROOT / "dist" / "TV-Player.apk"
         if not apk.exists():
-            apk = ROOT / "dist" / "TV-Player.apk"
+            apk = ROOT / "dist" / "hh.apk"
         if not apk.exists():
             return self._send(404, b"apk not built", "text/plain", head_only=head_only)
         size = apk.stat().st_size
@@ -511,7 +511,7 @@ class Handler(BaseHTTPRequestHandler):
         self._cors()
         self.send_header("Content-Type", "application/vnd.android.package-archive")
         self.send_header("Content-Disposition",
-                         'attachment; filename="hh.apk"')
+                         'attachment; filename="TV-Player.apk"')
         self.send_header("Content-Length", str(size))
         self.end_headers()
         if head_only:

@@ -97,7 +97,7 @@ public class LocalServer extends NanoHTTPD {
         conn.setConnectTimeout(15000);
         conn.setReadTimeout(30000);
         conn.setRequestProperty("User-Agent",
-                orDefault(q.get("u"), "Mozilla/5.0 (Android) hh"));
+                orDefault(q.get("u"), "Mozilla/5.0 (Android) TV Player"));
         if (q.get("h") != null) conn.setRequestProperty("Referer", q.get("h"));
         if (q.get("o") != null) conn.setRequestProperty("Origin", q.get("o"));
         if (q.get("c") != null) conn.setRequestProperty("Cookie", q.get("c"));

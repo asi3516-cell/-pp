@@ -1822,11 +1822,11 @@
           "white-space:pre-wrap;max-height:45%;overflow:auto";
         (document.body || document.documentElement).appendChild(box);
       }
-      box.textContent = "hh hata: " + String(err && err.message || err) +
+      box.textContent = "TV Player hata: " + String(err && err.message || err) +
         (err && err.stack ? "\n" + err.stack : "");
     } catch (e) {}
   }
-  window.__hhFatal = showFatal;
+  window.__tvFatal = showFatal;
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", boot);

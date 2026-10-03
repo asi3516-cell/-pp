@@ -10,7 +10,7 @@ Prerequisites (see tools/ setup):
   * Android SDK       -> $ANDROID_SDK_ROOT with platforms;android-34 and
                          build-tools;34.0.0
 
-Run:  python build_apk.py   ->  dist/hh.apk
+Run:  python build_apk.py   ->  dist/TV-Player.apk
 """
 
 from __future__ import annotations
@@ -24,7 +24,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 ANDROID = ROOT / "android"
 SRC = ANDROID / "app" / "src" / "main"
-OUT = ROOT / "dist" / "hh.apk"
+OUT = ROOT / "dist" / "TV-Player.apk"
 BUILD = ROOT / "build" / "android"
 
 PKG = "com.openhands.tvplayer"

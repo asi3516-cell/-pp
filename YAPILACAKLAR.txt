@@ -198,8 +198,7 @@ pakette duruyor (yedek / kaynak), ancak launcher artik native arayuz.
        tum layout'lar var; kendi basina derlenebilir.
     -> Indirme: /download/source-zip  (HTTP 200).
 
-[~] Native arayuz cihazda elle test edilmedi (emulator/cihaz yok).
-    -> Derleme basarili; davranis kodu okunarak dogrulandi.
+[x] Native arayuz cihazda elle denendi: calisiyor (2026-10-03).
 [x] Arayuz yeniden tasarlandi (2026-10-03):
     -> Kanal listesi: marka ikonu + sekme adi + temizleme dugmeli arama
        kutusu iceren baslik; altinda "N kanal" sayaci; baglama duyarli bos

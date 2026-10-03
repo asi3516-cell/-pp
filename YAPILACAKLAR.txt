@@ -309,3 +309,36 @@ DOGRULAMA: Emulator (emulator-5554) uzerinde BottomNavActivity acildi,
   mFocusedApp = com.openhands.tvplayer/.ui.BottomNavActivity, cokme yok.
   Not: Emulatorde KVM yok; systemui ANR yavasligi uygulamaya ait degil.
 
+
+========================================================================
+BOLUM 14 - KANAL EKLE / DUZENLE / SIL (bitti, commit eb2c193)
+
+  [x] UserChannelStore.kt: assets listesi + kullanici degisikliklerini
+      birlestirir. deleted -> gizle, edited -> gecersiz kil, added -> ekle.
+      live()/radio() yerine fragment UserChannelStore.all() kullaniyor.
+  [x] dialog_channel_edit.xml: ad / adres / grup / logo + Kaydet/Iptal.
+      Ad ve adres zorunlu, adres http(s) ile baslamali (satir ici uyari).
+  [x] ChannelListFragment: baslikta ve bos durumda "Kanal ekle" dugmesi;
+      uzun basinca "Duzenle" / "Sil" (AlertDialog + silme onayi).
+  [x] ExpandableChannelAdapter: onChannelLongClick geri cagrisi.
+  [x] strings.xml + ic_add / ic_edit / ic_delete eklendi.
+
+INCELIK: satirlar orijinal yayin adresine (baseUrl) gore anahtarlanir.
+  Duzenlenen bir kanal tekrar duzenlenince, onun baseUrl'si Room
+  satirindan bulunur; boylece ikinci bir satir olusmaz.
+
+DOGRULAMA: Emulatorde kuruldu ve acildi, FATAL yok, surec canli.
+  Not: Emulatorde KVM yok, SystemUI surekli ANR veriyor; bu yuzden
+  manuel tiklama testi (ekle/duzenle/sil) yapilamadi. Gercek cihazda
+  denenmeli.
+
+========================================================================
+BOLUM 15 - PC (EXE) TESLIMATI
+
+  [x] tv_player.spec: dist/TV-Player.apk PyInstaller datas'ina eklendi.
+  [x] server.py: _download_apk artik _send_file kullaniyor.
+  SORUN: Dondurulmus .exe yaninda dist/ olmadigi icin "/download/apk"
+  rotasi 404 veriyordu. Simdi APK exe icine gomulu -> 200 + dogru md5.
+  Windows .exe'yi uretmek icin: build_exe.bat (Windows'ta cift tikla).
+  Linux ikilisi: dist/hh (bu makinede derlendi).
+

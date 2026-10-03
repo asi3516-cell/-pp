@@ -76,7 +76,7 @@ jobs:
         run: |
           SDKMGR="$(ls -d "$ANDROID_SDK_ROOT"/cmdline-tools/*/bin/sdkmanager | tail -1)"
           yes | "$SDKMGR" --licenses > /dev/null 2>&1 || true
-          "$SDKMGR" "platforms;android-34" "build-tools;34.0.0"
+          "$SDKMGR" "platforms;android-36" "build-tools;36.0.0"
           echo "sdk.dir=$ANDROID_SDK_ROOT" > android/local.properties
 
       - name: Build APK

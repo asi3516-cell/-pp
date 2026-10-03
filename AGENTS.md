@@ -136,3 +136,41 @@ only packages the WebView fallback.
 Desktop build: `python build/make.py` produces `dist/hh` (Linux) or
 `dist/hh.exe` (Windows) and `build_exe.bat` is the double-click Windows path;
 `python build/package_source.py` refreshes `build/pkg/hh-Kaynak.zip`.
+
+## Toolchain versions (do not downgrade)
+
+The APK needs a newer AndroidX Media3 than the original 1.3.1. Media3 1.11.1
+pulls `kotlin-stdlib:2.2.10`, so the Kotlin plugin and KSP had to move with it,
+and Room with KSP. The versions are coupled:
+
+- AGP 8.10.1, Gradle 8.11.1, `compileSdk 36` (platform + build-tools 36)
+- Kotlin 2.2.10, KSP 2.2.10-2.0.2
+- Media3 1.11.1, Room 2.7.1, `minSdk 28`, `targetSdk 34`
+
+Dropping any one of these below its partner produces a build failure, not a
+warning: Media3 1.11.1's stdlib metadata is 2.2.0, so Kotlin < 2.2.10 fails with
+"Module was compiled with an incompatible version of Kotlin", and Room 2.6.1
+under KSP 2.2.x fails with "unexpected jvm signature V". CI installs
+`platforms;android-36` and `build-tools;36.0.0` for the same reason.
+
+## Live channel startup
+
+Live HLS used to take ~26s to first frame. Two things fixed it, and both live
+in `PlaybackController.build()`:
+
+- `DefaultMediaSourceFactory` live offsets: target 3s, min 1.5s, max 15s, with
+  speed 0.97–1.08. Without an explicit target the player starts ~30s behind the
+  live edge, which is what made a channel look hung.
+- `DefaultLoadControl.setBufferDurationsMs(8_000, 60_000, 1_000, 2_000)`: the
+  third value is how much buffer is required before the first frame, and the old
+  15s minimum delayed playback by ~20s on 24-hour playlists.
+
+Measured on the emulator: TRT1 26s → ~10s, Show TV 18.8s → ~10s, Star TV 16s →
+~8s. TRT1 reports `liveOffset` as unset because its playlist carries an absolute
+media timeline with no `#EXT-X-PROGRAM-DATE-TIME`, so the live-edge offset is
+not computable there; it still plays. The remaining TRT1 delay is the ~5.8s it
+waits to accumulate the minimum buffer before the first frame plus segment
+download latency — deliberate, not a stall.
+
+`TVPERF` logging (an OkHttp interceptor plus an `AnalyticsListener`) was used to
+measure this and has been removed; re-add it temporarily if startup regresses.

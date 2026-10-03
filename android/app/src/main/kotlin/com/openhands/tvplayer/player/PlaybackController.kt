@@ -9,6 +9,7 @@ import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.datasource.okhttp.OkHttpDataSource
 import androidx.media3.exoplayer.DefaultLoadControl
+import androidx.media3.exoplayer.DefaultRenderersFactory
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import com.openhands.tvplayer.model.Channel
@@ -91,20 +92,36 @@ object PlaybackController {
         val dataSource = OkHttpDataSource.Factory(client)
 
         // Startup tuning: the third/fourth values are how much buffer is
-        // required before playback starts and after a rebuffer. Dropping them
-        // from 5s/10s to 1s/2s is what makes a slow channel appear almost
-        // immediately; the forward buffer can still grow to 60s in the
-        // background so a healthy stream never starves.
+        // required before playback starts and after a rebuffer. Keeping them
+        // small is what makes a live channel appear quickly; a large minimum
+        // (the old 15s) delayed the first frame by ~20s on 24-hour playlists.
+        // The forward buffer can still grow to 60s in the background so a
+        // healthy stream never starves.
         val loadControl = DefaultLoadControl.Builder()
-            .setBufferDurationsMs(15_000, 60_000, 1_000, 2_000)
+            .setBufferDurationsMs(8_000, 60_000, 1_000, 2_000)
             .setBackBuffer(20_000, false)
             .setTargetBufferBytes(C.LENGTH_UNSET)
             .setPrioritizeTimeOverSizeThresholds(true)
             .build()
 
+        // Live HLS otherwise starts ~30s behind the live edge, which is why a
+        // channel seems to hang before the first frame. Aim a few seconds from
+        // the edge and let the player nudge its speed to stay there.
+        val mediaSourceFactory = DefaultMediaSourceFactory(dataSource)
+            .setLiveTargetOffsetMs(3_000)
+            .setLiveMinOffsetMs(1_500)
+            .setLiveMaxOffsetMs(15_000)
+            .setLiveMinSpeed(0.97f)
+            .setLiveMaxSpeed(1.08f)
+
         val player = ExoPlayer.Builder(context)
-            .setMediaSourceFactory(DefaultMediaSourceFactory(dataSource))
+            .setMediaSourceFactory(mediaSourceFactory)
             .setLoadControl(loadControl)
+            // A stream whose codec the box cannot decode in hardware still
+            // plays through the software decoder instead of failing outright.
+            .setRenderersFactory(
+                DefaultRenderersFactory(context).setEnableDecoderFallback(true)
+            )
             .setAudioAttributes(
                 AudioAttributes.Builder()
                     .setUsage(C.USAGE_MEDIA)
@@ -164,6 +181,15 @@ object PlaybackController {
             MediaItem.Builder()
                 .setUri(ch.playUrl)
                 .setMediaId(ch.url)
+                .setLiveConfiguration(
+                    MediaItem.LiveConfiguration.Builder()
+                        .setTargetOffsetMs(3_000)
+                        .setMinOffsetMs(1_500)
+                        .setMaxOffsetMs(15_000)
+                        .setMinPlaybackSpeed(0.97f)
+                        .setMaxPlaybackSpeed(1.08f)
+                        .build()
+                )
                 .setMediaMetadata(
                     MediaMetadata.Builder()
                         .setTitle(ch.name)

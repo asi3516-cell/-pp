@@ -24,6 +24,7 @@
     source: "Canlı TV",
     sources: [],
     expanded: { "Canlı TV": true },
+    openGroup: null,
     loaded: { "Canlı TV": true },
     detail: null,
     detailSeason: null,
@@ -719,11 +720,45 @@
           var gkids = document.createElement("div");
           gkids.className = "tree-kids";
           groups.forEach(function (g) {
+            // Accordion: one group open at a time. Opening a group lists its
+            // channels right underneath it, so a station is reached in the tree
+            // itself instead of a second pane.
+            var gkey = o.key + "\u0000" + activeKind + "\u0000" + g.name;
+            var openG = state.openGroup === gkey;
             gkids.appendChild(treeLeaf({
-              label: g.name, count: g.count,
-              active: state.group === g.name,
-              onPick: function () { selectGroup(o.key, activeKind, g.name); }
+              label: (openG ? "▾ " : "▸ ") + g.name, count: g.count,
+              active: openG,
+              onPick: function () {
+                state.openGroup = openG ? null : gkey;
+                renderTree();
+              }
             }));
+            if (openG) {
+              var chans = scopeFor(o.key, activeKind).filter(function (ch) {
+                return (ch.group || "Genel") === g.name;
+              });
+              var cwrap = document.createElement("div");
+              cwrap.className = "tree-kids ch-kids";
+              chans.slice(0, 250).forEach(function (ch) {
+                var cb = document.createElement("button");
+                cb.className = "tree-row leaf ch-leaf" +
+                  (state.current && state.current.url === ch.url ? " active" : "");
+                var initial = (ch.name || "?").trim().charAt(0).toUpperCase();
+                cb.innerHTML = '<span class="tw"></span>' +
+                  '<span class="ch-mini" style="background:hsl(' +
+                  logoHue(ch.name || "") + ' 55% 30%)">' + escapeHtml(initial) +
+                  "</span><span class=\"tl\">" + escapeHtml(ch.name) + "</span>";
+                cb.onclick = function () { play(ch); };
+                cwrap.appendChild(cb);
+              });
+              if (chans.length > 250) {
+                var more = document.createElement("div");
+                more.className = "tree-row leaf ch-leaf muted";
+                more.textContent = "+" + (chans.length - 250) + " kanal daha…";
+                cwrap.appendChild(more);
+              }
+              gkids.appendChild(cwrap);
+            }
           });
           kids.appendChild(gkids);
         }
@@ -1291,9 +1326,12 @@
     var st = $("#stage");
     if (!st || !st.getBoundingClientRect) return null;
     var r = st.getBoundingClientRect();
+    // getBoundingClientRect is in CSS pixels, the native View is laid out in
+    // physical pixels: without this scale the native player would open small.
+    var d = window.devicePixelRatio || 1;
     return {
-      x: Math.round(r.left), y: Math.round(r.top),
-      w: Math.round(r.width), h: Math.round(r.height)
+      x: Math.round(r.left * d), y: Math.round(r.top * d),
+      w: Math.round(r.width * d), h: Math.round(r.height * d)
     };
   }
 
@@ -1351,6 +1389,7 @@
     showVodInfo(ch);
     loadEpgFor(ch);
     if (window.innerWidth <= 900) $("#sidebar").classList.remove("open");
+    if (window.tvOpenPlayer) window.tvOpenPlayer();
     loadStream(0);
   }
 
@@ -1388,6 +1427,9 @@
       try {
         np.play(url, ch.name || "", (ch.group || "Genel") + " · " + (ch.source || ""),
                 ch.headers ? JSON.stringify(ch.headers) : "");
+        // On the phone the player takes the whole screen, so the picture is
+        // never a small box in the corner of the list.
+        np.setFullscreenMode(true);
       } catch (e) { showFatal(e); }
       return;
     }
@@ -2024,10 +2066,137 @@
   }
 
   function bind() {
+    // On a phone the tree is the list: the flat channel pane only appears for
+    // favourites or an active search, so it never duplicates the tree.
+    function syncListMode() {
+      var sb = $("#sidebar");
+      if (!sb) return;
+      var flat = state.tab === "fav" || !!state.query;
+      sb.classList.toggle("flat-list", flat);
+      var h = $("#listHead");
+      if (h) h.hidden = !flat;
+      if (h) h.textContent = state.query
+        ? "Arama sonuçları (" + state.filtered.length + ")"
+        : "Favoriler (" + state.filtered.length + ")";
+    }
+    window.tvSyncListMode = syncListMode;
+
+    // ---- bottom navigation (phone layout) ----
+    function activateTab(name) {
+      $$(".tabbtn", $("#tabbar")).forEach(function (b) {
+        b.classList.toggle("active", b.dataset.tab === name);
+      });
+      var settings = $("#settings");
+      if (settings) settings.classList.toggle("hide", name !== "settings");
+      if (name === "live" || name === "radio") {
+        var list = name === "live" ? "Canlı TV" : "Radyo";
+        state.tab = "all";
+        state.source = list;
+        state.kind = name === "live" ? "live" : "radio";
+        state.group = "all";
+        clearSearch();
+        state.expanded[list] = true;
+        renderTree();
+        buildGroups();
+        buildKindTabs();
+        render();
+      } else if (name === "fav") {
+        state.tab = "fav";
+        state.source = "all";
+        state.kind = "all";
+        renderTree();
+        buildGroups();
+        render();
+      }
+      syncListMode();
+      var sb = $("#sidebar");
+      if (sb) sb.classList.remove("open");
+    }
+    $$(".tabbtn", $("#tabbar")).forEach(function (b) {
+      b.addEventListener("click", function () { activateTab(b.dataset.tab); });
+    });
+
+    // ---- settings overlay (gear button) ----
+    function openSettings(on) {
+      var s = $("#settings");
+      if (s) s.classList.toggle("hide", !on);
+      syncThemeSeg();
+    }
+    on("#setBtn", function () { openSettings(true); });
+    on("#settingsBack", function () { openSettings(false); });
+
+    function syncThemeSeg() {
+      var cur = document.documentElement.getAttribute("data-theme") === "light"
+        ? "light" : "dark";
+      $$("#setTheme button").forEach(function (b) {
+        b.classList.toggle("active", b.dataset.theme === cur);
+      });
+    }
+    $$("#setTheme button").forEach(function (b) {
+      b.addEventListener("click", function () {
+        document.documentElement.setAttribute("data-theme", b.dataset.theme);
+        try { localStorage.setItem("tv.theme", b.dataset.theme); } catch (e) {}
+        syncThemeSeg();
+      });
+    });
+
+    function setSwitch(sel, on) {
+      var el = $(sel);
+      if (el) el.setAttribute("aria-checked", on ? "true" : "false");
+    }
+    var repeatOn = false;
+    var muteOn = false;
+    on("#setRepeat", function () {
+      repeatOn = !repeatOn;
+      setSwitch("#setRepeat", repeatOn);
+      var np = nativePlayer();
+      if (np) { try { np.setRepeatMode(repeatOn); } catch (e) {} }
+      showOsd(repeatOn ? "Tekrar açık" : "Tekrar kapalı");
+    });
+    on("#setMute", function () {
+      muteOn = !muteOn;
+      setSwitch("#setMute", muteOn);
+      var np = nativePlayer();
+      if (np) { try { np.setMuted(muteOn); } catch (e) {} }
+      else video.muted = muteOn;
+      syncCtl();
+    });
+    on("#setAdd", function () { openSettings(false); $("#addDlg").showModal(); });
+    on("#setClearRecent", function () {
+      state.recent = [];
+      state.recentsByList = {};
+      persist();
+      showOsd("Son izlenenler temizlendi");
+    });
+    try {
+      var about = $("#setAbout");
+      if (about) about.textContent = "TV Player · " + state.channels.length + " kanal";
+    } catch (e) {}
+
+    // ---- open the player when a channel is chosen, close it with back ----
+    function closePlayer() {
+      var app = $("#app");
+      if (app) app.classList.remove("playing");
+      var stage = $("#stage");
+      if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen();
+      if (stage) stage.classList.remove("fill");
+      if (nativePlayer()) { try { nativePlayer().stop(); } catch (e) {} }
+      else { try { video.pause(); } catch (e) {} }
+    }
+    window.tvOpenPlayer = function () {
+      var app = $("#app");
+      if (app) app.classList.add("playing");
+      syncNativeBounds();
+      setTimeout(syncNativeBounds, 120);
+    };
+    window.tvClosePlayer = closePlayer;
+    on("#playerBack", closePlayer);
+
     var onSearch = function (e) {
       state.query = e.target.value.trim();
       var clr = $("#clearSearch");
       if (clr) clr.hidden = !state.query;
+      if (window.tvSyncListMode) window.tvSyncListMode();
       render();
     };
     var search = $("#search");
@@ -2040,6 +2209,7 @@
       if (search) search.value = "";
       state.query = "";
       $("#clearSearch").hidden = true;
+      if (window.tvSyncListMode) window.tvSyncListMode();
       render();
     });
 

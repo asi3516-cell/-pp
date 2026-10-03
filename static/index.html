@@ -35,13 +35,7 @@
 
     <div class="groups" id="groups"></div>
 
-    <!-- Content-type tabs under the tree: tap to jump straight to that list. -->
-    <div class="kind-tabs" id="kindTabs">
-      <button class="ktab" data-kind="live" type="button">📺 Canlı TV</button>
-      <button class="ktab" data-kind="vod" type="button">🎬 Film</button>
-      <button class="ktab" data-kind="series" type="button">📽 Dizi</button>
-      <button class="ktab" data-kind="radio" type="button">📻 Radyo</button>
-    </div>
+    <div class="list-head" id="listHead" hidden>Arama sonuçları</div>
 
     <div class="channel-list" id="channels" role="list"></div>
 
@@ -53,6 +47,7 @@
 
   <main class="main">
     <header class="topbar">
+      <button id="playerBack" class="btn icon only-mobile" title="Geri">‹</button>
       <button id="menuBtn" class="btn icon only-mobile" title="Menü">☰</button>
       <div class="now-playing">
         <span id="npName">Kanal seçin</span>
@@ -64,6 +59,7 @@
         <button id="pipBtn" class="btn icon" title="Resim içinde resim">⧉</button>
         <button id="fullBtn" class="btn icon" title="Tam ekran">⛶</button>
         <button id="themeBtn" class="btn icon" title="Tema">◐</button>
+        <button id="setBtn" class="btn icon" title="Ayarlar">⚙️</button>
       </div>
     </header>
 
@@ -131,6 +127,71 @@
     </div>
 
   </main>
+
+  <!-- Settings: opened from the gear button; a full pane on the phone. -->
+  <div class="settings hide" id="settings">
+    <div class="settings-head">
+      <button id="settingsBack" class="btn icon" title="Kapat">‹</button>
+      <h2>Ayarlar</h2>
+    </div>
+    <div class="settings-body">
+      <section class="set-card">
+        <h3>Yayın</h3>
+        <label class="set-row">
+          <span>Yayın yeniden deneme</span>
+          <span class="muted">5 kez dener, sonra durur</span>
+        </label>
+        <label class="set-row">
+          <span>Tekrar oynatma</span>
+          <button id="setRepeat" class="switch" role="switch" aria-checked="false">
+            <span class="knob"></span>
+          </button>
+        </label>
+        <label class="set-row">
+          <span>Sessiz başlat</span>
+          <button id="setMute" class="switch" role="switch" aria-checked="false">
+            <span class="knob"></span>
+          </button>
+        </label>
+      </section>
+
+      <section class="set-card">
+        <h3>Görünüm</h3>
+        <div class="set-row">
+          <span>Tema</span>
+          <div class="seg" id="setTheme">
+            <button data-theme="dark" type="button">Koyu</button>
+            <button data-theme="light" type="button">Açık</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="set-card">
+        <h3>Kanallar</h3>
+        <button id="setAdd" class="set-btn">+ Kanal ekle</button>
+        <button id="setClearRecent" class="set-btn">Son izlenenleri temizle</button>
+      </section>
+
+      <section class="set-card">
+        <h3>Hakkında</h3>
+        <p class="muted" id="setAbout">TV Player · Android sürümü</p>
+      </section>
+    </div>
+  </div>
+
+  <!-- Bottom navigation: switch between Live TV, Radio and Settings without
+       going back to the list, the way a phone player app works. -->
+  <nav class="tabbar" id="tabbar">
+    <button class="tabbtn active" data-tab="live" type="button">
+      <span class="ti">📺</span><span class="tt">Canlı TV</span>
+    </button>
+    <button class="tabbtn" data-tab="radio" type="button">
+      <span class="ti">📻</span><span class="tt">Radyo</span>
+    </button>
+    <button class="tabbtn" data-tab="fav" type="button">
+      <span class="ti">★</span><span class="tt">Favoriler</span>
+    </button>
+  </nav>
 </div>
 
 <!-- Add channel -->

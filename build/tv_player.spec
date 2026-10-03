@@ -11,6 +11,12 @@ datas = [
     (str(ROOT / "data" / "channels.json"), "data"),
 ]
 
+# Ship the Android build inside the desktop executable so the "download APK"
+# button works from the standalone .exe (there is no dist/ folder next to it).
+_apk = ROOT / "dist" / "TV-Player.apk"
+if _apk.exists():
+    datas.append((str(_apk), "dist"))
+
 a = Analysis(
     [str(ROOT / "server.py")],
     pathex=[str(ROOT)],

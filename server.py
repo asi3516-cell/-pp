@@ -521,22 +521,8 @@ class Handler(BaseHTTPRequestHandler):
             apk = ROOT / "dist" / "hh.apk"
         if not apk.exists():
             return self._send(404, b"apk not built", "text/plain", head_only=head_only)
-        size = apk.stat().st_size
-        self.send_response(200)
-        self._cors()
-        self.send_header("Content-Type", "application/vnd.android.package-archive")
-        self.send_header("Content-Disposition",
-                         'attachment; filename="TV-Player.apk"')
-        self.send_header("Content-Length", str(size))
-        self.end_headers()
-        if head_only:
-            return
-        with apk.open("rb") as fh:
-            while True:
-                chunk = fh.read(64 * 1024)
-                if not chunk:
-                    break
-                self.wfile.write(chunk)
+        self._send_file(apk, "TV-Player.apk",
+                        "application/vnd.android.package-archive", head_only)
 
     def _download_player(self, head_only: bool) -> None:
         """Serve the built portable binary (source checkout only)."""

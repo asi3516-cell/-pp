@@ -1,4 +1,4 @@
-/* hh - canlı TV ve radyo oynatıcı */
+/* TV Player - canlı TV ve radyo oynatıcı */
 (function () {
   "use strict";
 
@@ -109,29 +109,51 @@
     saveLocal();
     clearTimeout(saveTimer);
     saveTimer = setTimeout(function () {
-      fetch("/api/store", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          favorites: state.favorites,
-          favoritesByList: state.favoritesByList,
-          recent: state.recent,
-          recentsByList: state.recentsByList,
-          playlists: state.playlists,
-          overrides: state.overrides,
-          deleted: state.deleted,
-          settings: { epgUrl: state.epgUrl, ui: { source: state.source, kind: state.kind } }
-        })
-      }).catch(function () { /* offline: localStorage still has it */ });
+      post("/api/store", JSON.stringify({
+        favorites: state.favorites,
+        favoritesByList: state.favoritesByList,
+        recent: state.recent,
+        recentsByList: state.recentsByList,
+        playlists: state.playlists,
+        overrides: state.overrides,
+        deleted: state.deleted,
+        settings: { epgUrl: state.epgUrl, ui: { source: state.source, kind: state.kind } }
+      })).catch(function () { /* offline: localStorage still has it */ });
     }, 400);
   }
 
   /* ------------------------------ api -------------------------------- */
-  function api(path) {
-    return fetch(path).then(function (r) {
-      if (!r.ok) throw new Error("HTTP " + r.status);
-      return r.json();
+  // XHR instead of fetch: fetch() is missing on the old WebViews that ship
+  // with many Android TV boxes, and a missing fetch made the whole boot fail
+  // so no channel ever appeared.
+  function request(method, path, body) {
+    return new Promise(function (resolve, reject) {
+      var xhr = new XMLHttpRequest();
+      xhr.open(method, path, true);
+      if (body) xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.onload = function () {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          resolve({
+            ok: true,
+            status: xhr.status,
+            text: function () { return Promise.resolve(xhr.responseText); },
+            json: function () { return Promise.resolve(JSON.parse(xhr.responseText)); }
+          });
+        } else {
+          reject(new Error("HTTP " + xhr.status));
+        }
+      };
+      xhr.onerror = function () { reject(new Error("ağ hatası")); };
+      xhr.ontimeout = function () { reject(new Error("zaman aşımı")); };
+      try { xhr.send(body || null); } catch (e) { reject(e); }
     });
+  }
+
+  function get(path) { return request("GET", path); }
+  function post(path, body) { return request("POST", path, body); }
+
+  function api(path) {
+    return get(path).then(function (r) { return r.json(); });
   }
 
   function proxied(url, extra) {
@@ -392,7 +414,7 @@
         .then(function (d) { done(d.channels || []); })
         .catch(function (e) { fail(e.message || "portal yanıt vermedi"); });
     } else {
-      fetch("/api/fetch?url=" + encodeURIComponent(pl.url))
+      get("/api/fetch?url=" + encodeURIComponent(pl.url))
         .then(function (r) { return r.text(); })
         .then(function (t) { done(parseM3U(t, label)); })
         .catch(function (e) { fail(e.message || "liste indirilemedi"); });
@@ -436,8 +458,8 @@
   }
 
   function bundledChannels() {
-    return fetch("channels.json").then(function (r) {
-      return r.ok ? r.json() : [];
+    return get("channels.json").then(function (r) {
+      return r.json();
     }).catch(function () { return []; });
   }
 
@@ -1613,7 +1635,7 @@
     var key = state.epgUrl;
     if (state.epg[key]) return;
 
-    fetch("/api/fetch?url=" + encodeURIComponent(key))
+    get("/api/fetch?url=" + encodeURIComponent(key))
       .then(function (r) { return r.text(); })
       .then(function (xml) { state.epg[key] = parseXmltv(xml); })
       .catch(function () {});
@@ -1664,51 +1686,66 @@
 
   /* ---------------------------- playlists ---------------------------- */
   /* ------------------------------ events ----------------------------- */
+  // $ returns null for an element this build does not render, so every
+  // handler is attached through on() to keep one missing node from aborting
+  // the whole boot (the old WebView has no dev console to explain the stop).
+  function on(sel, handler) {
+    var el = $(sel);
+    if (el) el.onclick = handler;
+  }
+
   function bind() {
     var onSearch = function (e) {
       state.query = e.target.value.trim();
-      $("#clearSearch").hidden = !state.query;
+      var clr = $("#clearSearch");
+      if (clr) clr.hidden = !state.query;
       render();
     };
-    ["input", "keyup", "change", "search"].forEach(function (evt) {
-      $("#search").addEventListener(evt, onSearch);
-    });
-    $("#clearSearch").onclick = function () {
-      $("#search").value = "";
+    var search = $("#search");
+    if (search) {
+      ["input", "keyup", "change", "search"].forEach(function (evt) {
+        search.addEventListener(evt, onSearch);
+      });
+    }
+    on("#clearSearch", function () {
+      if (search) search.value = "";
       state.query = "";
       $("#clearSearch").hidden = true;
       render();
-    };
+    });
 
-    $("#favBtn").onclick = function () {
+    on("#favBtn", function () {
       if (state.current) toggleFav(state.current);
-    };
-    $("#reloadBtn").onclick = function () {
+    });
+    on("#reloadBtn", function () {
       if (state.current) play(state.current);
-    };
-    $("#fullBtn").onclick = function () {
+    });
+    on("#fullBtn", function () {
       var stage = $("#stage");
       if (document.fullscreenElement) document.exitFullscreen();
-      else if (stage.requestFullscreen) stage.requestFullscreen();
-    };
-    $("#pipBtn").onclick = function () {
+      else if (stage && stage.requestFullscreen) stage.requestFullscreen();
+    });
+    on("#pipBtn", function () {
       if (document.pictureInPictureElement) document.exitPictureInPicture();
       else if (video.requestPictureInPicture) {
         video.requestPictureInPicture().catch(function () { showOsd("PiP desteklenmiyor"); });
       }
-    };
-    $("#themeBtn").onclick = function () {
+    });
+    on("#themeBtn", function () {
       var cur = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
       document.documentElement.setAttribute("data-theme", cur);
       try { localStorage.setItem("tv.theme", cur); } catch (e) {}
-    };
-    $("#menuBtn").onclick = function () { $("#sidebar").classList.toggle("open"); };
+    });
+    on("#menuBtn", function () {
+      var sb = $("#sidebar");
+      if (sb) sb.classList.toggle("open");
+    });
 
     // dialogs
-    $("#openAdd").onclick = function () { $("#addDlg").showModal(); };
-    $("#inspectClose").onclick = function () { $("#inspectDlg").close(); };
+    on("#openAdd", function () { $("#addDlg").showModal(); });
+    on("#inspectClose", function () { $("#inspectDlg").close(); });
 
-    $("#saveChannel").onclick = function () {
+    on("#saveChannel", function () {
       var name = $("#addName").value.trim();
       var url = $("#addUrl").value.trim();
       if (!name || !url) { showOsd("Ad ve adres gerekli"); return; }
@@ -1725,7 +1762,7 @@
       buildGroups(); render();
       $("#addDlg").close();
       play(ch);
-    };
+    });
 
     // keyboard shortcuts
     document.addEventListener("keydown", function (e) {
@@ -1751,11 +1788,13 @@
     } catch (e) {}
 
     loadLocal();
-    bind();
+    // A broken binding must never stop the channel list from loading.
+    try { bind(); } catch (e) { showFatal(e); }
 
     // Prefer the shared server copy (lets you open your list from any device).
     loadServerStore().then(function () {
-      if (state.epgUrl) $("#epgUrl").value = state.epgUrl;
+      var epg = $("#epgUrl");
+      if (state.epgUrl && epg) epg.value = state.epgUrl;
       return loadChannels();
     }).then(function () {
       if (state.channels.length) {
@@ -1766,10 +1805,34 @@
     }).catch(function (err) {
       setOverlay(true, "<h2>Liste yüklenemedi</h2><p>" +
         escapeHtml(String(err && err.message || err)) + "</p>");
+      showFatal(err);
     });
   }
 
-  document.addEventListener("DOMContentLoaded", boot);
+  // Surface errors on screen: on a TV box there is no dev console, so a
+  // screenshot of this banner is the only way to diagnose a blank list.
+  function showFatal(err) {
+    try {
+      var box = document.getElementById("fatal");
+      if (!box) {
+        box = document.createElement("div");
+        box.id = "fatal";
+        box.style.cssText = "position:fixed;left:0;right:0;bottom:0;z-index:99999;" +
+          "background:#7f1d1d;color:#fff;font:13px/1.4 monospace;padding:8px 10px;" +
+          "white-space:pre-wrap;max-height:45%;overflow:auto";
+        (document.body || document.documentElement).appendChild(box);
+      }
+      box.textContent = "hh hata: " + String(err && err.message || err) +
+        (err && err.stack ? "\n" + err.stack : "");
+    } catch (e) {}
+  }
+  window.__hhFatal = showFatal;
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot);
+  } else {
+    boot();
+  }
   // Tell the native side the page is live so a widget press that started the
   // app is not lost while the WebView was still loading.
   window.addEventListener("load", function () {

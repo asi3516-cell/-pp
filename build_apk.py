@@ -89,7 +89,7 @@ def main() -> None:
          "-I", android_jar,
          "--manifest", str(SRC / "AndroidManifest.xml"),
          "--java", str(gen),
-         "--min-sdk-version", "21",
+         "--min-sdk-version", "28",
          "--target-sdk-version", platform,
          "--version-code", "1", "--version-name", "1.0",
          str(res_zip)])
@@ -106,7 +106,7 @@ def main() -> None:
 
     # 4. Dex classes -> classes.dex.
     class_files = [str(p) for p in classes.rglob("*.class")]
-    run([d8, "--release", "--min-api", "21", "--lib", android_jar,
+    run([d8, "--release", "--min-api", "28", "--lib", android_jar,
          "--output", str(BUILD / "dex")] + class_files + libs)
 
     # 5. Add classes.dex and assets into the APK, then align + sign.

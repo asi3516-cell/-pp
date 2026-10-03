@@ -251,3 +251,39 @@ Calisan komutlar:
   Radyolari duzelt:  python3 fix_radios.py      (radio-browser'dan adres bulur)
 
 ========================================================================
+
+========================================================================
+12) YARIM KALAN IS: NATIVE APK'DA KANAL EKLE / DUZENLE / SIL (2026-10-03)
+========================================================================
+Durum: YARIM KALDI - devam edilecek.
+
+Amac: Native (Kotlin) APK'da kanal ekleme, adres duzenleme ve kalici silme.
+Bundled liste salt-okunur oldugu icin kullanici degisiklikleri Room'da
+tutulup listeyle birlestirilecek.
+
+TAMAMLANAN (kod yazildi):
+  [x] data/UserChannelEntity.kt  -> kullanici kanal satiri
+      (baseUrl PK, name, url, logo, groupName, kind, deleted, added, updatedAt)
+  [x] data/UserChannelDao.kt     -> observeAll / all / upsert / remove
+  [x] data/FavDatabase.kt        -> version 4, user_channels tablosu eklendi
+
+KALAN ISLER (sirayla):
+  [ ] UserChannelStore.kt: assets listesi + kullanici degisikliklerini
+      birlestir. deleted=true olanlari gizle, edited olanlari gecersiz kil,
+      added olanlari gruba ekle. live()/radio()/grouped() bunu kullansin.
+  [ ] Kanal duzenleme diyalogu (dialog_channel_edit.xml):
+      ad, adres, grup, logo alanlari + Kaydet / Iptal / Sil.
+      Ad ve adres zorunlu, adres http(s) ile baslamali.
+  [ ] ChannelListFragment: baslikta ve bos durumda "Kanal ekle" dugmesi;
+      uzun basinca "Duzenle" / "Sil" secenekleri (AlertDialog).
+  [ ] ExpandableChannelAdapter: onChannelLongClick geri cagrisi ekle.
+  [ ] strings.xml + drawables (ic_add, ic_edit, ic_delete) ekle.
+  [ ] APK derle ve dist/TV-Player.apk olarak yedekle.
+  [ ] Cihazda dogrula: kanal ekle, adres degistir, sil, uygulamayi kapat-ac
+      (degisiklikler kalici olmali).
+
+NOT: Degisiklikler Room'da oldugu icin uygulama guncellenince de kalir.
+Ayni ozellik web arayuzunde zaten var (static/app.js: editChannel/deleteChannel).
+
+========================================================================
+

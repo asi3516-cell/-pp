@@ -287,3 +287,25 @@ Ayni ozellik web arayuzunde zaten var (static/app.js: editChannel/deleteChannel)
 
 ========================================================================
 
+
+========================================================================
+BOLUM 13 - ACILIS COKMESI DUZELTMESI (cozuldu)
+
+SORUN: APK cihazda acilmiyordu (uygulama donuyor/cokuyor).
+KOK NEDEN: UI yeniden tasariminda eklenen iki vektor ikonda yay (arc)
+  komutu bozuktu. Iki bayrak ile x degeri bitisik yazilmisti:
+    ic_brand_mic.xml: "a5,5 0 015,5"     (7 yerine 5 sayi)
+    ic_search.xml:    "a8,8 0 105.3,14"  (7 yerine 5 sayi)
+  Android VectorDrawable bunlari acilirken okuyunca
+  "a needs to be followed by a multiple of 7 floats" hatasi verip
+  fragment_channel_list sisirilirken uygulamayi cokertiyordu.
+
+DUZELTME (commit b6be181):
+  [x] ic_brand_mic.xml / ic_search.xml pathData gecerli yaylarla yazildi
+  [x] build/check_vectors.py -> derlemeden once bozuk yayi yakalar
+  [x] R8 kucultme acildi (proguard-rules.pro) -> 18.7MB in 6.8MB
+
+DOGRULAMA: Emulator (emulator-5554) uzerinde BottomNavActivity acildi,
+  mFocusedApp = com.openhands.tvplayer/.ui.BottomNavActivity, cokme yok.
+  Not: Emulatorde KVM yok; systemui ANR yavasligi uygulamaya ait degil.
+

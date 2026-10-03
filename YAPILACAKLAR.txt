@@ -188,8 +188,15 @@ pakette duruyor (yedek / kaynak), ancak launcher artik native arayuz.
     -> Widget sadece radyoyu gosterir; TV acikken temizlenir.
 [x] Manifest: BottomNavActivity (launcher), PlayerActivity, PlayerService
     (foregroundServiceType=mediaPlayback), MainActivity (yedek, exported=false).
-[x] APK derlendi ve dist/TV-Player.apk olarak yedeklendi (18.6 MB).
+[x] APK derlendi ve dist/TV-Player.apk olarak yedeklendi (18.69 MB).
     -> Indirme: /download/apk  (HTTP 200).
+    -> Dogrulama: APK icinde BottomNavActivity, PlayerActivity,
+       ExpandableChannelAdapter, ChannelListFragment, PlayerService,
+       FavDatabase_Impl siniflari var.
+[x] Kaynak proje paketi: build/pkg/hh-Kaynak.zip (402 KB).
+    -> Icinde android/build.gradle, settings.gradle, 14 Kotlin dosyasi ve
+       tum layout'lar var; kendi basina derlenebilir.
+    -> Indirme: /download/source-zip  (HTTP 200).
 
 [~] Native arayuz cihazda elle test edilmedi (emulator/cihaz yok).
     -> Derleme basarili; davranis kodu okunarak dogrulandi.

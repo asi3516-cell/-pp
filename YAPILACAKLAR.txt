@@ -220,6 +220,13 @@ pakette duruyor (yedek / kaynak), ancak launcher artik native arayuz.
     kaldirilan 'tools' paketini kurmaya calisiyordu). Ilk push'ta dogrulandi.
     -> 2026-10-07: hh push'u (run 37620240269) TAM BASARILI. apk isi + 3 masaustu
        isi (windows/macos/linux) yesil; R8/minify acikken APK derlendi.
+[x] COKME DUZELTMESI (2026-10-07): R8/minify acikken uretilen APK kuruluyor ama
+    Android 14'te acilista cokuyordu. Kanit: calisan surumle (fe83be8) tek fark
+    R8'di (fe83be8..HEAD android/ diff = yalnizca build.gradle + proguard + sign_apk).
+    -> minifyEnabled false + shrinkResources false yapildi (bilinen-iyi hale donus).
+    -> proguard-rules.pro silinmedi; ileride denenirse Media3/NanoHTTPD/kopru/Room
+       keep kurallari hazir, ama cihazda acilis testi yapmadan acilmamali.
+    -> Surum yukseltildi: versionCode 2, versionName 1.1.
 
 Calisan komutlar (Android):
   APK derle: cd android && JAVA_HOME=/workspace/tools/jdk-17.0.20.1+1 \

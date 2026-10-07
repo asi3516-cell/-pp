@@ -12,7 +12,7 @@
 <link rel="icon" href="icons/favicon.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="icons/logo.svg" />
 <link rel="manifest" href="manifest.webmanifest" />
-<link rel="stylesheet" href="style.css?v=20261004" />
+<link rel="stylesheet" href="style.css?v=20261007" />
 </head>
 <body>
 <div id="app">
@@ -177,6 +177,14 @@
         <button id="setBackup" class="set-btn">Yedeği indir (tv-yedek.json)</button>
       </section>
 
+      <section class="set-card" id="setDownloads">
+        <h3>İndir</h3>
+        <a class="set-btn" href="/download/apk">Android APK indir (TV-Player.apk)</a>
+        <a class="set-btn" href="/download/windows-exe">Windows sürümü (hh.exe)</a>
+        <a class="set-btn" href="/download/player">Masaüstü oynatıcı</a>
+        <a class="set-btn" href="/download/source-zip">Kaynak kodu (hh-Kaynak.zip)</a>
+      </section>
+
       <section class="set-card">
         <h3>Hakkında</h3>
         <p class="muted" id="setAbout">TV Player · Android sürümü</p>
@@ -237,8 +245,8 @@
 </template>
 
 <script src="vendor/hls.min.js"></script>
-<script src="channels-data.js?v=20261004"></script>
-<script src="app.js?v=20261004"></script>
+<script src="channels-data.js?v=20261007"></script>
+<script src="app.js?v=20261007"></script>
 <script>
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", function () {

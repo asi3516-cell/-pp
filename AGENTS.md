@@ -80,6 +80,9 @@ A widget press cold-starts the activity, so `widgetCmd` queues the command in
 - `boot()` paints the embedded list first, then merges `/api/store` in the
   background, so a slow server never delays the first render. The flat list
   draws 200 rows and a "+N daha göster" row pages the rest in.
+- Settings has an "İndir" card linking to `/download/apk`, `/download/windows-exe`,
+  `/download/player` and `/download/source-zip`. Those routes only exist in
+  `server.py`, so the card is hidden when `nativePlayer()` is present (APK).
 - On the phone, show "TV Player" wherever the source says "hh".
 
 ### Native UI (Kotlin)
@@ -118,14 +121,16 @@ Build: `cd android && ./gradlew :app:assembleRelease` (wrapper is checked in;
 CI uses the same command). Do not run `build_apk.py` for the native app — it
 only packages the WebView fallback.
 
-Release builds run R8 (`minifyEnabled true`, `shrinkResources true`) with
-`android/app/proguard-rules.pro`. That file keeps Media3, NanoHTTPD, the
-`@JavascriptInterface` bridges and Room; if a new reflective entry point is
-added, add a `-keep` rule for it too or the release APK breaks at runtime while
-debug still works. Signing reads `hh-release.jks` plus `TV_STORE_PASS` /
-`TV_KEY_PASS` / `TV_KEY_ALIAS` from the environment (`android/sign_apk.bat`
-wraps `apksigner`); the keystore and passwords are never committed, and a build
-without the env vars falls back to the debug key.
+Release builds do **not** run R8 (`minifyEnabled false`, `shrinkResources
+false`). Enabling it once shipped an APK that installed but crashed on launch on
+Android 14; the unshrunk build is the known-good one. `android/app/proguard-rules.pro`
+is kept for a future, verified attempt — if R8 is ever turned back on, keep
+Media3, NanoHTTPD, the `@JavascriptInterface` bridges and Room (the rules
+already do), and test a real launch on a device before shipping. Signing reads
+`hh-release.jks` plus `TV_STORE_PASS` / `TV_KEY_PASS` / `TV_KEY_ALIAS` from the
+environment (`android/sign_apk.bat` wraps `apksigner`); the keystore and
+passwords are never committed, and a build without the env vars falls back to
+the debug key.
 
 `server.py` inspects mirrors in the `/api/probe` endpoint with a thread pool
 (8 workers, 6 s each, HEAD then a 4 KB GET) and caches healthy results for an

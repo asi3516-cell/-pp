@@ -814,6 +814,8 @@ h1, h2, h3 { margin: 0; }
 }
 .set-btn:first-of-type { border-top: 0; }
 .set-btn:active { color: var(--accent); }
+/* Download rows reuse the button look but are real links. */
+a.set-btn { text-decoration: none; box-sizing: border-box; }
 
 /* iOS-style switch */
 .switch {

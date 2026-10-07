@@ -2299,6 +2299,13 @@
       if (about) about.textContent = "TV Player · " + state.channels.length + " kanal";
     } catch (e) {}
 
+    // The download links come from server.py; inside the APK there is no local
+    // server, so hide the card rather than offer dead links.
+    try {
+      var dl = $("#setDownloads");
+      if (dl && nativePlayer()) dl.style.display = "none";
+    } catch (e) {}
+
     // ---- open the player when a channel is chosen, close it with back ----
     function closePlayer() {
       var app = $("#app");

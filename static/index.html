@@ -12,7 +12,7 @@
 <link rel="icon" href="icons/favicon.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="icons/logo.svg" />
 <link rel="manifest" href="manifest.webmanifest" />
-<link rel="stylesheet" href="style.css?v=20261003e" />
+<link rel="stylesheet" href="style.css?v=20261004" />
 </head>
 <body>
 <div id="app">
@@ -173,6 +173,11 @@
       </section>
 
       <section class="set-card">
+        <h3>Yedek</h3>
+        <button id="setBackup" class="set-btn">Yedeği indir (tv-yedek.json)</button>
+      </section>
+
+      <section class="set-card">
         <h3>Hakkında</h3>
         <p class="muted" id="setAbout">TV Player · Android sürümü</p>
       </section>
@@ -232,8 +237,8 @@
 </template>
 
 <script src="vendor/hls.min.js"></script>
-<script src="channels-data.js?v=20261003e"></script>
-<script src="app.js?v=20261003e"></script>
+<script src="channels-data.js?v=20261004"></script>
+<script src="app.js?v=20261004"></script>
 <script>
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", function () {

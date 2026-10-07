@@ -903,3 +903,30 @@ h1, h2, h3 { margin: 0; }
   .sidebar:not(.flat-list) .groups { display: none; }
   .nav-tree { max-height: none; flex: 1; }
 }
+
+/* TV remote focus: an amber ring on the row the directional pad is on, so
+   the cursor is visible on a box that has no mouse hover. */
+.ch:focus,
+.tree-row:focus { outline: 2px solid #ffb300; outline-offset: -2px; }
+
+/* "+N daha goster" row at the end of a paged channel list. */
+.ch-more {
+  width: 100
+/* TV remote focus: an amber ring on the row the directional pad is on, so the
+   cursor is visible on a box that has no mouse. */
+.ch:focus,
+.tree-row:focus { outline: 2px solid #ffb300; outline-offset: -2px; }
+
+/* "+N daha goster" row at the end of a paged channel list. */
+.ch-more {
+  width: 100%;
+  justify-content: center;
+  background: var(--bg-2);
+  color: var(--muted);
+  border: 0;
+  font: inherit;
+  font-size: 13px;
+  padding: 10px;
+  cursor: pointer;
+}
+.ch-more:hover { color: #fff; }

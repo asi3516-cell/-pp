@@ -17,3 +17,6 @@ android/app/build/
 data/channels.cache.json.gz
 *.idsig
 !android/gradle/wrapper/gradle-wrapper.jar
+tvplayer.keystore
+.keystore-pass
+signing.properties

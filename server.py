@@ -26,6 +26,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 import zipfile
+from concurrent.futures import ThreadPoolExecutor
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
@@ -68,6 +69,12 @@ STORE_FILE = DATA_DIR / "store.json"
 BUNDLED_DATA_DIR = ROOT / "data"
 
 DEFAULT_TIMEOUT = 20
+# One shared cache for the inspect view: a healthy probe is reused for an hour
+# so re-opening a channel does not re-hit every mirror. A single dead mirror
+# must not hold the whole check hostage, so probes get a shorter timeout.
+PROBE_TIMEOUT = 6
+PROBE_TTL = 3600
+_probe_cache: dict = {}
 UA = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
     "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"
@@ -129,6 +136,18 @@ def fetch(url: str, headers: dict | None = None, timeout: int = DEFAULT_TIMEOUT)
         hdrs = {k.lower(): v for k, v in resp.headers.items()}
         if hdrs.get("content-encoding") == "gzip" and raw[:2] == b"\x1f\x8b":
             raw = gzip.GzipFile(fileobj=io.BytesIO(raw)).read()
+        return resp.status, hdrs, raw
+
+
+def fetch_limited(url: str, timeout: int = DEFAULT_TIMEOUT, limit: int = 4096):
+    """Like fetch(), but read at most `limit` bytes. Probing a live video
+    stream must not download the whole transport stream just to see a status."""
+    req = urllib.request.Request(
+        url, headers={"User-Agent": UA, "Accept": "*/*",
+                      "Accept-Encoding": "identity"})
+    with urllib.request.urlopen(req, timeout=timeout, context=_SSL_CTX) as resp:
+        raw = resp.read(limit)
+        hdrs = {k.lower(): v for k, v in resp.headers.items()}
         return resp.status, hdrs, raw
 
 
@@ -615,38 +634,76 @@ class Handler(BaseHTTPRequestHandler):
             urls.extend(u for u in raw.split("|") if u)
         if not urls:
             return self._json(400, {"error": "missing url"})
-        results = []
-        for u in urls[:12]:
-            entry = {"url": u, "ok": False, "status": 0, "error": "",
-                     "kind": "", "note": ""}
-            try:
-                status, hdrs, raw = fetch(u, timeout=12)
-                ctype = (hdrs.get("content-type") or "").lower()
-                entry["status"] = status
-                if raw[:7].upper() == b"#EXTM3U":
-                    entry["kind"] = "playlist"
-                    text = raw.decode("utf-8", "replace")
-                    variants = [ln.strip() for ln in text.splitlines()
-                                if ln.strip() and not ln.startswith("#")]
-                    entry["variants"] = len(variants)
-                    entry["ok"] = len(variants) > 0
-                elif "mpegurl" in ctype or "vnd.apple" in ctype:
-                    entry["kind"] = "playlist"
-                    entry["ok"] = True
-                elif "mpegts" in ctype or "mp2t" in ctype or "video" in ctype:
-                    entry["kind"] = "media"
-                    entry["ok"] = status == 200
-                else:
-                    entry["kind"] = "data"
-                    entry["ok"] = status == 200 and len(raw) > 0
-                    entry["note"] = ctype or "bilinmeyen tür"
-            except urllib.error.HTTPError as exc:
-                entry["status"] = exc.code
-                entry["error"] = "HTTP %d (%s)" % (exc.code, exc.reason)
-            except (urllib.error.URLError, OSError) as exc:
-                entry["error"] = str(exc)[:120]
-            results.append(entry)
+        urls = urls[:12]
+        # A dead mirror used to burn the full 12s timeout in sequence, so a
+        # channel with several alternatives took half a minute to inspect.
+        # Probe the alternatives in parallel and cap each at 6s; a healthy
+        # result is cached for an hour (a failure is left uncached so the next
+        # check can catch a stream that just came back).
+        with ThreadPoolExecutor(max_workers=8) as pool:
+            results = list(pool.map(self._probe_one, urls))
         self._json(200, {"results": results})
+
+    def _probe_one(self, u: str) -> dict:
+        entry = {"url": u, "ok": False, "status": 0, "error": "",
+                 "kind": "", "note": ""}
+        cached = _probe_cache.get(u)
+        if cached and time.time() - cached.get("_at", 0) < PROBE_TTL:
+            out = dict(cached)
+            out.pop("_at", None)
+            return out
+        try:
+            status, hdrs, raw = self._probe_fetch(u)
+            ctype = (hdrs.get("content-type") or "").lower()
+            entry["status"] = status
+            if raw[:7].upper() == b"#EXTM3U":
+                entry["kind"] = "playlist"
+                text = raw.decode("utf-8", "replace")
+                variants = [ln.strip() for ln in text.splitlines()
+                            if ln.strip() and not ln.startswith("#")]
+                entry["variants"] = len(variants)
+                entry["ok"] = len(variants) > 0
+            elif "mpegurl" in ctype or "vnd.apple" in ctype:
+                entry["kind"] = "playlist"
+                entry["ok"] = True
+            elif "mpegts" in ctype or "mp2t" in ctype or "video" in ctype:
+                entry["kind"] = "media"
+                entry["ok"] = status == 200
+            else:
+                entry["kind"] = "data"
+                entry["ok"] = status == 200 and len(raw) > 0
+                entry["note"] = ctype or "bilinmeyen tür"
+        except urllib.error.HTTPError as exc:
+            entry["status"] = exc.code
+            entry["error"] = "HTTP %d (%s)" % (exc.code, exc.reason)
+        except (urllib.error.URLError, OSError) as exc:
+            entry["error"] = str(exc)[:120]
+        if entry["ok"]:
+            stored = dict(entry, _at=time.time())
+            _probe_cache[u] = stored
+        return entry
+
+    @staticmethod
+    def _probe_fetch(u: str):
+        """HEAD first (cheap) and only read a few KB with GET if the headers do
+        not already say what the URL is. A dead mirror therefore fails on the
+        6s timeout without pulling a whole transport stream."""
+        try:
+            req = urllib.request.Request(u, method="HEAD",
+                                         headers={"User-Agent": UA, "Accept": "*/*"})
+            with urllib.request.urlopen(req, timeout=PROBE_TIMEOUT,
+                                        context=_SSL_CTX) as resp:
+                hdrs = {k.lower(): v for k, v in resp.headers.items()}
+                status = resp.status
+            ctype = (hdrs.get("content-type") or "").lower()
+            if status < 400 and ("mpegurl" in ctype or "mpegts" in ctype or
+                                 "video" in ctype or "audio" in ctype):
+                return status, hdrs, b""
+        except urllib.error.HTTPError:
+            raise
+        except (urllib.error.URLError, OSError):
+            pass
+        return fetch_limited(u, timeout=PROBE_TIMEOUT, limit=4096)
 
     def _api_proxy(self, query: dict, head_only: bool) -> None:
         url = (query.get("url") or [""])[0]

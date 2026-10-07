@@ -28,10 +28,32 @@ android {
         viewBinding true
     }
 
+    // Release signing key is never committed with its password. Pass it at
+    // build time instead, e.g.:
+    //   TV_STORE_PASS=... TV_KEY_PASS=... ./gradlew :app:assembleRelease
+    // Without the env vars the debug key is used, so a local build still works.
+    signingConfigs {
+        release {
+            def ks = file('hh-release.jks')
+            if (ks.exists() && System.getenv('TV_STORE_PASS')) {
+                storeFile ks
+                storePassword System.getenv('TV_STORE_PASS')
+                keyAlias System.getenv('TV_KEY_ALIAS') ?: 'hhkey'
+                keyPassword System.getenv('TV_KEY_PASS') ?: System.getenv('TV_STORE_PASS')
+            }
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
-            signingConfig signingConfigs.debug
+            // R8 shrinks and obfuscates; the rules keep Media3, NanoHTTPD, the
+            // WebView JS bridges and Room intact at runtime.
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
+                          'proguard-rules.pro'
+            def hasReleaseKey = file('hh-release.jks').exists() && System.getenv('TV_STORE_PASS')
+            signingConfig hasReleaseKey ? signingConfigs.release : signingConfigs.debug
         }
     }
 

@@ -25,6 +25,8 @@
     sources: [],
     expanded: { "Canlı TV": true },
     openGroup: null,
+    pageLimit: 200,
+    _filterSig: "",
     loaded: { "Canlı TV": true },
     detail: null,
     detailSeason: null,
@@ -46,6 +48,8 @@
   // Playlists live on the server so they survive a reload and can be opened
   // from any device using the same address. localStorage is an offline cache.
   var LS_KEY = "tv.state.v1";
+  var MIRROR_KEY = "tv.mirror.v1";
+  var hueCache = {};
 
   function snapshot() {
     return {
@@ -119,9 +123,24 @@
         overrides: state.overrides,
         deleted: state.deleted,
         settings: { epgUrl: state.epgUrl, ui: { source: state.source, kind: state.kind } }
-      })).catch(function () { /* offline: localStorage still has it */ });
+                })).catch(function () { /* offline: localStorage still has it */ });
     }, 400);
   }
+
+  // One-file backup: favorites, added channels, overrides and deletions are all
+  // inside the local store snapshot, so saving it is enough to restore the app.
+  function exportBackup() {
+    var data = localStorage.getItem(LS_KEY) || JSON.stringify(snapshot());
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([data], { type: "application/json" }));
+    a.download = "tv-yedek.json";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+    showOsd("💾 tv-yedek.json indirildi");
+  }
+
 
   /* ------------------------------ api -------------------------------- */
   // XHR instead of fetch: fetch() is missing on the old WebViews that ship
@@ -655,6 +674,7 @@
     var open = !!state.expanded[o.key];
     var row = document.createElement("button");
     row.className = "tree-row" + (o.active ? " active" : "");
+    row.tabIndex = 0;
     row.innerHTML = '<span class="tw">' + (open ? "▾" : "▸") + "</span>" +
       '<span class="tl">' + escapeHtml(o.label) + "</span>" +
       '<span class="tn">' + o.count + "</span>";
@@ -792,6 +812,7 @@
   function treeLeaf(o) {
     var b = document.createElement("button");
     b.className = "tree-row leaf" + (o.active ? " active" : "");
+    b.tabIndex = 0;
     b.innerHTML = '<span class="tw"></span><span class="tl">' +
       escapeHtml(o.label) + "</span><span class='tn'>" + o.count + "</span>";
     b.onclick = o.onPick;
@@ -989,12 +1010,22 @@
       });
     }
     state.filtered = list;
+    // A changed filter starts paging from the top; a plain re-render (e.g. a
+    // favorite toggled) keeps the rows the user already expanded.
+    var sig = [state.tab, state.kind, state.source, state.group, state.query].join("\u0001");
+    if (sig !== state._filterSig) { state._filterSig = sig; state.pageLimit = 200; }
   }
 
   function logoHue(name) {
     var h = 0;
     for (var i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) % 360;
     return h;
+  }
+
+  // The same channel name is drawn many times (list + tree + grid); memoise
+  // the hue so the hash loop is not re-run for every row.
+  function logoHueM(name) {
+    return hueCache[name] || (hueCache[name] = logoHue(name));
   }
 
   // Season/episode markers as providers write them: "S01E02", "S1 E2",
@@ -1170,76 +1201,119 @@
     box.className = "channel-list";
     box.innerHTML = "";
     var frag = document.createDocumentFragment();
+    var limit = Math.min(state.filtered.length, state.pageLimit);
+    for (var i = 0; i < limit; i++) frag.appendChild(drawRow(state.filtered[i]));
 
-    state.filtered.slice(0, 1500).forEach(function (ch) {
-      var node = document.createElement("div");
-      node.className = "ch";
-      node.tabIndex = 0;
-      node.dataset.url = ch.url;
-      if (state.current && state.current.url === ch.url) node.classList.add("active");
-
-      var logo = document.createElement("div");
-      logo.className = "ch-logo";
-      var initial = (ch.name || "?").trim().charAt(0).toUpperCase();
-      logo.style.background =
-        "linear-gradient(135deg,hsl(" + logoHue(ch.name || "") + " 55% 34%),hsl(" +
-        ((logoHue(ch.name || "") + 40) % 360) + " 55% 22%))";
-      var ph = document.createElement("span");
-      ph.className = "ph";
-      ph.textContent = initial;
-      logo.appendChild(ph);
-      if (ch.logo) {
-        var img = document.createElement("img");
-        img.alt = "";
-        img.loading = "lazy";
-        img.onload = function () { ph.style.display = "none"; };
-        img.onerror = function () { img.remove(); };
-        img.src = ch.logo;
-        logo.appendChild(img);
-      }
-
-      var text = document.createElement("div");
-      text.className = "ch-text";
-      var nm = document.createElement("span");
-      nm.className = "ch-name";
-      nm.textContent = ch.name;
-      var sub = document.createElement("span");
-      sub.className = "ch-sub muted";
-      sub.textContent = ch.group || "Genel";
-      text.appendChild(nm);
-      text.appendChild(sub);
-
-      var favBtn = document.createElement("button");
-      favBtn.className = "ch-fav" + (isFavOf(ch) ? " on" : "");
-      favBtn.textContent = isFavOf(ch) ? "★" : "☆";
-      favBtn.title = "Favori";
-      favBtn.onclick = function (ev) { ev.stopPropagation(); toggleFav(ch); };
-
-      var head = document.createElement("div");
-      head.className = "ch-head";
-      head.appendChild(logo);
-      head.appendChild(text);
-      head.appendChild(favBtn);
-
-      var inspectBtn = document.createElement("button");
-      inspectBtn.className = "ch-inspect";
-      inspectBtn.type = "button";
-      inspectBtn.textContent = "ⓘ";
-      inspectBtn.title = "İncele / düzenle";
-      inspectBtn.onclick = function (ev) { ev.stopPropagation(); inspect(ch); };
-      head.appendChild(inspectBtn);
-
-      head.onclick = function () { play(ch); };
-      node.appendChild(head);
-
-      node.onkeydown = function (ev) {
-        if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); play(ch); }
-      };
-      frag.appendChild(node);
-    });
+    // More than one screen of channels: paint the first slice immediately and
+    // grow it only when the focused "show more" row is reached, so a 1500-row
+    // list neither blocks the first frame nor builds thousands of DOM nodes.
+    if (limit < state.filtered.length) {
+      frag.appendChild(moreRow(state.filtered.length - limit));
+    }
 
     box.appendChild(frag);
     $("#chCount").textContent = state.filtered.length + " / " + state.channels.length + " kanal";
+  }
+
+  // One channel row. Split out of render() so paging can append rows without
+  // rebuilding the whole list.
+  function drawRow(ch) {
+    var node = document.createElement("div");
+    node.className = "ch";
+    node.tabIndex = 0;
+    node.dataset.url = ch.url;
+    if (state.current && state.current.url === ch.url) node.classList.add("active");
+
+    var logo = document.createElement("div");
+    logo.className = "ch-logo";
+    var hue = logoHueM(ch.name || "");
+    var initial = (ch.name || "?").trim().charAt(0).toUpperCase();
+    logo.style.background =
+      "linear-gradient(135deg,hsl(" + hue + " 55% 34%),hsl(" +
+      ((hue + 40) % 360) + " 55% 22%))";
+    var ph = document.createElement("span");
+    ph.className = "ph";
+    ph.textContent = initial;
+    logo.appendChild(ph);
+    if (ch.logo) {
+      var img = document.createElement("img");
+      img.alt = "";
+      img.loading = "lazy";
+      img.onload = function () { ph.style.display = "none"; };
+      img.onerror = function () { img.remove(); };
+      img.src = ch.logo;
+      logo.appendChild(img);
+    }
+
+    var text = document.createElement("div");
+    text.className = "ch-text";
+    var nm = document.createElement("span");
+    nm.className = "ch-name";
+    nm.textContent = ch.name;
+    var sub = document.createElement("span");
+    sub.className = "ch-sub muted";
+    sub.textContent = ch.group || "Genel";
+    text.appendChild(nm);
+    text.appendChild(sub);
+
+    var favBtn = document.createElement("button");
+    favBtn.className = "ch-fav" + (isFavOf(ch) ? " on" : "");
+    favBtn.textContent = isFavOf(ch) ? "★" : "☆";
+    favBtn.title = "Favori";
+    favBtn.onclick = function (ev) { ev.stopPropagation(); toggleFav(ch); };
+
+    var head = document.createElement("div");
+    head.className = "ch-head";
+    head.appendChild(logo);
+    head.appendChild(text);
+    head.appendChild(favBtn);
+
+    var inspectBtn = document.createElement("button");
+    inspectBtn.className = "ch-inspect";
+    inspectBtn.type = "button";
+    inspectBtn.textContent = "ⓘ";
+    inspectBtn.title = "İncele / düzenle";
+    inspectBtn.onclick = function (ev) { ev.stopPropagation(); inspect(ch); };
+    head.appendChild(inspectBtn);
+
+    head.onclick = function () { play(ch); };
+    node.appendChild(head);
+
+    node.onkeydown = function (ev) {
+      if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); play(ch); }
+    };
+    return node;
+  }
+
+  // The "+N daha göster" row is focusable so a TV remote lands on it by simply
+  // pressing Down; the next page is appended without a full re-render.
+  function moreRow(n) {
+    var b = document.createElement("button");
+    b.className = "ch ch-more";
+    b.type = "button";
+    b.tabIndex = 0;
+    b.textContent = "+" + n + " daha göster";
+    b.onclick = loadMore;
+    b.onfocus = loadMore;
+    b.onkeydown = function (ev) {
+      if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); loadMore(); }
+    };
+    return b;
+  }
+
+  function loadMore() {
+    var box = $("#channels");
+    if (!box) return;
+    var more = box.querySelector(".ch-more");
+    if (!more) return;
+    var start = Math.min(box.querySelectorAll(".ch:not(.ch-more)").length,
+                         state.filtered.length);
+    var limit = Math.min(state.filtered.length, state.pageLimit + start);
+    var frag = document.createDocumentFragment();
+    for (var i = start; i < limit; i++) frag.appendChild(drawRow(state.filtered[i]));
+    state.pageLimit = limit;
+    if (limit < state.filtered.length) frag.appendChild(moreRow(state.filtered.length - limit));
+    box.replaceChild(frag, more);
   }
 
   function toggleFav(ch) {
@@ -1367,6 +1441,38 @@
     }
   };
 
+  // Remember which alternative URL actually played for a channel, keyed by its
+  // stream group, so the next open starts from a working mirror instead of a
+  // dead primary.
+  function mirrorKey(ch) {
+    return "mirror|" + (ch.streamGroup || ch.name || ch.group || "");
+  }
+  function rememberedMirror(ch) {
+    try { return localStorage.getItem(mirrorKey(ch)) || ""; } catch (e) { return ""; }
+  }
+  function rememberMirror(ch) {
+    if (!ch || !ch.url) return;
+    try { localStorage.setItem(mirrorKey(ch), ch.url); } catch (e) {}
+  }
+  function nextMirror() {
+    var i = state.streamIdx + 1;
+    if (i < (state.queue || []).length) loadStream(i);
+  }
+
+  // A stream can report "playing" while showing a black frame (a dead mirror
+  // that still sends a playlist). After 3s with no video dimensions, move on.
+  var blackTimer = null;
+  function watchBlack() {
+    clearTimeout(blackTimer);
+    if (isRadioNow()) return;
+    blackTimer = setTimeout(function () {
+      if (video.videoWidth === 0) {
+        showOsd("Siyah ekran · sonraki ayna");
+        nextMirror();
+      }
+    }, 3000);
+  }
+
   function play(ch, overrideUrl) {
     state.current = ch;
     state.detail = null;
@@ -1379,6 +1485,12 @@
     if (overrideUrl) {
       var idx = streams.map(function (s) { return s.url; }).indexOf(overrideUrl);
       if (idx > 0) { streams.splice(0, 0, streams.splice(idx, 1)[0]); }
+    } else if (streams.length > 1) {
+      // Start from the mirror that last worked for this channel, so a dead
+      // primary does not get retried on every zap.
+      var last = rememberedMirror(ch);
+      var li = last ? streams.map(function (s) { return s.url; }).indexOf(last) : -1;
+      if (li > 0) { streams.splice(0, 0, streams.splice(li, 1)[0]); }
     }
     state.queue = streams;
     state.streamIdx = start;
@@ -1904,6 +2016,10 @@
       showOsd("🔴 CANLI · " + (cur ? cur.name : ""));
     }
     pushWidgetState(true);
+    // Lock in the mirror that worked and arm the black-frame watchdog. Radio
+    // has no video frame, so the watchdog skips itself.
+    rememberMirror(state.current);
+    watchBlack();
     if (isRadioNow()) startNowPolling();
   }
 
@@ -2133,6 +2249,7 @@
     }
     on("#setBtn", function () { openSettings(true); });
     on("#settingsBack", function () { openSettings(false); });
+    on("#setBackup", function () { exportBackup(); });
 
     function syncThemeSeg() {
       var cur = document.documentElement.getAttribute("data-theme") === "light"
@@ -2201,12 +2318,19 @@
     window.tvClosePlayer = closePlayer;
     on("#playerBack", closePlayer);
 
+    var searchTimer = null;
     var onSearch = function (e) {
       state.query = e.target.value.trim();
       var clr = $("#clearSearch");
       if (clr) clr.hidden = !state.query;
-      if (window.tvSyncListMode) window.tvSyncListMode();
-      render();
+      // Debounce: filtering 1500 channels on every keystroke stutters on a TV
+      // box; 200ms coalesces a burst of input into a single render.
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(function () {
+        state.pageLimit = 200;
+        if (window.tvSyncListMode) window.tvSyncListMode();
+        render();
+      }, 200);
     };
     var search = $("#search");
     if (search) {
@@ -2217,6 +2341,7 @@
     on("#clearSearch", function () {
       if (search) search.value = "";
       state.query = "";
+      state.pageLimit = 200;
       $("#clearSearch").hidden = true;
       if (window.tvSyncListMode) window.tvSyncListMode();
       render();
@@ -2306,16 +2431,18 @@
     // A broken binding must never stop the channel list from loading.
     try { bind(); bindControls(); } catch (e) { showFatal(e); }
 
-    // Prefer the shared server copy (lets you open your list from any device).
+    // Paint the embedded list first and merge the shared server store in the
+    // background, so a slow /api/store never delays the first channel list.
+    loadChannels();
     loadServerStore().then(function () {
       var epg = $("#epgUrl");
       if (state.epgUrl && epg) epg.value = state.epgUrl;
-      return loadChannels();
-    }).then(function () {
       if (state.channels.length) {
-        setOverlay(true,
-          "<h2>" + state.channels.length + " kanal hazır</h2>" +
-          "<p>Başlamak için listeden bir kanal seçin.</p>");
+        applyOverrides();
+        renderTree();
+        buildGroups();
+        render();
+        if (state.current) updateFavBtn();
       }
     }).catch(function (err) {
       setOverlay(true, "<h2>Liste yüklenemedi</h2><p>" +

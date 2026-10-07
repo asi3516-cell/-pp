@@ -80,7 +80,24 @@ jobs:
           echo "sdk.dir=$ANDROID_SDK_ROOT" > android/local.properties
 
       - name: Build APK
-        run: cd android && ./gradlew :app:assembleRelease --no-daemon --stacktrace
+        env:
+          TV_STORE_PASS: ${{ secrets.HH_STORE_PASS }}
+          TV_KEY_PASS: ${{ secrets.HH_STORE_PASS }}
+          TV_KEY_ALIAS: hhkey
+        run: |
+          # Restore the fixed signing key so every build shares one signature.
+          # Without it Gradle falls back to a throwaway debug key and each run
+          # produces a differently-signed APK, which breaks updates on-device.
+          if [ -n "$TV_STORE_PASS" ]; then
+            echo "${{ secrets.HH_KEYSTORE_B64 }}" | base64 -d > android/app/hh-release.jks
+          fi
+          cd android && ./gradlew :app:assembleRelease --no-daemon --stacktrace
+
+      - name: Verify signing
+        run: |
+          APK=android/app/build/outputs/apk/release/app-release.apk
+          "$ANDROID_SDK_ROOT"/build-tools/34.0.0/apksigner verify --print-certs "$APK" \
+            | grep -i "certificate SHA-256" || true
 
       - name: Collect APK
         run: |

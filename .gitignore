@@ -20,3 +20,4 @@ data/channels.cache.json.gz
 tvplayer.keystore
 .keystore-pass
 signing.properties
+hh-release.jks

@@ -48,6 +48,10 @@ notification (this is how the radio widget is refreshed).
 pixels while the native View is laid out in physical pixels. Without the scale
 the native player opens as a small box.
 
+Playback remembers the last working mirror per channel (`tv.mirror.v1`) and
+starts there next time; if a start shows no video after a few seconds a
+watchdog advances to the next alternative URL (skipped for radio).
+
 ## Permissions
 
 Only `INTERNET` and `ACCESS_NETWORK_STATE`. No storage permission on any API
@@ -73,6 +77,9 @@ A widget press cold-starts the activity, so `widgetCmd` queues the command in
   (`.flat-list`).
 - Selecting a channel opens the player full screen (`#app.playing`); the back
   button returns to the list.
+- `boot()` paints the embedded list first, then merges `/api/store` in the
+  background, so a slow server never delays the first render. The flat list
+  draws 200 rows and a "+N daha göster" row pages the rest in.
 - On the phone, show "TV Player" wherever the source says "hh".
 
 ### Native UI (Kotlin)
@@ -110,3 +117,16 @@ never start a TV stream.
 Build: `cd android && ./gradlew :app:assembleRelease` (wrapper is checked in;
 CI uses the same command). Do not run `build_apk.py` for the native app — it
 only packages the WebView fallback.
+
+Release builds run R8 (`minifyEnabled true`, `shrinkResources true`) with
+`android/app/proguard-rules.pro`. That file keeps Media3, NanoHTTPD, the
+`@JavascriptInterface` bridges and Room; if a new reflective entry point is
+added, add a `-keep` rule for it too or the release APK breaks at runtime while
+debug still works. Signing reads `hh-release.jks` plus `TV_STORE_PASS` /
+`TV_KEY_PASS` / `TV_KEY_ALIAS` from the environment (`android/sign_apk.bat`
+wraps `apksigner`); the keystore and passwords are never committed, and a build
+without the env vars falls back to the debug key.
+
+`server.py` inspects mirrors in the `/api/probe` endpoint with a thread pool
+(8 workers, 6 s each, HEAD then a 4 KB GET) and caches healthy results for an
+hour. Keep probes bounded — a dead mirror must not stall the whole check.

@@ -1,6 +1,6 @@
 ========================================================================
 hh - YAPILACAKLAR VE DURUM LISTESI
-Son guncelleme: 2026-10-03
+Son guncelleme: 2026-10-07
 Depo: https://github.com/asi3516-cell/-pp (gizli/private)
 ========================================================================
 
@@ -216,8 +216,10 @@ pakette duruyor (yedek / kaynak), ancak launcher artik native arayuz.
 [x] Tam ekran dugmesi sistem cubuklarini gizleyip gosteriyor.
 [ ] WebView (MainActivity) ile native arayuz arasindaki gecis dugmesi
     (istege bagli; su an launcher native).
-[ ] CI APK isi Gradle wrapper ile duzeltildi (android-actions/setup-android
-    kaldirilan 'tools' paketini kurmaya calisiyordu). Ilk push'ta dogrulanacak.
+[x] CI APK isi Gradle wrapper ile duzeltildi (android-actions/setup-android
+    kaldirilan 'tools' paketini kurmaya calisiyordu). Ilk push'ta dogrulandi.
+    -> 2026-10-07: hh push'u (run 37620240269) TAM BASARILI. apk isi + 3 masaustu
+       isi (windows/macos/linux) yesil; R8/minify acikken APK derlendi.
 
 Calisan komutlar (Android):
   APK derle: cd android && JAVA_HOME=/workspace/tools/jdk-17.0.20.1+1 \

@@ -35,16 +35,13 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:theme="@style/Theme.TVPlayer">
 
-        <!-- The native UI: bottom tabs (Live / Radio / Favourites). -->
+        <!-- Alternate native UI (bottom tabs). Reachable but not the launcher;
+             the full app below is the default because it carries the complete
+             player controls (seek, mute, PiP, theme, settings). -->
         <activity
             android:name=".ui.BottomNavActivity"
-            android:exported="true"
-            android:theme="@style/Theme.TVPlayer">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false"
+            android:theme="@style/Theme.TVPlayer" />
 
         <activity
             android:name=".ui.PlayerActivity"
@@ -52,12 +49,18 @@
             android:configChanges="orientation|screenSize|keyboardHidden|screenLayout"
             android:theme="@style/Theme.TVPlayer" />
 
-        <!-- Kept for the web UI and the local server. -->
+        <!-- The full app: channel list, search, settings and the VLC-style
+             player, all in the bundled web UI with the native ExoPlayer. -->
         <activity
             android:name=".MainActivity"
-            android:exported="false"
+            android:exported="true"
             android:configChanges="orientation|screenSize|keyboardHidden|screenLayout"
-            android:screenOrientation="fullSensor" />
+            android:screenOrientation="fullSensor">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <!-- Background playback + the MediaSession the widgets drive. -->
         <service

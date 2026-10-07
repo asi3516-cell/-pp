@@ -110,5 +110,11 @@ portalını/playlist'ini eklemek zorunda kalmadan açılır açılmaz çalışı
   yüklenince liste yerine oturur.
 - **Sürüm**: `versionCode 3` / `versionName 1.2`; `VERSION=20261008a` damgası
   `index.html`, `sw.js` ve gömülü listeye yayıldı (tek damga).
-- **Not**: APK bu turda istenmediği için yeniden derlenmedi; `android/app/src/main/assets`
-  yeni damgayla eşitlendi.
+- **APK paketlendi** (istenildi): Gradle `:app:assembleRelease` ile arm64,
+  armeabi-v7a, universal (ayrıca emülatör için x86/x86_64) üretildi; imza
+  anahtarı/parmak izi **aynı** (`CN=TV Player`, SHA-256 `300decbe…`), bu yüzden
+  kurulu kutu üzerine güncelleme imza uyuşmazlığı olmadan çalışır. Çıktılar
+  `dist/` ve `build/pkg/` içine yayımlandı.
+- **Kaynak arşivi**: `build/package_source.py` artık `sign_apk.bat`,
+  `app/build.gradle` ve `proguard-rules.pro`'u da paketliyor; `data/store.json`
+  yine hariç. `hh-Kaynak.zip|.7z|.rar` yeniden üretildi.

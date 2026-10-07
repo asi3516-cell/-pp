@@ -18,7 +18,7 @@ OUT = PKG / "hh-Kaynak.zip"
 
 SINGLE_FILES = [
     "server.py", "build_channels.py", "build_canlitv.py", "build_exe.py",
-    "build_apk.py", "build_exe.bat", "README.md", "build/make.py",
+    "build_apk.py", "build_exe.bat", "sign_apk.bat", "README.md", "build/make.py",
     "build/tv_player.spec", "build/requirements-build.txt", "build/package_source.py",
     "build/verify_integrity.py", "build/refresh_health.py", "build/check_vectors.py",
     "make_embedded_channels.py", "apply_health.py", "VERSION", "run.sh", "run.bat",
@@ -27,6 +27,7 @@ SINGLE_FILES = [
 ANDROID_FILES = [
     "build.gradle", "settings.gradle", "gradle.properties",
     "gradlew", "gradlew.bat", "gradle/wrapper/gradle-wrapper.properties",
+    "app/build.gradle", "app/proguard-rules.pro",
 ]
 TREE_DIRS = ["static", "data", "android/app/src/main"]
 NEVER = {"store.json", "store.tmp"}

@@ -423,6 +423,9 @@ BOLUM 17 - SERTLESTIRME + KALICILIK + YEDEK (bu tur)
       (favoriler + eklenen kanallar + duzenlemeler + silinenler).
   [x] versionCode 3 / versionName 1.2; VERSION=20261008a damgasi
       index.html + sw.js + gomulu listeye yayildi (tek damga).
-  [ ] APK yeniden derleme: bu turda ISTEME UZERINE yapilmadi.
+  [x] APK yeniden derlendi: Gradle :app:assembleRelease (arm64 / armeabi-v7a
+      / universal / x86 / x86_64), imza ayni (CN=TV Player, SHA-256 300decbe…),
+      versionCode 3 / versionName 1.2, damga 20261008a. dist/ + build/pkg/
+      guncellendi.
   [ ] Gercek kutuda 10 dk test (acilis + TRT1/Star + CH+/- + geri).
   [ ] Repo private degil: github.com/asi3516-cell/-pp public (kontrol edildi).

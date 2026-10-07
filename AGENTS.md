@@ -126,7 +126,18 @@ false`). Enabling it once shipped an APK that installed but crashed on launch on
 Android 14; the unshrunk build is the known-good one. `android/app/proguard-rules.pro`
 is kept for a future, verified attempt — if R8 is ever turned back on, keep
 Media3, NanoHTTPD, the `@JavascriptInterface` bridges and Room (the rules
-already do), and test a real launch on a device before shipping. Signing reads
+already do), and test a real launch on a device before shipping.
+
+The launch crash had a second, independent cause: two vectors added with the
+4-tab redesign (`ic_brand_mic`, `ic_search`) had arc flags run into the next
+number (`"0 015,5"`, `"0 105.3,14"`). `VectorDrawable` rejects those at inflate
+time, and both icons live in `fragment_channel_list.xml`, so the app died on
+every launch — including builds that had R8 off. `build/check_vectors.py` scans
+`pathData` for that mistake and is wired into CI before the Gradle build; run it
+locally too (`python3 build/check_vectors.py`). When an APK "installs but won't
+open", check logcat first — inflate/resource errors, not only R8, are common.
+
+Signing reads
 `hh-release.jks` plus `TV_STORE_PASS` / `TV_KEY_PASS` / `TV_KEY_ALIAS` from the
 environment (`android/sign_apk.bat` wraps `apksigner`); the keystore and
 passwords are never committed, and a build without the env vars falls back to

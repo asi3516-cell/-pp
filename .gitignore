@@ -16,4 +16,8 @@ android/build/
 android/app/build/
 data/channels.cache.json.gz
 *.idsig
+*.keystore
+.keystore-pass
+*-pass.txt
+dist/*.signed.apk
 !android/gradle/wrapper/gradle-wrapper.jar

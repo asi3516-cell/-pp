@@ -264,3 +264,33 @@ Packaging
 - Sources: python3 build/package_source.py writes hh-Kaynak.zip and, when
   7z / py7zr / /workspace/tools/rar/rar are present, .7z and .rar too. The
   archives never include data/store.json (playlist credentials).
+
+Signing and secrets (BOLUM 17)
+- The release keystore is fixed: android/app/hh-release.jks, alias hhkey. It is
+  tracked in git on purpose so an update keeps the same signature; do NOT add
+  *.jks to .gitignore (only *.keystore / .keystore-pass / *-pass.txt are
+  ignored). Changing the keystore or alias breaks in-place updates on a box.
+- The passwords are no longer hard-coded in build.gradle: read them from
+  -PTV_STORE_PASS / -PTV_KEY_PASS or the TV_STORE_PASS / TV_KEY_PASS env vars,
+  falling back to the historical value. sign_apk.bat re-signs a raw APK and
+  uses the correct apksigner syntax `--ks-pass env:TV_STORE_PASS` (note the
+  colon; `--ks-pass:env NAME` is invalid and silently fails).
+
+User data persistence and playback (BOLUM 17)
+- Added channels ("+ Kanal") are stored in state.added, persisted to the server
+  store key `added` and to localStorage, and re-applied on every load by
+  applyAdded() (which skips duplicates). deleteChannel() removes them from
+  `added` too, so a deleted channel does not come back.
+- Web last-working mirror: localStorage tv.mirror.v1 maps a channel key to the
+  URL that last played; play() calls preferredChannel() to open straight on it.
+  The native player keeps the same idea in SharedPreferences.
+- Web black-frame watchdog: after 3 s of "playing" with videoWidth === 0 it
+  tries the next mirror and shows "Ayna N deneniyor". Skipped for radio and in
+  the APK (the native player has its own).
+- Backup: Ayarlar -> Yedek exports tv-yedek.json (snapshot()) and restores it
+  via applySnapshot + applyAdded/applyDeleted. It carries favourites, added
+  channels, overrides and deletions, but never the playlist credentials.
+- server.py POST /api/store now merges the keys "deleted" and "added" too;
+  _default_store() seeds them so an older store.json does not drop them.
+- PROBE_TTL is 86400 (one sweep a day). The 7-day dead-URL drop lives in
+  build/refresh_health.py; do not confuse the probe cache with urlcheck.json.

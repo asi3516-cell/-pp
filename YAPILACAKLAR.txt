@@ -371,6 +371,8 @@ OYNATMA
 BUTUNLUK (Faz 0)
   [x] Tek VERSION dosyasi (20261007a). index.html + sw.js ?v= damgasi
       bu dosyadan turetilir; /api/version uc noktasi ekler.
+
+
   [x] zincir checksum: pre-merge -> pre-health -> channels.json ->
       channels-data.js -> android assets
   [x] CI kapisi (guard): node --check, acorn --ecma5, ast.parse +
@@ -399,3 +401,28 @@ PAKETLEME
   [x] Kaynak: hh-Kaynak.zip + .7z + .rar (build/package_source.py)
   [x] YAPILANLAR.md + YAPILACAKLAR.txt guncellendi
 
+========================================================================
+BOLUM 17 - SERTLESTIRME + KALICILIK + YEDEK (bu tur)
+  [x] Imza: release anahtari sabit (hh-release.jks / alias hhkey);
+      parolalar build.gradle'dan disari alindi -> -PTV_STORE_PASS ya da
+      TV_STORE_PASS / TV_KEY_PASS ortam degiskeni. Anahtar DEGISMEDI.
+  [x] .gitignore: *.keystore, .keystore-pass, *-pass.txt, dist/*.signed.apk
+      eklendi; takip edilen hh-release.jks KORUNDU (*.jks yazilmadi).
+  [x] sign_apk.bat: --ks-pass env:TV_STORE_PASS dogru sozdizimi,
+      alias hhkey, keystore android\app\hh-release.jks.
+  [x] Eklenen kanal kaliciligi: state.added + snapshot/applySnapshot +
+      POST /api/store ("added") + applyAdded (mukerrer korumali) +
+      deleteChannel temizler. Reload'da kaybolmuyor.
+  [x] Son-calisan-ayna (web): tv.mirror.v1 + preferredChannel(play icinde)
+      + rememberMirror(onPlaying); native SharedPreferences zaten vardi.
+  [x] Siyah ekran bekcisi (web): 3 sn videoWidth==0 -> sonraki ayna +
+      "Ayna N deneniyor" OSD; radyo atlanir, native atlanir.
+  [x] Yaklasik probe TTL: PROBE_TTL 3600 -> 86400 (gunde 1 supur).
+      7 gun olu dusurme zaten var (build/refresh_health.py).
+  [x] Yedek indir/geri yukle: Ayarlar > Yedek, tv-yedek.json
+      (favoriler + eklenen kanallar + duzenlemeler + silinenler).
+  [x] versionCode 3 / versionName 1.2; VERSION=20261008a damgasi
+      index.html + sw.js + gomulu listeye yayildi (tek damga).
+  [ ] APK yeniden derleme: bu turda ISTEME UZERINE yapilmadi.
+  [ ] Gercek kutuda 10 dk test (acilis + TRT1/Star + CH+/- + geri).
+  [ ] Repo private degil: github.com/asi3516-cell/-pp public (kontrol edildi).

@@ -97,7 +97,8 @@ def _default_store() -> dict:
     # favoritesByList keeps a separate favorite list for every source ("Canlı
     # TV", "Radyo", each portal), so switching lists also switches favorites.
     return {"playlists": [], "favorites": [], "favoritesByList": {},
-            "recent": [], "overrides": {}, "settings": {}}
+            "recent": [], "overrides": {}, "deleted": {}, "added": [],
+            "settings": {}}
 
 
 def load_store() -> dict:
@@ -125,10 +126,10 @@ def save_store(store: dict) -> None:
 # Probe result cache
 # --------------------------------------------------------------------------
 # The inspect dialog re-checks the same address every time a channel is opened.
-# Caching the result for an hour keeps a slow or dead mirror from being probed
+# Caching the result for a day keeps a slow or dead mirror from being probed
 # over and over. The cache holds non-2xx answers too, so a blocked mirror is
 # only discovered once per TTL.
-PROBE_TTL = 3600
+PROBE_TTL = 86400
 PROBE_CACHE_FILE = DATA_DIR / "probe-cache.json"
 _probe_lock = threading.Lock()
 _probe_cache: dict | None = None
@@ -441,7 +442,7 @@ class Handler(BaseHTTPRequestHandler):
                 return self._json(400, {"error": "invalid body"})
             current = load_store()
             for key in ("playlists", "favorites", "favoritesByList",
-                        "recent", "overrides", "settings"):
+                        "recent", "overrides", "deleted", "added", "settings"):
                 if key in store:
                     current[key] = store[key]
             save_store(current)

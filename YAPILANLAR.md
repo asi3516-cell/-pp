@@ -84,3 +84,31 @@ portalını/playlist'ini eklemek zorunda kalmadan açılır açılmaz çalışı
   `verify_integrity.py`, `check_vectors.py`. Kırmızıysa paket çıkmaz.
 - **Paketler**: `dist/TV-Player*.apk` (arm64/armv7/universal) ve
   `build/pkg/hh-Kaynak.zip|.7z|.rar` güncellendi.
+
+## Son tur (BOLUM 17)
+- **İmza sertleştirme**: release anahtarı sabit kaldı (`hh-release.jks`,
+  alias `hhkey`); parolalar `build.gradle`'dan dışarı alındı. Artık
+  `-PTV_STORE_PASS` ya da `TV_STORE_PASS` / `TV_KEY_PASS` ortam değişkeniyle
+  veriliyor (yoksa eski değere düşer). `sign_apk.bat` doğru
+  `--ks-pass env:TV_STORE_PASS` sözdizimiyle eklendi.
+- **`.gitignore`**: `*.keystore`, `.keystore-pass`, `*-pass.txt`,
+  `dist/*.signed.apk` eklendi. Takip edilen `hh-release.jks` **korundu**
+  (imza sürekliliği için); `*.jks` yazılmadı.
+- **Eklenen kanal kalıcılığı**: `+ Kanal` ile eklenen kanal artık `state.added`
+  içinde saklanıyor, sunucu store'una (`added`) yazılıyor ve her açılışta
+  yeniden uygulanıyor. Silinirse `deleted` ile birlikte temizleniyor.
+- **Son-çalışan-ayna (web)**: her kanal için son çalışan ayna
+  `localStorage["tv.mirror.v1"]` içinde tutulur; `play()` kanalı doğrudan o
+  aynadan açar. Native oynatıcıda bu zaten `SharedPreferences` ile vardı.
+- **Siyah ekran bekçisi (web)**: oynatma "playing" dese de 3 sn içinde kare
+  gelmezse (`videoWidth === 0`) sonraki ayna denenir ve "Ayna N deneniyor"
+  gösterilir. Radyo ve native oynatıcı atlanır.
+- **Probe TTL**: `PROBE_TTL` 3600 → 86400 (günde 1 süpürme). 7 gün ölü
+  düşürme zaten vardı (`build/refresh_health.py`).
+- **Yedek indir/geri yükle**: Ayarlar → Yedek. `tv-yedek.json` favorileri,
+  eklenen kanalları, düzenlemeleri ve silinenleri taşır; yeni kutuda geri
+  yüklenince liste yerine oturur.
+- **Sürüm**: `versionCode 3` / `versionName 1.2`; `VERSION=20261008a` damgası
+  `index.html`, `sw.js` ve gömülü listeye yayıldı (tek damga).
+- **Not**: APK bu turda istenmediği için yeniden derlenmedi; `android/app/src/main/assets`
+  yeni damgayla eşitlendi.

@@ -1,12 +1,12 @@
 /* Minimal service worker: makes the player installable on Android/iOS.
    Network-first for the API (live data), cache-first for the shell. */
-const SHELL = "tv-shell-v7";
+const SHELL = "tv-shell-20261008a";
 const ASSETS = [
   "./",
   "index.html",
   "style.css",
-  "app.js?v=20261007a",
-  "channels-data.js?v=20261007a",
+  "app.js?v=20261008a",
+  "channels-data.js?v=20261008a",
   "manifest.webmanifest",
   "vendor/hls.min.js",
   "icons/logo.svg",

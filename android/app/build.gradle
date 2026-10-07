@@ -12,8 +12,8 @@ android {
         applicationId "com.openhands.tvplayer"
         minSdk 24
         targetSdk 34
-        versionCode 2
-        versionName "1.1"
+        versionCode 3
+        versionName "1.2"
 
         // Phones and Android TV boxes are all ARM in practice, so the x86
         // LibVLC payload (110 MB of the APK) is dead weight for real users.
@@ -62,11 +62,14 @@ android {
             // A fixed release key so the APK installs on every phone and an
             // update can replace an older build. The debug key is regenerated
             // per machine, which is what made "App not installed" appear when
-            // a build from another machine was sideloaded.
-            storeFile file('hh-release.jks')
-            storePassword 'hhrelease2026'
-            keyAlias 'hhkey'
-            keyPassword 'hhrelease2026'
+            // a build from another machine was sideloaded. The alias and the
+            // keystore stay fixed: changing either breaks in-place updates.
+            // Only the passwords are externalised, via -PTV_STORE_PASS or the
+            // TV_STORE_PASS / TV_KEY_PASS environment variables.
+            storeFile file(findProperty("TV_KEYSTORE") ?: System.getenv("TV_KEYSTORE") ?: "hh-release.jks")
+            storePassword findProperty("TV_STORE_PASS") ?: System.getenv("TV_STORE_PASS") ?: "hhrelease2026"
+            keyAlias "hhkey"
+            keyPassword findProperty("TV_KEY_PASS") ?: System.getenv("TV_KEY_PASS") ?: "hhrelease2026"
             // v1 is needed by older boxes that ignore the v2/v3 scheme.
             enableV1Signing true
             enableV2Signing true

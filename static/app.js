@@ -15,6 +15,7 @@
     playlists: [],
     overrides: {},
     deleted: {},
+    added: [],
     epgUrl: "",
     epg: {},
     current: null,
@@ -81,6 +82,7 @@
       playlists: state.playlists,
       overrides: state.overrides,
       deleted: state.deleted,
+      added: state.added,
       epgUrl: state.epgUrl,
       ui: { source: state.source, kind: state.kind }
     };
@@ -95,6 +97,7 @@
     state.playlists = raw.playlists || [];
     state.overrides = raw.overrides || {};
     state.deleted = raw.deleted || {};
+    state.added = raw.added || [];
     state.epgUrl = raw.epgUrl || "";
     if (raw.ui) {
       if (raw.ui.source) state.source = raw.ui.source;
@@ -124,6 +127,7 @@
         playlists: data.playlists,
         overrides: data.overrides,
         deleted: data.deleted,
+        added: data.added,
         epgUrl: settings.epgUrl,
         ui: settings.ui
       });
@@ -143,6 +147,7 @@
         playlists: state.playlists,
         overrides: state.overrides,
         deleted: state.deleted,
+        added: state.added,
         settings: { epgUrl: state.epgUrl, ui: { source: state.source, kind: state.kind } }
       })).catch(function () { /* offline: localStorage still has it */ });
     }, 400);
@@ -367,6 +372,26 @@
     });
   }
 
+  // Channels the user added with "+ Kanal". They are re-added on every load so
+  // an added channel survives a reload and is restored after a box reset.
+  function applyAdded() {
+    var added = state.added || [];
+    if (!added.length) return;
+    var have = {};
+    state.channels.forEach(function (c) {
+      have[(c.listName || "Canlı TV") + "|" + (c.url || "")] = 1;
+    });
+    added.forEach(function (a) {
+      var ch = normalize(a);
+      ch.listName = a.listName || "Özel kanallar";
+      var key = ch.listName + "|" + (ch.url || "");
+      if (have[key]) return;
+      have[key] = 1;
+      state.channels.unshift(ch);
+      state.loaded[ch.listName] = true;
+    });
+  }
+
   // Channels the user deleted. They are remembered by list + stream URL, so a
   // fresh fetch of the same list does not bring them back.
   function applyDeleted() {
@@ -381,6 +406,13 @@
   function deleteChannel(ch) {
     var key = (ch.listName || "Canlı TV") + "|" + (ch.url || "");
     state.deleted[key] = 1;
+    // A user-added channel is dropped from the added list too; otherwise the
+    // next load (or a restored backup) would bring it straight back.
+    if (state.added && state.added.length) {
+      state.added = state.added.filter(function (a) {
+        return (a.listName || "Özel kanallar") + "|" + (a.url || "") !== key;
+      });
+    }
     state.channels = state.channels.filter(function (c) {
       return (c.listName || "Canlı TV") + "|" + (c.url || "") !== key;
     });
@@ -523,6 +555,8 @@
       state.channels = normalizeLogos(dedupe(state.channels));
       state.channels = flattenStreams(state.channels);
       applyOverrides();
+      applyAdded();
+      applyDeleted();
       state.loaded = { "Canlı TV": true };
       buildSources();
       buildGroups();
@@ -1483,6 +1517,31 @@
     if (hls) { try { hls.destroy(); } catch (e) {} hls = null; }
   }
 
+  // ---- black-frame watchdog ------------------------------------------
+  // A stream can report "playing" while showing a black frame (bad mirror,
+  // geo-block, silent switch). After BLACK_FRAME_MS with no decoded picture,
+  // try the next mirror. Radio is skipped: it has no picture by design.
+  var BLACK_FRAME_MS = 3000;
+  var blackTimer = null;
+  var blackTried = "";
+  function clearBlackTimer() {
+    if (blackTimer) { clearTimeout(blackTimer); blackTimer = null; }
+  }
+  function armBlackTimer(stream, index) {
+    clearBlackTimer();
+    blackTimer = setTimeout(function () {
+      var ch = state.current;
+      if (!ch || contentKind(ch) === "radio") return;
+      if (nativePlayer()) return;            // the native player has its own
+      if (video.videoWidth > 0) return;      // a picture arrived, all good
+      var key = (ch.url || "") + "|" + index;
+      if (blackTried === key) return;        // never loop on the same mirror
+      blackTried = key;
+      showOsd("Ayna " + (index + 2) + " deneniyor");
+      loadStream(index + 1);
+    }, BLACK_FRAME_MS);
+  }
+
   // Inside the APK a native ExoPlayer renders the video; the WebView only draws
   // the channel list. On the desktop (no bridge) the web <video> is used.
   function nativePlayer() {
@@ -1534,7 +1593,44 @@
     }
   };
 
+  // ---- last working mirror -------------------------------------------
+  // A channel's mirrors are separate rows ("ATV", "ATV 2"). Remembering the
+  // row that last played lets the channel open straight on it, instead of
+  // always starting on a dead first mirror. The native player keeps its own
+  // copy in SharedPreferences; this is the web/WebView equivalent.
+  var MIRROR_KEY = "tv.mirror.v1";
+  function siblings(ch) {
+    var g = ch.streamGroup || ch.name;
+    var l = ch.listName || "Canlı TV";
+    return state.channels.filter(function (c) {
+      return (c.streamGroup || c.name) === g && (c.listName || "Canlı TV") === l;
+    });
+  }
+  function mirrorKey(ch) {
+    return [ch.listName || "Canlı TV", ch.group || "Genel",
+            ch.streamGroup || ch.name].join("|");
+  }
+  function rememberMirror(ch) {
+    if (!ch || !ch.url) return;
+    try {
+      var m = JSON.parse(localStorage.getItem(MIRROR_KEY) || "{}");
+      m[mirrorKey(ch)] = ch.url;
+      localStorage.setItem(MIRROR_KEY, JSON.stringify(m));
+    } catch (e) {}
+  }
+  function preferredChannel(ch) {
+    var url;
+    try {
+      url = JSON.parse(localStorage.getItem(MIRROR_KEY) || "{}")[mirrorKey(ch)];
+    } catch (e) { return ch; }
+    if (!url || url === ch.url) return ch;
+    var alts = siblings(ch);
+    for (var i = 0; i < alts.length; i++) if (alts[i].url === url) return alts[i];
+    return ch;
+  }
+
   function play(ch, overrideUrl) {
+    ch = preferredChannel(ch);
     state.current = ch;
     state.detail = null;
     showBrowse(false);
@@ -1564,6 +1660,7 @@
   }
 
   function loadStream(i) {
+    clearBlackTimer();
     var ch = state.current;
     if (!ch) return;
     var streams = state.queue || [];
@@ -1609,6 +1706,7 @@
     setOverlay(true, null);
     video.removeAttribute("src");
     video.load();
+    armBlackTimer(stream, i);
 
     // MAC/portal streams need the session headers, so always go via the proxy.
     var src = ch.headers ? proxyFor(ch, url) : url;
@@ -2062,6 +2160,9 @@
     showUi(true);
     updatePlayerInfo();
     var cur = state.current;
+    // This mirror actually produced a picture, so remember it for next time.
+    rememberMirror(cur);
+    clearBlackTimer();
     // Radio keeps its logo on stage: there is no video frame to show instead.
     if (!cur || contentKind(cur) !== "radio") hideVodInfo();
     var t = video.duration;
@@ -2361,6 +2462,58 @@
       persist();
       showOsd("Son izlenenler temizlendi");
     });
+
+    // ---- backup download / restore ------------------------------------
+    // One JSON carries everything a user cannot get back from a fresh
+    // install: favourites, added channels, edits and deletions. Restoring it
+    // on a new box brings those back before the store round-trip finishes.
+    on("#setExport", function () {
+      try {
+        var payload = snapshot();
+        payload.app = "TV Player";
+        payload.version = APP_VERSION;
+        payload.exportedAt = new Date().toISOString();
+        var blob = new Blob([JSON.stringify(payload, null, 1)],
+          { type: "application/json" });
+        var a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "tv-yedek.json";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+        showOsd("Yedek indirildi");
+      } catch (e) { showOsd("Yedek alınamadı"); }
+    });
+    on("#setImport", function () {
+      var input = $("#setImportFile");
+      if (input) input.click();
+    });
+    on("#setImportFile", function (e) {
+      var file = e.target.files && e.target.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function () {
+        try {
+          var raw = JSON.parse(String(reader.result));
+          if (!applySnapshot(raw)) throw new Error("bad");
+          persist();
+          applyOverrides();
+          applyAdded();
+          applyDeleted();
+          buildSources();
+          buildGroups();
+          buildKindTabs();
+          render();
+          showOsd("Yedek geri yüklendi");
+        } catch (err) {
+          showOsd("Geçersiz yedek dosyası");
+        }
+        e.target.value = "";
+      };
+      reader.onerror = function () { showOsd("Dosya okunamadı"); };
+      reader.readAsText(file);
+    });
     try {
       var about = $("#setAbout");
       if (about) about.textContent = "TV Player · " + state.channels.length + " kanal";
@@ -2375,6 +2528,7 @@
       if (stage) stage.classList.remove("fill");
       if (nativePlayer()) { try { nativePlayer().stop(); } catch (e) {} }
       else { try { video.pause(); } catch (e) {} }
+      clearBlackTimer();
     }
     window.tvOpenPlayer = function () {
       var app = $("#app");
@@ -2455,8 +2609,14 @@
         source: "Özel"
       });
       ch.listName = "Özel kanallar";
+      // Remember the raw record so it is restored on the next load and survives
+      // a box reset. Only the fields the add dialog owns are stored.
+      state.added = state.added || [];
+      state.added.unshift({ name: ch.name, url: ch.url, group: ch.group,
+                            logo: ch.logo, listName: ch.listName });
       state.channels.unshift(ch);
       state.loaded["Özel kanallar"] = true;
+      persist();
       buildSources();
       buildGroups(); render();
       $("#addDlg").close();
@@ -2532,6 +2692,8 @@
         var epg = $("#epgUrl");
         if (state.epgUrl && epg) epg.value = state.epgUrl;
         applyOverrides();
+        applyAdded();
+        applyDeleted();
         buildSources();
         buildGroups();
         buildKindTabs();

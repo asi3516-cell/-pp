@@ -21,8 +21,8 @@ html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:16px/1.
 .sidebar{display:flex;flex-direction:column;background:var(--bg-2);border-right:1px solid var(--line);min-height:0}
 .channel-list{overflow:auto}
 </style>
-<link rel="stylesheet" href="style.css?v=20261007a" media="print" onload="this.media='all'" />
-<noscript><link rel="stylesheet" href="style.css?v=20261007a" /></noscript>
+<link rel="stylesheet" href="style.css?v=20261008a" media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href="style.css?v=20261008a" /></noscript>
 </head>
 <body>
 <div id="app">
@@ -184,6 +184,14 @@ html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:16px/1.
       </section>
 
       <section class="set-card">
+        <h3>Yedek</h3>
+        <button id="setExport" class="set-btn">Yedeği indir (JSON)</button>
+        <button id="setImport" class="set-btn">Yedeği geri yükle</button>
+        <input id="setImportFile" type="file" accept="application/json,.json" hidden />
+        <p class="muted">Favoriler, eklenen kanallar ve düzenlemeler bu dosyada saklanır.</p>
+      </section>
+
+      <section class="set-card">
         <h3>Hakkında</h3>
         <p class="muted" id="setAbout">TV Player · Android sürümü</p>
       </section>
@@ -243,8 +251,8 @@ html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:16px/1.
 </template>
 
 <script defer src="vendor/hls.min.js"></script>
-<script defer src="channels-data.js?v=20261007a"></script>
-<script defer src="app.js?v=20261007a"></script>
+<script defer src="channels-data.js?v=20261008a"></script>
+<script defer src="app.js?v=20261008a"></script>
 <script>
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", function () {

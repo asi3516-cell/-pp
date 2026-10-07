@@ -9,13 +9,14 @@
 # App widget providers are referenced from the manifest only.
 -keep class com.openhands.tvplayer.RadioWidget* { *; }
 
-# The local HTTP server is instantiated by name from the WebView bridge.
--keep class com.openhands.tvplayer.LocalServer { *; }
--keep class fi.iki.elonen.** { *; }
-
-# Media3 builds its session/service plumbing reflectively in places.
--keep class androidx.media3.** { *; }
--dontwarn androidx.media3.**
+# LibVLC loads its JNI layer and media modules reflectively by class name, so
+# the whole library has to survive shrinking untouched.
+-keep class org.videolan.libvlc.** { *; }
+-keep class org.videolan.libvlc.interfaces.** { *; }
+-dontwarn org.videolan.libvlc.**
 
 -dontwarn org.checkerframework.**
 -dontwarn com.google.errorprone.annotations.**
+# VLC's androidx.media dependency pulls in optional renderer classes.
+-dontwarn androidx.mediarouter.**
+-dontwarn androidx.media.**

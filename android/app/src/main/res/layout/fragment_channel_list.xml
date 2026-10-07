@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Channel list screen: a fixed header (brand + search) over the TreeView.
-  The header carries the brand mark, the active tab name and the search field;
-  the list below fills the rest of the screen.
+  Channel list screen. A gradient hero carries the brand, a CANLI badge, the
+  live statistics and the search field; a horizontal strip of category chips
+  filters the tree below without leaving the screen.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -14,10 +14,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@drawable/bg_header"
+        android:background="@drawable/bg_hero"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:paddingTop="14dp"
+        android:paddingTop="18dp"
         android:paddingBottom="14dp">
 
         <LinearLayout
@@ -27,14 +27,14 @@
             android:gravity="center_vertical">
 
             <FrameLayout
-                android:layout_width="38dp"
-                android:layout_height="38dp"
-                android:layout_marginEnd="11dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginEnd="12dp"
                 android:background="@drawable/bg_brand_mark">
 
                 <ImageView
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_brand_tv"
                     android:contentDescription="@null" />
@@ -46,24 +46,47 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/headerTitle"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/tv_text"
-                    android:textSize="23sp"
-                    android:textStyle="bold"
-                    android:letterSpacing="0.01"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:text="@string/tab_live" />
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/headerTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/tv_text"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.01"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:text="@string/tab_live" />
+
+                    <TextView
+                        android:id="@+id/liveBadge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="9dp"
+                        android:background="@drawable/bg_live_badge"
+                        android:paddingStart="9dp"
+                        android:paddingEnd="9dp"
+                        android:paddingTop="2dp"
+                        android:paddingBottom="2dp"
+                        android:textColor="#FFFFFF"
+                        android:textSize="9.5sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.08"
+                        android:text="@string/live" />
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/headerSub"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:textColor="@color/tv_muted"
+                    android:layout_marginTop="3dp"
+                    android:textColor="#B9C6DD"
                     android:textSize="12.5sp"
                     android:maxLines="1"
                     android:ellipsize="end"
@@ -72,26 +95,90 @@
 
             <ImageButton
                 android:id="@+id/addChannel"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
                 android:layout_marginStart="8dp"
-                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:background="@drawable/bg_stat_pill"
                 android:src="@drawable/ic_add"
                 android:scaleType="fitCenter"
+                android:padding="10dp"
                 android:contentDescription="@string/add_channel" />
+
+            <ImageButton
+                android:id="@+id/restoreGroups"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_stat_pill"
+                android:src="@drawable/ic_restore"
+                android:scaleType="fitCenter"
+                android:padding="10dp"
+                android:visibility="gone"
+                android:contentDescription="@string/hidden_groups_title" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/statChannels"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_stat_pill"
+                android:paddingStart="11dp"
+                android:paddingEnd="11dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:textColor="@color/tv_text"
+                android:textSize="11.5sp"
+                android:textStyle="bold"
+                android:text="0 kanal" />
+
+            <TextView
+                android:id="@+id/statLive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_stat_pill"
+                android:paddingStart="11dp"
+                android:paddingEnd="11dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:textColor="@color/tv_accent_2"
+                android:textSize="11.5sp"
+                android:textStyle="bold"
+                android:text="0 canlı" />
+
+            <TextView
+                android:id="@+id/statFav"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_stat_pill"
+                android:paddingStart="11dp"
+                android:paddingEnd="11dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:textColor="@color/tv_star"
+                android:textSize="11.5sp"
+                android:textStyle="bold"
+                android:text="0 favori" />
         </LinearLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="46dp"
-            android:layout_marginTop="13dp"
-            android:background="@drawable/bg_search">
+            android:layout_height="48dp"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/bg_search_modern">
 
             <ImageView
                 android:layout_width="19dp"
                 android:layout_height="19dp"
                 android:layout_gravity="start|center_vertical"
-                android:layout_marginStart="14dp"
+                android:layout_marginStart="15dp"
                 android:src="@drawable/ic_search"
                 android:contentDescription="@null" />
 
@@ -99,7 +186,7 @@
                 android:id="@+id/searchInput"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="41dp"
+                android:layout_marginStart="43dp"
                 android:layout_marginEnd="6dp"
                 android:background="@null"
                 android:hint="@string/search_hint"
@@ -117,7 +204,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="end|center_vertical"
-                android:layout_marginEnd="3dp"
+                android:layout_marginEnd="4dp"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_close"
                 android:scaleType="fitCenter"
@@ -130,12 +217,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:textColor="@color/tv_muted"
+            android:textColor="#9FB0CB"
             android:textSize="12sp"
             android:maxLines="1"
             android:ellipsize="end"
             android:text="" />
     </LinearLayout>
+
+    <HorizontalScrollView
+        android:id="@+id/chipScroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:paddingTop="10dp"
+        android:paddingBottom="6dp"
+        android:clipToPadding="false">
+
+        <LinearLayout
+            android:id="@+id/chipRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp" />
+    </HorizontalScrollView>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -151,7 +256,9 @@
             android:childDivider="@null"
             android:paddingBottom="12dp"
             android:clipToPadding="false"
-            android:scrollbars="none" />
+            android:scrollbars="vertical"
+            android:fastScrollEnabled="true"
+            android:fastScrollAlwaysVisible="true" />
 
         <LinearLayout
             android:id="@+id/emptyState"

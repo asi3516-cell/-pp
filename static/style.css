@@ -221,6 +221,18 @@ h1, h2, h3 { margin: 0; }
   flex-direction: column;
   gap: 4px;
 }
+.more-toggle {
+  flex: none;
+  margin: 8px auto 4px;
+  padding: 10px 18px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--fg);
+  font: inherit;
+  cursor: pointer;
+}
+.more-toggle:hover { border-color: var(--accent); color: var(--accent); }
 .channel-list::-webkit-scrollbar,
 .groups::-webkit-scrollbar,
 .nav-tree::-webkit-scrollbar,
@@ -258,6 +270,11 @@ h1, h2, h3 { margin: 0; }
 }
 .ch:hover { background: var(--bg-3); }
 .ch.active { background: color-mix(in srgb, var(--accent) 16%, transparent); border-color: var(--accent); }
+/* Remote focus must always be visible, not only on :focus-visible: a D-pad
+   sets focus programmatically, which many WebViews never treat as visible. */
+.ch:focus, .tree-row:focus, .gchip:focus, .tabbtn:focus, .more-toggle:focus {
+  outline: 2px solid #ffb300; outline-offset: -2px;
+}
 .ch:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 
 .ch-inspect {

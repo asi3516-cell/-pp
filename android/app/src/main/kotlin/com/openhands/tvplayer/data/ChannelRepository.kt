@@ -31,17 +31,29 @@ object ChannelRepository {
     fun radio(context: Context): List<Channel> = all(context).filter { it.isRadio }
 
     /**
-     * Groups channels by category, keeping the order they appear in the list so
-     * the tree is stable between launches.
+     * Groups channels by category, preserving the order they appear in the
+     * bundled list. That order is the broadcaster importance ranking (TRT 1,
+     * Show TV, Star TV, Kanal 7, ATV ...), so sorting here would throw the
+     * ranking away. Categories keep their first-seen order too, and an "Hepsi"
+     * (All) group is pinned to the top.
      */
     fun grouped(channels: List<Channel>): LinkedHashMap<String, List<Channel>> {
-        val out = LinkedHashMap<String, MutableList<Channel>>()
+        if (channels.isEmpty()) return LinkedHashMap()
+
+        val byGroup = LinkedHashMap<String, MutableList<Channel>>()
         for (ch in channels) {
             val key = ch.group.ifBlank { "Genel" }
-            out.getOrPut(key) { mutableListOf() }.add(ch)
+            byGroup.getOrPut(key) { mutableListOf() }.add(ch)
         }
-        return LinkedHashMap(out)
+
+        val out = LinkedHashMap<String, List<Channel>>()
+        out[ALL_GROUP] = channels
+        for ((key, list) in byGroup) out[key] = list
+        return out
     }
+
+    /** The synthetic "show everything" group pinned to the top of every list. */
+    const val ALL_GROUP = "Hepsi"
 
     private fun parse(context: Context): List<Channel> {
         val text = try {

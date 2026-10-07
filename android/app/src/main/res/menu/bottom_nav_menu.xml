@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/tab_home"
+        android:icon="@drawable/ic_tab_home"
+        android:title="@string/tab_home" />
+    <item
         android:id="@+id/tab_live"
         android:icon="@drawable/ic_tab_tv"
         android:title="@string/tab_live" />

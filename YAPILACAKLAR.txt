@@ -342,3 +342,60 @@ BOLUM 15 - PC (EXE) TESLIMATI
   Windows .exe'yi uretmek icin: build_exe.bat (Windows'ta cift tikla).
   Linux ikilisi: dist/hh (bu makinede derlendi).
 
+========================================================================
+BOLUM 16 - ACILIS / PROBE / OYNATMA / BUTUNLUK / CI (bu tur)
+
+PLAN A (VLC performans/stabilite) - ONAYLI
+  [x] Madde 2: 200'luk dilim halinde cizim (PAGE_FIRST=200)
+  [x] Madde 3: once gomulu listeyi ciz, sunucu store'unu sonra birlestir
+
+ACILIS
+  [x] sw.js ASSETS'ine channels-data.js eklendi (v=20261007a)
+  [x] Radyo blogu tembellige alindi (ensureRadioLoaded)
+  [x] Arama kutusuna 200ms debounce
+  [x] Faz 1-1: acilis <1sn -> kritik CSS index.html'e gomuldu, style.css
+      media=print + onload ile bloklamiyor, expanded {} (agac kapali)
+
+PROBE
+  [x] Timeout 12sn -> 6sn, once HEAD sonra GET (GET ~3KB ile sinirli)
+  [x] TTL'li onbellek -> cold 0.342s / hot 0.009s
+      DUZELTME: onbellek artik data/probe-cache.json'da; urlcheck.json
+      bozulmuyor (apply_health.py onu liste olarak okuyor)
+
+OYNATMA
+  [~] Oynatma-1: kanal bazli zorla-SW listesi (varsayilan SW korundu)
+  [x] Oynatma-2: her kanala son calisan ayna hatirlanir (prefs)
+  [x] Oynatma-3: siyah ekran dedektoru 3sn -> sw-decode + sonraki ayna;
+      radyoda siyah ekran denetimi atlanir
+
+BUTUNLUK (Faz 0)
+  [x] Tek VERSION dosyasi (20261007a). index.html + sw.js ?v= damgasi
+      bu dosyadan turetilir; /api/version uc noktasi ekler.
+  [x] zincir checksum: pre-merge -> pre-health -> channels.json ->
+      channels-data.js -> android assets
+  [x] CI kapisi (guard): node --check, acorn --ecma5, ast.parse +
+      stdlib-only denetimi, verify_integrity.py, check_vectors.py.
+      Kirmizi ise build/apk calismaz (needs: guard).
+  [x] Surum uyusmazligi -> SW cache temizle + bir kez reload
+      (enforceVersion, HH_VERSION damgasi)
+
+FAZ 1 - ACILIS YEDEKLEME
+  [x] Faz 1-2: channels-data.js bozuksa /api/channels'a dus; o da bos
+      ise localStorage'daki son liste + "Son liste: HH:MM" etiketi
+
+CIHAZ KUMANDA (Android box)
+  [x] Madde 4: .ch/.tree-row/.gchip odak halkasi (amber, :focus)
+  [x] Madde 2: keyCode 13/8/461/427/428 (OK, BACK, CH+, CH-)
+  [x] Madde 1: render sonrasi odak korunur (ayni kanala geri odaklanir)
+  [x] Madde 3: "+N daha goster" odaklaninca yukler
+  [x] Madde 5: PlayerActivity DPAD_UP/DOWN + CH+/CH- kanal degistirir,
+      MENU kontrolleri getirir; VLCVideoLayout focusable=false
+
+PAKETLEME
+  [x] APK (4 ABI) Gradle ile derlendi (JAVA_HOME=.../jdk-17,
+      ANDROID_SDK_ROOT=.../android-sdk)
+  [x] dist/TV-Player.apk (arm64), -armeabi-v7a, -universal guncellendi
+  [x] build/pkg/TV-Player*.apk kopyalandi
+  [x] Kaynak: hh-Kaynak.zip + .7z + .rar (build/package_source.py)
+  [x] YAPILANLAR.md + YAPILACAKLAR.txt guncellendi
+

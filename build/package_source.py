@@ -13,13 +13,16 @@ import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-OUT = ROOT / "build" / "pkg" / "hh-Kaynak.zip"
+PKG = ROOT / "build" / "pkg"
+OUT = PKG / "hh-Kaynak.zip"
 
 SINGLE_FILES = [
     "server.py", "build_channels.py", "build_canlitv.py", "build_exe.py",
     "build_apk.py", "build_exe.bat", "README.md", "build/make.py",
     "build/tv_player.spec", "build/requirements-build.txt", "build/package_source.py",
-    ".github/workflows/build.yml", "YAPILACAKLAR.txt", "AGENTS.md",
+    "build/verify_integrity.py", "build/refresh_health.py", "build/check_vectors.py",
+    "make_embedded_channels.py", "apply_health.py", "VERSION", "run.sh", "run.bat",
+    ".github/workflows/build.yml", "YAPILACAKLAR.txt", "YAPILANLAR.md", "AGENTS.md",
 ]
 ANDROID_FILES = [
     "build.gradle", "settings.gradle", "gradle.properties",
@@ -52,6 +55,38 @@ def main() -> None:
         for jar in (ROOT / "android" / "libs").glob("*.jar"):
             zf.write(jar, f"hh/{jar.relative_to(ROOT)}")
     print(f"Hazır: {OUT}  ({OUT.stat().st_size} bytes)")
+
+    # Also produce the 7z / rar variants some users prefer, when the tools are
+    # present. Both mirror the zip exactly by extracting it first, so the three
+    # archives never drift apart. Missing tools are not fatal.
+    import shutil
+    import subprocess
+    import tempfile
+    seven = shutil.which("7z") or shutil.which("7za")
+    rar = Path("/workspace/tools/rar/rar")
+    if not (seven or rar.exists() or _has_py7zr()):
+        return
+    with tempfile.TemporaryDirectory() as tmp:
+        with zipfile.ZipFile(OUT) as zf:
+            zf.extractall(tmp)
+        if seven:
+            subprocess.run([seven, "a", "-y", str(PKG / "hh-Kaynak.7z"), "hh"],
+                           cwd=tmp, check=False, stdout=subprocess.DEVNULL)
+        elif _has_py7zr():
+            import py7zr
+            with py7zr.SevenZipFile(PKG / "hh-Kaynak.7z", "w") as z:
+                z.writeall(tmp, "hh")
+        if rar.exists():
+            subprocess.run([str(rar), "a", "-y", "-r", str(PKG / "hh-Kaynak.rar"), "hh"],
+                           cwd=tmp, check=False, stdout=subprocess.DEVNULL)
+
+
+def _has_py7zr() -> bool:
+    try:
+        import py7zr  # noqa: F401
+        return True
+    except ImportError:
+        return False
 
 
 if __name__ == "__main__":

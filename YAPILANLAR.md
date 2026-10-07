@@ -68,3 +68,19 @@ portalını/playlist'ini eklemek zorunda kalmadan açılır açılmaz çalışı
 - [x] APK derlendi (`dist/hh.apk`)
 - [ ] Windows .exe (Windows makinede `build_exe.bat`)
 - [x] GitHub'a private "hh" olarak yedeklendi
+
+## Son tur (BOLUM 16)
+- **Açılış**: kritik CSS gömülü, `style.css` bloklamıyor, ağaç kapalı başlar.
+- **Bütünlük**: tek `VERSION` dosyası; `?v=` damgası ve `/api/version`
+  bundan türer. `build/verify_integrity.py` zincir checksum denetler.
+  Sürüm uyuşmazsa servis çalışanı önbelleği temizlenip bir kez yenilenir.
+- **Yedek liste**: gömülü liste bozuksa sunucuya, o da yoksa localStorage'daki
+  son listeye düşer ve "Son liste: HH:MM" etiketini gösterir.
+- **Kumanda**: odak halkası, OK/CH±/BACK tuş kodları, render sonrası odak
+  korunur, "+N daha göster" odakla yüklenir; native oynatıcıda DPAD yukarı/aşağı
+  kanal değiştirir.
+- **Probe önbelleği** `data/probe-cache.json`'a taşındı (urlcheck.json bozulmaz).
+- **CI kapısı**: `node --check`, `acorn --ecma5`, `ast.parse` + stdlib-only,
+  `verify_integrity.py`, `check_vectors.py`. Kırmızıysa paket çıkmaz.
+- **Paketler**: `dist/TV-Player*.apk` (arm64/armv7/universal) ve
+  `build/pkg/hh-Kaynak.zip|.7z|.rar` güncellendi.

@@ -174,3 +174,93 @@ download latency — deliberate, not a stall.
 
 `TVPERF` logging (an OkHttp interceptor plus an `AnalyticsListener`) was used to
 measure this and has been removed; re-add it temporarily if startup regresses.
+
+
+## Session notes: list ordering, Turkish-only filter, stop/rotate (2026-10)
+
+Channel ordering
+- The bundled order in data/channels.json is the broadcaster importance
+  ranking (TRT 1, Show TV, Star TV, Kanal 7, ATV ...). Do not sort channels
+  alphabetically in the app: ChannelRepository.grouped() deliberately keeps
+  first-seen order for both groups and channels. An earlier Collator sort is
+  what made the user report sorting was completely lost. An Hepsi (All)
+  group is pinned first.
+
+Turkish-only list
+- /tmp/tvlists/build_list.py drops non-Turkish broadcasters. The regex must
+  run on both the raw and the clean_name() value, because sources list them
+  as TRT Arabi HD and only the cleaned name matches. Removed: TRT Arabi,
+  Avaz, Kurdi, World, and the Arabic .Al quran radio. Placeholder hosts
+  (http://missing) and .php web pages are also filtered.
+- Rebuild by restoring /tmp/tvlists/channels.json.bak over
+  /workspace/hh/data/channels.json first - running the script on its own
+  merged output makes (2)/(3) mirror rows look like separate channels.
+  Result: 666 unique channels / 872 address rows / 247 radio.
+
+Stop button
+- player.stop() alone was not enough: REPEAT_MODE_ALL plus the
+  MediaSessionService could re-arm playback. PlaybackController.stop() now
+  sets playWhenReady=false, then stop(), then clearMediaItems(), and
+  remembers lastChannel so Play resumes it. notifyState() reports
+  STATE_IDLE as stopped (previously mislabelled paused) and the activity
+  handles that state by clearing the transport.
+
+Build / release
+- JAVA_HOME=/workspace/tools/jdk-17.0.20.1+1 ./gradlew assembleRelease.
+- Publish with cp app/build/outputs/apk/release/app-release.apk ../dist/TV-Player.apk;
+  the static server serves /workspace/hh/dist.
+
+Playback engine: LibVLC (was Media3/ExoPlayer)
+- deps: org.videolan.android:libvlc-all:3.7.7 (no ExoPlayer). The AAR ships
+  libvlc/libvlcjni/libc++_shared for 4 ABIs, so the release APK is ~200 MB.
+- LibVLC's Context+List constructor appends --aout/--android-display-chroma
+  to the options list it is given. Pass a MUTABLE list (mutableListOf); a
+  Kotlin listOf() makes it throw UnsupportedOperationException at runtime.
+- The video surface is a org.videolan.libvlc.util.VLCVideoLayout; attach in
+  PlayerActivity.onResume and detach in onPause so audio keeps playing while
+  the screen is off. PlaybackController owns one shared MediaPlayer created
+  with a detached SurfaceView (no VLCVideoLayout) so radio works with no UI.
+- keep rules for org.videolan.libvlc.** are required (JNI/modules load by name).
+- Runtime testing needs a working emulator; the container has no /dev/kvm, so
+  x86_64 AVDs refuse to start. A previously running emulator worked before a
+  host restart - use one if the environment provides it, otherwise the build
+  is validated by compile + apksigner verify + aapt2 badging only.
+
+Integrity, version stamp and CI gate (BOLUM 16)
+- One source of truth: the root VERSION file. static/index.html and
+  static/sw.js carry ?v=<stamp>; the service-worker shell name is
+  tv-shell-<stamp>. build/verify_integrity.py --fix rewrites them and checks
+  the chain (channels.json -> channels-data.js -> android assets). server.py
+  exposes the stamp at /api/version and app.js compares it with the stamp
+  embedded in channels-data.js (window.HH_VERSION): a mismatch clears every
+  cache, unregisters the worker and reloads once.
+- CI runs a `guard` job before build/apk (needs: guard): node --check,
+  `npx acorn@8 --ecma5 static/app.js`, an ast.parse + stdlib-only check on
+  server.py, verify_integrity.py and check_vectors.py. Red guard = no packages.
+- Channel-list fallback: embedded list first, then /api/channels, then the last
+  good list cached in localStorage under tv.channels.cache, labelled
+  "Son liste: HH:MM" (#listStamp).
+- The probe cache lives in data/probe-cache.json ({at, ...} entries). Do NOT
+  point it at data/urlcheck.json: apply_health.py reads that file as a list of
+  health rows.
+
+Android TV remote (box) behaviour
+- Web layer: .ch/.tree-row/.gchip/.tabbtn/.more-toggle get a fixed amber
+  :focus ring because a D-pad focuses programmatically and :focus-visible is
+  not triggered on many WebViews. keydown handles raw codes 13 (OK -> click
+  the focused .ch), 427/428 (CH+/CH- -> zap) and 8/461 (BACK). The list render
+  restores focus to the same channel url (or the first row). The
+  "+N daha göster" button has tabindex=0 and loads the next page on focus.
+- Native: PlayerActivity.dispatchKeyEvent maps DPAD_UP/CHANNEL_UP to previous
+  and DPAD_DOWN/CHANNEL_DOWN to next; MENU shows the controls; BACK calls
+  stopLiveOnExit(). VLCVideoLayout is focusable=false so it never steals focus.
+
+Packaging
+- APK: cd android && JAVA_HOME=/workspace/tools/jdk-17.0.20.1+1 \
+  ANDROID_SDK_ROOT=/workspace/tools/android-sdk ./gradlew :app:assembleRelease.
+  Publish app-{arm64-v8a,armeabi-v7a,universal}-release.apk to dist/TV-Player*.apk
+  and build/pkg/. The first run needs network for AGP/aapt2; --offline fails
+  because aapt2 8.10.1 is not cached.
+- Sources: python3 build/package_source.py writes hh-Kaynak.zip and, when
+  7z / py7zr / /workspace/tools/rar/rar are present, .7z and .rar too. The
+  archives never include data/store.json (playlist credentials).

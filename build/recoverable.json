@@ -1,0 +1,78 @@
+{
+ "A Haber": [
+  {
+   "name": "A Haber",
+   "group": "Ulusal",
+   "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/ahaber/ahaber.m3u8",
+   "logo": "https://upload.wikimedia.org/wikipedia/commons/7/7c/Ahaber_Logo.png",
+   "kind": "radio",
+   "status": "OK-HLS"
+  }
+ ],
+ "TRT Spor": [
+  {
+   "name": "TRT Spor (3)",
+   "group": "Ulusal",
+   "url": "https://rd-trtradyo1.medya.trt.com.tr/master_128.m3u8",
+   "logo": "https://i.imgur.com/6tv0zxh.png",
+   "kind": "radio",
+   "status": "OK-HLS"
+  }
+ ],
+ "A Spor": [
+  {
+   "name": "A Spor",
+   "group": "Ulusal",
+   "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/aspor/aspor.m3u8",
+   "logo": "https://i.imgur.com/ZhkZzLf.png",
+   "kind": "radio",
+   "status": "OK-HLS"
+  },
+  {
+   "name": "A Spor (2)",
+   "group": "Ulusal",
+   "url": "https://rnttwmjcin.turknet.ercdn.net/lcpmvefbyo/aspor/aspor_480p.m3u8?hash=fe96d103350bc846e52be8c7ab97fa5b",
+   "logo": "https://i.imgur.com/ZhkZzLf.png",
+   "kind": "radio",
+   "status": "OK-HLS"
+  }
+ ],
+ "TRT Diyanet Çocuk": [
+  {
+   "name": "TRT Diyanet Çocuk (2)",
+   "group": "Türkiye",
+   "url": "https://tv-trtdiyanetcocuk.medya.trt.com.tr/master_720.m3u8",
+   "logo": "",
+   "kind": "radio",
+   "status": "OK-HLS"
+  }
+ ],
+ "Power Türk": [
+  {
+   "name": "Power Türk",
+   "group": "Türkiye",
+   "url": "http://livetv.powerapp.com.tr/powerturkTV/powerturkhd.smil/playlist.m3u8",
+   "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/turkey/powerturk-tr.png",
+   "kind": "radio",
+   "status": "OK-HLS"
+  }
+ ],
+ "Halk Tv": [
+  {
+   "name": "Halk Tv",
+   "group": "Türkü / Halk",
+   "url": "https://halktv.daioncdn.net/halktv/halktv_1080p.m3u8?sid=6vahxsup0jxl&app=c86957d3-74a7-44da-9ad2-dc358c769609&ce=3",
+   "logo": "null",
+   "kind": "radio",
+   "status": "OK-HLS"
+  },
+  {
+   "name": "Halk Tv (4)",
+   "group": "Türkü / Halk",
+   "url": "https://halktv.daioncdn.net/halktv/halktv_1080p.m3u8?app=c86957d3-74a7-44da-9ad2-dc358c769609",
+   "logo": "null",
+   "kind": "radio",
+   "status": "OK-HLS"
+  }
+ ]
+}

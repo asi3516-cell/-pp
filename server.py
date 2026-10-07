@@ -26,6 +26,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 import zipfile
+from concurrent.futures import ThreadPoolExecutor
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
@@ -60,7 +61,16 @@ def _writable_dir() -> Path:
         return fallback
 
 
+def _read_version(base: Path) -> str:
+    """The single stamp written by VERSION; empty if the file is missing."""
+    try:
+        return (base / "VERSION").read_text("utf-8").strip().splitlines()[0]
+    except (OSError, IndexError):
+        return ""
+
+
 ROOT = _app_root()
+HH_VERSION = _read_version(ROOT)
 STATIC_DIR = ROOT / "static"
 DATA_DIR = _writable_dir()
 STORE_FILE = DATA_DIR / "store.json"
@@ -112,10 +122,74 @@ def save_store(store: dict) -> None:
 
 
 # --------------------------------------------------------------------------
+# Probe result cache
+# --------------------------------------------------------------------------
+# The inspect dialog re-checks the same address every time a channel is opened.
+# Caching the result for an hour keeps a slow or dead mirror from being probed
+# over and over. The cache holds non-2xx answers too, so a blocked mirror is
+# only discovered once per TTL.
+PROBE_TTL = 3600
+PROBE_CACHE_FILE = DATA_DIR / "probe-cache.json"
+_probe_lock = threading.Lock()
+_probe_cache: dict | None = None
+
+
+def _load_probe_cache() -> dict:
+    global _probe_cache
+    if _probe_cache is not None:
+        return _probe_cache
+    cache: dict = {}
+    try:
+        raw = json.loads(PROBE_CACHE_FILE.read_text("utf-8"))
+    except (OSError, ValueError):
+        raw = {}
+    if isinstance(raw, dict) and isinstance(raw.get("entries"), dict):
+        for url, item in raw["entries"].items():
+            if isinstance(item, dict) and isinstance(item.get("at"), (int, float)):
+                cache[url] = item
+    _probe_cache = cache
+    return cache
+
+
+def _probe_cache_get(url: str) -> dict | None:
+    with _probe_lock:
+        cache = _load_probe_cache()
+        item = cache.get(url)
+        if not item:
+            return None
+        if time.time() - item.get("at", 0) > PROBE_TTL:
+            cache.pop(url, None)
+            return None
+        return item.get("result")
+
+
+def _probe_cache_put(url: str, result: dict) -> None:
+    with _probe_lock:
+        cache = _load_probe_cache()
+        cache[url] = {"at": time.time(), "result": result}
+        # Keep the file bounded; the dict preserves insertion order.
+        while len(cache) > 2000:
+            cache.pop(next(iter(cache)))
+        try:
+            DATA_DIR.mkdir(parents=True, exist_ok=True)
+            tmp = PROBE_CACHE_FILE.with_suffix(".tmp")
+            tmp.write_text(json.dumps({"entries": cache}, ensure_ascii=False),
+                           "utf-8")
+            tmp.replace(PROBE_CACHE_FILE)
+        except OSError:
+            pass
+
+
+# --------------------------------------------------------------------------
 # Upstream fetching helpers
 # --------------------------------------------------------------------------
-def fetch(url: str, headers: dict | None = None, timeout: int = DEFAULT_TIMEOUT):
-    """Fetch an upstream URL and return (status, headers, body-bytes)."""
+def fetch(url: str, headers: dict | None = None, timeout: int = DEFAULT_TIMEOUT,
+          max_bytes: int = 0):
+    """Fetch an upstream URL and return (status, headers, body-bytes).
+
+    [max_bytes] caps the body so a probe of a large media file reads only the
+    header bytes it needs instead of the whole stream.
+    """
     req_headers = {
         "User-Agent": UA,
         "Accept": "*/*",
@@ -125,11 +199,25 @@ def fetch(url: str, headers: dict | None = None, timeout: int = DEFAULT_TIMEOUT)
         req_headers.update({k: v for k, v in headers.items() if v})
     req = urllib.request.Request(url, headers=req_headers)
     with urllib.request.urlopen(req, timeout=timeout, context=_SSL_CTX) as resp:
-        raw = resp.read()
+        raw = resp.read(max_bytes) if max_bytes else resp.read()
         hdrs = {k.lower(): v for k, v in resp.headers.items()}
         if hdrs.get("content-encoding") == "gzip" and raw[:2] == b"\x1f\x8b":
             raw = gzip.GzipFile(fileobj=io.BytesIO(raw)).read()
         return resp.status, hdrs, raw
+
+
+def head_fetch(url: str, timeout: int = DEFAULT_TIMEOUT):
+    """HEAD an upstream URL and return (status, headers) without the body.
+
+    Probing uses this first: a healthy mirror is identified from the headers
+    alone, and a host that cannot even answer a HEAD is treated as dead.
+    """
+    req = urllib.request.Request(url, headers={
+        "User-Agent": UA,
+        "Accept": "*/*",
+    }, method="HEAD")
+    with urllib.request.urlopen(req, timeout=timeout, context=_SSL_CTX) as resp:
+        return resp.status, {k.lower(): v for k, v in resp.headers.items()}
 
 
 M3U8_RE = re.compile(r"\.m3u8(\?|$)", re.IGNORECASE)
@@ -367,6 +455,8 @@ class Handler(BaseHTTPRequestHandler):
 
         if path == "/api/health":
             return self._json(200, {"ok": True, "time": int(time.time())})
+        if path == "/api/version":
+            return self._json(200, {"version": HH_VERSION})
         if path == "/api/now":
             return self._api_now(query)
         if path == "/api/store":
@@ -385,6 +475,10 @@ class Handler(BaseHTTPRequestHandler):
             return self._download_player(head_only)
         if path == "/download/apk":
             return self._download_apk(head_only)
+        if path == "/download/apk-universal":
+            return self._download_apk(head_only, "TV-Player-universal.apk")
+        if path == "/download/apk-arm":
+            return self._download_apk(head_only, "TV-Player-armeabi-v7a.apk")
         if path == "/download/all":
             return self._download_all(head_only)
         if path == "/download/windows-rar":
@@ -403,6 +497,10 @@ class Handler(BaseHTTPRequestHandler):
             return self._send_file(
                 ROOT / "build" / "pkg" / "hh-Kaynak.rar",
                 "hh-Kaynak.rar", "application/vnd.rar", head_only)
+        if path == "/download/source-7z":
+            return self._send_file(
+                ROOT / "build" / "pkg" / "hh-Kaynak.7z",
+                "hh-Kaynak.7z", "application/x-7z-compressed", head_only)
         if path == "/channels.m3u":
             return self._download_channels(head_only)
         return self._static(path, head_only)
@@ -514,14 +612,14 @@ class Handler(BaseHTTPRequestHandler):
                     break
                 self.wfile.write(chunk)
 
-    def _download_apk(self, head_only: bool) -> None:
-        """Serve the built Android APK, if it has been assembled."""
-        apk = ROOT / "dist" / "TV-Player.apk"
-        if not apk.exists():
+    def _download_apk(self, head_only: bool, name: str = "TV-Player.apk") -> None:
+        """Serve a built Android APK, if it has been assembled."""
+        apk = ROOT / "dist" / name
+        if not apk.exists() and name == "TV-Player.apk":
             apk = ROOT / "dist" / "hh.apk"
         if not apk.exists():
             return self._send(404, b"apk not built", "text/plain", head_only=head_only)
-        self._send_file(apk, "TV-Player.apk",
+        self._send_file(apk, name,
                         "application/vnd.android.package-archive", head_only)
 
     def _download_player(self, head_only: bool) -> None:
@@ -601,37 +699,83 @@ class Handler(BaseHTTPRequestHandler):
             urls.extend(u for u in raw.split("|") if u)
         if not urls:
             return self._json(400, {"error": "missing url"})
-        results = []
-        for u in urls[:12]:
+        urls = urls[:12]
+
+        def check(u: str) -> dict:
+            cached = _probe_cache_get(u)
+            if cached is not None:
+                return dict(cached)
             entry = {"url": u, "ok": False, "status": 0, "error": "",
                      "kind": "", "note": ""}
             try:
-                status, hdrs, raw = fetch(u, timeout=12)
-                ctype = (hdrs.get("content-type") or "").lower()
-                entry["status"] = status
-                if raw[:7].upper() == b"#EXTM3U":
-                    entry["kind"] = "playlist"
-                    text = raw.decode("utf-8", "replace")
-                    variants = [ln.strip() for ln in text.splitlines()
-                                if ln.strip() and not ln.startswith("#")]
-                    entry["variants"] = len(variants)
-                    entry["ok"] = len(variants) > 0
-                elif "mpegurl" in ctype or "vnd.apple" in ctype:
-                    entry["kind"] = "playlist"
-                    entry["ok"] = True
-                elif "mpegts" in ctype or "mp2t" in ctype or "video" in ctype:
+                # HEAD first: it settles the common cases (dead host, 403, 404,
+                # a confident content-type) without transferring the body, and
+                # is far cheaper than a full GET on a dead mirror.
+                status = hdrs = None
+                try:
+                    status, hdrs = head_fetch(u, timeout=6)
+                except urllib.error.HTTPError as exc:
+                    status, hdrs = exc.code, {}
+                except (urllib.error.URLError, OSError):
+                    status, hdrs = None, None
+                ctype = ((hdrs or {}).get("content-type") or "").lower()
+                # A confident *media* type settles the check from the headers
+                # alone, so the body is never transferred. Playlists still get
+                # their body read: it is small and the variant count is worth
+                # showing.
+                if "mpegts" in ctype or "mp2t" in ctype or "video" in ctype:
+                    entry["status"] = status
                     entry["kind"] = "media"
                     entry["ok"] = status == 200
                 else:
-                    entry["kind"] = "data"
-                    entry["ok"] = status == 200 and len(raw) > 0
-                    entry["note"] = ctype or "bilinmeyen tür"
+                    # Unknown type, or the host refused HEAD: read the body. A
+                    # still-unsupported request is retried as GET, because some
+                    # servers answer 405/501 to HEAD but serve GET fine.
+                    raw_status, raw_hdrs, raw = None, {}, b""
+                    try:
+                        raw_status, raw_hdrs, raw = fetch(u, timeout=6, max_bytes=32768)
+                    except urllib.error.HTTPError as exc:
+                        raw_status, raw_hdrs, raw = exc.code, {}, b""
+                    except (urllib.error.URLError, OSError) as exc:
+                        if status in (None, 405, 501):
+                            raise
+                        entry["status"] = status
+                        entry["error"] = str(exc)[:120]
+                        _probe_cache_put(u, entry)
+                        return entry
+                    status = raw_status or status
+                    ctype = ((raw_hdrs or {}).get("content-type") or ctype).lower()
+                    entry["status"] = status
+                    if raw[:7].upper() == b"#EXTM3U":
+                        entry["kind"] = "playlist"
+                        text = raw.decode("utf-8", "replace")
+                        variants = [ln.strip() for ln in text.splitlines()
+                                    if ln.strip() and not ln.startswith("#")]
+                        entry["variants"] = len(variants)
+                        entry["ok"] = len(variants) > 0
+                    elif "mpegurl" in ctype or "vnd.apple" in ctype:
+                        entry["kind"] = "playlist"
+                        entry["ok"] = True
+                    elif "mpegts" in ctype or "mp2t" in ctype or "video" in ctype:
+                        entry["kind"] = "media"
+                        entry["ok"] = status == 200
+                    else:
+                        entry["kind"] = "data"
+                        entry["ok"] = status == 200 and len(raw) > 0
+                        entry["note"] = ctype or "bilinmeyen tür"
             except urllib.error.HTTPError as exc:
                 entry["status"] = exc.code
                 entry["error"] = "HTTP %d (%s)" % (exc.code, exc.reason)
             except (urllib.error.URLError, OSError) as exc:
                 entry["error"] = str(exc)[:120]
-            results.append(entry)
+            _probe_cache_put(u, entry)
+            return entry
+
+        # Check the mirrors in parallel: done serially, a handful of dead
+        # addresses each burn the full 12s timeout and the dialog spins for
+        # minutes. Results keep the original order.
+        with ThreadPoolExecutor(max_workers=min(8, len(urls))) as ex:
+            results = list(ex.map(check, urls))
         self._json(200, {"results": results})
 
     def _api_proxy(self, query: dict, head_only: bool) -> None:

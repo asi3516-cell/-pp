@@ -14,7 +14,58 @@ on:
   workflow_dispatch:
 
 jobs:
+  guard:
+    # Faz 0 kapisi: kirmizisa hicbir paket cikmaz.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Sozdizimi (node --check)
+        run: |
+          node --check static/app.js
+          node --check static/sw.js
+          node --check static/channels-data.js
+
+      - name: app.js ES5 kalmali (acorn --ecma5)
+        run: npx --yes acorn@8 --ecma5 static/app.js > /dev/null
+
+      - name: server.py stdlib-only (ast.parse + import denetimi)
+        run: |
+          python3 - <<'PY'
+          import ast, sys
+          src = open("server.py", encoding="utf-8").read()
+          tree = ast.parse(src)
+          allowed = set(sys.stdlib_module_names)
+          bad = []
+          for node in ast.walk(tree):
+              if isinstance(node, ast.Import):
+                  bad += [a.name.split(".")[0] for a in node.names if a.name.split(".")[0] not in allowed]
+              elif isinstance(node, ast.ImportFrom) and node.level == 0 and node.module:
+                  root = node.module.split(".")[0]
+                  if root not in allowed:
+                      bad.append(root)
+          if bad:
+              print("stdlib disi import:", sorted(set(bad)))
+              sys.exit(1)
+          print("server.py stdlib-only OK")
+          PY
+
+      - name: Butunluk (VERSION + zincir checksum)
+        run: python3 build/verify_integrity.py
+
+      - name: Vektor kontrolu
+        run: python3 build/check_vectors.py
+
   build:
+    needs: guard
     strategy:
       fail-fast: false
       matrix:
@@ -60,6 +111,7 @@ jobs:
           if-no-files-found: ignore
 
   apk:
+    needs: guard
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

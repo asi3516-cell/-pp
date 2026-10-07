@@ -10,13 +10,12 @@
     android:layout_height="match_parent"
     android:background="#000000">
 
-    <androidx.media3.ui.PlayerView
+    <org.videolan.libvlc.util.VLCVideoLayout
         android:id="@+id/playerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:use_controller="false"
-        app:show_buffering="when_playing"
-        app:resize_mode="fit" />
+        android:focusable="false"
+        android:focusableInTouchMode="false" />
 
     <ProgressBar
         android:id="@+id/playerLoading"
@@ -97,9 +96,20 @@
             android:focusableInTouchMode="false"
             android:layout_width="44dp"
             android:layout_height="44dp"
+            android:layout_marginEnd="4dp"
             android:background="@drawable/bg_control_focus"
             android:src="@drawable/ic_fullscreen"
             android:contentDescription="@string/fullscreen" />
+
+        <ImageButton
+            android:id="@+id/btnRotate"
+            android:focusable="true"
+            android:focusableInTouchMode="false"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@drawable/bg_control_focus"
+            android:src="@drawable/ic_rotate"
+            android:contentDescription="@string/rotate" />
     </LinearLayout>
 
     <!-- Bottom bar -->
@@ -121,8 +131,11 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_marginBottom="12dp"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
             android:textColor="@color/tv_muted"
             android:textSize="13sp"
+            android:maxLines="3"
             android:visibility="gone"
             android:text="@string/stream_error" />
 
@@ -244,7 +257,7 @@
                 android:contentDescription="@string/repeat" />
         </LinearLayout>
 
-        <!-- Secondary row: volume, playlist and speed. -->
+        <!-- Secondary row: playlist and speed. -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -253,39 +266,19 @@
             android:layout_marginTop="10dp">
 
             <ImageButton
-                android:id="@+id/btnMute"
-            android:focusable="true"
-            android:focusableInTouchMode="false"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="?android:attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_volume"
-                android:contentDescription="@string/mute" />
-
-            <SeekBar
-                android:id="@+id/volumeBar"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="6dp"
-                android:layout_marginEnd="10dp"
-                android:max="100"
-                android:progressTint="@color/tv_accent_2"
-                android:progressBackgroundTint="@color/tv_line"
-                android:thumbTint="@color/tv_accent_2"
-                android:maxHeight="3dp"
-                android:minHeight="3dp" />
-
-            <ImageButton
                 android:id="@+id/btnPlaylist"
             android:focusable="true"
             android:focusableInTouchMode="false"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginEnd="6dp"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_playlist"
                 android:contentDescription="@string/playlist" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/btnSpeed"

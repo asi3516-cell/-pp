@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Top hero: a deep blue-to-background diagonal wash with an accent halo so
+     the brand block reads as a distinct surface instead of a flat bar. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="#16305C"
+                android:centerColor="#0E1A30"
+                android:endColor="@color/tv_bg"
+                android:angle="315" />
+        </shape>
+    </item>
+    <item android:gravity="top">
+        <shape android:shape="rectangle">
+            <size android:height="2dp" />
+            <gradient
+                android:startColor="@color/tv_accent_2"
+                android:centerColor="@color/tv_accent"
+                android:endColor="@color/tv_violet"
+                android:angle="0" />
+        </shape>
+    </item>
+</layer-list>

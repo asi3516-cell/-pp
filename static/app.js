@@ -23,7 +23,7 @@
     kind: "all",
     source: "Canlı TV",
     sources: [],
-    expanded: { "Canlı TV": true },
+    expanded: {},
     openGroup: null,
     loaded: { "Canlı TV": true },
     detail: null,
@@ -46,6 +46,31 @@
   // Playlists live on the server so they survive a reload and can be opened
   // from any device using the same address. localStorage is an offline cache.
   var LS_KEY = "tv.state.v1";
+  // Bumped on every release; a mismatch between the shell and an older service
+  // worker cache is what makes a box show yesterday's UI after an update.
+  var APP_VERSION = window.HH_VERSION || "";
+
+  function enforceVersion() {
+    if (!APP_VERSION || !navigator.serviceWorker || !window.caches) return;
+    try {
+      if (localStorage.getItem("tv.version") === APP_VERSION) return;
+      localStorage.setItem("tv.version", APP_VERSION);
+    } catch (e) { return; }
+    // Drop every cache this origin owns, then reload once so the fresh shell
+    // is fetched instead of the stale one the service worker kept.
+    caches.keys().then(function (keys) {
+      return Promise.all(keys.map(function (k) { return caches.delete(k); }));
+    }).then(function () {
+      navigator.serviceWorker.getRegistrations().then(function (regs) {
+        return Promise.all(regs.map(function (r) { return r.unregister(); }));
+      }).then(function () {
+        if (!sessionStorage.getItem("tv.reloaded")) {
+          sessionStorage.setItem("tv.reloaded", "1");
+          location.reload();
+        }
+      });
+    }).catch(function () { /* offline: keep the cached shell */ });
+  }
 
   function snapshot() {
     return {
@@ -239,8 +264,21 @@
   // Classify a stream as live TV, a movie or a series episode. Xtream/XUI
   // portals separate them by URL path (/movie/, /series/), everything else is
   // treated as live television.
+  // contentKind runs a handful of regexes per channel and the tree scans the
+  // list several times per render, so memoise per channel object and recompute
+  // only when the fields it reads actually change.
+  var kindCache = new WeakMap();
   function contentKind(ch) {
     var u = (ch.url || "").toLowerCase();
+    var sig = u + "\u0000" + (ch.kind || "");
+    var hit = kindCache.get(ch);
+    if (hit && hit.sig === sig) return hit.kind;
+    var kind = computeContentKind(ch, u);
+    kindCache.set(ch, { sig: sig, kind: kind });
+    return kind;
+  }
+
+  function computeContentKind(ch, u) {
     // A channel can carry several iptv-org group titles joined by semicolons;
     // the first one is the primary category, so the tree shows one clear name.
     var group = (ch.group || "Genel").split(";")[0].trim() || "Genel";
@@ -429,21 +467,59 @@
     function embedded() {
       return (window.HH_CHANNELS || []).slice();
     }
+    // Last list that actually loaded, kept so a broken bundle on a box with no
+    // server still shows something instead of an empty screen.
+    var CACHE_KEY = "tv.channels.cache";
+    function saveCache(raw) {
+      try {
+        localStorage.setItem(CACHE_KEY, JSON.stringify({
+          at: Date.now(), channels: raw
+        }));
+      } catch (e) {}
+    }
+    function loadCache() {
+      try {
+        var hit = JSON.parse(localStorage.getItem(CACHE_KEY) || "null");
+        if (hit && hit.channels && hit.channels.length) return hit;
+      } catch (e) {}
+      return null;
+    }
+    function stampCache(hit) {
+      var el = $("#listStamp");
+      if (!el) return;
+      var d = new Date(hit.at);
+      el.textContent = "Son liste: " +
+        ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
+      el.hidden = false;
+    }
     var start = embedded().length ? Promise.resolve(embedded()) : api("/api/channels")
       .then(function (data) { return (data && data.channels) || []; })
       .catch(function () { return []; });
     return start
       .then(function (raw) {
-        if (!raw || !raw.length) return embedded();
+        if (!raw || !raw.length) {
+          // Both the bundle and the server came up empty; fall back to the
+          // last good list and label it with the time it was captured.
+          var hit = loadCache();
+          if (hit) { stampCache(hit); return hit.channels; }
+          return embedded();
+        }
         return raw;
       })
       .then(function (raw) {
-      state.channels = (raw || []).map(function (c) {
+      var mapped = (raw || []).map(function (c) {
         // Radios are bundled alongside TV but are their own top-level source,
         // so they get their own list name and never mix into Canlı TV.
         c.listName = contentKind(c) === "radio" ? "Radyo" : "Canlı TV";
         return c;
       });
+      saveCache(mapped);
+      // Paint live TV first: the 210 radio stations are normalised and drawn
+      // only when the Radio tab (or a radio kind) is first opened, so the
+      // first frame carries the much smaller TV list.
+      state.radios = mapped.filter(function (c) { return c.listName === "Radyo"; });
+      state.channels = mapped.filter(function (c) { return c.listName !== "Radyo"; });
+      radioLoaded = !state.radios.length;
       state.channels = normalizeLogos(dedupe(state.channels));
       state.channels = flattenStreams(state.channels);
       applyOverrides();
@@ -461,6 +537,32 @@
       return state.channels;
     });
   }
+
+  var radioLoaded = false;
+
+  // Folds the bundled radios into the live list on first use. Called from
+  // render() when the Radio tab is selected, so opening the app never pays for
+  // it.
+  function ensureRadioLoaded() {
+    if (radioLoaded) return;
+    radioLoaded = true;
+    var radios = (state.radios || []).map(function (c) {
+      c.listName = "Radyo";
+      return c;
+    });
+    radios = normalizeLogos(dedupe(radios));
+    radios = flattenStreams(radios);
+    state.channels = state.channels.concat(radios);
+    state.radios = null;
+    applyOverrides();
+    state.loaded["Radyo"] = true;
+    if (state.expanded) state.expanded["Radyo"] = true;
+    buildSources();
+    buildGroups();
+    buildKindTabs();
+    render();
+  }
+  window.tvEnsureRadio = ensureRadioLoaded;
 
   // The plain channels.json is a fallback for builds without the embedded
   // script; every read path stays offline.
@@ -991,9 +1093,16 @@
     state.filtered = list;
   }
 
+  // Rendering a channel row calls this twice per row; on a 1500-channel list
+  // the string hash dominated the frame. Memoise by name so repeated renders
+  // and same-named logos cost nothing.
+  var logoHueCache = {};
   function logoHue(name) {
+    var cached = logoHueCache[name];
+    if (cached !== undefined) return cached;
     var h = 0;
     for (var i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) % 360;
+    logoHueCache[name] = h;
     return h;
   }
 
@@ -1156,6 +1265,8 @@
   }
 
   function render() {
+    // The Radio tab pulls in the bundled radios the first time it is opened.
+    if (state.source === "Radyo" || state.kind === "radio") ensureRadioLoaded();
     applyFilter();
     // Movies and series are browsed as a poster grid; a series opens its own
     // season/episode screen. Live TV keeps the compact single-column list.
@@ -1167,12 +1278,36 @@
     }
     showBrowse(false);
     var box = $("#channels");
+    // Remember which row had the remote's focus: re-rendering replaces the
+    // whole list, and without this the D-pad would drop back to the body.
+    var active = document.activeElement;
+    var keepUrl = active && active.classList && active.classList.contains("ch")
+      ? active.dataset.url : null;
     box.className = "channel-list";
     box.innerHTML = "";
-    var frag = document.createDocumentFragment();
+    box.scrollTop = 0;
+    appendChannels(box, 0, PAGE_FIRST);
+    // Restore focus to the same channel, or hand it to the first row so the
+    // remote always has somewhere to go.
+    var rows = box.querySelectorAll(".ch");
+    var target = null;
+    if (keepUrl) {
+      for (var i = 0; i < rows.length; i++) {
+        if (rows[i].dataset.url === keepUrl) { target = rows[i]; break; }
+      }
+    }
+    if (!target && rows.length) target = rows[0];
+    if (target && !(active && active.classList && active.classList.contains("ch"))) {
+      target.setAttribute("tabindex", "0");
+    } else if (target && target !== active) {
+      try { target.focus({ preventScroll: true }); } catch (e) { target.focus(); }
+    }
+  }
 
-    state.filtered.slice(0, 1500).forEach(function (ch) {
-      var node = document.createElement("div");
+  // One channel row. Rendered in batches (see appendChannels) so a huge list
+  // does not build thousands of nodes before the first usable frame.
+  function channelNode(ch) {
+    var node = document.createElement("div");
       node.className = "ch";
       node.tabIndex = 0;
       node.dataset.url = ch.url;
@@ -1192,6 +1327,7 @@
         var img = document.createElement("img");
         img.alt = "";
         img.loading = "lazy";
+        img.decoding = "async";
         img.onload = function () { ph.style.display = "none"; };
         img.onerror = function () { img.remove(); };
         img.src = ch.logo;
@@ -1235,11 +1371,42 @@
       node.onkeydown = function (ev) {
         if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); play(ch); }
       };
-      frag.appendChild(node);
-    });
+    return node;
+  }
 
+  var PAGE_FIRST = 200;
+  var PAGE_MORE = 200;
+  var renderedCount = 0;
+
+  // Appends the next batch of rows. Called once for the initial paint and then
+  // again when the user reaches the bottom or taps "daha göster", so the first
+  // frame only ever carries PAGE_FIRST nodes. A 1500-row burst was what froze
+  // the UI on TV boxes.
+  function appendChannels(box, from, count) {
+    var end = Math.min(from + count, state.filtered.length);
+    if (from >= end) return;
+    var frag = document.createDocumentFragment();
+    for (var i = from; i < end; i++) frag.appendChild(channelNode(state.filtered[i]));
     box.appendChild(frag);
-    $("#chCount").textContent = state.filtered.length + " / " + state.channels.length + " kanal";
+    renderedCount = end;
+    updateListInfo(box, end < state.filtered.length);
+  }
+
+  function updateListInfo(box, hasMore) {
+    var info = $("#chCount");
+    if (info) info.textContent = state.filtered.length + " / " + state.channels.length + " kanal";
+    var old = $(".more-toggle");
+    if (old) old.remove();
+    if (!hasMore) return;
+    var btn = document.createElement("button");
+    btn.className = "more-toggle";
+    btn.textContent = "+" + (state.filtered.length - renderedCount) + " daha göster";
+    btn.tabIndex = 0;
+    btn.onclick = function () { appendChannels(box, renderedCount, PAGE_MORE); };
+    // Reaching the button with the remote's D-pad loads the next page in place,
+    // so a long list is navigable without tapping.
+    btn.onfocus = function () { appendChannels(box, renderedCount, PAGE_MORE); };
+    box.appendChild(btn);
   }
 
   function toggleFav(ch) {
@@ -2090,6 +2257,23 @@
     }
     window.tvSyncListMode = syncListMode;
 
+    // Load more rows as the user nears the bottom, so the first paint stays
+    // small but the whole list is still reachable by scrolling.
+    var listEl = $("#channels");
+    if (listEl) {
+      var scrollTimer = null;
+      listEl.addEventListener("scroll", function () {
+        if (scrollTimer) return;
+        scrollTimer = setTimeout(function () {
+          scrollTimer = null;
+          if (renderedCount >= state.filtered.length) return;
+          if (listEl.scrollTop + listEl.clientHeight >= listEl.scrollHeight - 320) {
+            appendChannels(listEl, renderedCount, PAGE_MORE);
+          }
+        }, 120);
+      });
+    }
+
     // ---- bottom navigation (phone layout) ----
     function activateTab(name) {
       $$(".tabbtn", $("#tabbar")).forEach(function (b) {
@@ -2201,12 +2385,19 @@
     window.tvClosePlayer = closePlayer;
     on("#playerBack", closePlayer);
 
+    var searchTimer = null;
     var onSearch = function (e) {
-      state.query = e.target.value.trim();
+      var value = e.target.value.trim();
       var clr = $("#clearSearch");
-      if (clr) clr.hidden = !state.query;
-      if (window.tvSyncListMode) window.tvSyncListMode();
-      render();
+      if (clr) clr.hidden = !value;
+      // Typing fires input+keyup+change+search for every keystroke; without
+      // this each character re-filtered and re-rendered the whole list.
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(function () {
+        state.query = value;
+        if (window.tvSyncListMode) window.tvSyncListMode();
+        render();
+      }, 200);
     };
     var search = $("#search");
     if (search) {
@@ -2275,6 +2466,19 @@
     // keyboard shortcuts
     document.addEventListener("keydown", function (e) {
       if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+      // Android TV / box remotes send these raw key codes rather than names.
+      // 13=OK, 427=CH+, 428=CH-, 8/461=BACK.
+      var code = e.keyCode || 0;
+      if (code === 13) {
+        var focused = document.activeElement;
+        if (focused && focused.classList && focused.classList.contains("ch")) {
+          e.preventDefault();
+          focused.click();
+          return;
+        }
+      }
+      if (code === 427) { e.preventDefault(); zap(1); return; }
+      if (code === 428) { e.preventDefault(); zap(-1); return; }
       // Channel zapping: the remote's left/right and channel buttons switch
       // channel instead of seeking the video.
       if (e.key === "ArrowRight" || e.key === "MediaTrackNext" ||
@@ -2295,6 +2499,9 @@
       if (theme) document.documentElement.setAttribute("data-theme", theme);
     } catch (e) {}
 
+    // A new build must not be served through an old service-worker cache.
+    try { enforceVersion(); } catch (e) {}
+
     loadLocal();
     // In the APK the native ExoPlayer draws the video above the WebView and
     // brings its own auto-hiding controller, so the web layer is not used.
@@ -2306,12 +2513,10 @@
     // A broken binding must never stop the channel list from loading.
     try { bind(); bindControls(); } catch (e) { showFatal(e); }
 
-    // Prefer the shared server copy (lets you open your list from any device).
-    loadServerStore().then(function () {
-      var epg = $("#epgUrl");
-      if (state.epgUrl && epg) epg.value = state.epgUrl;
-      return loadChannels();
-    }).then(function () {
+    // Paint the embedded list first: it ships inside the APK, so the user sees
+    // channels with no server round-trip. The shared server store (favourites,
+    // overrides, extra channels) is merged afterwards in the background.
+    loadChannels().then(function () {
       if (state.channels.length) {
         setOverlay(true,
           "<h2>" + state.channels.length + " kanal hazır</h2>" +
@@ -2321,6 +2526,17 @@
       setOverlay(true, "<h2>Liste yüklenemedi</h2><p>" +
         escapeHtml(String(err && err.message || err)) + "</p>");
       showFatal(err);
+    }).then(function () {
+      // Best effort: a slow `/api/store` must never delay the first frame.
+      loadServerStore().then(function () {
+        var epg = $("#epgUrl");
+        if (state.epgUrl && epg) epg.value = state.epgUrl;
+        applyOverrides();
+        buildSources();
+        buildGroups();
+        buildKindTabs();
+        render();
+      });
     });
   }
 

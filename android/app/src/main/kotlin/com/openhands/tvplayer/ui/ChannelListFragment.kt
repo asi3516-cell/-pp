@@ -12,6 +12,7 @@ import android.widget.EditText
 import android.widget.ExpandableListView
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -22,6 +23,7 @@ import com.openhands.tvplayer.R
 import com.openhands.tvplayer.data.ChannelRepository
 import com.openhands.tvplayer.data.FavDatabase
 import com.openhands.tvplayer.data.FavEntity
+import com.openhands.tvplayer.data.GroupStore
 import com.openhands.tvplayer.data.UserChannelEntity
 import com.openhands.tvplayer.data.UserChannelStore
 import com.openhands.tvplayer.model.Channel
@@ -43,10 +45,17 @@ class ChannelListFragment : Fragment() {
     private lateinit var addButton: ImageButton
     private lateinit var emptyAddButton: Button
     private lateinit var adapter: ExpandableChannelAdapter
+    private lateinit var liveBadge: TextView
+    private lateinit var statChannels: TextView
+    private lateinit var statLive: TextView
+    private lateinit var statFav: TextView
+    private lateinit var chipRow: LinearLayout
 
     private var allChannels: List<Channel> = emptyList()
     private var query: String = ""
+    private var activeGroup: String? = null
     private var favouriteUrls: Set<String> = emptySet()
+    private var hiddenGroups: Set<String> = emptySet()
     private val db by lazy { FavDatabase.get(requireContext()) }
     private val dao by lazy { db.favDao() }
     private val userDao by lazy { db.userChannelDao() }
@@ -71,6 +80,11 @@ class ChannelListFragment : Fragment() {
         searchClear = view.findViewById(R.id.searchClear)
         addButton = view.findViewById(R.id.addChannel)
         emptyAddButton = view.findViewById(R.id.emptyAddButton)
+        liveBadge = view.findViewById(R.id.liveBadge)
+        statChannels = view.findViewById(R.id.statChannels)
+        statLive = view.findViewById(R.id.statLive)
+        statFav = view.findViewById(R.id.statFav)
+        chipRow = view.findViewById(R.id.chipRow)
         val search = view.findViewById<EditText>(R.id.searchInput)
         search.hint = getString(R.string.search_hint)
 
@@ -83,13 +97,16 @@ class ChannelListFragment : Fragment() {
             }
         )
         headerSub.text = getString(R.string.hero_tagline)
+        // The red CANLI badge only belongs on the live and radio tabs.
+        liveBadge.isVisible = mode == MODE_LIVE || mode == MODE_RADIO
 
         adapter = ExpandableChannelAdapter(
             context = requireContext(),
             onChannelClick = { channels, index -> openPlayer(channels, index) },
             onFavouriteToggle = { channel, makeFav -> toggleFavourite(channel, makeFav) },
             onChannelLongClick = { channel -> showChannelOptions(channel) },
-            onGroupToggle = { groupPosition -> toggleGroup(groupPosition) }
+            onGroupToggle = { groupPosition -> toggleGroup(groupPosition) },
+            onGroupLongClick = { group -> confirmDeleteGroup(group) }
         )
         listView.setAdapter(adapter)
         // Let the D-pad move focus onto the individual rows instead of stopping
@@ -99,6 +116,10 @@ class ChannelListFragment : Fragment() {
         addButton.setOnClickListener { showChannelEditor(null) }
         emptyAddButton.setOnClickListener { showChannelEditor(null) }
         addButton.isVisible = mode != MODE_FAV && mode != MODE_ALL
+        // The Lists tab is where removed categories are brought back.
+        val restoreButton = view.findViewById<ImageButton>(R.id.restoreGroups)
+        restoreButton.isVisible = mode == MODE_ALL
+        restoreButton.setOnClickListener { showHiddenGroups() }
 
         // One category open at a time, so the tree stays readable on a phone.
         listView.setOnGroupClickListener { _, _, groupPosition, _ ->
@@ -126,6 +147,21 @@ class ChannelListFragment : Fragment() {
         observeFavourites()
     }
 
+    override fun onResume() {
+        super.onResume()
+        refreshNowPlaying()
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (!hidden) refreshNowPlaying()
+    }
+
+    /** Re-binds the list so the "ÇALIYOR" badge follows the current channel. */
+    private fun refreshNowPlaying() {
+        if (::adapter.isInitialized) adapter.notifyDataSetChanged()
+    }
+
     private fun loadChannels() {
         viewLifecycleOwner.lifecycleScope.launch {
             val list = withContext(Dispatchers.IO) {
@@ -137,8 +173,62 @@ class ChannelListFragment : Fragment() {
                 }
             }
             allChannels = list
+            hiddenGroups = withContext(Dispatchers.IO) { GroupStore.hidden(requireContext()) }
             render()
         }
+    }
+
+    /** Long press on a category header: offer to remove the whole group. */
+    private fun confirmDeleteGroup(group: String) {
+        val count = allChannels.count { it.group == group }
+        AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.delete_group_title, group))
+            .setMessage(getString(R.string.delete_group_message, count))
+            .setPositiveButton(R.string.delete) { _, _ -> deleteGroup(group) }
+            .setNegativeButton(R.string.cancel, null)
+            .show()
+    }
+
+    private fun deleteGroup(group: String) {
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+            GroupStore.hide(requireContext(), group)
+        }
+        hiddenGroups = hiddenGroups + group
+        if (activeGroup == group) activeGroup = null
+        render()
+        toast(R.string.group_deleted)
+    }
+
+    /** Brings every removed group back, offered on the Lists tab. */
+    private fun restoreAllGroups() {
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+            GroupStore.restoreAll(requireContext())
+        }
+        hiddenGroups = emptySet()
+        render()
+        toast(R.string.groups_restored)
+    }
+
+    private fun showHiddenGroups() {
+        val hidden = hiddenGroups.toList()
+        if (hidden.isEmpty()) {
+            toast(R.string.no_hidden_groups)
+            return
+        }
+        AlertDialog.Builder(requireContext())
+            .setTitle(R.string.hidden_groups_title)
+            .setItems(hidden.toTypedArray()) { _, which ->
+                val group = hidden[which]
+                viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+                    GroupStore.restore(requireContext(), group)
+                }
+                hiddenGroups = hiddenGroups - group
+                render()
+                toast(R.string.group_restored)
+            }
+            .setPositiveButton(R.string.restore_all) { _, _ -> restoreAllGroups() }
+            .setNegativeButton(R.string.cancel, null)
+            .show()
     }
 
     private fun observeUserChannels() {
@@ -286,12 +376,32 @@ class ChannelListFragment : Fragment() {
         Toast.makeText(requireContext(), resId, Toast.LENGTH_SHORT).show()
     }
 
+    /**
+     * Narrows the list to one category. Used when a home rail header is tapped,
+     * so the user lands in that category rather than at the top of everything.
+     */
+    fun showGroup(group: String) {
+        activeGroup = group
+        if (isAdded) render()
+    }
+
     private fun render() {
-        val filtered = if (query.isBlank()) allChannels else allChannels.filter {
+        val visible = allChannels.filter { it.group !in hiddenGroups }
+        val searched = if (query.isBlank()) visible else visible.filter {
             it.name.contains(query, ignoreCase = true) ||
                 it.group.contains(query, ignoreCase = true)
         }
-        adapter.submit(ChannelRepository.grouped(filtered))
+        val filtered = activeGroup?.let { g -> searched.filter { it.group == g } } ?: searched
+        if (activeGroup != null) {
+            // A tapped category becomes a plain open list under the chips; the
+            // tree header would just repeat the chip the user already pressed.
+            adapter.submitFlat(filtered)
+            listView.expandGroup(0)
+        } else {
+            adapter.submit(ChannelRepository.grouped(filtered))
+        }
+        updateStats()
+        buildChips(searched)
 
         val empty = filtered.isEmpty()
         emptyState.isVisible = empty
@@ -310,6 +420,58 @@ class ChannelListFragment : Fragment() {
             for (i in 0 until adapter.groupCount) listView.expandGroup(i)
         }
     }
+
+    /** Fills the three header pills with the current tab's numbers. */
+    private fun updateStats() {
+        // Count only what is actually visible, so the pills match the list
+        // after a category has been removed.
+        val visible = allChannels.filter { it.group !in hiddenGroups }
+        val live = visible.count { !it.isRadio }
+        val radio = visible.count { it.isRadio }
+        val shown = if (mode == MODE_RADIO) radio else live
+        statChannels.text = getString(R.string.stat_channels, shown)
+        statLive.text = getString(R.string.stat_live, live)
+        statFav.text = getString(R.string.stat_fav, favouriteUrls.size)
+    }
+
+    /**
+     * Rebuilds the horizontal category strip. "Tümü" clears the filter; tapping
+     * any other chip narrows the list to that category.
+     */
+    private fun buildChips(source: List<Channel>) {
+        val counts = LinkedHashMap<String, Int>()
+        source.forEach { counts[it.group] = (counts[it.group] ?: 0) + 1 }
+        chipRow.removeAllViews()
+        chipRow.addView(makeChip(getString(R.string.all_categories), activeGroup == null) {
+            activeGroup = null
+            render()
+        })
+        counts.forEach { (group, count) ->
+            chipRow.addView(makeChip("$group  $count", activeGroup == group) {
+                activeGroup = if (activeGroup == group) null else group
+                render()
+            })
+        }
+    }
+
+    private fun makeChip(label: String, selected: Boolean, onClick: () -> Unit): TextView =
+        TextView(requireContext()).apply {
+            text = label
+            setTextColor(if (selected) 0xFFFFFFFF.toInt() else 0xFFC6D2E6.toInt())
+            textSize = 12.5f
+            background = androidx.core.content.ContextCompat.getDrawable(
+                requireContext(),
+                if (selected) R.drawable.bg_chip_selected else R.drawable.bg_chip
+            )
+            setPadding(38, 18, 38, 18)
+            isClickable = true
+            isFocusable = true
+            layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            ).apply { marginEnd = 22 }
+            setOnClickListener { onClick() }
+        }
 
     private fun showEmptyState() {
         when {

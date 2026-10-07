@@ -1,7 +1,7 @@
 package com.openhands.tvplayer;
 
-/** Smallest widget: station name plus a single play/pause button. */
+/** Radio widget: station name plus prev / play-pause / next controls. */
 public class RadioWidgetSmall extends RadioWidgetBase {
     @Override protected int layoutId() { return R.layout.widget_radio_small; }
-    @Override protected boolean hasControls() { return false; }
+    @Override protected boolean hasControls() { return true; }
 }

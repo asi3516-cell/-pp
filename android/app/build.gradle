@@ -10,10 +10,39 @@ android {
 
     defaultConfig {
         applicationId "com.openhands.tvplayer"
-        minSdk 28
+        minSdk 24
         targetSdk 34
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1"
+
+        // Phones and Android TV boxes are all ARM in practice, so the x86
+        // LibVLC payload (110 MB of the APK) is dead weight for real users.
+        // x86 splits are still produced for emulator testing but are not the
+        // file we hand out.
+        ndk {
+            abiFilters 'arm64-v8a', 'armeabi-v7a'
+        }
+    }
+
+    // One APK per ABI instead of a single 200 MB fat APK. The arm64 build is
+    // the one to install; the universal APK stays available for odd devices.
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'arm64-v8a', 'armeabi-v7a', 'x86', 'x86_64'
+            universalApk true
+        }
+    }
+
+    packaging {
+        jniLibs {
+            // Store the .so files compressed. Modern AGP leaves native libs
+            // uncompressed and page-aligned (bigger APK, no install-time
+            // extraction); legacy packaging compresses them so the download is
+            // far smaller and Android unpacks them on install.
+            useLegacyPackaging true
+        }
     }
 
     compileOptions {
@@ -28,6 +57,23 @@ android {
         viewBinding true
     }
 
+    signingConfigs {
+        release {
+            // A fixed release key so the APK installs on every phone and an
+            // update can replace an older build. The debug key is regenerated
+            // per machine, which is what made "App not installed" appear when
+            // a build from another machine was sideloaded.
+            storeFile file('hh-release.jks')
+            storePassword 'hhrelease2026'
+            keyAlias 'hhkey'
+            keyPassword 'hhrelease2026'
+            // v1 is needed by older boxes that ignore the v2/v3 scheme.
+            enableV1Signing true
+            enableV2Signing true
+            enableV3Signing true
+        }
+    }
+
     buildTypes {
         release {
             // Shrinking matters here: the unshrunk APK carried ~16 MB of unused
@@ -36,7 +82,7 @@ android {
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
                     'proguard-rules.pro'
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
         }
     }
 
@@ -67,11 +113,10 @@ tasks.register('syncAssets', Copy) {
 tasks.named('preBuild') { dependsOn 'syncAssets' }
 
 dependencies {
-    implementation 'androidx.media3:media3-exoplayer:1.11.1'
-    implementation 'androidx.media3:media3-exoplayer-hls:1.11.1'
-    implementation 'androidx.media3:media3-ui:1.11.1'
-    implementation 'androidx.media3:media3-session:1.11.1'
-    implementation 'androidx.media3:media3-datasource-okhttp:1.11.1'
+    // LibVLC is the single playback engine. It is far more tolerant of the
+    // broken/odd HLS feeds Turkish broadcasters serve than ExoPlayer was, and
+    // it handles live HLS, radio and reconnects out of the box.
+    implementation 'org.videolan.android:libvlc-all:3.7.7'
     implementation 'com.squareup.okhttp3:okhttp:4.12.0'
     implementation 'androidx.media:media:1.7.0'
     implementation 'androidx.annotation:annotation:1.7.1'

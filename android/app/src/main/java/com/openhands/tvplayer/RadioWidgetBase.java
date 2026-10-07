@@ -77,9 +77,6 @@ public abstract class RadioWidgetBase extends AppWidgetProvider {
             rv.setOnClickPendingIntent(R.id.widget_prev, pending(c, PlaybackActions.ACTION_PREV, 1));
             rv.setOnClickPendingIntent(R.id.widget_play, pending(c, PlaybackActions.ACTION_TOGGLE, 2));
             rv.setOnClickPendingIntent(R.id.widget_next, pending(c, PlaybackActions.ACTION_NEXT, 3));
-            if (hasStop()) {
-                rv.setOnClickPendingIntent(R.id.widget_stop, pending(c, PlaybackActions.ACTION_STOP, 4));
-            }
         } else {
             // The compact size has only the play button.
             rv.setImageViewResource(R.id.widget_play, playing
@@ -129,15 +126,11 @@ public abstract class RadioWidgetBase extends AppWidgetProvider {
     /** Refresh every placed widget after the now-playing state changes. */
     static void updateAll(Context c) {
         AppWidgetManager mgr = AppWidgetManager.getInstance(c);
-        RadioWidgetBase[] widgets = {
-                new RadioWidgetSmall(), new RadioWidgetMedium(), new RadioWidgetLarge()
-        };
-        for (RadioWidgetBase w : widgets) {
-            ComponentName cn = new ComponentName(c, w.getClass());
-            int[] ids = mgr.getAppWidgetIds(cn);
-            if (ids.length == 0) continue;
-            RemoteViews rv = w.build(c);
-            for (int id : ids) mgr.updateAppWidget(id, rv);
-        }
+        RadioWidgetSmall w = new RadioWidgetSmall();
+        ComponentName cn = new ComponentName(c, w.getClass());
+        int[] ids = mgr.getAppWidgetIds(cn);
+        if (ids.length == 0) return;
+        RemoteViews rv = w.build(c);
+        for (int id : ids) mgr.updateAppWidget(id, rv);
     }
 }

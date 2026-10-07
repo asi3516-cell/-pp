@@ -130,7 +130,19 @@ already do), and test a real launch on a device before shipping. Signing reads
 `hh-release.jks` plus `TV_STORE_PASS` / `TV_KEY_PASS` / `TV_KEY_ALIAS` from the
 environment (`android/sign_apk.bat` wraps `apksigner`); the keystore and
 passwords are never committed, and a build without the env vars falls back to
-the debug key.
+the debug key. The CI `apk` job restores the key from the `HH_KEYSTORE_B64` /
+`HH_STORE_PASS` repository secrets and verifies the certificate afterwards:
+every build must share one signature (cert SHA-256
+`a5d938073f428f13a73419cc34194b0c8c7ba30aeeca9d64e54a7cb2c40e3a6f`), otherwise
+Android refuses to install an update over an existing install.
+
+A working local toolchain lives in the sandbox at `/workspace/tools` (Temurin
+JDK 17, Android SDK 34, build-tools 34.0.0). `android/local.properties` points at
+it, so `cd android && JAVA_HOME=/workspace/tools/jdk-17 ANDROID_SDK_ROOT=/workspace/tools/android-sdk ./gradlew :app:assembleRelease`
+builds an APK locally — no CI round-trip needed. The fixed key is kept outside
+the repo at `/workspace/keys/hh-release.jks` (`pass.txt` next to it); copy it to
+`android/app/hh-release.jks` and export `TV_STORE_PASS`/`TV_KEY_PASS`/`TV_KEY_ALIAS=hhkey`
+before building a signed release.
 
 `server.py` inspects mirrors in the `/api/probe` endpoint with a thread pool
 (8 workers, 6 s each, HEAD then a 4 KB GET) and caches healthy results for an

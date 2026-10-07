@@ -227,6 +227,17 @@ pakette duruyor (yedek / kaynak), ancak launcher artik native arayuz.
     -> proguard-rules.pro silinmedi; ileride denenirse Media3/NanoHTTPD/kopru/Room
        keep kurallari hazir, ama cihazda acilis testi yapmadan acilmamali.
     -> Surum yukseltildi: versionCode 2, versionName 1.1.
+[x] IMZA DUZELTMESI (2026-10-07): Her CI kosusu yeni bir debug keystore uretiyordu,
+    yani her APK FARKLI imzaliydi. Telefonda eski (bozuk) surumun uzerine kurulum
+    imza uyusmazligindan sessizce basarisiz oluyordu; "kuruluyor ama acilmiyor"
+    tablosunun kaynagi buydu (dex + manifest eski calisan surumle birebir ayniydi).
+    -> Sabit release anahtari uretildi (RSA 2048, 30 yil) ve GitHub secret olarak
+       eklendi: HH_KEYSTORE_B64 + HH_STORE_PASS. CI artik bu anahtarla imzaliyor ve
+       sertifika parmak izini dogruluyor: a5d938073f428f13a73419cc34194b0c8c7ba30aeeca9d64e54a7cb2c40e3a6f
+    -> Anahtar depo disinda: /workspace/keys/hh-release.jks (+ pass.txt). Depoya
+       girmiyor (.gitignore).
+    -> ONEMLI: Telefonda eski surumu KALDIRIP kurun; ilk kurulumdan sonra tum
+       guncellemeler ayni imzayla sorunsuz kurulur.
 
 Calisan komutlar (Android):
   APK derle: cd android && JAVA_HOME=/workspace/tools/jdk-17.0.20.1+1 \

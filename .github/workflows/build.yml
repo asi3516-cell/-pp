@@ -79,6 +79,9 @@ jobs:
           "$SDKMGR" "platforms;android-34" "build-tools;34.0.0"
           echo "sdk.dir=$ANDROID_SDK_ROOT" > android/local.properties
 
+      - name: Check vector drawables
+        run: python3 build/check_vectors.py
+
       - name: Build APK
         env:
           TV_STORE_PASS: ${{ secrets.HH_STORE_PASS }}

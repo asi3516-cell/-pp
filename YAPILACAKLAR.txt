@@ -307,3 +307,8 @@ Ayni ozellik web arayuzunde zaten var (static/app.js: editChannel/deleteChannel)
 
 ========================================================================
 
+
+[x] GERCEK ACILIS COKMESI (2026-10-07, v1.2): Sebep R8 DEGILDI. UI yeniden tasariminda (3ca873f) eklenen iki vektor ikonunun pathData arc bayraklari sayiya yapisikti ("0 015,5" / "0 105.3,14"). VectorDrawable sisirirken IllegalArgumentException atiyor; ikonlar fragment_channel_list.xml icinde oldugu icin uygulama HER ACILISTA cokuyordu.
+    -> ic_brand_mic.xml + ic_search.xml gecerli 7-sayili arc ile yeniden yazildi.
+    -> build/check_vectors.py eklendi ve CI ye baglandi.
+    -> Surum 1.2 (versionCode 3). 1.0/1.1 dahil onceki tum surumler bu hatayi tasiyordu.

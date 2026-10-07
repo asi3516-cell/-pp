@@ -429,3 +429,8 @@ BOLUM 17 - SERTLESTIRME + KALICILIK + YEDEK (bu tur)
       guncellendi.
   [ ] Gercek kutuda 10 dk test (acilis + TRT1/Star + CH+/- + geri).
   [ ] Repo private degil: github.com/asi3516-cell/-pp public (kontrol edildi).
+  [x] GitHub yedegi: hh-backup dali origin'e push edildi; commit 8594a33
+      (kaynak + kalicilik) ve 52fadc6 (APK + arsivler). 
+  [x] Git etiketi: hh-20261008a (annotated) push edildi -> indirilebilir
+      kaynak ve surum noktasi.
+  [ ] ZIP indirme linki self-review icin bana verilecek (bir sonraki adim).
